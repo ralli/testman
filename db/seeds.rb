@@ -1,0 +1,1 @@
+User.create(:login => 'admin', :email => 'noreply@admin.com', :password => 'admin', :password_confirmation => 'admin')

@@ -1,0 +1,8 @@
+div.mainmenu ul {
+    display: inline;
+    list-style: none;
+}
+
+div.mainmenu ul li {
+    float: left;
+}
