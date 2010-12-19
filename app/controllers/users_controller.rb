@@ -13,7 +13,7 @@ class UsersController < ApplicationController
   def create
     @user = User.new(params[:user])
     if @user.save
-      redirect_to root_url, :notice => 'Your profile has been successfully created.'
+      redirect_to root_url, :notice => 'Successfully registered.'
     else
       render 'new'
     end
@@ -26,7 +26,7 @@ class UsersController < ApplicationController
   def update
     @user = current_user
     if @user.update_attributes(params[:user])
-      redirect_to root_url, :notice => 'Your Profile has been successfully updated.'
+      redirect_to root_url, :notice => 'Your profile has been successfully updated.'
     else
       render 'edit'
     end
