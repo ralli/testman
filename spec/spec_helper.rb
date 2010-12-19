@@ -2,6 +2,7 @@
 ENV["RAILS_ENV"] ||= 'test'
 require File.expand_path("../../config/environment", __FILE__)
 require 'rspec/rails'
+require File.join(File.dirname(__FILE__), 'blueprints')
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.
@@ -24,4 +25,25 @@ RSpec.configure do |config|
   # examples within a transaction, remove the following line or assign false
   # instead of true.
   config.use_transactional_fixtures = true
+
+  config.before(:all)    { Sham.reset(:before_all)  }
+  config.before(:each)   { Sham.reset(:before_each) }
+end
+
+class Object
+  def self.check_required(cls, attribute)
+    it "should validate the presence of the attribute #{attribute}" do
+      instance = cls.make_unsaved(attribute => nil)
+      instance.should_not be_valid
+    end
+  end
+
+  def self.check_length(cls, attribute, length)
+    it "should validate the length of the attribute #{attribute} to be at most #{length}" do
+      instance = cls.make_unsaved(attribute => ("x" * (length+1)))
+      instance.should_not be_valid
+      instance = cls.make_unsaved(attribute => "x" * length)
+      instance.should be_valid
+    end
+  end
 end
