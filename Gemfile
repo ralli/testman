@@ -10,6 +10,7 @@ gem 'sqlite3-ruby', :require => 'sqlite3'
 gem 'formtastic'
 gem 'will_paginate', '>= 3.0.pre2'
 gem 'authlogic'
+gem 'declarative_authorization'
 
 # Use unicorn as the web server
 # gem 'unicorn'

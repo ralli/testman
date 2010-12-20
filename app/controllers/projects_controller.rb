@@ -1,4 +1,6 @@
 class ProjectsController < ApplicationController
+  filter_resource_access
+
   def index
     @projects = Project.all
   end
@@ -36,6 +38,6 @@ class ProjectsController < ApplicationController
   def destroy
     @project = Project.find(params[:id])
     @project.destroy    
-    redirect_to projects_url, "Successfully deleted project."
+    redirect_to projects_url, :notice => "Successfully deleted project."
   end
 end

@@ -6,7 +6,7 @@
 </p>
 
 <p>
-  <%= link_to "Edit", edit_project_path(@project) %> |
-  <%= link_to "Destroy", @project, :confirm => 'Are you sure?', :method => :delete %> |
-  <%= link_to "View All", projects_path %>
+  <%= link_to "Edit", edit_project_path(@project) if permitted_to? :update, @project %>
+  <%= link_to "Destroy", @project, :confirm => 'Are you sure?', :method => :delete if permitted_to? :delete, @project %>
+  <%= link_to "View All", projects_path if permitted_to? :read, :projects%>
 </p>

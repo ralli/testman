@@ -10,12 +10,12 @@
     <% for project in @projects %>
       <tr>
         <td><%= project.name %></td>
-        <td><%= link_to "Show", project %></td>
-        <td><%= link_to "Edit", edit_project_path(project) %></td>
-        <td><%= link_to "Destroy", project, :confirm => 'Are you sure?', :method => :delete %></td>
+        <td><%= link_to "Show", project if permitted_to? :read, project %>
+          <%= link_to "Edit", edit_project_path(project) if permitted_to? :update, project %>
+          <%= link_to "Destroy", project, :confirm => 'Are you sure?', :method => :delete if permitted_to? :delete, project %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<p><%= link_to "New Project", new_project_path %></p>
+<p><%= link_to "New Project", new_project_path if permitted_to? :create, :projects %></p>

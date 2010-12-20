@@ -12,4 +12,8 @@ class User < ActiveRecord::Base
       login
     end
   end
+
+  def role_symbols
+    [:admin]
+  end
 end
