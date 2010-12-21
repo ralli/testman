@@ -1,0 +1,34 @@
+<% title "Testcases" %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Key</th>
+      <th>Version</th>
+      <th>Name</th>
+      <th>Execution Type</th>
+      <th>Test Status</th>
+      <th>Test Priority</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for testcase in @testcases %>
+      <tr>
+        <td><%= testcase.key %></td>
+        <td><%= testcase.version %></td>
+        <td><%= testcase.name %></td>
+        <td><%= testcase.value_for(:execution_type) %></td>
+        <td><%= testcase.value_for(:test_status) %></td>
+        <td><%= testcase.value_for(:test_priority) %></td>
+        <td>
+          <%= link_to "Show", testcase if permitted_to? :read, testcase %>
+          <%= link_to "Edit", edit_testcase_path(testcase) if permitted_to? :update, testcase %>
+          <%= link_to "Destroy", testcase, :confirm => 'Are you sure?', :method => :delete if permitted_to? :delete, testcase %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<p><%= link_to "New Testcase", new_testcase_path if permitted_to? :create, :testcases %></p>

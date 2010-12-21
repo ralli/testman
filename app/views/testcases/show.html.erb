@@ -1,0 +1,80 @@
+<% title "Testcase" %>
+
+<p>
+  <strong>Key:</strong>
+  <%= @testcase.key %>
+</p>
+<p>
+  <strong>Version:</strong>
+  <%= @testcase.version %>
+</p>
+<p>
+  <strong>Project:</strong>
+  <%= @testcase.project_id %>
+</p>
+<p>
+  <strong>Name:</strong>
+  <%= @testcase.name %>
+</p>
+<p>
+  <strong>Enabled:</strong>
+  <%= @testcase.enabled %>
+</p>
+<p>
+  <strong>Created By:</strong>
+  <%= @testcase.created_by_id %>
+</p>
+<p>
+  <strong>Edited By:</strong>
+  <%= @testcase.edited_by_id %>
+</p>
+<p>
+  <strong>Description:</strong>
+  <%= @testcase.description %>
+</p>
+<p>
+  <strong>Precondition:</strong>
+  <%= @testcase.precondition %>
+</p>
+<p>
+  <strong>Postcondition:</strong>
+  <%= @testcase.postcondition %>
+</p>
+<p>
+  <strong>Expected Result:</strong>
+  <%= @testcase.expected_result %>
+</p>
+<p>
+  <strong>Test Area:</strong>
+  <%= @testcase.test_area %>
+</p>
+<p>
+  <strong>Test Variety:</strong>
+  <%= @testcase.test_variety %>
+</p>
+<p>
+  <strong>Test Level:</strong>
+  <%= @testcase.test_level %>
+</p>
+<p>
+  <strong>Execution Type:</strong>
+  <%= @testcase.execution_type %>
+</p>
+<p>
+  <strong>Test Status:</strong>
+  <%= @testcase.test_status %>
+</p>
+<p>
+  <strong>Test Priority:</strong>
+  <%= @testcase.test_priority %>
+</p>
+<p>
+  <strong>Test Method:</strong>
+  <%= @testcase.test_method %>
+</p>
+
+<p>
+  <%= link_to "Edit", edit_testcase_path(@testcase) %> |
+  <%= link_to "Destroy", @testcase, :confirm => 'Are you sure?', :method => :delete %> |
+  <%= link_to "View All", testcases_path %>
+</p>

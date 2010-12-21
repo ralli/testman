@@ -1,4 +1,6 @@
 Testman::Application.routes.draw do
+  resources :testcases
+
   resources :projects
 
   # The priority is based upon order of creation:

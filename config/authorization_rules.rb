@@ -1,10 +1,14 @@
 authorization do
+  role :manager do
+    has_permission_on [:projects, :testcases], :to => :manage
+  end
+
   role :admin do
-    has_permission_on :projects, :to => :manage
+    includes :manager
   end
 
   role :guest do
-    has_permission_on :projects, :to => :read
+    has_permission_on [:projects, :testcases], :to => :read
   end
 end
 
