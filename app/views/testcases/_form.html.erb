@@ -1,4 +1,18 @@
 <%= semantic_form_for @testcase do |f| %>
-  <%= f.inputs %>
+  <%= f.inputs do %>
+    <%= f.input :name  %>
+    <%= f.input :description %>
+  <% end %>
+  <%= f.inputs :class => 'inputs span-12' do %>
+    <%= f.input :test_area, :as => :select, :collection => Testcase.test_areas %>
+    <%= f.input :test_variety, :as => :select, :collection => Testcase.test_varieties %>
+    <%= f.input :test_level, :as => :select, :collection => Testcase.test_levels %>
+  <% end %>
+  <%= f.inputs :class => 'inputs span-12 last' do %>
+    <%= f.input :execution_type, :as => :select, :collection => Testcase.execution_types %>
+    <%= f.input :test_status, :as => :select, :collection => Testcase.test_statuses %>
+    <%= f.input :test_method, :as => :select, :collection => Testcase.test_methods %>
+    <%= f.input :test_priority, :as => :select, :collection => Testcase.test_priorities %>
+  <% end %>
   <%= f.buttons  %>
 <% end %>
