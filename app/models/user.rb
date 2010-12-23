@@ -5,6 +5,10 @@ class User < ActiveRecord::Base
   validates_length_of :login, :maximum => 20
   validates_length_of :email, :maximum => 80
 
+  def to_label
+    display_name
+  end
+  
   def display_name
     unless first_name.blank? or last_name.blank?
       "#{first_name} #{last_name}"

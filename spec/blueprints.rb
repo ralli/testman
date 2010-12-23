@@ -20,9 +20,6 @@ Testcase.blueprint do
   version { 1 }
   name { Faker::Lorem.words(4).join(' ') }
   description { Faker::Lorem.sentences(4).join(' ') }
-  precondition { Faker::Lorem.sentences(4).join(' ') }
-  postcondition { Faker::Lorem.sentences(4).join(' ') }
-  expected_result { Faker::Lorem.sentences(4).join(' ') }
   test_area { Testcase.keys_for(:test_areas).rand }
   test_variety { Testcase.keys_for(:test_varieties).rand }
   test_level { Testcase.keys_for(:test_levels).rand }

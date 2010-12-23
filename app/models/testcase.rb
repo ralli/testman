@@ -4,8 +4,10 @@ class Testcase < ActiveRecord::Base
   belongs_to :created_by, :class_name => 'User'
   belongs_to :edited_by, :class_name => 'User'
   
-  validates_presence_of :version
-  validates_length_of :name, :maximum => 80
+  validates_presence_of :key
+  validates_length_of :key, :maximum => 10
+  validates_presence_of  :version
+  validates_length_of    :name, :maximum => 80
   validates_inclusion_of :enabled, :in => [true, false]
   validates_inclusion_of :test_area, :in =>  ["FUNCTIONAL", "NON-FUNCTIONAL", "STRUCTURAL", "REGRESSION", "RETEST"]
   validates_inclusion_of :test_variety, :in => ["POSITIVE", "NEGATIVE"]
@@ -15,16 +17,16 @@ class Testcase < ActiveRecord::Base
   validates_inclusion_of :test_priority, :in =>  ["LOW", "MEDIUM", "HIGH"]
   validates_inclusion_of :test_method, :in =>  ["BLACKBOX", "WHITEBOX"]
   before_validation :init_fields
-
-  attr_accessible :version, :project_id, :name, :created_by_id, :edited_by_id, :description, :precondition, :postcondition, :expected_result,
-    :test_area, :test_variety, :test_level, :execution_type, :test_status, :test_priority, :test_method
-
-  def key
-    sprintf("TC%05d", id)
-  end
+  after_create :init_key
   
+  attr_accessible :version, :project_id, :name, :created_by_id, :edited_by_id, :description,    :test_area, :test_variety, :test_level, :execution_type, :test_status, :test_priority, :test_method
+
   def self.new_with_defaults
-    self.new(:test_area => 'FUNCTIONAL', :test_variety => 'POSITIVE', :test_level => "INTEGRATION_TEST", :execution_type => 'MANUAL', :test_status => 'DESIGN', :test_priority => 'MEDIUM', :test_method => "BLACKBOX")
+    self.new(:key => 'NEW', :test_area => 'FUNCTIONAL', :test_variety => 'POSITIVE', :test_level => "INTEGRATION_TEST", :execution_type => 'MANUAL', :test_status => 'DESIGN', :test_priority => 'MEDIUM', :test_method => "BLACKBOX")
+  end
+
+  def init_key
+    update_attribute(:key, sprintf('TC%05d', id)) if key == 'NEW'
   end
   
   def init_fields    

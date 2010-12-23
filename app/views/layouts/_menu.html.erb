@@ -1,5 +1,5 @@
 <ul>
-  <li><%= link_to 'Home', root_url %></li>
-  <li><%= link_to 'Projects', projects_url %> </li>
-  <li><%= link_to 'Test cases', testcases_url %> </li>
+  <li><%= link_to_unless_current 'Home', root_url %></li>
+  <li><%= link_to_unless_current  'Projects', projects_url %> </li>
+  <li><%= link_to_unless_current  'Test cases', testcases_url %> </li>
 </ul>

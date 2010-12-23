@@ -15,6 +15,10 @@ class TestcasesController < ApplicationController
   
   def create
     @testcase = Testcase.new(params[:testcase])
+    @testcase.key = 'NEW'
+    @testcase.project = current_project
+    @testcase.created_by = current_user
+    @testcase.edited_by = current_user
     if @testcase.save
       flash[:notice] = "Successfully created testcase."
       redirect_to @testcase
@@ -29,6 +33,7 @@ class TestcasesController < ApplicationController
   
   def update
     @testcase = Testcase.find(params[:id])
+    @testcase.edited_by = current_user
     if @testcase.update_attributes(params[:testcase])
       flash[:notice] = "Successfully updated testcase."
       redirect_to @testcase

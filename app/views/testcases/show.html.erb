@@ -1,80 +1,70 @@
 <% title "Testcase" %>
+<style type="text/css">
+  div.label {
+    font-weight: bold;
+  }
+  .row {
+    height: 2em;
 
-<p>
-  <strong>Key:</strong>
-  <%= @testcase.key %>
-</p>
-<p>
-  <strong>Version:</strong>
-  <%= @testcase.version %>
-</p>
-<p>
-  <strong>Project:</strong>
-  <%= @testcase.project_id %>
-</p>
-<p>
-  <strong>Name:</strong>
-  <%= @testcase.name %>
-</p>
-<p>
-  <strong>Enabled:</strong>
-  <%= @testcase.enabled %>
-</p>
-<p>
-  <strong>Created By:</strong>
-  <%= @testcase.created_by_id %>
-</p>
-<p>
-  <strong>Edited By:</strong>
-  <%= @testcase.edited_by_id %>
-</p>
-<p>
-  <strong>Description:</strong>
-  <%= @testcase.description %>
-</p>
-<p>
-  <strong>Precondition:</strong>
-  <%= @testcase.precondition %>
-</p>
-<p>
-  <strong>Postcondition:</strong>
-  <%= @testcase.postcondition %>
-</p>
-<p>
-  <strong>Expected Result:</strong>
-  <%= @testcase.expected_result %>
-</p>
-<p>
-  <strong>Test Area:</strong>
-  <%= @testcase.test_area %>
-</p>
-<p>
-  <strong>Test Variety:</strong>
-  <%= @testcase.test_variety %>
-</p>
-<p>
-  <strong>Test Level:</strong>
-  <%= @testcase.test_level %>
-</p>
-<p>
-  <strong>Execution Type:</strong>
-  <%= @testcase.execution_type %>
-</p>
-<p>
-  <strong>Test Status:</strong>
-  <%= @testcase.test_status %>
-</p>
-<p>
-  <strong>Test Priority:</strong>
-  <%= @testcase.test_priority %>
-</p>
-<p>
-  <strong>Test Method:</strong>
-  <%= @testcase.test_method %>
-</p>
+  }
+</style>
+<div class="row">
+  <div class="label span-5">Key:</div>
+  <div class="span-7"><%= @testcase.key %></div>
+  <div class="label span-5">Version:</div>
+  <div class="span-7 last"><%= @testcase.version %></div>
+</div>
 
-<p>
-  <%= link_to "Edit", edit_testcase_path(@testcase) %> |
-  <%= link_to "Destroy", @testcase, :confirm => 'Are you sure?', :method => :delete %> |
-  <%= link_to "View All", testcases_path %>
-</p>
+<div class="row">
+  <div class="label span-5">Project:</div>
+  <div class="span-19 last"><%=  @testcase.project.try(:to_label) %></div>
+</div>
+
+<div class="row">
+  <div class="label span-5">Name:</div>
+  <div class="span-19 last"><%=  @testcase.name %></div>
+</div>
+
+<div class="row">
+  <div class="label span-5">Created:</div>
+  <div class="span-7"><%= @testcase.created_at %> <strong>by</strong> <%= @testcase.created_by.try(:to_label) %></div>
+  <div class="label span-5">Edited:</div>
+  <div class="span-7 last"><%= @testcase.created_at %> <strong>by</strong> <%= @testcase.edited_by.try(:to_label) %></div>
+</div>
+
+<div class="row">
+  <div class="label span-5">Description:</div>
+  <div class="span-19 last"><%= @testcase.description %></div>
+</div>
+
+<div class="row">
+  <div class="label span-5">Test Area:</div>
+  <div class="span-7"><%= @testcase.value_for(:test_area) %></div>
+  <div class="label span-5">Test Variety:</div>
+  <div class="span-7 last"><%= @testcase.value_for(:test_variety) %></div>
+</div>
+
+<div class="row">
+  <div class="label span-5">Test Level:</div>
+  <div class="span-7"><%= @testcase.value_for(:test_level) %></div>
+  <div class="label span-5">Execution Type:</div>
+  <div class="span-7 last"><%= @testcase.value_for(:execution_type) %></div>
+</div>
+
+<div class="row">
+  <div class="label span-5">Test Status:</div>
+  <div class="span-7"><%= @testcase.value_for(:test_status) %></div>
+  <div class="label span-5">Test Priority:</div>
+  <div class="span-7 last"><%= @testcase.value_for(:test_priority) %></div>
+</div>
+
+<div class="row">
+  <div class="label span-5">Test Method:</div>
+  <div class="span-19 last"><%= @testcase.value_for(:test_method) %></div>
+</div>
+
+<div class="row">
+  <%= link_to "Edit", edit_testcase_path(@testcase) if permitted_to? :update, @testcase %>
+  <%= link_to "Destroy", @testcase, :confirm => 'Are you sure?', :method => :delete if permitted_to? :delete, @testcase %>
+  <%= link_to "View All", testcases_path if permitted_to? :read, :testcases %>
+</div>

@@ -4,11 +4,13 @@ describe Testcase do
   def make_unsaved_testcase(attributes = {})
     project = Project.make
     user = User.make
-    Testcase.make_unsaved(attributes.merge({:project => project, :created_by => user, :edited_by => user }))
+    Testcase.make_unsaved(attributes.merge({:key => 'NEW', :project => project, :created_by => user, :edited_by => user }))
   end
 
   it "should be valid" do
-    make_unsaved_testcase.should be_valid
+    testcase = make_unsaved_testcase
+    puts testcase.errors.inspect unless testcase.valid?
+    testcase.should be_valid
   end
 
   def self.check_invalid_value(attribute)

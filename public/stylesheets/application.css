@@ -5,4 +5,5 @@ div.mainmenu ul {
 
 div.mainmenu ul li {
     float: left;
+    padding-right: 1em;
 }

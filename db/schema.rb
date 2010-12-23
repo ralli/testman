@@ -21,23 +21,21 @@ ActiveRecord::Schema.define(:version => 20101221202012) do
   add_index "projects", ["name"], :name => "index_projects_on_name"
 
   create_table "testcases", :force => true do |t|
+    t.string   "key",            :limit => 10
     t.integer  "version"
     t.integer  "project_id"
-    t.string   "name",            :limit => 80
-    t.boolean  "enabled",                       :default => true
+    t.string   "name",           :limit => 80
+    t.boolean  "enabled",                      :default => true
     t.integer  "created_by_id"
     t.integer  "edited_by_id"
     t.text     "description"
-    t.text     "precondition"
-    t.text     "postcondition"
-    t.text     "expected_result"
-    t.string   "test_area",       :limit => 20
-    t.string   "test_variety",    :limit => 20
-    t.string   "test_level",      :limit => 20
-    t.string   "execution_type",  :limit => 20
-    t.string   "test_status",     :limit => 20
-    t.string   "test_priority",   :limit => 20
-    t.string   "test_method",     :limit => 20
+    t.string   "test_area",      :limit => 20
+    t.string   "test_variety",   :limit => 20
+    t.string   "test_level",     :limit => 20
+    t.string   "execution_type", :limit => 20
+    t.string   "test_status",    :limit => 20
+    t.string   "test_priority",  :limit => 20
+    t.string   "test_method",    :limit => 20
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -45,6 +43,7 @@ ActiveRecord::Schema.define(:version => 20101221202012) do
   add_index "testcases", ["created_by_id"], :name => "index_testcases_on_created_by_id"
   add_index "testcases", ["edited_by_id"], :name => "index_testcases_on_edited_by_id"
   add_index "testcases", ["execution_type"], :name => "index_testcases_on_execution_type"
+  add_index "testcases", ["key", "version"], :name => "index_testcases_on_key_and_version"
   add_index "testcases", ["name"], :name => "index_testcases_on_name"
   add_index "testcases", ["project_id"], :name => "index_testcases_on_project_id"
   add_index "testcases", ["test_area"], :name => "index_testcases_on_test_area"

@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   helper :all
-  helper_method :current_user_session, :current_user
+  helper_method :current_user_session, :current_user, :current_project
+  
   before_filter { |c| Authorization.current_user = c.current_user }
 
   def permission_denied
@@ -9,6 +10,11 @@ class ApplicationController < ActionController::Base
     redirect_to root_url
   end
 
+  def current_project
+    return @current_project if defined?(@current_project)
+    @current_project = Project.first
+  end
+  
   def current_user_session
     return @current_user_session if defined?(@current_user_session)
     @current_user_session = UserSession.find
