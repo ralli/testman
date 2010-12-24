@@ -7,6 +7,7 @@ class Testcase < ActiveRecord::Base
   validates_presence_of :key
   validates_length_of :key, :maximum => 10
   validates_presence_of  :version
+  validates_presence_of :name
   validates_length_of    :name, :maximum => 80
   validates_inclusion_of :enabled, :in => [true, false]
   validates_inclusion_of :test_area, :in =>  ["FUNCTIONAL", "NON-FUNCTIONAL", "STRUCTURAL", "REGRESSION", "RETEST"]
