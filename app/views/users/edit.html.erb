@@ -14,8 +14,10 @@
     <%= f.input :password %>
     <%= f.input :password_confirmation %>
   </fieldset>
-  <div class="buttons">
-    <%= f.button :submit, 'Save' %>
-    <%= link_to 'Cancel', root_url %>
-  </div>
+  <fieldset>
+    <div class="buttons">
+      <%= f.button :submit, 'Save' %>
+      <%= link_to 'Cancel', root_url %>
+    </div>
+  </fieldset>
 <% end %>

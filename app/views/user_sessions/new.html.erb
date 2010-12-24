@@ -2,10 +2,13 @@
 <style type="text/css">
 </style>
 <%= simple_form_for @user_session, :url => url_for(:action => 'create') do |f| %>
-  <%= f.input :login, :label_html => { :class => 'span-5',:style => 'margin-top: 7px;'}, :input_html => {:class => 'span-19 last'} %>
-  <%= f.input :password, :label_html => { :class => 'span-5', :style => 'margin-top: 7px;'}, :input_html => {:class => 'span-19 last'} %>
-  <div class="buttons">
-    <%= f.button :submit, 'Login' %>
-    <%= link_to 'Cancel', root_url %>
-  </div>
+  <fieldset>
+    <legend>Login</legend>
+    <%= f.input :login, :label_html => { :class => 'span-5',:style => 'margin-top: 7px;'}, :input_html => {:class => 'span-19 last'} %>
+    <%= f.input :password, :label_html => { :class => 'span-5', :style => 'margin-top: 7px;'}, :input_html => {:class => 'span-19 last'} %>
+    <div class="buttons">
+      <%= f.button :submit, 'Login' %>
+      <%= link_to 'Cancel', root_url %>
+    </div>
+  </fieldset>
 <% end %>
