@@ -1,3 +1,18 @@
+.field_with_errors label {
+    color: red;
+}
+
+input[type='email'] {
+    border-style: solid;
+    border-width: 1px;
+}
+
+.field_with_errors input,
+.field_with_errors textarea
+{
+    border-color: red;
+}
+
 div.mainmenu ul {
     display: inline;
     list-style: none;

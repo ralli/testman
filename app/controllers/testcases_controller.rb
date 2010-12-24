@@ -19,9 +19,8 @@ class TestcasesController < ApplicationController
     @testcase.project = current_project
     @testcase.created_by = current_user
     @testcase.edited_by = current_user
-    if @testcase.save
-      flash[:notice] = "Successfully created testcase."
-      redirect_to @testcase
+    if @testcase.save      
+      redirect_to @testcase, :notice => "Your Test case has been successfully created."
     else
       render :action => 'new'
     end
@@ -34,9 +33,8 @@ class TestcasesController < ApplicationController
   def update
     @testcase = Testcase.find(params[:id])
     @testcase.edited_by = current_user
-    if @testcase.update_attributes(params[:testcase])
-      flash[:notice] = "Successfully updated testcase."
-      redirect_to @testcase
+    if @testcase.update_attributes(params[:testcase])      
+      redirect_to @testcase, :notice => "Successfully updated testcase."
     else
       render :action => 'edit'
     end

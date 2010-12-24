@@ -1,4 +1,7 @@
 <%= simple_form_for @project do |f| %>
-  <%= f.input :name %>
-  <%= f.button :submit %>
+  <fieldset>
+    <legend>Project</legend>
+    <%= f.input :name %>
+    <%= f.button :submit %>
+  </fieldset>
 <% end %>

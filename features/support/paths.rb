@@ -14,6 +14,9 @@ module NavigationHelpers
     when /the projects list/
       '/projects'
 
+    when /the list of test cases/
+      '/testcases'
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

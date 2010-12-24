@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
   validates_length_of :login, :maximum => 20
   validates_length_of :email, :maximum => 80
 
+  attr_accessible :login, :first_name, :last_name, :email, :password, :password_confirmation
+
   def to_label
     display_name
   end
