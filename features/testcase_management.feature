@@ -10,3 +10,14 @@ Scenario: Show Testcases
   And I am on the list of test cases
   Then I should see "My first Test case"
 
+Scenario: Create testcase
+   Given a project exists with name: "Test project"
+   And I am logged in as user "test" for that project
+   And I am on the list of test cases
+   And I follow "New Testcase"
+   And I enter the following values
+    | Name | My Test case |
+    | Description | This is the description |
+   And I press "testcase_submit"
+   Then I should see "My Test case"
+   And I should see "Your Test case has been successfully created"

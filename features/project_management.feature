@@ -11,7 +11,7 @@ Feature: Manage Projects
 
   Scenario: Create project
     Given there do not exist any projects
-    And I am logged in as User "test"
+    And I am logged in as user "test"
     And I am on the projects list
     When I follow "New Project"
     And I enter the following values
@@ -22,7 +22,7 @@ Feature: Manage Projects
 
   Scenario: Cancel Project creation
     Given there do not exist any projects
-    And I am logged in as User "test"
+    And I am logged in as user "test"
     And I am on the projects list
     When I follow "New Project"
     And I enter the following values
@@ -32,7 +32,7 @@ Feature: Manage Projects
 
   Scenario: Project creation with invalid name
     Given there do not exist any projects
-    And I am logged in as User "test"
+    And I am logged in as user "test"
     And I am on the projects list
     When I follow "New Project"
     And I press "Create Project"

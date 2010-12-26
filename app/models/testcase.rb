@@ -4,7 +4,7 @@ class Testcase < ActiveRecord::Base
   belongs_to :created_by, :class_name => 'User'
   belongs_to :edited_by, :class_name => 'User'
   
-  validates_presence_of :key
+  validates_presence_of :key, :on => :update
   validates_length_of :key, :maximum => 10
   validates_presence_of  :version
   validates_presence_of :name
