@@ -1,8 +1,9 @@
 class TestcasesController < ApplicationController
   filter_resource_access
+  before_filter :check_current_project
   
   def index
-    @testcases = Testcase.order(:id).paginate(:per_page => 10, :page => params[:page])
+    @testcases = current_project.testcases.order(:id).paginate(:per_page => 10, :page => params[:page])
   end
   
   def show
@@ -45,5 +46,12 @@ class TestcasesController < ApplicationController
     @testcase.destroy
     flash[:notice] = "Successfully destroyed testcase."
     redirect_to testcases_url
+  end
+
+  def check_current_project
+    if current_project.nil?
+      flash[:error] = 'Please select an active project first.'
+      redirect_to root_url
+    end
   end
 end

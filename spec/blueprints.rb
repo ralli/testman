@@ -16,6 +16,10 @@ User.blueprint do
   last_name { Faker::Name.last_name }
 end
 
+User.blueprint(:full) do
+  current_project { Project.create }
+end
+
 Testcase.blueprint do
   version { 1 }
   name { Faker::Lorem.words(4).join(' ') }

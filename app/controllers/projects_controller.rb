@@ -1,7 +1,11 @@
 class ProjectsController < ApplicationController
-  filter_resource_access
+  filter_resource_access :collection => [[:activatable_projects, :index], :index], :additional_member => {:activate => :update}
 
   def index
+    @projects = Project.all
+  end
+
+  def activatable_projects
     @projects = Project.all
   end
   
@@ -39,5 +43,11 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     @project.destroy    
     redirect_to projects_url, :notice => "Successfully deleted project."
+  end
+
+  def activate
+    project = Project.find(params[:id])
+    current_user.reload.update_attribute(:current_project, project)
+    redirect_to root_url, :notice => "Current project changed to #{project.name}"
   end
 end

@@ -17,11 +17,14 @@ class CreateUsers < ActiveRecord::Migration
       t.string    :current_login_ip
       t.string    :last_login_ip
 
+      t.integer   :current_project_id
+      
       t.timestamps
     end
 
     add_index :users, :login, :unique => true
     add_index :users, :last_name
+    add_index :users, :current_project_id
   end
 
   def self.down

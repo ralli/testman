@@ -1,0 +1,18 @@
+<h1>Activate Project</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Project</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @projects.each do |project| %>
+      <tr>
+        <td><%= project.name %></td>
+        <td> <%= link_to 'Activate', activate_project_url(project) %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

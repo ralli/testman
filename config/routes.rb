@@ -1,7 +1,10 @@
 Testman::Application.routes.draw do
   resources :testcases
 
+  get 'projects/activatable_projects' => 'projects#activatable_projects'
+  get 'projects/:id/activate' => 'projects#activate', :as => :activate_project
   resources :projects
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

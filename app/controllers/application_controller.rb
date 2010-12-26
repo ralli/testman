@@ -11,8 +11,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_project
-    return @current_project if defined?(@current_project)
-    @current_project = Project.first
+    current_user.try(:current_project)
   end
   
   def current_user_session

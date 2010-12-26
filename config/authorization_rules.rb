@@ -8,7 +8,7 @@ authorization do
   end
 
   role :guest do
-    has_permission_on [:projects, :testcases], :to => :read
+    has_permission_on [:projects], :to => :read
   end
 end
 

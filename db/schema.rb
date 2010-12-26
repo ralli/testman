@@ -68,10 +68,12 @@ ActiveRecord::Schema.define(:version => 20101221202012) do
     t.datetime "last_login_at"
     t.string   "current_login_ip"
     t.string   "last_login_ip"
+    t.integer  "current_project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "users", ["current_project_id"], :name => "index_users_on_current_project_id"
   add_index "users", ["last_name"], :name => "index_users_on_last_name"
   add_index "users", ["login"], :name => "index_users_on_login", :unique => true
 

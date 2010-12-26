@@ -1,4 +1,11 @@
 <div class="span-24 last">
+  <div class="left">
+    <% if current_project %>
+      Current Project: <%= current_project.name %> <%= link_to 'Choose...', :controller => :projects, :action => :activatable_projects unless current_user.nil? %>
+    <% else %>
+      <%= link_to 'Choose current project', :controller => :projects, :action => :activatable_projects unless current_user.nil? %>
+    <% end %>
+  </div>
   <div class="right last">
     <% if current_user %>
       <span>Welcome:</span> <span><%=  current_user.display_name %></span>
