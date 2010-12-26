@@ -17,6 +17,10 @@ module NavigationHelpers
     when /the list of test cases/
       '/testcases'
 
+    when /the show page for (.+)/
+      polymorphic_path(model($1))
+
+
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:
     #

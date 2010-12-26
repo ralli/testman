@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101221202012) do
+ActiveRecord::Schema.define(:version => 20101226170250) do
 
   create_table "projects", :force => true do |t|
     t.string   "name",       :limit => 80, :null => false
@@ -52,6 +52,17 @@ ActiveRecord::Schema.define(:version => 20101221202012) do
   add_index "testcases", ["test_priority"], :name => "index_testcases_on_test_priority"
   add_index "testcases", ["test_status"], :name => "index_testcases_on_test_status"
   add_index "testcases", ["test_variety"], :name => "index_testcases_on_test_variety"
+
+  create_table "teststeps", :force => true do |t|
+    t.integer  "testcase_id"
+    t.integer  "position"
+    t.text     "step"
+    t.text     "expected_result"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "teststeps", ["testcase_id", "position"], :name => "index_teststeps_on_testcase_id_and_position"
 
   create_table "users", :force => true do |t|
     t.string   "login",               :limit => 20,                :null => false

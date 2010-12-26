@@ -29,7 +29,7 @@
 
   <div class="row">
     <div class="label span-5">Description:</div>
-    <div class="span-17 last"><%= raw (RedCloth.new(@testcase.description).to_html) %></div>
+    <div class="span-17 last"><%= render_textile(@testcase.description) %></div>
   </div>
 
   <div class="row">
@@ -58,16 +58,48 @@
     <div class="span-6 last"><%= @testcase.value_for(:test_method) %></div>
   </div>
 
-  <div class="row">
+  <div class="row span-22 last">
     <div class="label span-5">Created:</div>
     <div class="span-6"><%= @testcase.created_at %> <strong>by</strong> <%= @testcase.created_by.try(:to_label) %></div>
     <div class="label span-5">Edited:</div>
     <div class="span-6 last"><%= @testcase.created_at %> <strong>by</strong> <%= @testcase.edited_by.try(:to_label) %></div>
   </div>
 
-  <div class="row">
+  <div class="row span-22 last">
     <%= link_to "Edit", edit_testcase_path(@testcase) if permitted_to? :update, @testcase %>
     <%= link_to "Destroy", @testcase, :confirm => 'Are you sure?', :method => :delete if permitted_to? :delete, @testcase %>
     <%= link_to "View All", testcases_path if permitted_to? :read, :testcases %>
   </div>
 </fieldset>
+
+<h2>Test Steps</h2>
+
+<ul>
+  <li><%= link_to 'New Test Step', new_testcase_teststep_path(@testcase), {:id => 'new_teststep'} %></li>
+</ul>
+
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Step</th>
+      <th>Expected Result</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @testcase.teststeps.each do |teststep| %>
+      <tr>
+        <td><%= teststep.position %></td>
+        <td><%= render_textile(teststep.step) %></td>
+        <td><%= render_textile(teststep.expected_result) %></td>
+        <td>
+          <%= link_to "Up", move_up_path(@testcase, teststep), :id => 'move_up' %>
+          <%= link_to "Down", move_down_path(@testcase, teststep), :id => 'move_down' %>
+          <%= link_to "Edit", edit_testcase_teststep_path(@testcase, teststep), {:id => 'edit_teststep'} %>
+          <%= link_to "Delete", testcase_teststep_path(@testcase, teststep), :method => 'delete', :confirm => 'Are you sure?', :id => 'delete_teststep' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -32,3 +32,18 @@ Testcase.blueprint do
   test_priority { Testcase.keys_for(:test_priorities).rand }
   test_method { Testcase.keys_for(:test_methods).rand }
 end
+
+Testcase.blueprint(:full) do
+  project { Project.make }
+  created_by { User.make(:current_project => project) }
+  edited_by { created_by }
+end
+
+Teststep.blueprint do
+  step { Faker::Lorem.paragraph(3) }
+  expected_result { Faker::Lorem.paragraph(3) }
+end
+
+Teststep.blueprint(:full) do
+  testcase { Testcase.make(:full) }
+end

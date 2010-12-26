@@ -1,5 +1,10 @@
 Testman::Application.routes.draw do
-  resources :testcases
+
+  get 'testcases/:testcase_id/moveup/:id' => 'teststeps#move_up', :as => :move_up
+  get 'testcases/:testcase_id/movedown/:id' => 'teststeps#move_down', :as => :move_down
+  resources :testcases do
+    resources :teststeps
+  end
 
   get 'projects/activatable_projects' => 'projects#activatable_projects'
   get 'projects/:id/activate' => 'projects#activate', :as => :activate_project

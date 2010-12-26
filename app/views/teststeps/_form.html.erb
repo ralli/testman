@@ -1,0 +1,8 @@
+<fieldset>
+  <legend>Test step</legend>
+  <%= simple_form_for [@testcase, @teststep] do |f| %>
+    <%= f.input :step %>
+    <%= f.input :expected_result %>
+    <%= f.button :submit %>
+  <% end %>
+</fieldset>

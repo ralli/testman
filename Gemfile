@@ -8,6 +8,7 @@ gem 'rails', '3.0.3'
 gem 'mysql2'
 
 gem 'simple_form'
+gem 'acts_as_list'
 gem 'will_paginate', '>= 3.0.pre2'
 gem 'authlogic'
 gem 'declarative_authorization'

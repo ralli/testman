@@ -19,6 +19,7 @@ class Testcase < ActiveRecord::Base
   validates_inclusion_of :test_method, :in =>  ["BLACKBOX", "WHITEBOX"]
   before_validation :init_fields
   after_create :init_key
+  has_many :teststeps, :order => 'position', :dependent => :destroy
   
   attr_accessible :version, :project_id, :name, :created_by_id, :edited_by_id, :description, :test_area, :test_variety, :test_level, :execution_type, :test_status, :test_priority, :test_method
 
