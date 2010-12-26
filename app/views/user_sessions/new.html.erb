@@ -2,6 +2,7 @@
 <style type="text/css">
 </style>
 <%= simple_form_for @user_session, :url => url_for(:action => 'create') do |f| %>
+  <%= f.error_notification %>
   <fieldset>
     <legend>Login</legend>
     <%= f.input :login %>

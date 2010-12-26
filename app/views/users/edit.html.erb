@@ -1,5 +1,6 @@
 <h1>Edit Profile</h1>
 <%=  simple_form_for @user do |f| %>
+  <%= f.error_notification %>
   <fieldset>
     <legend>User</legend>
 
@@ -15,7 +16,7 @@
     <%= f.input :password_confirmation %>
   </fieldset>
   <fieldset>
-    <div class="buttons">
+    <div class="actions">
       <%= f.button :submit, 'Save' %>
       <%= link_to 'Cancel', root_url %>
     </div>
