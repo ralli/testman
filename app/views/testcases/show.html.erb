@@ -5,66 +5,69 @@
   }
   .row {
     height: 2em;
-
+    width: 930px;
   }
 </style>
-<div class="row">
-  <div class="label span-5">Key:</div>
-  <div class="span-7"><%= @testcase.key %></div>
-  <div class="label span-5">Version:</div>
-  <div class="span-7 last"><%= @testcase.version %></div>
-</div>
+<fieldset>
+  <legend>Testcase</legend>
+  <div class="row">
+    <div class="label span-5">Key:</div>
+    <div class="span-6"><%= @testcase.key %></div>
+    <div class="label span-5">Version:</div>
+    <div class="span-6 last"><%= @testcase.version %></div>
+  </div>
 
-<div class="row">
-  <div class="label span-5">Project:</div>
-  <div class="span-19 last"><%=  @testcase.project.try(:to_label) %></div>
-</div>
+  <div class="row">
+    <div class="label span-5">Project:</div>
+    <div class="span-17 last"><%=  @testcase.project.try(:to_label) %></div>
+  </div>
 
-<div class="row">
-  <div class="label span-5">Name:</div>
-  <div class="span-19 last"><%=  @testcase.name %></div>
-</div>
+  <div class="row">
+    <div class="label span-5">Name:</div>
+    <div class="span-17 last"><%=  @testcase.name %></div>
+  </div>
 
-<div class="row">
-  <div class="label span-5">Description:</div>
-  <div class="span-19 last"><%= raw (RedCloth.new(@testcase.description).to_html) %></div>
-</div>
+  <div class="row">
+    <div class="label span-5">Description:</div>
+    <div class="span-17 last"><%= raw (RedCloth.new(@testcase.description).to_html) %></div>
+  </div>
 
-<div class="row">
-  <div class="label span-5">Test Area:</div>
-  <div class="span-7"><%= @testcase.value_for(:test_area) %></div>
-  <div class="label span-5">Test Variety:</div>
-  <div class="span-7 last"><%= @testcase.value_for(:test_variety) %></div>
-</div>
+  <div class="row">
+    <div class="label span-5">Test Area:</div>
+    <div class="span-6"><%= @testcase.value_for(:test_area) %></div>
+    <div class="label span-5">Test Variety:</div>
+    <div class="span-6 last"><%= @testcase.value_for(:test_variety) %></div>
+  </div>
 
-<div class="row">
-  <div class="label span-5">Test Level:</div>
-  <div class="span-7"><%= @testcase.value_for(:test_level) %></div>
-  <div class="label span-5">Execution Type:</div>
-  <div class="span-7 last"><%= @testcase.value_for(:execution_type) %></div>
-</div>
+  <div class="row">
+    <div class="label span-5">Test Level:</div>
+    <div class="span-6"><%= @testcase.value_for(:test_level) %></div>
+    <div class="label span-5">Execution Type:</div>
+    <div class="span-6 last"><%= @testcase.value_for(:execution_type) %></div>
+  </div>
 
-<div class="row">
-  <div class="label span-5">Test Status:</div>
-  <div class="span-7"><%= @testcase.value_for(:test_status) %></div>
-  <div class="label span-5">Test Priority:</div>
-  <div class="span-7 last"><%= @testcase.value_for(:test_priority) %></div>
-</div>
+  <div class="row">
+    <div class="label span-5">Test Status:</div>
+    <div class="span-6"><%= @testcase.value_for(:test_status) %></div>
+    <div class="label span-5">Test Priority:</div>
+    <div class="span-6 last"><%= @testcase.value_for(:test_priority) %></div>
+  </div>
 
-<div class="row">
-  <div class="label span-5">Test Method:</div>
-  <div class="span-19 last"><%= @testcase.value_for(:test_method) %></div>
-</div>
+  <div class="row">
+    <div class="label span-5">Test Method:</div>
+    <div class="span-6 last"><%= @testcase.value_for(:test_method) %></div>
+  </div>
 
-<div class="row">
-  <div class="label span-5">Created:</div>
-  <div class="span-7"><%= @testcase.created_at %> <strong>by</strong> <%= @testcase.created_by.try(:to_label) %></div>
-  <div class="label span-5">Edited:</div>
-  <div class="span-7 last"><%= @testcase.created_at %> <strong>by</strong> <%= @testcase.edited_by.try(:to_label) %></div>
-</div>
+  <div class="row">
+    <div class="label span-5">Created:</div>
+    <div class="span-6"><%= @testcase.created_at %> <strong>by</strong> <%= @testcase.created_by.try(:to_label) %></div>
+    <div class="label span-5">Edited:</div>
+    <div class="span-6 last"><%= @testcase.created_at %> <strong>by</strong> <%= @testcase.edited_by.try(:to_label) %></div>
+  </div>
 
-<div class="row">
-  <%= link_to "Edit", edit_testcase_path(@testcase) if permitted_to? :update, @testcase %>
-  <%= link_to "Destroy", @testcase, :confirm => 'Are you sure?', :method => :delete if permitted_to? :delete, @testcase %>
-  <%= link_to "View All", testcases_path if permitted_to? :read, :testcases %>
-</div>
+  <div class="row">
+    <%= link_to "Edit", edit_testcase_path(@testcase) if permitted_to? :update, @testcase %>
+    <%= link_to "Destroy", @testcase, :confirm => 'Are you sure?', :method => :delete if permitted_to? :delete, @testcase %>
+    <%= link_to "View All", testcases_path if permitted_to? :read, :testcases %>
+  </div>
+</fieldset>

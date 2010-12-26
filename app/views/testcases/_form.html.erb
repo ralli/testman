@@ -2,8 +2,8 @@
   <%= f.error_notification %>
   <fieldset class="span-23 last">
     <legend>Testcase</legend>
-    <%= f.input :name %>
-    <%= f.input :description %>
+    <%= f.input :name, :input_html => { :style => 'width: 620px;' }  %>
+    <%= f.input :description, :input_html => { :style => 'width: 620px; padding: 0px;' } %>
     <div class="span-11">
       <%= f.input :test_area, :as => :select, :collection => Testcase.test_areas, :include_blank => false %>
       <%= f.input :test_variety, :as => :select, :collection => Testcase.test_varieties, :include_blank => false %>
