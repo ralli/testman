@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101226170250) do
+ActiveRecord::Schema.define(:version => 20101226221851) do
 
   create_table "projects", :force => true do |t|
     t.string   "name",       :limit => 80, :null => false
@@ -63,6 +63,23 @@ ActiveRecord::Schema.define(:version => 20101226170250) do
   end
 
   add_index "teststeps", ["testcase_id", "position"], :name => "index_teststeps_on_testcase_id_and_position"
+
+  create_table "testsuites", :force => true do |t|
+    t.string   "key",           :limit => 10
+    t.integer  "version"
+    t.boolean  "enabled",                     :default => true
+    t.string   "name",          :limit => 80
+    t.text     "description"
+    t.integer  "created_by_id"
+    t.integer  "edited_by_id"
+    t.integer  "project_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "testsuites", ["created_by_id"], :name => "index_testsuites_on_created_by_id"
+  add_index "testsuites", ["edited_by_id"], :name => "index_testsuites_on_edited_by_id"
+  add_index "testsuites", ["project_id"], :name => "index_testsuites_on_project_id"
 
   create_table "users", :force => true do |t|
     t.string   "login",               :limit => 20,                :null => false
