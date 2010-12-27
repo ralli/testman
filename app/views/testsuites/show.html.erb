@@ -64,6 +64,8 @@
         <td><%= entry.testcase.version %> </td>
         <td><%= entry.testcase.name %> </td>
         <td>
+          <%= link_to 'Up', move_testcase_up_url(@testsuite, entry) %>
+          <%= link_to 'Down', move_testcase_down_url(@testsuite, entry) %>
           <%= link_to "Show", entry.testcase %>
           <%= link_to "Delete", testsuite_testsuite_entry_url(@testsuite, entry), :method => 'delete', :confirm => 'Are you sure?' %>
         </td>
