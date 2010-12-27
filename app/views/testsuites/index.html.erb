@@ -1,0 +1,29 @@
+<h1>Testsuites</h1>
+
+<ul>
+  <%= link_to "New Testsuite", new_testsuite_path, :id => 'new_testsuite'  %>
+</ul>
+<table>
+  <thead>
+    <tr>
+      <th>Key</th>
+      <th>Version</th>
+      <th>Name</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @testsuites.each do |testsuite| %>
+      <tr>
+        <td><%= testsuite.key %></td>
+        <td><%= testsuite.version %></td>
+        <td><%= testsuite.name %></td>
+        <td>
+          <%= link_to "Show", testsuite, :id => 'show_testsuite' %>
+          <%= link_to "Edit", edit_testsuite_path(testsuite), :id => 'edit_testsuite' %>
+          <%= link_to "Delete", testsuite, :method => 'delete', :confirm => 'Are you sure?', :id => 'delete_testsuite' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

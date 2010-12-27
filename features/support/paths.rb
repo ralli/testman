@@ -20,6 +20,11 @@ module NavigationHelpers
     when /the show page for (.+)/
       polymorphic_path(model($1))
 
+    when /the edit page for (.+)/
+      polymorphic_path(model($1)) + "/edit"
+
+    when /page "(.+)"/
+      $1
 
     # Add more mappings here.
     # Here is an example that pulls values out of the Regexp:

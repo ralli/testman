@@ -51,11 +51,15 @@ end
 Testsuite.blueprint do
   version { 1 }
   name { Faker::Lorem.sentence(4) }
-  description { Faker::paragraph(3) }
+  description { Faker::Lorem.paragraph(3) }
 end
 
 Testsuite.blueprint(:full) do
   project { Project.make }
   created_by { User.make(:current_project => project) }
   edited_by { created_by }
+end
+
+TestsuiteEntry.blueprint do
+  
 end

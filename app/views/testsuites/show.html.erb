@@ -1,0 +1,73 @@
+<h1>Testsuite</h1>
+<%  content_for :head do %>
+  <style type="text/css">
+    div.label {
+      font-weight: bold;
+    }
+  </style>
+<% end %>
+<fieldset class="span-24">
+  <legend>Testsuite</legend>
+  <div class="span-24 last">
+    <div class="label span-3">
+      Key:
+    </div>
+    <div class="span-5">
+      <%= @testsuite.key || "New" %>
+    </div>
+    <div class="label span-3">
+      Name:
+    </div>
+    <div class="span-5">
+      <%= @testsuite.name  %>
+    </div>
+    <div class="label span-3">
+      Version:
+    </div>
+    <div class="span-5 last">
+      <%= @testsuite.version  %>
+    </div>
+  </div>
+
+  <div class="span-24 last">
+    <div class="label span-3">
+      Description:
+    </div>
+    <div class="span-19 last">
+      <%= render_textile(@testsuite.description) %>
+    </div>
+  </div>
+</fieldset>
+
+<%= link_to "Edit", edit_testsuite_path(@testsuite) %>
+<%= link_to "Show all", testsuites_path %>
+
+<h2>Testcases</h2>
+<ul>
+  <li><%= link_to 'Add Testcase', show_testcases_url(@testsuite) %></li>
+</ul>
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Key</th>
+      <th>Version</th>
+      <th>Name</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @testsuite_entries.each do |entry| %>
+      <tr>
+        <td><%= entry.position %></td>
+        <td><%= entry.testcase.key %> </td>
+        <td><%= entry.testcase.version %> </td>
+        <td><%= entry.testcase.name %> </td>
+        <td>
+          <%= link_to "Show", entry.testcase %>
+          <%= link_to "Delete", testsuite_testsuite_entry_url(@testsuite, entry), :method => 'delete', :confirm => 'Are you sure?' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

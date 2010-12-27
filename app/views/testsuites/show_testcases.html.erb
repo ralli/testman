@@ -1,0 +1,56 @@
+<h1>Add Testcase</h1>
+
+<%  content_for :head do %>
+  <style type="text/css">
+    div.label {
+      font-weight: bold;
+    }
+  </style>
+<% end %>
+
+<fieldset class="span-24">
+  <legend>Testsuite</legend>
+  <div class="span-24 last">
+    <div class="label span-3">
+      Key:
+    </div>
+    <div class="span-5">
+      <%= @testsuite.key || "New" %>
+    </div>
+    <div class="label span-3">
+      Name:
+    </div>
+    <div class="span-5">
+      <%= @testsuite.name  %>
+    </div>
+    <div class="label span-3">
+      Version:
+    </div>
+    <div class="span-5 last">
+      <%= @testsuite.version  %>
+    </div>
+  </div>
+</fieldset>
+
+<h2>Selectable Testcases</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Key</th>
+      <th>Version</th>
+      <th>Name</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @testcases.each do |testcase| %>
+      <tr>
+        <td><%= testcase.key  %></td>
+        <td><%= testcase.version %></td>
+        <td><%= testcase.name  %></td>
+        <td><%= link_to "Add", add_testcase_url(@testsuite, testcase)  %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
