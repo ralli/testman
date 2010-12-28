@@ -31,7 +31,7 @@ class Testcase < ActiveRecord::Base
   end
 
   def init_key
-    update_attribute(:key, sprintf('TC%05d', id)) if key == 'NEW'
+    update_attribute(:key, sprintf('TC%05d', id)) if key == 'NEW' or key.blank?
   end
   
   def init_fields    

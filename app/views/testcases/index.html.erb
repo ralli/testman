@@ -30,5 +30,6 @@
     <% end %>
   </tbody>
 </table>
+<%= will_paginate @testcases %>
 
 <p><%= link_to "New Testcase", new_testcase_path if permitted_to? :create, :testcases %></p>
