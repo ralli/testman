@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101228130708) do
+ActiveRecord::Schema.define(:version => 20101227004417) do
 
   create_table "projects", :force => true do |t|
     t.string   "name",       :limit => 80, :null => false
@@ -52,24 +52,6 @@ ActiveRecord::Schema.define(:version => 20101228130708) do
   add_index "testcases", ["test_priority"], :name => "index_testcases_on_test_priority"
   add_index "testcases", ["test_status"], :name => "index_testcases_on_test_status"
   add_index "testcases", ["test_variety"], :name => "index_testcases_on_test_variety"
-
-  create_table "testruns", :force => true do |t|
-    t.integer  "testsuite_id"
-    t.integer  "current_testcase_id"
-    t.integer  "current_teststep_id"
-    t.string   "state",               :limit => 20
-    t.integer  "created_by_id"
-    t.integer  "edited_by_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "testruns", ["created_by_id"], :name => "index_testruns_on_created_by_id"
-  add_index "testruns", ["current_testcase_id"], :name => "index_testruns_on_current_testcase_id"
-  add_index "testruns", ["current_teststep_id"], :name => "index_testruns_on_current_teststep_id"
-  add_index "testruns", ["edited_by_id"], :name => "index_testruns_on_edited_by_id"
-  add_index "testruns", ["state"], :name => "index_testruns_on_state"
-  add_index "testruns", ["testsuite_id"], :name => "index_testruns_on_testsuite_id"
 
   create_table "teststeps", :force => true do |t|
     t.integer  "testcase_id"
