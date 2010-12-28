@@ -61,5 +61,4 @@ Testsuite.blueprint(:full) do
 end
 
 TestsuiteEntry.blueprint do
-  
 end

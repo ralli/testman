@@ -57,6 +57,6 @@ class TestsuitesController < ApplicationController
     @testsuite = Testsuite.find(params[:id])
     @testcase = Testcase.find(params[:testcase_id])
     @testsuite.add_testcase(@testcase, current_user)
-    redirect_to @testsuite, :notice => 'Successfully added testcase.'
+    redirect_to @testsuite, :notice => 'Successfully added Testcase.'
   end
 end

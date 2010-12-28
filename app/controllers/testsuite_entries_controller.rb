@@ -3,7 +3,7 @@ class TestsuiteEntriesController < ApplicationController
     testsuite = Testsuite.find(params[:testsuite_id])
     entry = TestsuiteEntry.find(params[:id])
     entry.destroy
-    redirect_to testsuite, :notice => 'Successfully removed testcase from testsuite.'
+    redirect_to testsuite, :notice => 'Successfully removed the Testcase from the Testsuite.'
   end
 
   def move_up
@@ -27,5 +27,4 @@ class TestsuiteEntriesController < ApplicationController
     end
     redirect_to @testsuite, :notice => 'Moved Testcase down'
   end
-
 end

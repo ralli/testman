@@ -11,7 +11,7 @@ class Testsuite < ActiveRecord::Base
   has_many :testsuite_entries, :dependent => :destroy, :order => :position
   has_many :testcases, :through => :testsuite_entries
   
-  attr_accessible :name, :description
+  attr_accessible :name, :description, :edited_by, :updated_by
   after_create :init_key
 
   def self.new_with_defaults(attributes = {})
@@ -23,7 +23,7 @@ class Testsuite < ActiveRecord::Base
   end
 
   def add_testcase(testcase, user = nil)
-    self.transaction do |i|
+    self.transaction do
       entry = TestsuiteEntry.new
       entry.testsuite = self
       entry.testcase = testcase

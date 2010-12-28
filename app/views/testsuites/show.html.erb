@@ -44,7 +44,7 @@
 
 <h2>Testcases</h2>
 <ul>
-  <li><%= link_to 'Add Testcase', show_testcases_url(@testsuite) %></li>
+  <li><%= link_to 'Add Testcase', show_testcases_url(@testsuite), :id => 'add_testcase' %></li>
 </ul>
 <table>
   <thead>
@@ -67,7 +67,7 @@
           <%= link_to 'Up', move_testcase_up_url(@testsuite, entry) %>
           <%= link_to 'Down', move_testcase_down_url(@testsuite, entry) %>
           <%= link_to "Show", entry.testcase %>
-          <%= link_to "Delete", testsuite_testsuite_entry_url(@testsuite, entry), :method => 'delete', :confirm => 'Are you sure?' %>
+          <%= link_to "Delete", testsuite_testsuite_entry_url(@testsuite, entry), :method => 'delete', :confirm => 'Are you sure?', :id => 'remove_testcase' %>
         </td>
       </tr>
     <% end %>

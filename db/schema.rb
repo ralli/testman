@@ -89,6 +89,7 @@ ActiveRecord::Schema.define(:version => 20101227004417) do
 
   add_index "testsuites", ["created_by_id"], :name => "index_testsuites_on_created_by_id"
   add_index "testsuites", ["edited_by_id"], :name => "index_testsuites_on_edited_by_id"
+  add_index "testsuites", ["key"], :name => "index_testsuites_on_key"
   add_index "testsuites", ["project_id"], :name => "index_testsuites_on_project_id"
 
   create_table "users", :force => true do |t|

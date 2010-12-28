@@ -58,4 +58,54 @@ Feature: Manage Testsuites
     When I go to the page "/testsuites"
     And I follow "delete_testsuite"
     Then I should see "Successfully deleted Testsuite."
-    And 0 testsuites exist
+    And 0 testsuites should exist
+
+  Scenario: Add Testcase to Testsuite
+    Given a project exists
+    And I am logged in as user "test" for that project
+    And a testsuite exists with project: the project
+    And a testcase exists with project: the project
+    And I am on the show page for the testsuite
+    When I follow "add_testcase"
+    And I follow "add_testcase"
+    Then I should see "Successfully added Testcase"
+    And a testsuite entry should exist
+
+  Scenario: Delete Testcase from Testsuite
+    Given an project exists
+    And I am logged in as user "test" for that project
+    And a testsuite exists with project: the project
+    And a testcase exists with project: the project
+    And a testsuite entry exists with testsuite: the testsuite, testcase: the testcase
+    And I am on the show page for the testsuite
+    When I follow "remove_testcase"
+    Then I should see "Successfully removed the Testcase from the Testsuite"
+    And 0 testsuite entries should exist
+
+  Scenario: Move Testcase up
+    Given an project exists
+    And I am logged in as user "test" for that project
+    And a testsuite exists with project: the project
+    And a testcase "one" exists with project: the project
+    And a testcase "two" exists with project: the project
+    And a testsuite entry "one" exists with testsuite: the testsuite, testcase: testcase "one"
+    And a testsuite entry "two" exists with testsuite: the testsuite, testcase: testcase "two"
+    And I am on the show page for the testsuite
+    When I click the move up link for testsuite entry "two"
+    Then I should see "Moved Testcase up"
+    And the position of testsuite_entry "two" should be "1"
+    And the position of testsuite_entry "one" should be "2"
+
+  Scenario: Move Testcase down
+    Given an project exists
+    And I am logged in as user "test" for that project
+    And a testsuite exists with project: the project
+    And a testcase "one" exists with project: the project
+    And a testcase "two" exists with project: the project
+    And a testsuite entry "one" exists with testsuite: the testsuite, testcase: testcase "one"
+    And a testsuite entry "two" exists with testsuite: the testsuite, testcase: testcase "two"
+    And I am on the show page for the testsuite
+    When I click the move down link for testsuite entry "one"
+    Then I should see "Moved Testcase down"
+    And the position of testsuite_entry "two" should be "1"
+    And the position of testsuite_entry "one" should be "2"
