@@ -10,6 +10,7 @@ class Testsuite < ActiveRecord::Base
   belongs_to :project
   has_many :testsuite_entries, :dependent => :destroy, :order => :position
   has_many :testcases, :through => :testsuite_entries
+  has_many :testsuiteruns, :dependent => :destroy
   
   attr_accessible :name, :description, :edited_by, :updated_by
   after_create :init_key

@@ -4,15 +4,12 @@ class CreateTestsuiteruns < ActiveRecord::Migration
       t.integer :testsuite_id
       t.string :status, :nulls => false, :limit => 20
       t.string :result, :nulls => false, :limit => 20
-      t.integer :current_testcaserun
       t.integer :created_by_id, :nulls => false
       t.integer :edited_by_id, :nulls => false
       t.timestamps
     end
 
     add_index(:testsuiteruns, :testsuite_id)
-    add_index(:testsuiteruns, :status)
-    add_index(:testsuiteruns, :result)
     add_index(:testsuiteruns, :created_by_id)
     add_index(:testsuiteruns, :edited_by_id)
   end

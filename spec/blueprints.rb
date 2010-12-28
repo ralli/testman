@@ -1,14 +1,14 @@
 require 'machinist/active_record'
 require 'faker'
 
-Sham.login { Faker::Name.first_name.underscore }
+#Sham.login { Faker::Name.first_name.underscore }
 
 Project.blueprint do
   name { Faker::Lorem.words(3).join(" ") }
 end
 
 User.blueprint do
-  login
+  login { Faker::letterify("??????????") }
   email { Faker::Internet::email(login) }
   password { login }
   password_confirmation { password }
@@ -64,6 +64,17 @@ TestsuiteEntry.blueprint do
 end
 
 Testsuiterun.blueprint do
-  status { ['new', 'running', 'skipped', 'ended'].rand }
-  result { ['unknown', 'passed', 'failed'].rand }
+  status { ['new', 'running', 'ended'].rand }
+  result { status != 'ended' ? 'unknown' : ['unknown', 'ok', 'failed', 'error', 'skipped'].rand }
+end
+
+Testsuiterun.blueprint(:full) do
+  created_by { User.make(:full)}
+  edited_by { created_by }
+  testsuite { Testsuite.make(:full) }
+end
+
+Testcaserun.blueprint do
+  status { ['new', 'running', 'ended'].rand }
+  result { status != 'ended' ? 'unknown' : ['unknown', 'ok', 'failed', 'error', 'skipped'].rand }
 end

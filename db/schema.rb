@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101228203636) do
+ActiveRecord::Schema.define(:version => 20101228212226) do
 
   create_table "projects", :force => true do |t|
     t.string   "name",       :limit => 80, :null => false
@@ -19,6 +19,23 @@ ActiveRecord::Schema.define(:version => 20101228203636) do
   end
 
   add_index "projects", ["name"], :name => "index_projects_on_name"
+
+  create_table "testcaseruns", :force => true do |t|
+    t.integer  "testsuiterun_id"
+    t.integer  "position",                      :default => 0
+    t.integer  "testcase_id"
+    t.string   "status",          :limit => 20
+    t.string   "result",          :limit => 20
+    t.integer  "created_by_id"
+    t.integer  "edited_by_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "testcaseruns", ["created_by_id"], :name => "index_testcaseruns_on_created_by_id"
+  add_index "testcaseruns", ["edited_by_id"], :name => "index_testcaseruns_on_edited_by_id"
+  add_index "testcaseruns", ["testcase_id"], :name => "index_testcaseruns_on_testcase_id"
+  add_index "testcaseruns", ["testsuiterun_id", "position"], :name => "index_testcaseruns_on_testsuiterun_id_and_position"
 
   create_table "testcases", :force => true do |t|
     t.string   "key",            :limit => 10
@@ -76,9 +93,8 @@ ActiveRecord::Schema.define(:version => 20101228203636) do
 
   create_table "testsuiteruns", :force => true do |t|
     t.integer  "testsuite_id"
-    t.string   "status",              :limit => 20
-    t.string   "result",              :limit => 20
-    t.integer  "current_testcaserun"
+    t.string   "status",        :limit => 20
+    t.string   "result",        :limit => 20
     t.integer  "created_by_id"
     t.integer  "edited_by_id"
     t.datetime "created_at"
@@ -87,8 +103,6 @@ ActiveRecord::Schema.define(:version => 20101228203636) do
 
   add_index "testsuiteruns", ["created_by_id"], :name => "index_testsuiteruns_on_created_by_id"
   add_index "testsuiteruns", ["edited_by_id"], :name => "index_testsuiteruns_on_edited_by_id"
-  add_index "testsuiteruns", ["result"], :name => "index_testsuiteruns_on_result"
-  add_index "testsuiteruns", ["status"], :name => "index_testsuiteruns_on_status"
   add_index "testsuiteruns", ["testsuite_id"], :name => "index_testsuiteruns_on_testsuite_id"
 
   create_table "testsuites", :force => true do |t|
