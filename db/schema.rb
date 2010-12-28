@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101227004417) do
+ActiveRecord::Schema.define(:version => 20101228203636) do
 
   create_table "projects", :force => true do |t|
     t.string   "name",       :limit => 80, :null => false
@@ -73,6 +73,23 @@ ActiveRecord::Schema.define(:version => 20101227004417) do
   add_index "testsuite_entries", ["testcase_id"], :name => "index_testsuite_entries_on_testcase_id"
   add_index "testsuite_entries", ["testsuite_id", "position"], :name => "index_testsuite_entries_on_testsuite_id_and_position"
   add_index "testsuite_entries", ["testsuite_id"], :name => "index_testsuite_entries_on_testsuite_id"
+
+  create_table "testsuiteruns", :force => true do |t|
+    t.integer  "testsuite_id"
+    t.string   "status",              :limit => 20
+    t.string   "result",              :limit => 20
+    t.integer  "current_testcaserun"
+    t.integer  "created_by_id"
+    t.integer  "edited_by_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "testsuiteruns", ["created_by_id"], :name => "index_testsuiteruns_on_created_by_id"
+  add_index "testsuiteruns", ["edited_by_id"], :name => "index_testsuiteruns_on_edited_by_id"
+  add_index "testsuiteruns", ["result"], :name => "index_testsuiteruns_on_result"
+  add_index "testsuiteruns", ["status"], :name => "index_testsuiteruns_on_status"
+  add_index "testsuiteruns", ["testsuite_id"], :name => "index_testsuiteruns_on_testsuite_id"
 
   create_table "testsuites", :force => true do |t|
     t.string   "key",           :limit => 10

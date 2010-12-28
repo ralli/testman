@@ -62,3 +62,8 @@ end
 
 TestsuiteEntry.blueprint do
 end
+
+Testsuiterun.blueprint do
+  status { ['new', 'running', 'skipped', 'ended'].rand }
+  result { ['unknown', 'passed', 'failed'].rand }
+end
