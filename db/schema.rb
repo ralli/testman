@@ -76,10 +76,14 @@ ActiveRecord::Schema.define(:version => 20101228223453) do
     t.integer  "teststep_id"
     t.string   "status",         :limit => 20
     t.string   "result",         :limit => 20
+    t.integer  "created_by"
+    t.integer  "edited_by"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
+  add_index "teststepruns", ["created_by"], :name => "index_teststepruns_on_created_by"
+  add_index "teststepruns", ["edited_by"], :name => "index_teststepruns_on_edited_by"
   add_index "teststepruns", ["testcaserun_id", "position"], :name => "index_teststepruns_on_testcaserun_id_and_position"
   add_index "teststepruns", ["testcaserun_id", "teststep_id"], :name => "index_teststepruns_on_testcaserun_id_and_teststep_id"
 

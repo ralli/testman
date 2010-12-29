@@ -14,6 +14,15 @@ describe Teststep do
     Teststep.make_unsaved(attributes)
   end
 
+  def make_teststep
+    project = Project.first || Project.make
+    user = User.first || User.make
+    testcase = Testcase.first || Testcase.make(:project => project, :created_by => user, :edited_by => user)
+    teststep = Teststep.make(:testcase => testcase, :created_by => user, :edited_by => user)
+    testcaserun = Testcaserun.make(:testcase => testcase,:created_by => user, :edited_by => user, :status => 'running', :result => 'unknown')
+
+  end
+  
   it "should be valid" do
     teststep = create_teststep
     teststep.should be_valid

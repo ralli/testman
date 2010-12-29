@@ -32,4 +32,12 @@ class Testsuite < ActiveRecord::Base
       self.update_attribute(:edited_by, user) if user
     end
   end
+
+  def create_run(user)
+    testsuiterun = Testsuiterun.create(:testsuite => self, :status => 'new', :result => 'unknown', :created_by => user, :edited_by => user)
+    testsuite_entries.includes(:testcase).each do |entry|
+      testsuiterun.testcaseruns << entry.testcase.create_run(user, testsuiterun, entry.position)
+    end
+    testsuiterun
+  end
 end

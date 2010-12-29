@@ -11,4 +11,18 @@ class Teststeprun < ActiveRecord::Base
   validates_presence_of :result
   validates_length_of :result, :maximum => 20
   validates_inclusion_of :result, :in => ['unknown', 'ok', 'failed', 'error', 'skipped']
+
+  belongs_to :created_by, :class_name => "User"
+  belongs_to :edited_by, :class_name => "User"
+
+  validates_presence_of :created_by
+  validates_presence_of :edited_by
+  
+  def step(result)
+    update_attributes(:status => 'ended', :result => result)
+  end
+
+  def step?
+    status != 'ended'
+  end
 end

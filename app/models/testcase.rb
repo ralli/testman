@@ -20,7 +20,8 @@ class Testcase < ActiveRecord::Base
   has_many :teststeps, :order => 'position', :dependent => :destroy
   has_many :testsuite_entries, :dependent => :destroy
   has_many :testsuites, :through => :testsuite_entries
-
+  has_many :testcaseruns, :dependent => :destroy
+  
   before_validation :init_fields
   after_create :init_key
   
@@ -92,5 +93,13 @@ class Testcase < ActiveRecord::Base
   def self.execution_types
     [['Manual', 'MANUAL'],
       ['Automatic', 'AUTOMATIC']]    
+  end
+
+  def create_run(user, testsuiterun, position)
+    testcaserun = Testcaserun.create!(:testcase => self, :testsuiterun => testsuiterun, :created_by => user, :edited_by =>  user, :position => position, :status => 'new', :result => 'unknown')
+    teststeps.each do |teststep|
+      testcaserun.teststepruns << teststep.create_run(user, testcaserun)
+    end
+    testcaserun
   end
 end
