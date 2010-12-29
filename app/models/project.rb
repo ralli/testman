@@ -4,6 +4,7 @@ class Project < ActiveRecord::Base
   has_many :testcases, :dependent => :destroy
   has_many :testsuites, :dependent => :destroy
   has_many :current_users, :foreign_key => :current_project_id
+  has_many :testsuiteruns, :through => :testsuites
   
   attr_accessible :name
 

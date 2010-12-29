@@ -1,46 +1,45 @@
 <h1>Testsuite</h1>
-<%  content_for :head do %>
-  <style type="text/css">
-    div.label {
-      font-weight: bold;
-    }
-  </style>
-<% end %>
-<fieldset class="span-24">
+<fieldset class="span-24 last">
   <legend>Testsuite</legend>
-  <div class="span-24 last">
+  <div class="fieldset span-22 last">
     <div class="label span-3">
       Key:
     </div>
-    <div class="span-5">
+    <div class="span-4">
       <%= @testsuite.key || "New" %>
     </div>
+
     <div class="label span-3">
       Name:
     </div>
-    <div class="span-5">
+    <div class="span-4">
       <%= @testsuite.name  %>
     </div>
+
     <div class="label span-3">
       Version:
     </div>
-    <div class="span-5 last">
+    <div class="span-4 last">
       <%= @testsuite.version  %>
     </div>
-  </div>
 
-  <div class="span-24 last">
-    <div class="label span-3">
-      Description:
+
+    <div class="span-22 last">
+      <div class="label span-3">
+         Description:
+      </div>
+      <div class="span-19 last">
+         <%= render_textile(@testsuite.description) %>
+      </div>
     </div>
-    <div class="span-19 last">
-      <%= render_textile(@testsuite.description) %>
+
+    <div class="span-22 last">
+      <%= link_to "Edit", edit_testsuite_path(@testsuite) %>
+      <%= link_to "Show all", testsuites_path %>      
     </div>
   </div>
 </fieldset>
 
-<%= link_to "Edit", edit_testsuite_path(@testsuite) %>
-<%= link_to "Show all", testsuites_path %>
 
 <h2>Testcases</h2>
 <ul>

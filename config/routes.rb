@@ -1,5 +1,7 @@
 Testman::Application.routes.draw do
 
+  resources :testsuiteruns
+  
   get 'testsuites/:id/show_testcases' => 'testsuites#show_testcases', :as => :show_testcases
   get 'testsuites/:id/add_testcase/:testcase_id' => 'testsuites#add_testcase', :as => :add_testcase
   get 'testsuites/:testsuite_id/moveup/:id' => 'testsuite_entries#move_up', :as => :move_testcase_up

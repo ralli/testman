@@ -1,8 +1,10 @@
-<fieldset>
+<fieldset class="span-24 last">
   <legend>Test step</legend>
-  <%= simple_form_for [@testcase, @teststep] do |f| %>
-    <%= f.input :step %>
-    <%= f.input :expected_result %>
-    <%= f.button :submit %>
-  <% end %>
+  <div class="fieldset">
+      <%= simple_form_for [@testcase, @teststep] do |f| %>
+        <%= f.input :step %>
+        <%= f.input :expected_result %>
+        <%= f.button :submit %>
+      <% end %>
+  </div>
 </fieldset>

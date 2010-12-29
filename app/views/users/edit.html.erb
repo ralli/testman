@@ -1,24 +1,25 @@
 <h1>Edit Profile</h1>
-<%=  simple_form_for @user do |f| %>
-  <%= f.error_notification %>
-  <fieldset>
-    <legend>User</legend>
+<%= simple_form_for @user do |f| %>
+    <%= f.error_notification %>
+    <fieldset class="span-24 last">
+      <legend>User</legend>
+      <div class="fieldset span-22 last">
+        <%= f.input :login %>
+        <%= f.input :first_name %>
+        <%= f.input :last_name %>
+        <%= f.input :email %>
+      </div>
+    </fieldset>
+    <fieldset class="span-24 last">
+      <legend>Change password</legend>
+      <div class="fieldset span-22 last">
 
-    <%= f.input :login %>
-    <%= f.input :first_name %>
-    <%= f.input :last_name %>
-    <%= f.input :email %>
-  </fieldset>
-  <fieldset>
-    <legend>Change password</legend>
-
-    <%= f.input :password %>
-    <%= f.input :password_confirmation %>
-  </fieldset>
-  <fieldset>
-    <div class="actions">
-      <%= f.button :submit, 'Save' %>
-      <%= link_to 'Cancel', root_url %>
-    </div>
-  </fieldset>
+        <%= f.input :password %>
+        <%= f.input :password_confirmation %>
+      </div>
+    </fieldset>
+      <div class="span-22 last" style="margin-left: 1em; margin-top: 1em;">
+        <%= f.button :submit, 'Save' %>
+        <%= link_to 'Cancel', root_url %>
+      </div>
 <% end %>

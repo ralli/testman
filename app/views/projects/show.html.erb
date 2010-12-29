@@ -1,12 +1,17 @@
 <% title "Project" %>
 
-<p>
-  <strong>Name:</strong>
-  <%= @project.name %>
-</p>
+<fieldset class="span-24 last">
+      <legend>Project</legend>
+      <div class="fieldset span-22">
+          <div class="label span-3">Name:</div>
+          <div class="span-19 last"><%= @project.name %></div>
 
-<p>
-  <%= link_to "Edit", edit_project_path(@project) if permitted_to? :update, @project %>
-  <%= link_to "Destroy", @project, :confirm => 'Are you sure?', :method => :delete if permitted_to? :delete, @project %>
-  <%= link_to "View All", projects_path if permitted_to? :read, :projects%>
-</p>
+          <div class="span-22 last">
+             <%= link_to "Edit", edit_project_path(@project) if permitted_to? :update, @project %>
+             <%= link_to "Destroy", @project, :confirm => 'Are you sure?', :method => :delete if permitted_to? :delete, @project %>
+             <%= link_to "View All", projects_path if permitted_to? :read, :projects%>
+          </div>
+
+      </div>
+</fieldset>
+

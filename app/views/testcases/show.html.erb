@@ -1,15 +1,13 @@
 <% title "Testcase" %>
 <style type="text/css">
-  div.label {
-    font-weight: bold;
-  }
   .row {
     height: 2em;
     width: 930px;
   }
 </style>
-<fieldset>
+<fieldset class="span-24 last">
   <legend>Testcase</legend>
+  <div class="span-22 last" style="padding: 1em;">
   <div class="row span-22 last">
     <div class="label span-5">Key:</div>
     <div class="span-6"><%= @testcase.key %></div>
@@ -76,6 +74,7 @@
     <%= link_to "Edit", edit_testcase_path(@testcase) if permitted_to? :update, @testcase %>
     <%= link_to "Destroy", @testcase, :confirm => 'Are you sure?', :method => :delete if permitted_to? :delete, @testcase %>
     <%= link_to "View All", testcases_path if permitted_to? :read, :testcases %>
+  </div>
   </div>
 </fieldset>
 

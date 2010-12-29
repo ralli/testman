@@ -1,0 +1,21 @@
+<h1>Test Runs</h1>
+<table>
+  <thead>
+    <tr>
+      <th>Key</th>
+      <th>Name</th>
+      <th>Result</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @testruns.each do |run| %>
+      <tr>
+        <td><%= run.testsuite.key %></td>
+        <td><%= run.testsuite.name %></td>
+        <td><%= run.result %></td>
+        <td><%= link_to 'Show', run %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

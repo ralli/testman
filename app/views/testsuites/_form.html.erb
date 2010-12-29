@@ -1,11 +1,12 @@
-
-<%= simple_form_for @testsuite do |f| %>
-  <fieldset>
+<fieldset class="span-24 last">
     <legend>Testsuite</legend>
-    <%= f.error_notification %>
+    <div class="fieldset span-22 last">
+        <%= simple_form_for @testsuite do |f| %>
+            <%= f.error_notification %>
 
-    <%= f.input :name %>
-    <%= f.input :description %>
-    <%= f.button :submit %>
-  </fieldset>
-<% end %>
+            <%= f.input :name %>
+            <%= f.input :description %>
+            <%= f.button :submit %>
+        <% end %>
+    </div>
+</fieldset>
