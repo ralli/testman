@@ -6,15 +6,15 @@ class CreateTeststepruns < ActiveRecord::Migration
       t.integer :teststep_id
       t.string  :status, :nulls => false, :limit => 20
       t.string  :result, :nulls => false, :limit => 20
-      t.integer :created_by, :nulls => false
-      t.integer :edited_by, :nulls => false
+      t.integer :created_by_id, :nulls => false
+      t.integer :edited_by_id, :nulls => false
       t.timestamps
     end
 
     add_index(:teststepruns, [:testcaserun_id, :position])
     add_index(:teststepruns, [:testcaserun_id, :teststep_id])
-    add_index(:teststepruns, :created_by)
-    add_index(:teststepruns, :edited_by)
+    add_index(:teststepruns, :created_by_id)
+    add_index(:teststepruns, :edited_by_id)
   end
 
   def self.down

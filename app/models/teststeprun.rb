@@ -18,11 +18,15 @@ class Teststeprun < ActiveRecord::Base
   validates_presence_of :created_by
   validates_presence_of :edited_by
   
-  def step(result)
-    update_attributes(:status => 'ended', :result => result)
+  def step(user, result)
+    update_attributes!(:edited_by => user, :status => 'ended', :result => result)
   end
 
   def step?
     status != 'ended'
+  end
+
+  def next?
+    false
   end
 end

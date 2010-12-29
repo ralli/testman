@@ -18,4 +18,20 @@ class Testcaserun < ActiveRecord::Base
   validates_presence_of :created_by
   belongs_to :edited_by, :class_name => 'User'
   validates_presence_of :edited_by
+
+  def nextstep
+    teststepruns.where(["status <> ?", 'ended']).first
+  end
+
+  def next?
+    not nextstep.nil?
+  end
+
+  def step(user, result)
+    s = nextstep
+    return nil if s.nil?
+    s.step(user, result)
+    update_attributes!(:edited_by => user, :status => 'ended', :result => result) if nextstep.nil?
+    s
+  end
 end
