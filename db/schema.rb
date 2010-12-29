@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101228212226) do
+ActiveRecord::Schema.define(:version => 20101228223453) do
 
   create_table "projects", :force => true do |t|
     t.string   "name",       :limit => 80, :null => false
@@ -69,6 +69,19 @@ ActiveRecord::Schema.define(:version => 20101228212226) do
   add_index "testcases", ["test_priority"], :name => "index_testcases_on_test_priority"
   add_index "testcases", ["test_status"], :name => "index_testcases_on_test_status"
   add_index "testcases", ["test_variety"], :name => "index_testcases_on_test_variety"
+
+  create_table "teststepruns", :force => true do |t|
+    t.integer  "testcaserun_id"
+    t.integer  "position",                     :default => 0
+    t.integer  "teststep_id"
+    t.string   "status",         :limit => 20
+    t.string   "result",         :limit => 20
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "teststepruns", ["testcaserun_id", "position"], :name => "index_teststepruns_on_testcaserun_id_and_position"
+  add_index "teststepruns", ["testcaserun_id", "teststep_id"], :name => "index_teststepruns_on_testcaserun_id_and_teststep_id"
 
   create_table "teststeps", :force => true do |t|
     t.integer  "testcase_id"
