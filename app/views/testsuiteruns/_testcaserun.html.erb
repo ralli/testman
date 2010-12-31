@@ -1,0 +1,17 @@
+<fieldset class="span-24 last">
+  <legend >Testcase</legend>
+  <div class="fieldset span-22 last">
+    <div class="row span-22 last">
+      <div class="label span-4">Key</div>
+      <div class="span-7"><%= testcaserun.testcase.key %> </div>
+      <div class="label span-4">Name</div>
+      <div class="span-7 last"><%= testcaserun.testcase.name %> </div>
+    </div>
+    <div class="row span-22 last">
+      <div class="label span-4">Description</div>
+      <div class="span-18 last"><%= render_textile(testcaserun.testcase.description) %></div>
+    </div>
+  </div>
+</fieldset>
+
+<%= render :partial => 'teststeprun', :locals => {:teststeprun => nextstep(testcaserun)} if nextstep(testcaserun) %>

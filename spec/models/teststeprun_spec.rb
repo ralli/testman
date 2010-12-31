@@ -58,8 +58,8 @@ describe Teststeprun do
 
   it "should step ok" do
     run = make_valid_testrun(:status => 'running', :result => 'unknown')
-    run.expects(:update_attributes).with(:status  => 'ended', :result => 'ok')
-    run.step('ok')
+    run.expects(:update_attributes!).with(:edited_by => run.created_by, :status  => 'ended', :result => 'ok')
+    run.step(run.created_by, 'ok')
   end
 
   it "should be created by a user" do

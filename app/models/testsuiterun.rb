@@ -18,7 +18,7 @@ class Testsuiterun < ActiveRecord::Base
 
   def nextcase
     return nil unless step?
-    testcaseruns.where(['status <> ?', 'ended']).first
+    testcaseruns.where(['status <> ?', 'ended']).includes(:testcase).first
   end
 
   def next?

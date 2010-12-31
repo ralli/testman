@@ -1,0 +1,13 @@
+<fieldset class="span-24 last">
+  <legend >Teststep #<%= teststeprun.teststep.position %> </legend>
+  <div class="fieldset span-22 last">
+    <div class="row span-22 last">
+      <div class="label span-11">Step</div>
+      <div class="label span-11 last">Expected outcome</div>
+    </div>
+    <div class="row span-22 last">
+      <div class="span-11"><%= render_textile(teststeprun.teststep.step) %></div>
+      <div class="span-11 last"><%= render_textile(teststeprun.teststep.expected_result) %></div>
+    </div>
+  </div>
+</fieldset>
