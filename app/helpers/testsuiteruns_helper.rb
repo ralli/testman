@@ -6,7 +6,10 @@ module TestsuiterunsHelper
 
   def nextstep(testcase)
     @nextstep = testcase.nextstep unless defined?(@nextstep)
-    puts "#{@nextstep.inspect}"
     @nextstep
+  end
+
+  def show_steplink?(testrun)
+    testrun.status != 'ended'
   end
 end

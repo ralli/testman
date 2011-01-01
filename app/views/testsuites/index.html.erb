@@ -21,6 +21,7 @@
         <td>
           <%= link_to "Show", testsuite, :id => 'show_testsuite' %>
           <%= link_to "Edit", edit_testsuite_path(testsuite), :id => 'edit_testsuite' %>
+          <%= link_to 'Run', run_testsuite_path(testsuite), :id => 'run_testsuite' %>
           <%= link_to "Delete", testsuite, :method => 'delete', :confirm => 'Are you sure?', :id => 'delete_testsuite' %>
         </td>
       </tr>

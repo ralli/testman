@@ -14,7 +14,7 @@
         <td><%= run.testsuite.key %></td>
         <td><%= run.testsuite.name %></td>
         <td><%= run.result %></td>
-        <td><%= link_to 'Show', run %></td>
+        <td><%= link_to 'Show', run, :id => 'show_testsuiterun' %></td>
       </tr>
     <% end %>
   </tbody>

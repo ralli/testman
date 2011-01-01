@@ -33,6 +33,6 @@ class Testsuiterun < ActiveRecord::Base
     c = nextcase
     return nil if c.nil?
     c.step(user, result)
-    update_attributes!(:edited_by => user, :status => 'ended', :result => result) if nextstep.nil?
+    update_attributes!(:edited_by => user, :status => 'ended', :result => result) if nextcase.nil?
   end
 end

@@ -9,9 +9,17 @@
       <div class="span-7 last"><%= @testrun.testsuite.name %></div>
     </div>
     <div class="row span-22 last">
+      <div class="label span-4">Status</div>
+      <div class="span-7"><%= @testrun.status %></div>
+      <div class="label span-4">Result</div>
+      <div class="span-7 last"><%= @testrun.result %></div>
+    </div>
+    <div class="row span-22 last">
       <div class="label span-4">Description</div>
       <div class="span-18 last"><%= render_textile(@testrun.testsuite.description) %></div>
     </div>
   </div>
 </fieldset>
 <%= render :partial => "testcaserun", :locals => { :testcaserun => nextcase(@testrun) } if nextcase(@testrun) %>
+<%= link_to 'Step (Ok)', step_ok_path(@testrun), :id => 'step_ok' if show_steplink?(@testrun) %>
+<%= link_to 'Step (Failure)', step_failure_path(@testrun), :id => 'step_failure' if show_steplink?(@testrun) %>

@@ -1,5 +1,5 @@
 class TestsuitesController < ApplicationController
-  filter_resource_access :additional_member => {:show_testcases => :update, :add_testcase => :update}
+  filter_resource_access :additional_member => {:show_testcases => :update, :add_testcase => :update, :run => :update}
   
   def index
     @testsuites = current_project.testsuites
@@ -59,4 +59,11 @@ class TestsuitesController < ApplicationController
     @testsuite.add_testcase(@testcase, current_user)
     redirect_to @testsuite, :notice => 'Successfully added Testcase.'
   end
+
+  def run
+    @testsuite = Testsuite.find(params[:id])
+    testsuiterun = @testsuite.create_run(current_user)
+    redirect_to testsuiterun, :notice => 'Test suite run started' 
+  end
+
 end

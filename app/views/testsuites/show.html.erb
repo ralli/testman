@@ -35,6 +35,7 @@
 
     <div class="span-22 last">
       <%= link_to "Edit", edit_testsuite_path(@testsuite) %>
+      <%= link_to 'Run', run_testsuite_path(@testsuite), :id => 'run_testsuite' %>
       <%= link_to "Show all", testsuites_path %>      
     </div>
   </div>
