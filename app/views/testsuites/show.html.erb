@@ -1,3 +1,36 @@
+<% content_for :head do %>
+  <%= javascript_include_tag 'jquery.tablednd.js' %>
+  <style type="text/css">
+    .dragHandle {
+      cursor: move;
+    }
+    .dragClass {
+      background-color: #eeeeee;
+    }
+    tbody tr:nth-child(even) td {
+      background-color: transparent;
+    }
+  </style>
+  <script language="javascript">
+    $(function() {
+      $('#tctable').tableDnD( {
+        onDragClass: 'dragClass',
+        dragHandle: 'dragHandle',
+        onDrop: function(table, row) {
+          $.ajax({
+            type: 'post',
+            data: $.tableDnD.serialize(),
+            dataType: 'script',
+            complete: function(request){
+              $('#tctable').effect('highlight');
+            },
+            url: '<%= sort_testcases_testsuite_url(@testsuite) %>'
+          });
+        }
+      })
+    })
+  </script>
+<% end %>
 <h1>Testsuite</h1>
 <fieldset class="span-24 last">
   <legend>Testsuite</legend>
@@ -26,17 +59,17 @@
 
     <div class="span-22 last">
       <div class="label span-3">
-         Description:
+        Description:
       </div>
       <div class="span-19 last">
-         <%= render_textile(@testsuite.description) %>
+        <%= render_textile(@testsuite.description) %>
       </div>
     </div>
 
     <div class="span-22 last">
       <%= link_to "Edit", edit_testsuite_path(@testsuite) %>
       <%= link_to 'Run', run_testsuite_path(@testsuite), :id => 'run_testsuite' %>
-      <%= link_to "Show all", testsuites_path %>      
+      <%= link_to "Show all", testsuites_path %>
     </div>
   </div>
 </fieldset>
@@ -46,7 +79,7 @@
 <ul>
   <li><%= link_to 'Add Testcase', show_testcases_url(@testsuite), :id => 'add_testcase' %></li>
 </ul>
-<table>
+<table id="tctable">
   <thead>
     <tr>
       <th>#</th>
@@ -58,18 +91,18 @@
   </thead>
   <tbody>
     <% @testsuite_entries.each do |entry| %>
-      <tr>
-        <td><%= entry.position %></td>
-        <td><%= entry.testcase.key %> </td>
-        <td><%= entry.testcase.version %> </td>
-        <td><%= entry.testcase.name %> </td>
-        <td>
-          <%= link_to 'Up', move_testcase_up_url(@testsuite, entry) %>
-          <%= link_to 'Down', move_testcase_down_url(@testsuite, entry) %>
-          <%= link_to "Show", entry.testcase %>
-          <%= link_to "Delete", testsuite_testsuite_entry_url(@testsuite, entry), :method => 'delete', :confirm => 'Are you sure?', :id => 'remove_testcase' %>
-        </td>
-      </tr>
+      <%= content_tag :tr, :id => entry.id do %>
+      <td class="dragHandle"><%= image_tag '/icons/small/arrow-up.png' %> </td>
+      <td><%= entry.testcase.key %> </td>
+      <td><%= entry.testcase.version %> </td>
+      <td><%= entry.testcase.name %> </td>
+      <td>
+        <%= link_to 'Up', move_testcase_up_url(@testsuite, entry) %>
+        <%= link_to 'Down', move_testcase_down_url(@testsuite, entry) %>
+        <%= link_to "Show", entry.testcase %>
+        <%= link_to "Delete", testsuite_testsuite_entry_url(@testsuite, entry), :method => 'delete', :confirm => 'Are you sure?', :id => 'remove_testcase' %>
+      </td>
     <% end %>
-  </tbody>
+  <% end %>
+</tbody>
 </table>

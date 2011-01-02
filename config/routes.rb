@@ -11,6 +11,9 @@ Testman::Application.routes.draw do
   get 'testsuites/:testsuite_id/movedown/:id' => 'testsuite_entries#move_down', :as => :move_testcase_down
   resources :testsuites do
     resources :testsuite_entries, :only => :destroy
+    member do
+      match 'sort_testcases'
+    end
   end
 
   get 'testcases/:testcase_id/moveup/:id' => 'teststeps#move_up', :as => :move_up

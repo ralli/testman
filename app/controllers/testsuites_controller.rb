@@ -1,5 +1,5 @@
 class TestsuitesController < ApplicationController
-  filter_resource_access :additional_member => {:show_testcases => :update, :add_testcase => :update, :run => :update}
+  filter_resource_access :additional_member => {:show_testcases => :update, :add_testcase => :update, :run => :update, :sort_testcases => :update}
   
   def index
     @testsuites = current_project.testsuites
@@ -66,4 +66,14 @@ class TestsuitesController < ApplicationController
     redirect_to testsuiterun, :notice => 'Test suite run started' 
   end
 
+  def sort_testcases
+    @testsuite = Testsuite.find(params[:id])
+    ids = params['tctable']
+    ids.delete_at(0) unless ids.empty?
+    puts(ids.inspect)
+    ids.each_with_index do |id, idx|
+      TestsuiteEntry.update_all(['position=?', idx+1], ['id=?', id.to_i])
+    end
+    render :nothing => true
+  end
 end
