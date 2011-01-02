@@ -1,6 +1,6 @@
 authorization do
   role :manager do
-    has_permission_on [:projects, :testcases, :teststeps, :testsuites, :testruns], :to => :manage
+    has_permission_on [:projects, :testcases, :teststeps, :testsuites, :testruns, :testsuiteruns], :to => :manage
   end
 
   role :admin do

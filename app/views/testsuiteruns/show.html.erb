@@ -1,3 +1,43 @@
+<% content_for :head do  %>
+  <style type="text/css">
+    ul.step_buttons {
+      list-style: none;
+      margin: 0px;
+      padding: 1em 0px 0px 0px;
+    }
+
+    ul.step_buttons li.step_ok {
+      float: left;
+      list-style: none;
+      width: auto;
+      min-height: 32px;
+      background-image: url("/icons/medium/ok.png");
+      background-position: left;
+      background-repeat: no-repeat;
+      line-height: 32px;
+      padding-right: 32px;
+    }
+
+    ul.step_buttons li.step_failure {
+      float: left;
+      list-style: none;
+      width: auto;
+      min-height: 32px;
+      line-height: 32px;
+      background-image: url("/icons/medium/failure.png");
+      background-position: left;
+      background-repeat: no-repeat;
+    }
+
+    ul.step_buttons li a {
+      padding-left: 35px;
+      min-height: 32px;
+      line-height: 32px;
+      height: 32px;
+    }
+
+  </style>
+<% end %>
 <h1>Test Run</h1>
 <fieldset class="span-24 last">
   <legend >Testrun</legend>
@@ -21,5 +61,16 @@
   </div>
 </fieldset>
 <%= render :partial => "testcaserun", :locals => { :testcaserun => nextcase(@testrun) } if nextcase(@testrun) %>
-<%= link_to 'Step (Ok)', step_ok_path(@testrun), :id => 'step_ok' if show_steplink?(@testrun) %>
-<%= link_to 'Step (Failure)', step_failure_path(@testrun), :id => 'step_failure' if show_steplink?(@testrun) %>
+
+<% if show_steplink?(@testrun) %>
+  <div class="span-24 last">
+    <ul class="step_buttons right">
+      <li class="step_ok" >
+        <%= link_to 'Step (Ok)', step_ok_path(@testrun), :id => 'step_ok' %>
+      </li>
+      <li class="step_failure" >
+        <%= link_to 'Step (Failure)', step_failure_path(@testrun), :id => 'step_failure' %>
+      </li>
+    </ul>
+  </div>
+<%end %>

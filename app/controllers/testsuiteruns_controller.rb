@@ -1,6 +1,7 @@
 class TestsuiterunsController < ApplicationController
   before_filter :check_current_project
-  
+  filter_resource_access :additional_member => {:step_ok => :update, :step_failure => :update}
+
   def index
     @testruns = current_project.testsuiteruns.includes(:testsuite).order("testsuites.key").paginate(:page => params[:page])
   end
@@ -26,7 +27,7 @@ class TestsuiterunsController < ApplicationController
     render 'show'      
   end
   
-private
+  private
   def check_current_project
     if current_project.nil?
       flash[:error] = 'Please select an active project first.'
