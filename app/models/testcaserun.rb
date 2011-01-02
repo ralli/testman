@@ -34,4 +34,8 @@ class Testcaserun < ActiveRecord::Base
     update_attributes!(:edited_by => user, :status => 'ended', :result => result) if nextstep.nil?
     s
   end
+
+  def testcasecount
+    testsuiterun.try(:testcaseruns).try(:count) || 0
+  end
 end

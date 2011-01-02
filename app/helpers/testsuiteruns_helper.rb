@@ -16,12 +16,12 @@ module TestsuiterunsHelper
   def label_for_testcase(testcaserun)
     s = "Testcase ##{testcaserun.position}"
     if testcaserun.testsuiterun then
-      s << " of #{testcaserun.testsuiterun.testcaseruns.count}"
+      s << " of #{testcaserun.testcasecount}"
     end
     s
   end
 
   def label_for_teststep(teststeprun)
-    "Teststep ##{teststeprun.teststep.position} of #{teststeprun.testcaserun.teststepruns.count}"
+    "Teststep ##{teststeprun.teststep.position} of #{teststeprun.teststepcount}"
   end
 end

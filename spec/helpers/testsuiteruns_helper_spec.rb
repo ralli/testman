@@ -36,4 +36,25 @@ describe TestsuiterunsHelper do
     testsuiterun.stubs(:status => 'running')
     show_steplink?(testsuiterun).should be_true
   end
+
+  it "should have a valid label for teststeps" do
+    teststeprun = Teststeprun.new
+    teststep = Teststep.new(:position => 1)
+    teststeprun.stub(:teststep => teststep, :teststepcount => 10)
+    label_for_teststep(teststeprun).should == 'Teststep #1 of 10'
+  end
+
+  it "should have a valid label for testcases" do
+    testcaserun = Testcaserun.new
+    testsuiterun = Testsuiterun.new
+    testcaserun.stubs(:position => 1, :testcasecount => 10, :testsuiterun => testsuiterun)
+    label_for_testcase(testcaserun).should== 'Testcase #1 of 10'
+  end
+
+  it "should have a valid label for testcases" do
+    testcaserun = Testcaserun.new
+    testsuiterun = nil
+    testcaserun.stubs(:position => 1, :testcasecount => 10, :testsuiterun => testsuiterun)
+    label_for_testcase(testcaserun).should== 'Testcase #1'
+  end
 end

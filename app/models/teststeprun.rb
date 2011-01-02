@@ -29,4 +29,8 @@ class Teststeprun < ActiveRecord::Base
   def next?
     false
   end
+
+  def teststepcount
+    testcaserun.try(:teststepruns).try(:count) || 0
+  end
 end
