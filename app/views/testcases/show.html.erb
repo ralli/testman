@@ -1,80 +1,167 @@
 <% title "Testcase" %>
-<style type="text/css">
-  .row {
-    height: 2em;
-    width: 930px;
-  }
-</style>
+<% content_for :head do %>
+  <%= javascript_include_tag 'jquery.tablednd.js' %>
+
+  <style type="text/css">
+    .row {
+      height: 2em;
+      width: 930px;
+    }
+    .handle {
+      cursor: move;
+      font-size: 0.8em;
+      color: #888888;
+      vertical-align: top;
+    }
+
+    ol#attachments {
+      list-style: none;
+      margin: 0px;
+      padding: 0px;
+    }
+
+    .dragClass {
+      background-color: #cccccc;
+    }
+
+    tbody tr:nth-child(even) td {
+      background-color: transparent;
+    }  </style>
+  <script type="text/javascript">
+    $(function() {
+      $('#attachments').sortable({
+        axis: 'y',
+        dropOnEmpty: false,
+        handle: '.handle',
+        cursor: 'move',
+        items: 'li',
+        opacity: 0.4,
+        scroll: true,
+        update: function(){
+          $.ajax({
+            type: 'post',
+            data: $('#attachments').sortable("serialize"),
+            dataType: 'script',
+            complete: function(request){
+              $('#attachments').effect('highlight');
+            },
+            url: '<%=  sort_attachments_testcase_url(@testcase) -%>' })
+        }
+      });
+
+      $('#teststeps').tableDnD( {
+        onDragClass: 'dragClass',
+        dragHandle: 'handle',
+        onDrop: function(table, row) {
+          $.ajax({
+            type: 'post',
+            data: $.tableDnD.serialize(),
+            dataType: 'script',
+            complete: function(request){
+              $('#teststeps').effect('highlight');
+            },
+            url: '<%= sort_teststeps_testcase_url(@testcase) %>'
+          });
+        }
+      })
+    })
+  </script>
+<% end %>
 <fieldset class="span-24 last">
   <legend>Testcase</legend>
   <div class="span-22 last" style="padding: 1em;">
-  <div class="row span-22 last">
-    <div class="label span-5">Key:</div>
-    <div class="span-6"><%= @testcase.key %></div>
-    <div class="label span-5">Version:</div>
-    <div class="span-6 last"><%= @testcase.version %></div>
-  </div>
+    <div class="row span-22 last">
+      <div class="label span-5">Key:</div>
+      <div class="span-6"><%= @testcase.key %></div>
+      <div class="label span-5">Version:</div>
+      <div class="span-6 last"><%= @testcase.version %></div>
+    </div>
 
-  <div class="row span-22 last">
-    <div class="label span-5">Project:</div>
-    <div class="span-17 last"><%=  @testcase.project.try(:to_label) %></div>
-  </div>
+    <div class="row span-22 last">
+      <div class="label span-5">Project:</div>
+      <div class="span-17 last"><%=  @testcase.project.try(:to_label) %></div>
+    </div>
 
-  <div class="row span-22 last">
-    <div class="label span-5">Name:</div>
-    <div class="span-17 last"><%=  @testcase.name %></div>
-  </div>
+    <div class="row span-22 last">
+      <div class="label span-5">Name:</div>
+      <div class="span-17 last"><%=  @testcase.name %></div>
+    </div>
 
-  <div class="row">
-    <div class="label span-5">Description:</div>
-    <div class="span-17 last"><%= render_textile(@testcase.description) %></div>
-  </div>
+    <div class="row">
+      <div class="label span-5">Description:</div>
+      <div class="span-17 last"><%= render_textile(@testcase.description) %></div>
+    </div>
 
-  <div class="row span-22 last">
-    <div class="label span-5">Test Area:</div>
-    <div class="span-6"><%= @testcase.value_for(:test_area) %></div>
-    <div class="label span-5">Test Variety:</div>
-    <div class="span-6 last"><%= @testcase.value_for(:test_variety) %></div>
-  </div>
+    <div class="row span-22 last">
+      <div class="label span-5">Test Area:</div>
+      <div class="span-6"><%= @testcase.value_for(:test_area) %></div>
+      <div class="label span-5">Test Variety:</div>
+      <div class="span-6 last"><%= @testcase.value_for(:test_variety) %></div>
+    </div>
 
-  <div class="row span-22 last">
-    <div class="label span-5">Test Level:</div>
-    <div class="span-6"><%= @testcase.value_for(:test_level) %></div>
-    <div class="label span-5">Execution Type:</div>
-    <div class="span-6 last"><%= @testcase.value_for(:execution_type) %></div>
-  </div>
+    <div class="row span-22 last">
+      <div class="label span-5">Test Level:</div>
+      <div class="span-6"><%= @testcase.value_for(:test_level) %></div>
+      <div class="label span-5">Execution Type:</div>
+      <div class="span-6 last"><%= @testcase.value_for(:execution_type) %></div>
+    </div>
 
-  <div class="row span-22 last">
-    <div class="label span-5">Test Status:</div>
-    <div class="span-6"><%= @testcase.value_for(:test_status) %></div>
-    <div class="label span-5">Test Priority:</div>
-    <div class="span-6 last"><%= @testcase.value_for(:test_priority) %></div>
-  </div>
+    <div class="row span-22 last">
+      <div class="label span-5">Test Status:</div>
+      <div class="span-6"><%= @testcase.value_for(:test_status) %></div>
+      <div class="label span-5">Test Priority:</div>
+      <div class="span-6 last"><%= @testcase.value_for(:test_priority) %></div>
+    </div>
 
-  <div class="row span-22 last">
-    <div class="label span-5">Test Method:</div>
-    <div class="span-6 last"><%= @testcase.value_for(:test_method) %></div>
-  </div>
+    <div class="row span-22 last">
+      <div class="label span-5">Test Method:</div>
+      <div class="span-6 last"><%= @testcase.value_for(:test_method) %></div>
+    </div>
 
-  <div class="row span-22 last">
-    <div class="label span-5">Created:</div>
-    <div class="span-6"><%= @testcase.created_at %></div>
-    <div class="label span-5">Edited:</div>
-    <div class="span-6 last"><%= @testcase.created_at %></div>
-  </div>
+    <div class="row span-22 last">
+      <div class="label span-5">Created:</div>
+      <div class="span-6"><%= @testcase.created_at %></div>
+      <div class="label span-5">Edited:</div>
+      <div class="span-6 last"><%= @testcase.created_at %></div>
+    </div>
 
-   <div class="row span-22 last">
-    <div class="label span-5">Created by:</div>
-    <div class="span-6"><%= @testcase.created_by.try(:to_label) %></div>
-    <div class="label span-5">Edited by:</div>
-    <div class="span-6 last"><%= @testcase.edited_by.try(:to_label) %></div>
-  </div>
+    <div class="row span-22 last">
+      <div class="label span-5">Created by:</div>
+      <div class="span-6"><%= @testcase.created_by.try(:to_label) %></div>
+      <div class="label span-5">Edited by:</div>
+      <div class="span-6 last"><%= @testcase.edited_by.try(:to_label) %></div>
+    </div>
 
-  <div class="row span-22 last">
-    <%= link_to "Edit", edit_testcase_path(@testcase) if permitted_to? :update, @testcase %>
-    <%= link_to "Destroy", @testcase, :confirm => 'Are you sure?', :method => :delete if permitted_to? :delete, @testcase %>
-    <%= link_to "View All", testcases_path if permitted_to? :read, :testcases %>
+    <div class="row span-22 last">
+      <%= link_to "Edit", edit_testcase_path(@testcase) if permitted_to? :update, @testcase %>
+      <%= link_to "Destroy", @testcase, :confirm => 'Are you sure?', :method => :delete if permitted_to? :delete, @testcase %>
+      <%= link_to "View All", testcases_path if permitted_to? :read, :testcases %>
+    </div>
   </div>
+</fieldset>
+
+<fieldset class="span-24 last">
+  <legend>Attachments</legend>
+  <div class="span-22 last fieldset">
+    <ul>
+      <li><%= link_to 'Add Attachment', new_testcase_attachment_url(@testcase) %></li>
+    </ul>
+    <ol id="attachments">
+      <% @testcase.testcase_attachments.each do |attachment| %>
+        <li class="span-22 last" id="attachment_<%= attachment.to_param %>">
+          <div class="handle span-2">[drag]</div>
+          <div class="span-8">
+            <%= link_to attachment.attachment_file_name, attachment.attachment.url %>
+          </div>
+          <div class="span-4">
+            <%= attachment.attachment_file_size.bytes %> Bytes
+          </div>
+          <div class="span-4 last">
+            <%= link_to 'Delete', testcase_attachment_url(@testcase, attachment), :confirm => 'Are you shure?', :method => 'delete' %>
+          </div>
+        </li>
+      <% end %>
+    </ol>
   </div>
 </fieldset>
 
@@ -84,7 +171,7 @@
   <li><%= link_to 'New Test Step', new_testcase_teststep_path(@testcase), {:id => 'new_teststep'} %></li>
 </ul>
 
-<table>
+<table id="teststeps">
   <thead>
     <tr>
       <th>#</th>
@@ -95,8 +182,8 @@
   </thead>
   <tbody>
     <% @testcase.teststeps.each do |teststep| %>
-      <tr>
-        <td><%= teststep.position %></td>
+      <tr id="<%= teststep.to_param %> ">
+        <td class="handle">[drag]</td>
         <td><%= render_textile(teststep.step) %></td>
         <td><%= render_textile(teststep.expected_result) %></td>
         <td>

@@ -3,6 +3,8 @@
   <style type="text/css">
     .dragHandle {
       cursor: move;
+      color: #888888;
+      font-size: 0.8em;
     }
     .dragClass {
       background-color: #eeeeee;
@@ -92,7 +94,7 @@
   <tbody>
     <% @testsuite_entries.each do |entry| %>
       <%= content_tag :tr, :id => entry.id do %>
-      <td class="dragHandle"><%= image_tag '/icons/small/arrow-up.png' %> </td>
+      <td class="dragHandle">[drag]</td>
       <td><%= entry.testcase.key %> </td>
       <td><%= entry.testcase.version %> </td>
       <td><%= entry.testcase.name %> </td>

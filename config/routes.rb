@@ -19,12 +19,18 @@ Testman::Application.routes.draw do
   get 'testcases/:testcase_id/moveup/:id' => 'teststeps#move_up', :as => :move_up
   get 'testcases/:testcase_id/movedown/:id' => 'teststeps#move_down', :as => :move_down
   resources :testcases do
+    member do
+      match 'sort_attachments'
+      match 'sort_teststeps'
+    end
     resources :teststeps
+    resources :testcase_attachments, :as => 'attachments'
   end
 
-  get 'projects/activatable_projects' => 'projects#activatable_projects'
-  get 'projects/:id/activate' => 'projects#activate', :as => :activate_project
-  resources :projects
+  resources :projects do
+    get 'activatable_projects', :on => :collection
+    get 'activate', :on => :member
+  end
 
 
   # The priority is based upon order of creation:

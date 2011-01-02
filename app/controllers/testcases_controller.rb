@@ -1,5 +1,5 @@
 class TestcasesController < ApplicationController
-  filter_resource_access
+  filter_resource_access :additional_member => { :sort_attachments => :update, :sort_teststeps => :update }
   before_filter :check_current_project
   
   def index
@@ -54,4 +54,22 @@ class TestcasesController < ApplicationController
       redirect_to root_url
     end
   end
+
+  def sort_attachments
+    params['attachment'].each_with_index do |id,idx|
+      TestcaseAttachment.update_all(['position=?', idx+1], ['id=?', id.to_i])
+    end
+    render :nothing => true
+  end
+
+  def sort_teststeps
+    @testcase = Testcase.find(params[:id])
+    ids = params['teststeps']
+    ids.delete_at(0) unless ids.empty?    
+    ids.each_with_index do |id, idx|
+      Teststep.update_all(['position=?', idx+1], ['id=?', id.to_i])
+    end
+    render :nothing => true
+  end
+
 end

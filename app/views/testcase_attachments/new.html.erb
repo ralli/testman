@@ -1,0 +1,10 @@
+<% title "New Testcase Attachment" %>
+<%= simple_form_for @testcase_attachment, :html => { :multipart => true } do |f| %>
+<fieldset class="span-24 last">
+  <legend>Attachment</legend>
+  <div class="fieldset span-22 last">
+    <%=  f.input :attachment %>
+    <%= f.button :submit, 'Save' %>
+  </div>
+</fieldset>
+<% end %>

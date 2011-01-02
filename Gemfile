@@ -14,6 +14,7 @@ gem 'authlogic'
 gem 'declarative_authorization'
 gem 'RedCloth'
 gem 'jquery-rails'
+gem 'paperclip'
 
 # Use unicorn as the web server
 # gem 'unicorn'

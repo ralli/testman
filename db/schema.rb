@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20101228223453) do
+ActiveRecord::Schema.define(:version => 20110102202044) do
 
   create_table "projects", :force => true do |t|
     t.string   "name",       :limit => 80, :null => false
@@ -19,6 +19,20 @@ ActiveRecord::Schema.define(:version => 20101228223453) do
   end
 
   add_index "projects", ["name"], :name => "index_projects_on_name"
+
+  create_table "testcase_attachments", :force => true do |t|
+    t.integer  "testcase_id"
+    t.integer  "position"
+    t.text     "description"
+    t.string   "attachment_file_name"
+    t.string   "attachment_content_type"
+    t.integer  "attachment_file_size"
+    t.datetime "attachment_updated_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "testcase_attachments", ["testcase_id", "position"], :name => "index_testcase_attachments_on_testcase_id_and_position"
 
   create_table "testcaseruns", :force => true do |t|
     t.integer  "testsuiterun_id"
