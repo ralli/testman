@@ -13,6 +13,7 @@ gem 'will_paginate', '>= 3.0.pre2'
 gem 'authlogic'
 gem 'declarative_authorization'
 gem 'RedCloth'
+gem 'jquery-rails'
 
 # Use unicorn as the web server
 # gem 'unicorn'
