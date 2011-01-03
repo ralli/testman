@@ -7,8 +7,6 @@ Testman::Application.routes.draw do
   get 'testsuites/:id/run' => 'testsuites#run', :as => :run_testsuite
   get 'testsuites/:id/show_testcases' => 'testsuites#show_testcases', :as => :show_testcases
   get 'testsuites/:id/add_testcase/:testcase_id' => 'testsuites#add_testcase', :as => :add_testcase
-  get 'testsuites/:testsuite_id/moveup/:id' => 'testsuite_entries#move_up', :as => :move_testcase_up
-  get 'testsuites/:testsuite_id/movedown/:id' => 'testsuite_entries#move_down', :as => :move_testcase_down
   resources :testsuites do
     resources :testsuite_entries, :only => :destroy
     member do
@@ -16,8 +14,6 @@ Testman::Application.routes.draw do
     end
   end
 
-  get 'testcases/:testcase_id/moveup/:id' => 'teststeps#move_up', :as => :move_up
-  get 'testcases/:testcase_id/movedown/:id' => 'teststeps#move_down', :as => :move_down
   resources :testcases do
     member do
       match 'sort_attachments'

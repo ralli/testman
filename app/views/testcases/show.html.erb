@@ -187,8 +187,6 @@
         <td><%= render_textile(teststep.step) %></td>
         <td><%= render_textile(teststep.expected_result) %></td>
         <td>
-          <%= link_to "Up", move_up_path(@testcase, teststep), :id => 'move_up' %>
-          <%= link_to "Down", move_down_path(@testcase, teststep), :id => 'move_down' %>
           <%= link_to "Edit", edit_testcase_teststep_path(@testcase, teststep), {:id => 'edit_teststep'} %>
           <%= link_to "Delete", testcase_teststep_path(@testcase, teststep), :method => 'delete', :confirm => 'Are you sure?', :id => 'delete_teststep' %>
         </td>

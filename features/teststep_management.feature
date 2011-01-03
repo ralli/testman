@@ -40,25 +40,3 @@ Feature: Manage Test Steps
     And I go to the show page for that testcase
     And I follow "delete_teststep"
     Then I should see "Successfully deleted test step."
-
-  Scenario: Move test step up
-    Given a project exists
-    And I am logged in as user "test" for that project
-    And a testcase exists with project: that project
-    And a teststep "one" exists with testcase: that testcase, step: "first step"
-    And a teststep "two" exists with testcase: that testcase, step: "second step"
-    And I go to the show page for that testcase
-    When I click "move_up" for teststep "two"
-    Then teststep: "two" has position "1"
-    And teststep: "one" has position "2"
-
-  Scenario: Move test step down
-    Given a project exists
-    And I am logged in as user "test" for that project
-    And a testcase exists with project: that project
-    And a teststep "one" exists with testcase: that testcase, step: "first step"
-    And a teststep "two" exists with testcase: that testcase, step: "second step"
-    And I go to the show page for that testcase
-    When I click "move_down" for teststep "one"
-    Then teststep: "two" has position "1"
-    And teststep: "one" has position "2"
