@@ -69,8 +69,7 @@ class TestsuitesController < ApplicationController
   def sort_testcases
     @testsuite = Testsuite.find(params[:id])
     ids = params['tctable']
-    ids.delete_at(0) unless ids.empty?
-    puts(ids.inspect)
+    ids.delete_at(0) unless ids.empty?    
     ids.each_with_index do |id, idx|
       TestsuiteEntry.update_all(['position=?', idx+1], ['id=?', id.to_i])
     end
