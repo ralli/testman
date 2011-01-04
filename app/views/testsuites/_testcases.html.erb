@@ -1,0 +1,6 @@
+<% @testcases.each do |testcase| %>
+  <%= content_tag :li, :id => "entryid_t#{testcase.to_param}" do %>
+    <div class="handle span-1">[drag]</div>
+    <%= "#{testcase.key}.#{testcase.version}" %> <%= testcase.name %>
+  <% end %>
+<% end %>

@@ -24,13 +24,14 @@ class Testsuite < ActiveRecord::Base
   end
 
   def add_testcase(testcase, user = nil)
-    self.transaction do
-      entry = TestsuiteEntry.new
+    entry = TestsuiteEntry.new
+    self.transaction do      
       entry.testsuite = self
       entry.testcase = testcase
       entry.save
       self.update_attribute(:edited_by, user) if user
     end
+    entry
   end
 
   def create_run(user)

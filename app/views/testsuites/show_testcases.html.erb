@@ -43,7 +43,7 @@
         <td><%= testcase.key  %></td>
         <td><%= testcase.version %></td>
         <td><%= testcase.name  %></td>
-        <td><%= link_to "Add", add_testcase_url(@testsuite, testcase), :id => 'add_testcase'  %></td>
+        <td><%= link_to "Add", add_testcase_testsuite_url(@testsuite, testcase), :id => 'add_testcase'  %></td>
       </tr>
     <% end %>
   </tbody>

@@ -4,13 +4,15 @@ Testman::Application.routes.draw do
   get "testsuiteruns/:id/step_failure" => "testsuiteruns#step_failure", :as => :step_failure
   resources :testsuiteruns
 
-  get 'testsuites/:id/run' => 'testsuites#run', :as => :run_testsuite
-  get 'testsuites/:id/show_testcases' => 'testsuites#show_testcases', :as => :show_testcases
-  get 'testsuites/:id/add_testcase/:testcase_id' => 'testsuites#add_testcase', :as => :add_testcase
+  get 'testsuites/:id/add_testcase/:testcase_id' => 'testsuites#add_testcase', :as => :add_testcase_testsuite
   resources :testsuites do
     resources :testsuite_entries, :only => :destroy
     member do
       match 'sort_testcases'
+      match 'run'
+      get 'show_testcases'
+      get 'show_add'
+      post 'assign_testcase'
     end
   end
 

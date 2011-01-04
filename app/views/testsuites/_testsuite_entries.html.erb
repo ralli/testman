@@ -1,0 +1,8 @@
+<% @testsuite_entries.each do |entry| %>
+  <%= content_tag :li, :id => "entryid_e#{entry.to_param}" do %>
+    <div class="handle span-1">[drag]</div>
+    <%= "#{entry.testcase.key}.#{entry.testcase.version}"  %>
+    <%= entry.testcase.name %>
+    <%= link_to 'Delete', testsuite_testsuite_entry_url(@testsuite, entry), :method => 'delete' %>
+  <% end %>
+<% end %>

@@ -1,5 +1,5 @@
 class TestsuitesController < ApplicationController
-  filter_resource_access :additional_member => {:show_testcases => :update, :add_testcase => :update, :run => :update, :sort_testcases => :update}
+  filter_resource_access :additional_member => {:show_testcases => :update, :add_testcase => :update, :run => :update, :sort_testcases => :update, :show_add => :update, :assign_testcase => :update}
   
   def index
     @testsuites = current_project.testsuites
@@ -27,6 +27,16 @@ class TestsuitesController < ApplicationController
   def show
     @testsuite = Testsuite.find(params[:id])
     @testsuite_entries = @testsuite.testsuite_entries.includes(:testcase)
+  end
+
+  def show_add
+    @testsuite = Testsuite.find(params[:id])
+    @testsuite_entries = @testsuite.testsuite_entries.includes(:testcase)
+    if @testsuite_entries.empty?
+      @testcases = current_project.testcases.order("testcases.key")
+    else
+      @testcases = current_project.testcases.order("testcases.key").where('testcases.id not in (?)', @testsuite.testcases)
+    end
   end
 
   def edit
@@ -75,4 +85,37 @@ class TestsuitesController < ApplicationController
     end
     render :nothing => true
   end
+
+  def assign_testcase
+    @testsuite = Testsuite.find(params[:id])
+    logger.info(params[:entryid].inspect)
+    entry_ids = params[:entryid]
+    testcase_id = find_testcase_id(entry_ids)
+    logger.info("Testcase Id = #{testcase_id}")
+    if testcase_id.blank?
+      render :nothing => true
+    else
+      testcase = Testcase.find(testcase_id)
+      entry = @testsuite.add_testcase(testcase, current_user)
+      entry_ids.each_with_index do |entry_id, idx|
+        match = /^e(\d+)$/.match(entry_id)
+        if match
+          id = match[1].to_i
+        elsif (/^t\d+$/.match(entry_id))
+          id = entry.id               
+        end
+        TestsuiteEntry.update_all(['position=?', idx+1], ['id=?', id])
+      end
+      @testsuite_entries = @testsuite.testsuite_entries(true).includes(:testcase)
+    end
+  end
+
+  private
+  def find_testcase_id(entry_ids)
+    testcase_id = entry_ids.detect(nil) { |id| /^t\d+$/.match(id) }
+    return nil if testcase_id.blank?
+    match = /^t(\d+)$/.match(testcase_id)
+    return match[1].to_i
+  end
+
 end

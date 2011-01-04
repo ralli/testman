@@ -1,0 +1,74 @@
+<h1>Add Testcases</h1>
+
+<% content_for :title => 'Add Testcases' %>
+<% content_for :head do %>
+  <style type="text/css">
+    .handle {
+      color: #aaaaaa;
+      font-size: 0.8em;
+      cursor: move;
+    }
+    ol.testcases {
+      list-style: none;
+      margin: 0px;
+      padding: 1em;
+      background-color: #eeeeff;
+      border-color: #aaaaaa;
+      border-style: solid;
+      border-width: 1px;
+    }
+
+    ol.testcases li {
+      background-color: white;
+      border-color: #aaaaaa;
+      border-style: solid;
+      border-width: 1px;
+      padding: 0.2em;
+      margin-bottom: 0.3em;
+    }
+  </style>
+
+  <script type="text/javascript">
+    $(function() {
+      $('#testcases').sortable({
+        connectWith: '#testentries',
+        helper: 'clone',
+        handle: '.handle',
+        update: function() {
+          $('#debug').html($('#testentries').sortable('serialize'));
+          $.post('<%= assign_testcase_testsuite_url(@testsuite) %>', $('#testentries').sortable('serialize'));
+        }
+      });
+
+      $('#testentries').sortable({
+        handle: '.handle',
+        axis: 'y'
+      });
+      
+    })
+  </script>
+<% end %>
+
+<div id="debug">
+</div>
+<fieldset class="span-24 last">
+  <legend>Testsuite</legend>
+  <div class="fieldset span-22 last">
+    <div class="label span-2"><%= @testsuite.key %></div>
+    <div class="span-18"><%= @testsuite.name %></div>
+    <div class="span-2 last"><%= link_to 'show ...', @testsuite %></div>
+  </div>
+</fieldset>
+<div class="span-11 testcases">
+  <h2>Available testcases</h2>
+  <ol class="testcases" id="testcases">
+    <%= render 'testcases' %>
+  </ol>
+</div>
+
+<div class="span-11 right last">
+  <h2>Assigned testcases</h2>
+  <ol class="testcases" id="testentries">
+    <%= render 'testsuite_entries' %>
+  </ol>
+</div>
