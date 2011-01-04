@@ -60,17 +60,6 @@ Feature: Manage Testsuites
     Then I should see "Successfully deleted Testsuite."
     And 0 testsuites should exist
 
-  Scenario: Add Testcase to Testsuite
-    Given a project exists
-    And I am logged in as user "test" for that project
-    And a testsuite exists with project: the project
-    And a testcase exists with project: the project
-    And I am on the show page for the testsuite
-    When I follow "add_testcase"
-    And I follow "add_testcase"
-    Then I should see "Successfully added Testcase"
-    And a testsuite entry should exist
-
   Scenario: Delete Testcase from Testsuite
     Given an project exists
     And I am logged in as user "test" for that project

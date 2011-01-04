@@ -1,5 +1,5 @@
 class TestsuitesController < ApplicationController
-  filter_resource_access :additional_member => {:show_testcases => :update, :add_testcase => :update, :run => :update, :sort_testcases => :update, :show_add => :update, :assign_testcase => :update }
+  filter_resource_access :additional_member => {:run => :update, :sort_testcases => :update, :show_add => :update, :assign_testcase => :update }
   filter_access_to :remove_testcase, :require => :update
 
   def index
@@ -57,18 +57,6 @@ class TestsuitesController < ApplicationController
     @testsuite = Testsuite.find(params[:id])
     @testsuite.destroy
     redirect_to testsuites_path, :notice => 'Successfully deleted Testsuite.'
-  end
-
-  def show_testcases
-    @testsuite = Testsuite.find(params[:id])
-    @testcases = current_project.testcases.paginate(:page => params[:page])
-  end
-
-  def add_testcase
-    @testsuite = Testsuite.find(params[:id])
-    @testcase = Testcase.find(params[:testcase_id])
-    @testsuite.add_testcase(@testcase, current_user)
-    redirect_to @testsuite, :notice => 'Successfully added Testcase.'
   end
 
   def run

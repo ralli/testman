@@ -4,7 +4,6 @@ Testman::Application.routes.draw do
   get "testsuiteruns/:id/step_failure" => "testsuiteruns#step_failure", :as => :step_failure
   resources :testsuiteruns
 
-  get 'testsuites/:id/add_testcase/:testcase_id' => 'testsuites#add_testcase', :as => :add_testcase_testsuite
   resources :testsuites do
     resources :testsuite_entries, :only => :destroy
     member do
