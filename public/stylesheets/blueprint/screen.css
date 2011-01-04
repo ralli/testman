@@ -80,7 +80,7 @@ caption {background:#eee;}
 
 /* forms.css */
 label {font-weight:bold;}
-fieldset {padding: 0px;margin: 0px;border:1px solid #ccc;}
+fieldset {padding: 0px;margin: 0px;border:1px solid #ccc; }
 legend {font-weight:bold;font-size:1.2em;margin-left:1em;}
 legend, #IE8#HACK {margin-top:0;margin-bottom:0;}
 input[type=text], input[type=password], input[type=email], input.text, input.title, textarea {background-color:#fff;border:1px solid #bbb;}

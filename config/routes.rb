@@ -13,6 +13,8 @@ Testman::Application.routes.draw do
       get 'show_testcases'
       get 'show_add'
       post 'assign_testcase'
+      post 'reorder_testcases'
+      post 'remove_testcase'
     end
   end
 

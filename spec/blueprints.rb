@@ -83,3 +83,7 @@ Teststeprun.blueprint do
   status { ['new', 'running', 'ended'].rand }
   result { status != 'ended' ? 'unknown' : ['unknown', 'ok', 'failed', 'error', 'skipped'].rand }
 end
+
+TestcaseAttachment.blueprint do
+  position { 1 }
+end

@@ -77,9 +77,15 @@ input[type='email'] {
     border-color: red;
 }
 
+div.mainmenu {
+    background-color: #E5ECF9;
+    margin-bottom: 1em;
+    height: 2em;
+    line-height: 2em;
+}
 div.mainmenu ul {
     display: inline;
-    list-style: none;
+    list-style: none;    
 }
 
 div.mainmenu ul li {
@@ -146,3 +152,8 @@ div.fieldset {
     padding: 1em;
 }
 
+div.login {
+    background-color: #C3D9FF;
+    height: 3em;
+    line-height: 3em;
+}

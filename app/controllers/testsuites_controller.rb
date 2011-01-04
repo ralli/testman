@@ -1,6 +1,7 @@
 class TestsuitesController < ApplicationController
-  filter_resource_access :additional_member => {:show_testcases => :update, :add_testcase => :update, :run => :update, :sort_testcases => :update, :show_add => :update, :assign_testcase => :update}
-  
+  filter_resource_access :additional_member => {:show_testcases => :update, :add_testcase => :update, :run => :update, :sort_testcases => :update, :show_add => :update, :assign_testcase => :update }
+  filter_access_to :remove_testcase, :require => :update
+
   def index
     @testsuites = current_project.testsuites
   end
@@ -92,30 +93,37 @@ class TestsuitesController < ApplicationController
     entry_ids = params[:entryid]
     testcase_id = find_testcase_id(entry_ids)
     logger.info("Testcase Id = #{testcase_id}")
-    if testcase_id.blank?
-      render :nothing => true
-    else
+    unless testcase_id.blank? then
       testcase = Testcase.find(testcase_id)
       entry = @testsuite.add_testcase(testcase, current_user)
-      entry_ids.each_with_index do |entry_id, idx|
-        match = /^e(\d+)$/.match(entry_id)
-        if match
-          id = match[1].to_i
-        elsif (/^t\d+$/.match(entry_id))
-          id = entry.id               
-        end
-        TestsuiteEntry.update_all(['position=?', idx+1], ['id=?', id])
-      end
-      @testsuite_entries = @testsuite.testsuite_entries(true).includes(:testcase)
+    else
+      entry = nil
     end
+    entry_ids.each_with_index do |entry_id, idx|
+      match = /^e(\d+)$/.match(entry_id)
+      if match
+        id = match[1].to_i
+      elsif (/^t\d+$/.match(entry_id))
+        id = entry.id
+      end
+      TestsuiteEntry.update_all(['position=?', idx+1], ['id=?', id])
+    end
+    @testsuite_entries = @testsuite.testsuite_entries(true).includes(:testcase)
+    @notice = entry.nil? ? "Successfully reordered testcases" : "Assigned Testcase."
   end
 
+  def remove_testcase
+    entryid = params[:entryid]
+    entry = TestsuiteEntry.find(entryid.to_i)
+    entry.destroy()
+    @notice = "Successfully removed testcase."
+  end
   private
+  
   def find_testcase_id(entry_ids)
     testcase_id = entry_ids.detect(nil) { |id| /^t\d+$/.match(id) }
     return nil if testcase_id.blank?
     match = /^t(\d+)$/.match(testcase_id)
     return match[1].to_i
   end
-
 end

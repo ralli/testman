@@ -3,6 +3,6 @@
     <div class="handle span-1">[drag]</div>
     <%= "#{entry.testcase.key}.#{entry.testcase.version}"  %>
     <%= entry.testcase.name %>
-    <%= link_to 'Delete', testsuite_testsuite_entry_url(@testsuite, entry), :method => 'delete' %>
+    <a href="#" class= "delete right" id = "<%=  entry.id %>" style="margin-right: 1em;">Delete</a>
   <% end %>
 <% end %>

@@ -13,11 +13,15 @@
     <%= yield(:head) %>
   </head>
   <body>
-    <div class="container">
+    <div class="login">
       <%=  render '/layouts/login' %>
-      <div class="span-24 mainmenu last">
+    </div>
+    <div class="mainmenu">
+      <div class="container">
         <%= render '/layouts/menu' %>
       </div>
+    </div>
+    <div class="container" style="min-height: 200px;">
       <% flash.each do |name, msg| %>
         <%= content_tag :div, msg, :id => "flash_#{name}", :class => "span-24 last #{name}" %>
       <% end %>

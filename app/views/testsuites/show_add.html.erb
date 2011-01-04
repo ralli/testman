@@ -34,30 +34,41 @@
         connectWith: '#testentries',
         helper: 'clone',
         handle: '.handle',
-        update: function() {
-          $('#debug').html($('#testentries').sortable('serialize'));
-          $.post('<%= assign_testcase_testsuite_url(@testsuite) %>', $('#testentries').sortable('serialize'));
-        }
+        revert: true
       });
 
       $('#testentries').sortable({
         handle: '.handle',
-        axis: 'y'
+        axis: 'y',
+        update: function() {
+          $('#message').hide();
+          $.post('<%= assign_testcase_testsuite_url(@testsuite) %>', $('#testentries').sortable('serialize'));
+        }
       });
-      
+
+      $('.delete').click(function() {
+        $("#message").hide();
+        $.post('<%= remove_testcase_testsuite_url(@testsuite)%>', "entryid=" + $(this).attr('id') );
+        $(this).parent('li').remove();
+        return false;
+      });
     })
   </script>
 <% end %>
 
 <div id="debug">
 </div>
-<fieldset class="span-24 last">
+<div id="message" class="notice" style="display: none">
+  Hossa
+</div>
+<fieldset class="span-24 last" style="margin-bottom: 1em;">
   <legend>Testsuite</legend>
   <div class="fieldset span-22 last">
     <div class="label span-2"><%= @testsuite.key %></div>
-    <div class="span-18"><%= @testsuite.name %></div>
-    <div class="span-2 last"><%= link_to 'show ...', @testsuite %></div>
+    <div class="span-20 last"><%= @testsuite.name %></div>
+    <div class="span-22 last" style="margin-top: 1em;"><%= link_to 'Back', @testsuite %></div>
   </div>
+
 </fieldset>
 <div class="span-11 testcases">
   <h2>Available testcases</h2>

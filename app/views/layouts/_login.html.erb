@@ -1,4 +1,4 @@
-<div class="span-24 last">
+<div class="container">
   <div class="left">
     <% if current_project %>
       Current Project: <%= current_project.name %> <%= link_to 'Choose...', :controller => :projects, :action => :activatable_projects unless current_user.nil? %>
