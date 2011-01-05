@@ -15,6 +15,7 @@ gem 'declarative_authorization'
 gem 'RedCloth'
 gem 'jquery-rails'
 gem 'paperclip'
+gem 'acts_as_taggable_on_steroids'
 
 # Use unicorn as the web server
 # gem 'unicorn'

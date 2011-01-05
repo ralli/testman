@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110102202044) do
+ActiveRecord::Schema.define(:version => 20110105000154) do
 
   create_table "projects", :force => true do |t|
     t.string   "name",       :limit => 80, :null => false
@@ -19,6 +19,20 @@ ActiveRecord::Schema.define(:version => 20110102202044) do
   end
 
   add_index "projects", ["name"], :name => "index_projects_on_name"
+
+  create_table "taggings", :force => true do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.datetime "created_at"
+  end
+
+  add_index "taggings", ["tag_id"], :name => "index_taggings_on_tag_id"
+  add_index "taggings", ["taggable_id", "taggable_type"], :name => "index_taggings_on_taggable_id_and_taggable_type"
+
+  create_table "tags", :force => true do |t|
+    t.string "name"
+  end
 
   create_table "testcase_attachments", :force => true do |t|
     t.integer  "testcase_id"
@@ -52,23 +66,24 @@ ActiveRecord::Schema.define(:version => 20110102202044) do
   add_index "testcaseruns", ["testsuiterun_id", "position"], :name => "index_testcaseruns_on_testsuiterun_id_and_position"
 
   create_table "testcases", :force => true do |t|
-    t.string   "key",            :limit => 10
+    t.string   "key",             :limit => 10
     t.integer  "version"
     t.integer  "project_id"
-    t.string   "name",           :limit => 80
-    t.boolean  "enabled",                      :default => true
+    t.string   "name",            :limit => 80
+    t.boolean  "enabled",                       :default => true
     t.integer  "created_by_id"
     t.integer  "edited_by_id"
     t.text     "description"
-    t.string   "test_area",      :limit => 20
-    t.string   "test_variety",   :limit => 20
-    t.string   "test_level",     :limit => 20
-    t.string   "execution_type", :limit => 20
-    t.string   "test_status",    :limit => 20
-    t.string   "test_priority",  :limit => 20
-    t.string   "test_method",    :limit => 20
+    t.string   "test_area",       :limit => 20
+    t.string   "test_variety",    :limit => 20
+    t.string   "test_level",      :limit => 20
+    t.string   "execution_type",  :limit => 20
+    t.string   "test_status",     :limit => 20
+    t.string   "test_priority",   :limit => 20
+    t.string   "test_method",     :limit => 20
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "cached_tag_list"
   end
 
   add_index "testcases", ["created_by_id"], :name => "index_testcases_on_created_by_id"

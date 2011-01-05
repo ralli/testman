@@ -30,6 +30,7 @@ GEM
       activesupport (= 3.0.3)
     activesupport (3.0.3)
     acts_as_list (0.1.2)
+    acts_as_taggable_on_steroids (1.2)
     arel (2.0.6)
     authlogic (2.1.6)
       activesupport
@@ -163,6 +164,7 @@ PLATFORMS
 DEPENDENCIES
   RedCloth
   acts_as_list
+  acts_as_taggable_on_steroids
   authlogic
   capybara
   cucumber

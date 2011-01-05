@@ -1,4 +1,5 @@
 class Testcase < ActiveRecord::Base
+  acts_as_taggable
 
   belongs_to :project
   belongs_to :created_by, :class_name => 'User'
