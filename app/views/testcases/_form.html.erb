@@ -1,4 +1,17 @@
-<%= simple_form_for @testcase do |f| %>
+<% content_for :head do %>
+  <style type="text/css">
+    form.testcase textarea, input[type="text"] {
+      padding: 4px;      
+      width: 570px;
+    }
+    form.testcase select {
+      width: 140px;
+      margin-right:10px;
+      padding: 4px;
+    }
+  </style>
+<% end %>
+<%= simple_form_for @testcase, :class => 'testcases' do |f| %>
   <%= f.error_notification %>
   <fieldset class="span-24 last">
     <legend>Testcase</legend>

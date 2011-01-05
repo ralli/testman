@@ -1,3 +1,12 @@
+<% content_for :head do %>
+  <style type="text/css">
+    form.simple_form_user textarea, input[type="text"], input[type="email"], input[type="password"] {
+      padding: 4px;
+      width: 570px;
+    }
+  </style>
+<% end %>
+
 <h1>Register</h1>
 <%= simple_form_for @user do |f| %>
     <%= f.error_notification %>
