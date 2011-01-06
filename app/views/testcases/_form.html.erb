@@ -1,7 +1,7 @@
 <% content_for :head do %>
   <style type="text/css">
     form.testcase textarea, input[type="text"] {
-      padding: 4px;      
+      padding: 4px;
       width: 570px;
     }
     form.testcase select {
@@ -10,6 +10,13 @@
       padding: 4px;
     }
   </style>
+  <%= stylesheet_link_tag 'jquery.tag' %>
+  <%= javascript_include_tag 'jquery.tag' %>
+  <script type="text/javascript">
+    $(function() {
+      $('#testcase_tag_list').tag({seperator: ','});
+    });
+  </script>
 <% end %>
 <%= simple_form_for @testcase, :class => 'testcases' do |f| %>
   <%= f.error_notification %>
@@ -18,7 +25,7 @@
     <div class="fieldset span-22">
       <%= f.input :name %>
       <%= f.input :description %>
-      <%= f.input :tag_list, :as => :string   %>
+      <%= f.input :tag_list, :as => :string, :input_html => {"data-seperator" => "," }  %>
       <div class="span-11">
         <%= f.input :test_area, :as => :select, :collection => Testcase.test_areas, :include_blank => false %>
         <%= f.input :test_variety, :as => :select, :collection => Testcase.test_varieties, :include_blank => false %>

@@ -27,7 +27,7 @@ class Testcase < ActiveRecord::Base
   before_validation :init_fields
   after_create :init_key
   
-  attr_accessible :version, :project, :name, :created_by, :edited_by, :description, :test_area, :test_variety, :test_level, :execution_type, :test_status, :test_priority, :test_method
+  attr_accessible :version, :project, :name, :created_by, :edited_by, :description, :test_area, :test_variety, :test_level, :execution_type, :test_status, :test_priority, :test_method, :tag_list
 
   def self.new_with_defaults
     self.new(:key => 'NEW', :test_area => 'FUNCTIONAL', :test_variety => 'POSITIVE', :test_level => "INTEGRATION_TEST", :execution_type => 'MANUAL', :test_status => 'DESIGN', :test_priority => 'MEDIUM', :test_method => "BLACKBOX")

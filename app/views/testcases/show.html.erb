@@ -1,6 +1,7 @@
 <% title "Testcase" %>
 <% content_for :head do %>
-  <%= javascript_include_tag 'jquery.tablednd.js' %>
+  <%= javascript_include_tag 'jquery.tablednd' %>
+  <%= stylesheet_link_tag 'jquery.tag'  %>
 
   <style type="text/css">
     .row {
@@ -130,6 +131,20 @@
       <div class="span-6"><%= @testcase.created_by.try(:to_label) %></div>
       <div class="label span-5">Edited by:</div>
       <div class="span-6 last"><%= @testcase.edited_by.try(:to_label) %></div>
+    </div>
+
+    <div class="row span-22 last">
+      <div class="label span-5">Tag list:</div>
+      <div class="span-17 last">
+        <ul style="margin: 0px; padding: 0px;">
+          <% @testcase.tag_list.each do |tag| %>
+            <li style="list-style: none; float: left; background-color: #cccccc; border-color: #aaaaaa; border-width: 1px; border-style: solid; padding: 2px 4px; margin-right: 4px; -moz-border-radius: 4px; -o-border-radius: 4px; border-radius: 4px; -webkit-border-radius: 4px;">
+              <%= tag %>
+            </li>
+          <% end %>
+        </ul>
+      </div>
+
     </div>
 
     <div class="row span-22 last">
