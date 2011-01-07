@@ -42,8 +42,6 @@ ActiveRecord::Schema.define(:version => 20110105000154) do
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"
     t.datetime "attachment_updated_at"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   add_index "testcase_attachments", ["testcase_id", "position"], :name => "index_testcase_attachments_on_testcase_id_and_position"

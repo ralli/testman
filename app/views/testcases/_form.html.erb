@@ -1,4 +1,10 @@
 <% content_for :head do %>
+
+  <%= javascript_include_tag 'markitup/jquery.markitup.js' %>
+  <%= javascript_include_tag 'markitup/sets/textile/set.js' %>
+  <%= stylesheet_link_tag 'markitup/skins/simple/style.css'   %>
+  <%= stylesheet_link_tag 'markitup/sets/textile/style.css'   %>
+
   <style type="text/css">
     form.testcase textarea, input[type="text"] {
       padding: 4px;
@@ -9,12 +15,17 @@
       margin-right:10px;
       padding: 4px;
     }
+    div.textile {
+      margin-left: 120px;
+    }
   </style>
   <%= stylesheet_link_tag 'jquery.tag' %>
   <%= javascript_include_tag 'jquery.tag' %>
   <script type="text/javascript">
     $(function() {
       $('#testcase_tag_list').tag({seperator: ','});
+
+      $('textarea').markItUp(mySettings);
     });
   </script>
 <% end %>
