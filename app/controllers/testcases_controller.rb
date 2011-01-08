@@ -1,9 +1,27 @@
 class TestcasesController < ApplicationController
   filter_resource_access :additional_member => { :sort_attachments => :update, :sort_teststeps => :update }
+  filter_access_to :search, :require => :read
   before_filter :check_current_project
-  
+
   def index
-    @testcases = current_project.testcases.order(:id).paginate(:per_page => 10, :page => params[:page])
+    unless params[:tag].blank?
+      @testcases = Testcase.find_tagged_with(params[:tag]).paginate(:per_page => 10, :page => params[:page])
+    else
+      @testcases = current_project.testcases.order(:id).paginate(:per_page => 10, :page => params[:page])
+    end
+    @tag_counts = Testcase.tag_counts
+  end
+
+  def search
+    if(params[:search].blank?)
+      @testcases = current_project.testcases.order(:id).paginate(:per_page => 10, :page => params[:page])
+    else
+      @testcases = Testcase.search(params[:search],
+        :conditions => { :project_id => current_project.id },
+        :per_page => 10, :page => params[:page])
+    end
+    @tag_counts = Testcase.tag_counts
+    render 'index'
   end
   
   def show
@@ -71,5 +89,7 @@ class TestcasesController < ApplicationController
     end
     render :nothing => true
   end
+  private
+  
 
 end

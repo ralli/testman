@@ -1,7 +1,9 @@
 .bundle
 db/*.sqlite3
 log/*.log
+log/*.pid
 tmp/**/*
 nbproject/**
 .idea/**
 public/system/**
+db/sphinx/**

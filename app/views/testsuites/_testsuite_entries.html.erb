@@ -3,6 +3,6 @@
     <div class="handle span-1">[drag]</div>
     <%= "#{entry.testcase.key}.#{entry.testcase.version}"  %>
     <%= entry.testcase.name %>
-    <a href="#" class= "delete right" id = "<%=  entry.id %>" style="margin-right: 1em;">Delete</a>
+    <%= image_tag 'to-delete.png', :id => entry.id, :class => 'delete right', :alt => 'delete', :title => 'remove testcase' %>
   <% end %>
 <% end %>

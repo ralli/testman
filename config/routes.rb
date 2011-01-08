@@ -14,6 +14,7 @@ Testman::Application.routes.draw do
       post 'assign_testcase'
       post 'reorder_testcases'
       post 'remove_testcase'
+      match 'search_testcases'
     end
   end
 
@@ -21,6 +22,9 @@ Testman::Application.routes.draw do
     member do
       match 'sort_attachments'
       match 'sort_teststeps'
+    end
+    collection do
+      get 'search'
     end
     resources :teststeps
     resources :testcase_attachments, :as => 'attachments'

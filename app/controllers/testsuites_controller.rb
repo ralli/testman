@@ -1,6 +1,7 @@
 class TestsuitesController < ApplicationController
   filter_resource_access :additional_member => {:run => :update, :sort_testcases => :update, :show_add => :update, :assign_testcase => :update }
   filter_access_to :remove_testcase, :require => :update
+  filter_access_to :search_testcases, :require => :read
 
   def index
     @testsuites = current_project.testsuites
@@ -106,6 +107,17 @@ class TestsuitesController < ApplicationController
     entry.destroy()
     @notice = "Successfully removed testcase."
   end
+
+  def search_testcases
+    param = params[:search] || ""
+    if(param.length < 3)
+      @testcases = current_project.testcases.order(:id)
+    else
+      param += "*" unless param.match(/\*$/)
+      @testcases = Testcase.search(param, :conditions => { :project_id => current_project.id })
+    end
+  end
+
   private
   
   def find_testcase_id(entry_ids)
@@ -114,4 +126,5 @@ class TestsuitesController < ApplicationController
     match = /^t(\d+)$/.match(testcase_id)
     return match[1].to_i
   end
+
 end

@@ -105,4 +105,14 @@ class Testcase < ActiveRecord::Base
     testcaserun
   end
 
+  define_index do
+    indexes :name, :sortable => true
+    indexes :description
+    indexes :key, :as => 'tckey', :sortable => true
+    indexes teststeps.step
+    indexes teststeps.expected_result
+
+    has :project_id
+  end
+
 end

@@ -8,23 +8,34 @@
       font-size: 0.8em;
       cursor: move;
     }
-    ol.testcases {
+    div.testcases {
+      background-color: #C3D9FF;
+      -moz-border-radius: 6px;
+      border-radius: 6px;
+      -webkit-border-radius: 6px;
+      padding: 1em;
+    }
+    div.testcases ol {
       list-style: none;
       margin: 0px;
-      padding: 1em;
-      background-color: #eeeeff;
-      border-color: #aaaaaa;
-      border-style: solid;
-      border-width: 1px;
+      padding: 0px;
     }
 
-    ol.testcases li {
-      background-color: white;
-      border-color: #aaaaaa;
-      border-style: solid;
-      border-width: 1px;
-      padding: 0.2em;
+    div.search, div.testcases ol li {
+      background-color: #E5ECF9;
+      -moz-border-radius: 6px;
+      border-radius: 6px;
+      -webkit-border-radius: 6px;
+      padding: 0.5em 1em;
       margin-bottom: 0.3em;
+    }
+
+    div.search input {
+    }
+
+    .delete {
+      padding: 0.5em 0.5em;
+      cursor: pointer;
     }
   </style>
 
@@ -52,6 +63,15 @@
         $(this).parent('li').remove();
         return false;
       });
+
+      $('#searchfield').autocomplete({
+        source: [],
+        minLength: 0,
+        search: function() {
+          $.post('<%= search_testcases_testsuite_url(@testsuite) %>', "search=" + $(this).val());
+          return false;
+        }
+      });
     })
   </script>
 <% end %>
@@ -61,6 +81,7 @@
 <div id="message" class="notice" style="display: none">
   Hossa
 </div>
+
 <fieldset class="span-24 last" style="margin-bottom: 1em;">
   <legend>Testsuite</legend>
   <div class="fieldset span-22 last">
@@ -68,18 +89,26 @@
     <div class="span-20 last"><%= @testsuite.name %></div>
     <div class="span-22 last" style="margin-top: 1em;"><%= link_to 'Back', @testsuite %></div>
   </div>
-
 </fieldset>
-<div class="span-11 testcases">
+
+<div class="span-11">
   <h2>Available testcases</h2>
-  <ol class="testcases" id="testcases">
-    <%= render 'testcases' %>
-  </ol>
+  <div class="testcases">
+    <div class="search">
+      <%= label_tag(:search, 'Search')  %>
+      <%= text_field_tag(:search, "", :id => 'searchfield') %>
+    </div>
+    <ol id="testcases">
+      <%= render 'testcases' %>
+    </ol>
+  </div>
 </div>
 
 <div class="span-11 right last">
   <h2>Assigned testcases</h2>
-  <ol class="testcases" id="testentries">
-    <%= render 'testsuite_entries' %>
-  </ol>
+  <div class="testcases">
+    <ol class="testcases" id="testentries">
+      <%= render 'testsuite_entries' %>
+    </ol>
+  </div>
 </div>
