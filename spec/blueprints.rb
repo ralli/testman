@@ -1,8 +1,6 @@
 require 'machinist/active_record'
 require 'faker'
 
-#Sham.login { Faker::Name.first_name.underscore }
-
 Project.blueprint do
   name { Faker::Lorem.words(3).join(" ") }
 end
