@@ -8,7 +8,7 @@ Project.blueprint do
 end
 
 User.blueprint do
-  login { Faker::letterify("??????????") }
+  login { Faker::Base::letterify("??????????") }
   email { Faker::Internet::email(login) }
   password { login }
   password_confirmation { password }
