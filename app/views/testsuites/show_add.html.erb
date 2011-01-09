@@ -64,13 +64,9 @@
         return false;
       });
 
-      $('#searchfield').autocomplete({
-        source: [],
-        minLength: 0,
-        search: function() {
-          $.post('<%= search_testcases_testsuite_url(@testsuite) %>', "search=" + $(this).val());
-          return false;
-        }
+      $('#search_form').submit(function() {
+        $.post('<%= search_testcases_testsuite_url(@testsuite) %>', "search=" + $('#searchfield').val());
+        return false;
       });
     })
   </script>
@@ -95,8 +91,11 @@
   <h2>Available testcases</h2>
   <div class="testcases">
     <div class="search">
-      <%= label_tag(:search, 'Search')  %>
-      <%= text_field_tag(:search, "", :id => 'searchfield') %>
+      <%= form_tag(search_testcases_testsuite_url(@testsuite), :id => 'search_form') do %>
+        <%= label_tag(:search, 'Search')  %>
+        <%= text_field_tag(:search, "", :id => 'searchfield') %>
+        <%= submit_tag 'Search', :id => 'search_button' %>
+      <% end %>
     </div>
     <ol id="testcases">
       <%= render 'testcases' %>

@@ -113,7 +113,6 @@ class TestsuitesController < ApplicationController
     if(param.length < 3)
       @testcases = current_project.testcases.order(:id)
     else
-      param += "*" unless param.match(/\*$/)
       @testcases = Testcase.search(param, :conditions => { :project_id => current_project.id })
     end
   end
