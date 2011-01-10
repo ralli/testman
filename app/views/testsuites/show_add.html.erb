@@ -42,7 +42,7 @@
   <script type="text/javascript">
     $(function() {
       $('#testcases').sortable({
-        connectWith: '#testentries',
+        connectWith: '#testentries',        
         helper: 'clone',
         handle: '.handle',
         revert: true
@@ -106,7 +106,7 @@
 <div class="span-11 right last">
   <h2>Assigned testcases</h2>
   <div class="testcases">
-    <ol class="testcases" id="testentries">
+    <ol class="testcases" id="testentries" style="min-height: 3em;">
       <%= render 'testsuite_entries' %>
     </ol>
   </div>
