@@ -17,12 +17,13 @@ describe Testsuite do
   end
 
   def make_full_suite
-    step = Teststep.make(:full)
-    testcase = step.testcase
-    user = testcase.created_by
-    suite = Testsuite.make(:project => testcase.project, :created_by => user, :edited_by => user)
-    suite.add_testcase(testcase)
-    suite
+    project = Project.make
+    user = User.make(:current_project => project)
+    testcase = Testcase.make(:project => project, :created_by => user, :edited_by => user)
+    teststep = Teststep.make(:testcase => testcase)
+    testsuite = Testsuite.make(:project => project, :created_by => user, :edited_by => user)
+    testsuite.testsuite_entries.create(:testcase => testcase)
+    Testsuite.find(testsuite.id)
   end
 
   it "should create a valid test run" do

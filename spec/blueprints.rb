@@ -48,7 +48,7 @@ end
 
 Testsuite.blueprint do
   version { 1 }
-  name { Faker::Lorem.sentence(4) }
+  name { Faker::Lorem.words(4).join(' ') }
   description { Faker::Lorem.paragraph(3) }
 end
 

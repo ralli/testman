@@ -36,7 +36,10 @@ class Testsuite < ActiveRecord::Base
 
   def create_run(user)
     testsuiterun = Testsuiterun.create(:testsuite => self, :status => 'new', :result => 'unknown', :created_by => user, :edited_by => user)
-    testsuite_entries.includes(:testcase).each do |entry|
+
+    # normally i would have been using "testsuite_entries.includes(:testcase).each"
+    # but the rspec failed using an invalid column name for the testcase_id in the sql-statement...
+    TestsuiteEntry.includes(:testcase).where(:testsuite_id => self).order("position").each do | entry |
       testsuiterun.testcaseruns << entry.testcase.create_run(user, testsuiterun, entry.position)
     end
     testsuiterun
