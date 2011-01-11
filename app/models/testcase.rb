@@ -27,7 +27,7 @@ class Testcase < ActiveRecord::Base
   before_validation :init_fields
   after_create :init_key
   
-  attr_accessible :version, :project, :name, :created_by, :edited_by, :description, :test_area, :test_variety, :test_level, :execution_type, :test_status, :test_priority, :test_method, :tag_list
+  attr_accessible :key, :version, :project, :name, :created_by, :edited_by, :description, :test_area, :test_variety, :test_level, :execution_type, :test_status, :test_priority, :test_method, :tag_list
 
   def self.new_with_defaults
     self.new(:key => 'NEW', :test_area => 'FUNCTIONAL', :test_variety => 'POSITIVE', :test_level => "INTEGRATION_TEST", :execution_type => 'MANUAL', :test_status => 'DESIGN', :test_priority => 'MEDIUM', :test_method => "BLACKBOX")
@@ -105,6 +105,20 @@ class Testcase < ActiveRecord::Base
     testcaserun
   end
 
+  def create_version(user = nil)
+    user = user || edited_by
+    copy = Testcase.create(attributes.merge(:project => project, :created_by => created_by, :edited_by => edited_by, :version => version + 1))
+    teststeps.each do |step|
+      copy.teststeps.create(step.attributes)
+    end
+    testcase_attachments.each do |attachment|
+      attachment_copy = copy.testcase_attachments.build(attachment.attributes)
+      attachment_copy.attachment = attachment.attachment
+      attachment.save
+    end
+    copy
+  end
+  
   define_index do
     indexes :name, :sortable => true
     indexes :description
