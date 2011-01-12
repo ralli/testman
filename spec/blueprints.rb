@@ -29,6 +29,7 @@ Testcase.blueprint do
   test_status { Testcase.keys_for(:test_statuses).rand }
   test_priority { Testcase.keys_for(:test_priorities).rand }
   test_method { Testcase.keys_for(:test_methods).rand }
+  
 end
 
 Testcase.blueprint(:full) do
