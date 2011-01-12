@@ -10,7 +10,8 @@ class Testsuiterun < ActiveRecord::Base
   validates_inclusion_of :result, :in => ['unknown', 'ok', 'failed', 'error', 'skipped']
 
   has_many :testcaseruns, :dependent => :destroy, :order => 'position'
-    
+  has_many :teststepruns, :through => :testcaseruns
+  
   belongs_to :created_by, :class_name => 'User'
   validates_presence_of :created_by
   belongs_to :edited_by, :class_name => 'User'
@@ -28,7 +29,15 @@ class Testsuiterun < ActiveRecord::Base
   def step?
     status != 'ended'
   end
+
+  def teststep_count
+    teststepruns.count
+  end
   
+  def completed_teststep_count
+    teststepruns.where('teststepruns.status=?', 'ended').count
+  end
+
   def step(user, result)
     c = nextcase
     return nil if c.nil?

@@ -1,4 +1,6 @@
 <% content_for :head do  %>
+  <%= stylesheet_link_tag 'smoothness/jquery-ui.css' %>
+
   <style type="text/css">
     ul.step_buttons {
       list-style: none;
@@ -35,10 +37,23 @@
       line-height: 32px;
       height: 32px;
     }
-
+    div.progressbar {
+      height: 1.5em;
+      border-color: #B4B4B4;
+      border-width: 1px;
+      border-style: solid;
+      margin-bottom: 1em;
+    }
   </style>
+  <script type="text/javascript">
+    $(function() {
+      $('#progressbar').progressbar({ value: <%= completed_percentage %>  });
+    })
+  </script>
 <% end %>
 <h1>Test Run</h1>
+<div class="progressbar span-21" id="progressbar"></div>
+<div class="right"><%=  "#{number_to_percentage(completed_percentage, :precision => 1)} completed" %></div>
 <fieldset class="span-24 last">
   <legend >Testrun</legend>
   <div class="fieldset span-22 last" style="padding: 1em;" >
