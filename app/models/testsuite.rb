@@ -8,11 +8,11 @@ class Testsuite < ActiveRecord::Base
   belongs_to :created_by, :class_name => 'User'
   belongs_to :edited_by, :class_name => 'User'
   belongs_to :project
-  has_many :testsuite_entries, :dependent => :destroy, :order => :position
+
+  has_many :testsuite_entries, :dependent => :destroy, :order => :position, :class_name => 'TestsuiteEntry'
   has_many :testcases, :through => :testsuite_entries
   has_many :testsuiteruns, :dependent => :destroy
   
-  attr_accessible :name, :description, :edited_by, :updated_by
   after_create :init_key
 
   def self.new_with_defaults(attributes = {})
@@ -20,7 +20,9 @@ class Testsuite < ActiveRecord::Base
   end
 
   def init_key
-    update_attribute(:key, sprintf("TS%05d", id))
+    unless key.blank? or key == 'NEW' then
+      update_attribute(:key, sprintf("TS%05d", id))
+    end
   end
 
   def add_testcase(testcase, user = nil)
@@ -43,5 +45,13 @@ class Testsuite < ActiveRecord::Base
       testsuiterun.testcaseruns << entry.testcase.create_run(user, testsuiterun, entry.position)
     end
     testsuiterun
+  end
+
+  def create_version
+    copy = Testsuite.create!(self.attributes.merge({:project => project, :created_by => created_by, :edited_by => edited_by, :version => version + 1}))
+    TestsuiteEntry.includes(:testcase).where(:testsuite_id => self).order('position').each do |tc|
+      copy.testsuite_entries.create(:testcase => tc)
+    end
+    copy
   end
 end
