@@ -44,8 +44,6 @@ describe Testsuite do
     end
     
     it "should have the same attrbutes as the original" do
-      puts "original: #{@original.attributes.inspect}"
-      puts "copy: #{@copy.attributes.inspect}"
       @copy.attributes.each do |k,v|
         @original.attributes[k].should== v unless ['id', 'created_at', 'updated_at','version'].include?(k)
       end

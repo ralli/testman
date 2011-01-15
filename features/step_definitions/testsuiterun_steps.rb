@@ -8,10 +8,11 @@ Given /^a testsuiterun with (\d+) testcases and (\d+) teststeps per testcase exi
       Teststep.make(:testcase => testcase)
     end
     testcases << testcase
-  end
+  end  
   testsuite = Testsuite.make(:project => project, :created_by => user, :edited_by => user)
   testcases.each do |testcase|
     testsuite.add_testcase(testcase)
   end
+  testsuite = Testsuite.find(testsuite.id)
   testsuite.create_run(user)
 end

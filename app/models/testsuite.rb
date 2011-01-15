@@ -20,7 +20,7 @@ class Testsuite < ActiveRecord::Base
   end
 
   def init_key
-    unless key.blank? or key == 'NEW' then
+    if key.blank? or key == 'NEW' then
       update_attribute(:key, sprintf("TS%05d", id))
     end
   end
@@ -37,11 +37,11 @@ class Testsuite < ActiveRecord::Base
   end
 
   def create_run(user)
-    testsuiterun = Testsuiterun.create(:testsuite => self, :status => 'new', :result => 'unknown', :created_by => user, :edited_by => user)
+    testsuiterun = Testsuiterun.create!(:testsuite => self, :status => 'new', :result => 'unknown', :created_by => user, :edited_by => user)
 
     # normally i would have been using "testsuite_entries.includes(:testcase).each"
     # but the rspec failed using an invalid column name for the testcase_id in the sql-statement...
-    TestsuiteEntry.includes(:testcase).where(:testsuite_id => self).order("position").each do | entry |
+    TestsuiteEntry.includes(:testcase).where(:testsuite_id => self.id).order("position").each do | entry |
       testsuiterun.testcaseruns << entry.testcase.create_run(user, testsuiterun, entry.position)
     end
     testsuiterun

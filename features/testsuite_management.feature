@@ -48,7 +48,7 @@ Feature: Manage Testsuites
       | Description | My description |
     And I press "testsuite_submit"
     Then I should see "Successfully saved Testsuite."
-    And I should see "My test suite"
+    Then I should see "My test suite"
     And I should see "My description"
 
   Scenario: Delete Test Suite

@@ -1,8 +1,8 @@
 class TestsuiterunsController < ApplicationController
   before_filter :check_current_project
   filter_resource_access
-  filter_access_to :step_ok => :update
-  filter_access_to :step_failure => :update
+  filter_access_to :step_ok, :require => :update
+  filter_access_to :step_failure, :require => :update
   
   def index
     @testruns = current_project.testsuiteruns.includes(:testsuite).order("testsuites.key").paginate(:page => params[:page])
@@ -17,8 +17,8 @@ class TestsuiterunsController < ApplicationController
     Testsuiterun.transaction do
       fetch_testrun
       @testrun.step(current_user, "ok")
-      fetch_teststep_counts
     end
+    fetch_teststep_counts
     render 'show'
   end
 
@@ -27,9 +27,9 @@ class TestsuiterunsController < ApplicationController
     Testsuiterun.transaction do
       fetch_testrun
       @testrun.step(current_user, "failed")
-      fetch_teststep_counts
     end
-    render 'show'      
+    fetch_teststep_counts
+    render 'show'
   end
   
   private
