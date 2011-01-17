@@ -16,3 +16,7 @@ Given /^a testsuiterun with (\d+) testcases and (\d+) teststeps per testcase exi
   testsuite = Testsuite.find(testsuite.id)
   testsuite.create_run(user)
 end
+
+When /^I follow the show all link$/ do
+  
+end

@@ -35,6 +35,14 @@ class Testcaserun < ActiveRecord::Base
     s
   end
 
+  def set_all(user, result)
+    teststepruns.each do |run|
+      run.status = 'ended'
+      run.result = result
+      run.save!
+    end
+  end
+  
   def testcasecount
     testsuiterun.try(:testcaseruns).try(:count) || 0
   end

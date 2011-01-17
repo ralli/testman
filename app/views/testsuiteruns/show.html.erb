@@ -37,6 +37,7 @@
       line-height: 32px;
       height: 32px;
     }
+
     div.progressbar {
       height: 1.5em;
       border-color: #B4B4B4;
@@ -45,9 +46,13 @@
       margin-bottom: 1em;
     }
   </style>
+
   <script type="text/javascript">
     $(function() {
       $('#progressbar').progressbar({ value: <%= completed_percentage %>  });
+      $('#show_all,#show_current').button({icons: { primary:'ui-icon-search'}});
+      $('#set_all_failed').button({icons: { primary:'ui-icon-circle-close'}});
+      $('#set_all_ok').button({icons: { primary:'ui-icon-circle-check'}});
     })
   </script>
 <% end %>
@@ -73,9 +78,26 @@
       <div class="label span-4">Description</div>
       <div class="span-18 last"><%= render_textile(@testrun.testsuite.description) %></div>
     </div>
+    <div class="row span-22 last">
+      <div class="prepend-4 span-18 last">
+        <%= link_to("Show all testcases", show_all_testsuiterun_path(@testrun), :method => 'put', :id => 'show_all') if @testrun.show_current? %>
+        <%= link_to("Show only current", show_current_testsuiterun_path(@testrun), :method => 'put', :id => 'show_current') if @testrun.show_all? %>
+        <% if show_steplink?(@testrun) && @testrun.show_all? %>
+          <%= link_to("Set all to OK", set_all_ok_testsuiterun_path(@testrun), :method => 'put', :id => 'set_all_ok')  %>
+          <%= link_to("Set all to FAILED", set_all_failed_testsuiterun_path(@testrun), :method => 'put', :id => 'set_all_failed')  %>
+        <% end %>
+      </div>
+    </div>
   </div>
 </fieldset>
-<%= render :partial => "testcaserun", :locals => { :testcaserun => nextcase(@testrun) } if nextcase(@testrun) %>
+
+<% if @testrun.show_current? %>
+  <% if nextcase(@testrun) -%>
+    <%= render :partial => "testcaserun", :object => nextcase(@testrun), :locals => { :full => false }  %>
+  <% end -%>
+<% else %>  
+  <%= render :partial => "testcaserun", :collection => @testrun.testcaseruns.includes([:testcase, :teststepruns]), :locals => { :full => true }  %>
+<% end %>
 
 <% if show_steplink?(@testrun) %>
   <div class="span-24 last">
@@ -88,4 +110,4 @@
       </li>
     </ul>
   </div>
-<%end %>
+<% end %>

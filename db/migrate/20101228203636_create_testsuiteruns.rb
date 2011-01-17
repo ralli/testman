@@ -6,6 +6,8 @@ class CreateTestsuiteruns < ActiveRecord::Migration
       t.string :result, :nulls => false, :limit => 20
       t.integer :created_by_id, :nulls => false
       t.integer :edited_by_id, :nulls => false
+      t.string  :show_mode, :nulls => false, :default => 'current', :limit => 10
+      
       t.timestamps
     end
 

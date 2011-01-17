@@ -141,6 +141,7 @@ ActiveRecord::Schema.define(:version => 20110105000154) do
     t.string   "result",        :limit => 20
     t.integer  "created_by_id"
     t.integer  "edited_by_id"
+    t.string   "show_mode",     :limit => 10, :default => "current"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

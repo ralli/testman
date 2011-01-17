@@ -1,3 +1,4 @@
+<%= content_tag('h2', label_for_testcase(testcaserun)) if full %>
 <fieldset class="span-24 last">
   <legend ><%=  label_for_testcase(testcaserun) %></legend>
   <div class="fieldset span-22 last">
@@ -14,4 +15,10 @@
   </div>
 </fieldset>
 
-<%= render :partial => 'teststeprun', :locals => {:teststeprun => nextstep(testcaserun)} if nextstep(testcaserun) %>
+<% if full  %>
+  <%= render :partial => 'teststeprun', :collection => testcaserun.teststepruns %>
+<% else %>
+  <% if nextstep(testcaserun) -%>
+    <%= render :partial => 'teststeprun', :object => nextstep(testcaserun) %>
+  <% end -%>
+<% end %>

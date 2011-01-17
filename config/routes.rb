@@ -2,7 +2,14 @@ Testman::Application.routes.draw do
 
   get "testsuiteruns/:id/step_ok" => "testsuiteruns#step_ok", :as => :step_ok
   get "testsuiteruns/:id/step_failure" => "testsuiteruns#step_failure", :as => :step_failure
-  resources :testsuiteruns
+  resources :testsuiteruns do
+    member do
+      put 'show_all'
+      put 'show_current'
+      put 'set_all_ok'
+      put 'set_all_failed'
+    end
+  end
 
   resources :testsuites do
     resources :testsuite_entries, :only => :destroy

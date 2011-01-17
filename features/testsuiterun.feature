@@ -67,3 +67,19 @@ Feature: Run a test suite
     When I am on the show page for the testsuiterun
     Then I should see "Step (Ok)"
     Then I should see "Step (Failure)"
+
+  Scenario: Show all teststeps of a testsuite run
+    Given a project exists
+    And I am logged in as user "test" for that project
+    And a full testsuiterun exists with status: "running", result: "unknown", show_mode: "current"
+    When I am on the show page for the testsuiterun
+    And I follow "show_all"
+    Then I should see "Show only current"
+
+  Scenario: Show all teststeps of a testsuite run
+    Given a project exists
+    And I am logged in as user "test" for that project
+    And a full testsuiterun exists with status: "running", result: "unknown", show_mode: "all"
+    When I am on the show page for the testsuiterun
+    And I follow "show_current"
+    Then I should see "Show all testcases"
