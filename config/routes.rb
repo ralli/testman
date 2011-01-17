@@ -27,8 +27,9 @@ Testman::Application.routes.draw do
 
   resources :testcases do
     member do
-      match 'sort_attachments'
-      match 'sort_teststeps'
+      post 'sort_attachments'
+      post 'sort_teststeps'
+      put 'create_version'
     end
     collection do
       get 'search'

@@ -1,6 +1,7 @@
 class TestcasesController < ApplicationController
   filter_resource_access :additional_member => { :sort_attachments => :update, :sort_teststeps => :update }
   filter_access_to :search, :require => :read
+  filter_access_to :create_version, :require => :create
   before_filter :check_current_project
 
   def index
@@ -89,6 +90,13 @@ class TestcasesController < ApplicationController
     end
     render :nothing => true
   end
+
+  def create_version
+    @testcase = Testcase.find(params[:id])
+    @testcase = @testcase.create_version(current_user)
+    redirect_to @testcase, :notice => 'New version created.'
+  end
+  
   private
   
 

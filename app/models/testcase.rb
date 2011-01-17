@@ -107,7 +107,9 @@ class Testcase < ActiveRecord::Base
 
   def create_version(user = nil)
     user = user || edited_by
-    copy = Testcase.create(attributes.merge(:project => project, :created_by => created_by, :edited_by => edited_by, :version => version + 1))
+    copy = Testcase.new(attributes.merge(:project => project, :created_by => created_by, :edited_by => edited_by, :version => version + 1))
+    copy.tag_list = tag_list
+    copy.save!
     teststeps.each do |step|
       copy.teststeps.create(step.attributes)
     end
