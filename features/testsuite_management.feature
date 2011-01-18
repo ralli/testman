@@ -70,3 +70,12 @@ Feature: Manage Testsuites
     When I follow "remove_testcase"
     Then I should see "Successfully removed the Testcase from the Testsuite"
     And 0 testsuite entries should exist
+
+  Scenario: Create version of Testsuite
+    Given an project exists
+    And I am logged in as user "test" for that project
+    And a testsuite exists with project: the project
+    And I am on the show page for the testsuite
+    When I follow "create_version"
+    Then I should see "New version created."
+    And 1 testsuites exist with version: "2"

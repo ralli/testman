@@ -2,6 +2,7 @@ class TestsuitesController < ApplicationController
   filter_resource_access :additional_member => {:run => :update, :sort_testcases => :update, :show_add => :update, :assign_testcase => :update }
   filter_access_to :remove_testcase, :require => :update
   filter_access_to :search_testcases, :require => :read
+  filter_access_to :create_version, :require => :update
 
   def index
     @testsuites = current_project.testsuites
@@ -117,6 +118,14 @@ class TestsuitesController < ApplicationController
     end
   end
 
+  def create_version
+    @testsuite = Testsuite.find(params[:id])
+    Testsuite.transaction do
+      @testsuite = @testsuite.create_version(current_user)
+    end
+    redirect_to @testsuite, :notice => 'New version created.'
+  end
+  
   private
   
   def find_testcase_id(entry_ids)

@@ -43,6 +43,7 @@
   <script type="text/javascript">
     $(function() {
       $('a.button').button();
+      $('a.button_add').button({icons: { primary:'ui-icon-plus'}});
       
 
       $('#attachments').sortable({
@@ -184,7 +185,7 @@
   <legend>Attachments</legend>
   <div class="span-22 last fieldset">
     <ul class="link_list span-22 last" style="margin: 0px 0px 1em 0px; padding: 0px">
-      <li><%= link_to 'Add Attachment', new_testcase_attachment_url(@testcase), :class => 'button' if permitted_to? 'update', @testcase %></li>
+      <li><%= link_to 'Add Attachment', new_testcase_attachment_url(@testcase), :class => 'button_add' if permitted_to? 'update', @testcase %></li>
     </ul>
     <ol id="attachments" >
       <% @testcase.testcase_attachments.each do |attachment| %>
@@ -208,7 +209,7 @@
 <h2>Test Steps</h2>
 
 <ul class="link_list span-24 last" style="margin: 0px 0px 1em 0px; padding: 0px;">
-  <li><%= link_to 'New Test Step', new_testcase_teststep_path(@testcase), :id => 'new_teststep', :class => 'button' if permitted_to? 'update', @testcase %></li>
+  <li><%= link_to 'New Test Step', new_testcase_teststep_path(@testcase), :id => 'new_teststep', :class => 'button_add' if permitted_to? 'update', @testcase %></li>
 </ul>
 
 <table id="teststeps">

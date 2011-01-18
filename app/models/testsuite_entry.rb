@@ -4,7 +4,5 @@ class TestsuiteEntry < ActiveRecord::Base
   acts_as_list :scope => :testsuite
 
   validates_presence_of :testsuite_id
-  validates_presence_of :testcase_id
-  
-  attr_accessible :position
+  validates_presence_of :testcase_id   
 end

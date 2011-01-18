@@ -40,7 +40,7 @@ describe Testsuite do
       @original = Testsuite.make(:project => @project, :created_by => @user, :edited_by => @user)
       @original.testsuite_entries.create(:testcase => @testcase)
       @original = Testsuite.find(@original.id)
-      @copy = @original.create_version
+      @copy = @original.create_version(@user)
     end
     
     it "should have the same attrbutes as the original" do

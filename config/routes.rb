@@ -22,6 +22,7 @@ Testman::Application.routes.draw do
       post 'reorder_testcases'
       post 'remove_testcase'
       match 'search_testcases'
+      put "create_version"
     end
   end
 

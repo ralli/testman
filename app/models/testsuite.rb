@@ -47,10 +47,11 @@ class Testsuite < ActiveRecord::Base
     testsuiterun
   end
 
-  def create_version
-    copy = Testsuite.create!(self.attributes.merge({:project => project, :created_by => created_by, :edited_by => edited_by, :version => version + 1}))
-    TestsuiteEntry.includes(:testcase).where(:testsuite_id => self).order('position').each do |tc|
-      copy.testsuite_entries.create(:testcase => tc)
+  def create_version(user)    
+    copy = Testsuite.create!(self.attributes.merge({:project => project, :created_by => created_by, :edited_by => user, :version => version + 1}))
+    TestsuiteEntry.includes(:testcase).where(:testsuite_id => self.id).order('position').each do |entry|
+      new_entry = copy.testsuite_entries.build(:testcase => entry.testcase)
+      new_entry.save!
     end
     copy
   end

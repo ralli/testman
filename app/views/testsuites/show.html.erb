@@ -1,6 +1,16 @@
 <% content_for :head do %>
+  <%= stylesheet_link_tag 'smoothness/jquery-ui.css' %>
   <%= javascript_include_tag 'jquery.tablednd.js' %>
   <style type="text/css">
+    .link_list {
+      list-style: none;   
+    }
+
+    .link_list li {
+      float: left;
+      margin-right: 0.5em;
+    }
+
     .dragHandle {
       cursor: move;
       color: #888888;
@@ -15,6 +25,9 @@
   </style>
   <script language="javascript">
     $(function() {
+      $('.button').button();
+      $('a.button_add').button({icons: { primary:'ui-icon-plus'}});
+      
       $('#tctable').tableDnD( {
         onDragClass: 'dragClass',
         dragHandle: 'dragHandle',
@@ -69,18 +82,27 @@
     </div>
 
     <div class="span-22 last">
-      <%= link_to "Edit", edit_testsuite_path(@testsuite) %>
-      <%= link_to 'Run', run_testsuite_path(@testsuite), :id => 'run_testsuite' %>
-      <%= link_to "Show all", testsuites_path %>
+      <ol class="link_list prepend-3 span-19 last" style="margin: 0px;">
+        <% if permitted_to? :update, @testsuite -%>
+          <li><%= link_to("Edit", edit_testsuite_path(@testsuite), :class => 'button') %></li>
+        <% end -%>
+        <% if permitted_to? :create, Testsuiterun -%>
+          <li><%= link_to('Run', run_testsuite_path(@testsuite), :id => 'run_testsuite', :class => 'button') %></li>
+        <% end -%>
+        <li><%= link_to("Show all", testsuites_path, :class => 'button') %></li>
+        <% if permitted_to? :update, @testsuite -%>
+          <li><%= link_to("Create version", create_version_testsuite_path(@testsuite), :id => 'create_version', :class => 'button',:method => 'put') %></li>
+        <% end -%>
+      </ol>
     </div>
   </div>
 </fieldset>
 
 
 <h2>Testcases</h2>
-<ul>
-  <li><%= link_to 'Add Testcases', show_add_testsuite_url(@testsuite), :id => 'show_add' %></li>
-</ul>
+<ol class="link_list span-24 last" style="margin: 0px; padding: 0px 0px 1em 0px;">
+  <li><%= link_to('Add Testcases', show_add_testsuite_url(@testsuite), :id => 'show_add', :class => 'button_add') %></li>
+</ol>
 <table id="tctable">
   <thead>
     <tr>
