@@ -9,19 +9,4 @@
 <% end %>
 
 
-<fieldset class="span-24 last">
-  <legend>Login</legend>
-  <div class="fieldset span-22 last">
-
-     <%= simple_form_for @user_session, :url => url_for(:action => 'create') do |f| %>
-        <%= f.error_notification %>
-        <%= f.input :login %>
-        <%= f.input :password %>
-        <div class="buttons">
-          <%= f.button :submit, 'Login' %>
-          <%= link_to 'Cancel', root_url %>
-        </div>
-     <% end %>
-</div>
-</fieldset>
-    
+<%= render :partial => 'user_sessions/form' %>

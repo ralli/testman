@@ -12,8 +12,7 @@ authorization do
     has_permission_on [:projects, :testcases, :teststeps, :testsuites, :testcase_attachments], :to => :read
   end
   
-  role :guest do
-    has_permission_on [:projects], :to => :read
+  role :guest do    
   end
 end
 
