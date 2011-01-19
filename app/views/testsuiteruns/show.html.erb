@@ -96,7 +96,7 @@
     <%= render :partial => "testcaserun", :object => nextcase(@testrun), :locals => { :full => false }  %>
   <% end -%>
 <% else %>  
-  <%= render :partial => "testcaserun", :collection => @testrun.testcaseruns.includes([:testcase, :teststepruns]), :locals => { :full => true }  %>
+  <%= render :partial => "testcaserun", :collection => @testrun.testcaseruns.includes(:testcase).includes(:teststepruns => :teststep), :locals => { :full => true }  %>
 <% end %>
 
 <% if show_steplink?(@testrun) %>

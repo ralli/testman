@@ -71,7 +71,7 @@ class TestsuiterunsController < ApplicationController
   end
 
   def fetch_testrun
-    @testrun = Testsuiterun.find(params[:id])   
+    @testrun = Testsuiterun.find(params[:id])
   end
 
   def fetch_teststep_counts
