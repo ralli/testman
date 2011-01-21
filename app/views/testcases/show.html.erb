@@ -1,6 +1,5 @@
 <% title "Testcase" %>
 <% content_for :head do %>
-  <%= stylesheet_link_tag 'smoothness/jquery-ui.css' %>
   <%= javascript_include_tag 'jquery.tablednd' %>
   <%= stylesheet_link_tag 'jquery.tag'  %>
 
@@ -42,10 +41,7 @@
     }  </style>
   <script type="text/javascript">
     $(function() {
-      $('a.button').button();
       $('a.button_add').button({icons: { primary:'ui-icon-plus'}});
-      
-
       $('#attachments').sortable({
         axis: 'y',
         dropOnEmpty: false,

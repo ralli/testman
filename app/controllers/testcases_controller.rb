@@ -6,16 +6,16 @@ class TestcasesController < ApplicationController
 
   def index
     unless params[:tag].blank?
-      @testcases = Testcase.find_tagged_with(params[:tag]).paginate(:per_page => 10, :page => params[:page])
+      @testcases = Testcase.find_tagged_with(params[:tag], :order => 'testcases.key, testcases.version').paginate(:per_page => 10, :page => params[:page])
     else
-      @testcases = current_project.testcases.order(:id).paginate(:per_page => 10, :page => params[:page])
+      @testcases = current_project.testcases.order("testcases.key, testcases.version").paginate(:per_page => 10, :page => params[:page])
     end
     @tag_counts = Testcase.tag_counts
   end
 
   def search
     if(params[:search].blank?)
-      @testcases = current_project.testcases.order(:id).paginate(:per_page => 10, :page => params[:page])
+      @testcases = current_project.testcases.order("testcases.key, testcases.version").paginate(:per_page => 10, :page => params[:page])
     else
       @testcases = Testcase.search(params[:search],
         :conditions => { :project_id => current_project.id },

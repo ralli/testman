@@ -8,8 +8,8 @@
       <%= f.input :password %>
       <div class="buttons">
         <%= f.button :submit, 'Login' %>
-        <%= link_to 'Cancel', root_url %>
-        <%= link_to 'Register', new_user_path %>
+        <%= link_to 'Cancel', root_url, :class => 'button' %>
+        <%= link_to 'Register', new_user_path, :class => 'button' %>
       </div>
     <% end %>
   </div>

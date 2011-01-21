@@ -1,5 +1,4 @@
 <% content_for :head do %>
-  <%= stylesheet_link_tag 'smoothness/jquery-ui.css' %>
   <%= javascript_include_tag 'jquery.tablednd.js' %>
   <style type="text/css">
     .link_list {
@@ -24,8 +23,7 @@
     }
   </style>
   <script language="javascript">
-    $(function() {
-      $('.button').button();
+    $(function() {      
       $('a.button_add').button({icons: { primary:'ui-icon-plus'}});
       
       $('#tctable').tableDnD( {
