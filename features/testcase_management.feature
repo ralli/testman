@@ -32,3 +32,11 @@ Feature: Managing Testcases
     And I should see "My testcase"
     And 1 testcases should exist with version: "2"
 
+  Scenario: Cancel adding Testcase Attachment
+    Given a project exists with name: "Test project"
+    And I am logged in as user "test" for that project
+    And a testcase exists with name: "My testcase", project: the project
+    And I am on the show page for the testcase
+    And I follow "add_attachment"
+    When I follow "cancel"
+    Then I should see "My testcase"

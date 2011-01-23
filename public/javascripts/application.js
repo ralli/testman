@@ -1,4 +1,9 @@
 $(function() {
-   $("a.button").button();
-   $("input[type=submit]").button();
+    $("a.button").button();
+    $('a.button_add').button({
+        icons: {
+            primary:'ui-icon-plus'
+        }
+    });
+    $("input[type=submit]").button();
 });

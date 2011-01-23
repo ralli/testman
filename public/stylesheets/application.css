@@ -157,3 +157,12 @@ div.login {
     height: 3em;
     line-height: 3em;
 }
+
+.link_list {
+    list-style: none;
+}
+
+.link_list li {
+    float: left;
+    margin-right: 0.5em;
+}

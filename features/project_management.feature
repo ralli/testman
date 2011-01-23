@@ -4,7 +4,9 @@ Feature: Manage Projects
   I should be able to manage my projects
 
   Scenario: Show project list
-    Given there are projects named Testproject, Some other project
+    Given a project exists with name: "Testproject"
+    And I am logged in as user "test"
+    And a project exist with name: "Some other project"
     And I go to the projects list
     Then I should see "Testproject"
     And I should see "Some other project"
@@ -27,7 +29,7 @@ Feature: Manage Projects
     When I follow "New Project"
     And I enter the following values
       | Name | Testproject |
-    And I follow "Back to List"
+    And I follow "cancel"
     Then the number of projects is 0
 
   Scenario: Project creation with invalid name

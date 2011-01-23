@@ -1,15 +1,6 @@
 <% content_for :head do %>
   <%= javascript_include_tag 'jquery.tablednd.js' %>
   <style type="text/css">
-    .link_list {
-      list-style: none;   
-    }
-
-    .link_list li {
-      float: left;
-      margin-right: 0.5em;
-    }
-
     .dragHandle {
       cursor: move;
       color: #888888;
@@ -24,8 +15,6 @@
   </style>
   <script language="javascript">
     $(function() {      
-      $('a.button_add').button({icons: { primary:'ui-icon-plus'}});
-      
       $('#tctable').tableDnD( {
         onDragClass: 'dragClass',
         dragHandle: 'dragHandle',
@@ -84,7 +73,7 @@
         <% if permitted_to? :update, @testsuite -%>
           <li><%= link_to("Edit", edit_testsuite_path(@testsuite), :class => 'button') %></li>
         <% end -%>
-        <% if permitted_to? :create, Testsuiterun -%>
+        <% if permitted_to? :create, Testsuiterun.new -%>
           <li><%= link_to('Run', run_testsuite_path(@testsuite), :id => 'run_testsuite', :class => 'button') %></li>
         <% end -%>
         <li><%= link_to("Show all", testsuites_path, :class => 'button') %></li>

@@ -101,10 +101,10 @@
   <div class="span-24 last">
     <ul class="step_buttons right">
       <li class="step_ok" >
-        <%= link_to 'Step (Ok)', step_ok_path(@testrun), :id => 'step_ok' %>
+        <%= link_to 'Step (Ok)', step_ok_testsuiterun_path(@testrun), :id => 'step_ok', :method => 'put' %>
       </li>
       <li class="step_failure" >
-        <%= link_to 'Step (Failure)', step_failure_path(@testrun), :id => 'step_failure' %>
+        <%= link_to 'Step (Failure)', step_failure_testsuiterun_path(@testrun), :id => 'step_failure', :method => 'put' %>
       </li>
     </ul>
   </div>

@@ -4,7 +4,7 @@
     <legend>Project</legend>
       <div class="fieldset">
         <%= f.input :name %>
-        <%= f.button :submit %>
+        <%= f.button :submit %> <%= cancel_link @project, :class => 'button', :id => 'cancel' %>
       </div>
   </fieldset>
 <% end %>

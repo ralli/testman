@@ -17,11 +17,14 @@
     <fieldset class="span-24 last">
       <legend>Search</legend>
       <div class="fieldset">
-        <div class="row span-22 last">
+        <div class="row span-15">
           <%= label_tag(:search, 'Search: ') %>
           <%= text_field_tag(:search, params[:search]) %>
           <%= submit_tag 'Search' %>
           <%= "#{@testcases.total_entries} Testcases found" %>
+        </div>
+        <div class="right">
+          <%= link_to "New Testcase", new_testcase_path, :class => 'button_add', :id => 'new_testcase' if permitted_to? :create, :testcases %>
         </div>
       </div>
     </fieldset>
@@ -61,7 +64,7 @@
   </table>
   <%= will_paginate @testcases %>
 
-  <p><%= link_to "New Testcase", new_testcase_path if permitted_to? :create, :testcases %></p>
+
 </div>
 
 <div class="span-4 last">
