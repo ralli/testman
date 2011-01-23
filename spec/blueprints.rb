@@ -86,3 +86,7 @@ end
 TestcaseAttachment.blueprint do
   position { 1 }
 end
+
+Testcaselog.blueprint do
+  
+end

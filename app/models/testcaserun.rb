@@ -19,6 +19,8 @@ class Testcaserun < ActiveRecord::Base
   belongs_to :edited_by, :class_name => 'User'
   validates_presence_of :edited_by
 
+  after_create :create_log
+
   def nextstep
     teststepruns.where(["status <> ?", 'ended']).first
   end
@@ -31,7 +33,10 @@ class Testcaserun < ActiveRecord::Base
     s = nextstep
     return nil if s.nil?
     s.step(user, result)
-    update_attributes!(:edited_by => user, :status => 'ended', :result => result) if nextstep.nil?
+    if nextstep.nil? then
+      update_attributes!(:edited_by => user, :status => 'ended', :result => result)
+      Testcaselog.create!(:created_by => user, :testcaserun => self, :status => 'ended', :result => result)
+    end
     s
   end
 
@@ -41,9 +46,18 @@ class Testcaserun < ActiveRecord::Base
       run.result = result
       run.save!
     end
+    self.status = 'ended'
+    self.result = result
+    save!
+    create_log
   end
   
   def testcasecount
     testsuiterun.try(:testcaseruns).try(:count) || 0
+  end
+
+  private
+  def create_log
+    Testcaselog.create!(:created_by => created_by, :testcaserun => self, :status => status, :result => result)
   end
 end

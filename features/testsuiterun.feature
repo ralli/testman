@@ -16,6 +16,7 @@ Feature: Run a test suite
     Then 1 testsuiteruns should exist
     And 1 testcaseruns should exist
     And 1 teststepruns should exist
+    And 1 testcaselogs should exist with status: "new", result: "unknown"
 
   Scenario: Start running a test suite from the list of test suites
     Given a project exists
@@ -29,6 +30,7 @@ Feature: Run a test suite
     Then 1 testsuiteruns should exist
     And 1 testcaseruns should exist
     And 1 teststepruns should exist
+    And 1 testcaselogs should exist with status: "new", result: "unknown"
 
   Scenario: Run a step of a test suite with one testcase and one teststep successfully
     Given a project exists
@@ -40,6 +42,7 @@ Feature: Run a test suite
     Then 1 teststepruns should exist with result: "ok", status: "ended"
     And 1 testcaseruns should exist with result: "ok", status: "ended"
     And 1 testsuiteruns should exist with result: "ok", status: "ended"
+    And 1 testcaselogs should exist with status: "ended", result: "ok"
 
   Scenario: Run a step of a test suite with one testcase and one teststep failing
     Given a project exists
@@ -51,6 +54,7 @@ Feature: Run a test suite
     Then 1 teststepruns should exist with result: "failed", status: "ended"
     And 1 testcaseruns should exist with result: "failed", status: "ended"
     And 1 testsuiteruns should exist with result: "failed", status: "ended"
+    And 1 testcaselogs should exist with status: "ended", result: "failed"
 
   Scenario: Do not show step links if testrun ended
     Given a project exists

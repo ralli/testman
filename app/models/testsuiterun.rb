@@ -48,10 +48,6 @@ class Testsuiterun < ActiveRecord::Base
 
   def set_all(user, result)
     testcaseruns.each do |run|
-      run.edited_by = user
-      run.status = 'ended'
-      run.result = result
-      run.save!
       run.set_all(user, result)
     end
     self.status = 'ended'

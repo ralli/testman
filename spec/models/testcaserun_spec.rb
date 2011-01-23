@@ -16,48 +16,50 @@ describe Testcaserun do
     run
   end
 
-  it "should be valid" do
-    run = make_valid_testrun
-    run.should be_valid
-  end
+  context "when validating" do
+    it "should be valid" do
+      run = make_valid_testrun
+      run.should be_valid
+    end
 
-  it "should have a status" do
-    run = make_valid_testrun(:status => nil)
-    run.should_not be_valid
-  end
+    it "should have a status" do
+      run = make_valid_testrun(:status => nil)
+      run.should_not be_valid
+    end
 
-  it "should have a result" do
-    run = make_valid_testrun(:result => nil)
-    run.should_not be_valid
-  end
+    it "should have a result" do
+      run = make_valid_testrun(:result => nil)
+      run.should_not be_valid
+    end
 
-  it "should have a valid status" do
-    run = make_valid_testrun(:status => 'hase')
-    run.should_not be_valid
-  end
+    it "should have a valid status" do
+      run = make_valid_testrun(:status => 'hase')
+      run.should_not be_valid
+    end
 
-  it "should have a valid result" do
-    run = make_valid_testrun(:result => 'hase')
-    run.should_not be_valid
-  end
+    it "should have a valid result" do
+      run = make_valid_testrun(:result => 'hase')
+      run.should_not be_valid
+    end
 
-  it "should belong to a testcase" do
-    run = make_valid_testrun(:testcase => nil)
-    run.should_not be_valid
-  end
+    it "should belong to a testcase" do
+      run = make_valid_testrun(:testcase => nil)
+      run.should_not be_valid
+    end
 
-  it "should be valid without a testsuite run" do
-    run = make_valid_testrun(:testsuiterun => nil)
-    run.should be_valid
-  end
+    it "should be valid without a testsuite run" do
+      run = make_valid_testrun(:testsuiterun => nil)
+      run.should be_valid
+    end
 
-  it "should be created by a user" do
-    run = make_valid_testrun(:created_by => nil)
-    run.should_not be_valid
-  end
+    it "should be created by a user" do
+      run = make_valid_testrun(:created_by => nil)
+      run.should_not be_valid
+    end
 
-  it "should be edited by a user" do
-    run = make_valid_testrun(:edited_by => nil)
-    run.should_not be_valid
-  end
+    it "should be edited by a user" do
+      run = make_valid_testrun(:edited_by => nil)
+      run.should_not be_valid
+    end
+  end  
 end
