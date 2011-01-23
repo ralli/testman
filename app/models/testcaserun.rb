@@ -20,6 +20,7 @@ class Testcaserun < ActiveRecord::Base
   validates_presence_of :edited_by
 
   after_create :create_log
+  has_many :testcaselogs, :dependent => :destroy
 
   def nextstep
     teststepruns.where(["status <> ?", 'ended']).first
