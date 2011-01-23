@@ -9,10 +9,10 @@
     form.testcase textarea {
       padding: 4px;
       width: 570px;
-      
+
     }
     div.textile {
-      margin-left: 120px;      
+      margin-left: 120px;
     }
   </style>
   <script type="text/javascript">
@@ -29,6 +29,7 @@
       <%= f.input :step %>
       <%= f.input :expected_result %>
       <%= f.button :submit %>
+      <%= link_to "Cancel", @testcase, :class => 'button', :id => 'cancel'   %>
     <% end %>
   </div>
 </fieldset>

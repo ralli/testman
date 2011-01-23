@@ -22,14 +22,15 @@
   </script>
 <% end %>
 <fieldset class="span-24 last">
-    <legend>Testsuite</legend>
-    <div class="fieldset span-22 last">
-        <%= simple_form_for @testsuite do |f| %>
-            <%= f.error_notification %>
+  <legend>Testsuite</legend>
+  <div class="fieldset span-22 last">
+    <%= simple_form_for @testsuite do |f| %>
+      <%= f.error_notification %>
 
-            <%= f.input :name %>
-            <%= f.input :description %>
-            <%= f.button :submit %>
-        <% end %>
-    </div>
+      <%= f.input :name %>
+      <%= f.input :description %>
+      <%= f.button :submit %>
+      <%= cancel_link @testsuite, :class => 'button', :id => 'cancel' %>
+    <% end %>
+  </div>
 </fieldset>

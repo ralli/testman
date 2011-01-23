@@ -1,6 +1,5 @@
-<h1>Add Testcases</h1>
+<% title "Add Testcases" %>
 
-<% content_for :title => 'Add Testcases' %>
 <% content_for :head do %>
   <style type="text/css">
     .handle {
@@ -30,9 +29,6 @@
       margin-bottom: 0.3em;
     }
 
-    div.search input {
-    }
-
     .delete {
       padding: 0.5em 0.5em;
       cursor: pointer;
@@ -42,7 +38,7 @@
   <script type="text/javascript">
     $(function() {
       $('#testcases').sortable({
-        connectWith: '#testentries',        
+        connectWith: '#testentries',
         helper: 'clone',
         handle: '.handle',
         revert: true
@@ -83,7 +79,7 @@
   <div class="fieldset span-22 last">
     <div class="label span-2"><%= @testsuite.key %></div>
     <div class="span-20 last"><%= @testsuite.name %></div>
-    <div class="span-22 last" style="margin-top: 1em;"><%= link_to 'Back', @testsuite %></div>
+    <div class="span-22 last" style="margin-top: 1em;"><%= link_to 'Back to testsuite', @testsuite, :class => 'button', :id => 'back' %></div>
   </div>
 </fieldset>
 

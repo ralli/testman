@@ -166,12 +166,10 @@
         <% if permitted_to? :delete, @testcase -%>
           <li><%= link_to("Destroy", @testcase, :confirm => 'Are you sure?', :method => :delete, :id => 'delete', :class => 'button') %></li>
         <% end -%>
-        <% if permitted_to? :read, :testcases -%>
-          <li><%= link_to("View All", url_for(:back), :id => 'view_all', :class => 'button') %></li>
-        <% end -%>
         <% if permitted_to? :create, @testcase -%>
           <li><%= link_to("Create Version", create_version_testcase_path(@testcase), :id => 'create_version', :method => 'put', :class => 'button')  %></li>
         <% end -%>
+        <li><%= link_to("Go back", url_for(:back), :id => 'view_all', :class => 'button') %></li>
       </ul>
     </div>
   </div>
