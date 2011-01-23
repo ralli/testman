@@ -40,3 +40,13 @@ Feature: Managing Testcases
     And I follow "add_attachment"
     When I follow "cancel"
     Then I should see "My testcase"
+
+  Scenario: Search Testcase
+    Given a project exists with name: "Test project"
+    And I am logged in as user "test" for that project
+    And a testcase exists with name: "Wonderful testcase", project: the project
+    And I am on the testcases page
+    And I enter the following values
+      | search | Wonderful |
+    And I press "Search"
+    Then I should see "Wonderful testcase"
