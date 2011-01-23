@@ -123,7 +123,7 @@ class Testcase < ActiveRecord::Base
   
   def self.search(pattern)
     pattern = "%#{pattern.downcase.strip}%"
-    search = Testcase.scoped
+    search = Testcase.select('distinct testcases.id, testcases.key, testcases.version, testcases.name, testcases.execution_type, testcases.test_status, testcases.test_priority')
     search = search.joins('left outer join teststeps on teststeps.testcase_id=testcases.id')
     search = search.where("lcase(testcases.name) like ? or lcase(testcases.description) like ? or lcase(teststeps.step) like ? or lcase(teststeps.expected_result) like ?", pattern, pattern, pattern, pattern)
     search
