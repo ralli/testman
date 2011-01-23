@@ -121,14 +121,11 @@ class Testcase < ActiveRecord::Base
     copy
   end
   
-  define_index do
-    indexes :name, :sortable => true
-    indexes :description
-    indexes :key, :as => 'tckey', :sortable => true
-    indexes teststeps.step
-    indexes teststeps.expected_result
-
-    has :project_id
+  def self.search(pattern)
+    pattern = "%#{pattern.downcase.strip}%"
+    search = Testcase.scoped
+    search = search.joins('left outer join teststeps on teststeps.testcase_id=testcases.id')
+    search = search.where("lcase(testcases.name) like ? or lcase(testcases.description) like ? or lcase(teststeps.step) like ? or lcase(teststeps.expected_result) like ?", pattern, pattern, pattern, pattern)
+    search
   end
-
 end
