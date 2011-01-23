@@ -28,11 +28,41 @@ describe Testcase do
     check_invalid_value(:test_priority)
     check_invalid_value(:test_method)
   end
+  
+  describe "when searching" do
+    it "should find a text within its name" do
+      testcase = make_unsaved_testcase(:name => 'King of the Bongo la la')
+      testcase.save!
+      Testcase.search('bongo').size.should== 1
+    end
+
+    it "should find a text within its description" do
+      testcase = make_unsaved_testcase(:description => 'King of the Bongo la la')
+      testcase.save!
+      result = Testcase.search('bongo')
+      result.size.should== 1
+    end
+
+    it "should find a text within the teststeps step-definition" do
+      testcase = make_unsaved_testcase()
+      testcase.save!
+      teststep = testcase.teststeps.make(:step => 'King of the Bongo la la')
+      result = Testcase.search('bongo')
+      result.size.should== 1
+    end
+
+    it "should find a text within the teststeps expected outcome" do
+      testcase = make_unsaved_testcase()
+      testcase.save!
+      teststep = testcase.teststeps.make(:expected_result => 'King of the Bongo la la')
+      result = testcase.class.search('bongo')
+      result.size.should== 1
+    end
+  end
 
   describe "when creating a new version" do
     before :all do
       @testcase = Testcase.make(:full)
-      #      @testcase.teststeps << Teststep.make(:testcase => @testcase)
       @testcase.teststeps.make()
       attachment = @testcase.testcase_attachments.create(:attachment => File.join(Rails.root, 'spec', 'fixtures', 'testfile.txt'))
       @copy = @testcase.create_version
@@ -69,34 +99,6 @@ describe Testcase do
     
     it "should copy its attachments as well" do
       @copy.testcase_attachments.size.should== 1
-    end
-  end
-
-  describe "when searching" do
-    it "should find a text within its name" do
-      @testcase = Testcase.make(:name => 'King of the Bongo la la')
-      @result = Testcase.search('bongo')
-      @result.size.should== 1
-    end
-    
-    it "should find a text within its description" do
-      @testcase = Testcase.make(:description => 'King of the Bongo la la')
-      @result = Testcase.search('bongo')
-      @result.size.should== 1
-    end
-    
-    it "should find a text within the teststeps step-definition" do
-      @testcase = Testcase.make
-      @teststep = @testcase.teststeps.make(:step => 'King of the Bongo la la')
-      @result = Testcase.search('bongo')
-      @result.size.should== 1
-    end
-    
-    it "should find a text within the teststeps expected outcome" do
-      @testcase = Testcase.make
-      @teststep = @testcase.teststeps.make(:expected_result => 'King of the Bongo la la')
-      @result = Testcase.search('bongo')
-      @result.size.should== 1
     end
   end
 end

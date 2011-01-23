@@ -40,7 +40,7 @@ describe TestsuiterunsHelper do
   it "should have a valid label for teststeps" do
     teststeprun = Teststeprun.new
     teststep = Teststep.new(:position => 1)
-    teststeprun.stub(:teststep => teststep, :teststepcount => 10)
+    teststeprun.stubs(:teststep => teststep, :teststepcount => 10)
     label_for_teststep(teststeprun).should == 'Teststep #1 of 10'
   end
 

@@ -114,7 +114,7 @@ class TestsuitesController < ApplicationController
     if(param.length < 3)
       @testcases = current_project.testcases.order(:id)
     else
-      @testcases = Testcase.search(param, :conditions => { :project_id => current_project.id })
+      @testcases = Testcase.search(param).where(:project_id => current_project.id)
     end
   end
 

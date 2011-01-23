@@ -32,6 +32,7 @@ group :development, :test do
   gem 'spork'
   gem 'launchy'
   gem 'pickle'
+
   gem 'mocha'
 end
 
