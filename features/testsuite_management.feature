@@ -33,7 +33,7 @@ Feature: Manage Testsuites
     And I enter the following values
       | Name        | My test suite  |
       | Description | My description |
-    And I follow "back"
+    And I follow "cancel"
     Then 0 testsuites exist
     And I should see "Testsuites"
 
