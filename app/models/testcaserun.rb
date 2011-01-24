@@ -18,9 +18,9 @@ class Testcaserun < ActiveRecord::Base
   validates_presence_of :created_by
   belongs_to :edited_by, :class_name => 'User'
   validates_presence_of :edited_by
+  has_many :testcaselogs, :dependent => :destroy
 
   after_create :create_log
-  has_many :testcaselogs, :dependent => :destroy
 
   def nextstep
     teststepruns.where(["status <> ?", 'ended']).first
