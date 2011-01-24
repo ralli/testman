@@ -14,7 +14,7 @@
     }
   </style>
   <script language="javascript">
-    $(function() {      
+    $(function() {
       $('#tctable').tableDnD( {
         onDragClass: 'dragClass',
         dragHandle: 'dragHandle',
@@ -76,10 +76,10 @@
         <% if permitted_to? :create, Testsuiterun.new -%>
           <li><%= link_to('Run', run_testsuite_path(@testsuite), :id => 'run_testsuite', :class => 'button') %></li>
         <% end -%>
-        <li><%= link_to("Show all", testsuites_path, :class => 'button') %></li>
         <% if permitted_to? :update, @testsuite -%>
           <li><%= link_to("Create version", create_version_testsuite_path(@testsuite), :id => 'create_version', :class => 'button',:method => 'put') %></li>
         <% end -%>
+        <li><%= link_to("Show All", testsuites_path, :class => 'button') %></li>
       </ol>
     </div>
   </div>

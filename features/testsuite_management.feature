@@ -25,7 +25,7 @@ Feature: Manage Testsuites
     And I should see "My test suite"
     And I should see "My description"
 
-  Scenario: Cancel Test Suite creation
+  Scenario: Cancel Test Suite creation    
     Given a project exists
     And I am logged in as user "test" for that project
     And I am on the page "/testsuites"
@@ -51,7 +51,7 @@ Feature: Manage Testsuites
     Then I should see "My test suite"
     And I should see "My description"
 
-  Scenario: Delete Test Suite
+  Scenario: Delete Test Suite    
     Given a project exists
     And I am logged in as user "test" for that project
     And a testsuite exists with project: the project
@@ -79,3 +79,13 @@ Feature: Manage Testsuites
     When I follow "create_version"
     Then I should see "New version created."
     And 1 testsuites exist with version: "2"
+
+  Scenario: Search Testsuites
+    Given an project exists
+    And I am logged in as user "test" for that project
+    And a testsuite exists with project: the project, name: "My Bingo Bongo"
+    And I am on the testsuites page
+    When I enter the following values
+      | q | bongo |
+    And I press "search"
+    Then I should see "My Bingo Bongo"

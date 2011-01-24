@@ -1,8 +1,31 @@
-<h1>Testsuites</h1>
+<% title "Testsuites" %>
 
-<ul>
-  <%= link_to "New Testsuite", new_testsuite_path, :id => 'new_testsuite'  %>
-</ul>
+<% content_for :head do %>
+<style type="text/css">
+    div.row {
+      margin-bottom: 1em;
+    }
+  </style>
+<% end %>
+<div class="row span-24 last">
+  <%= form_tag(search_testsuites_path , :method => 'get') do %>
+    <fieldset class="span-24 last">
+      <legend>Search</legend>
+      <div class="fieldset">
+        <div class="row span-15">
+          <%= label_tag(:q, 'Search: ') %>
+          <%= text_field_tag(:q, params[:q]) %>
+          <%= submit_tag 'Search', :id => 'search' %>
+          <%= "#{@testsuites.total_entries} Testsuites found" %>
+        </div>
+        <div class="row right">
+          <%= link_to "New Testsuite", new_testsuite_path, :id => 'new_testsuite', :class => 'button_add'  %>
+        </div>
+      </div>
+    </fieldset>
+  <% end %>
+</div>
+
 <table>
   <thead>
     <tr>
@@ -28,3 +51,5 @@
     <% end %>
   </tbody>
 </table>
+
+<%= will_paginate @testsuites %>

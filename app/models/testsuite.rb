@@ -55,4 +55,14 @@ class Testsuite < ActiveRecord::Base
     end
     copy
   end
+
+  def self.search(pattern)
+    if /TS\d{5}/i.match(pattern.strip) then
+      return Testsuite.where('testsuites.key = ?', pattern)
+    end
+    pattern = "%#{pattern.to_s.downcase.strip}%"
+    testsuites = Testsuite.scoped
+    testsuites = Testsuite.where("lcase(testsuites.name) like ? or lcase(testsuites.description) like ?", pattern, pattern)
+    return testsuites
+  end
 end

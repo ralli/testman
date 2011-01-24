@@ -31,6 +31,26 @@ describe Testsuite do
     suite.create_run(suite.created_by)
   end
 
+  describe "when searching" do
+    it "should find matches within the name" do
+      project = Project.make
+      user = User.make
+      testsuite = Testsuite.make(:project => project, :created_by => user, :edited_by => user, :name => 'My Bingo Bongo')
+      testsuites = Testsuite.search('bingo')
+      testsuites.size.should== 1
+      testsuites.first.name.should== 'My Bingo Bongo'
+    end
+
+    it "should find matches within the description" do
+      project = Project.make
+      user = User.make
+      testsuite = Testsuite.make(:project => project, :created_by => user, :edited_by => user, :description => 'My Bingo Bongo')
+      testsuites = Testsuite.search('bingo')
+      testsuites.size.should== 1
+      testsuites.first.description.should== 'My Bingo Bongo'      
+    end
+  end
+
   describe "when creating a new version" do
     before :all do
       @project = Project.make

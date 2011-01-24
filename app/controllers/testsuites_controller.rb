@@ -3,9 +3,10 @@ class TestsuitesController < ApplicationController
   filter_access_to :remove_testcase, :require => :update
   filter_access_to :search_testcases, :require => :read
   filter_access_to :create_version, :require => :update
-
+  filter_access_to :search, :require => :read
+  
   def index
-    @testsuites = current_project.testsuites
+    @testsuites = current_project.testsuites.paginate(:per_page => 10, :page => params[:page])
   end
 
   def new
@@ -124,6 +125,17 @@ class TestsuitesController < ApplicationController
       @testsuite = @testsuite.create_version(current_user)
     end
     redirect_to @testsuite, :notice => 'New version created.'
+  end
+
+  def search
+    q = params[:q]
+    if q.blank? then
+      @testsuites = Testsuite.order('testsuites.key')
+    else
+      @testsuites = Testsuite.search(q).where(:project_id => current_project.id).order('testsuites.key')
+    end
+    @testsuites = @testsuites.paginate(:per_page => 10, :page => params[:page])
+    render 'index'
   end
   
   private
