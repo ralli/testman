@@ -78,7 +78,7 @@ Feature: Manage Testsuites
     And I am on the show page for the testsuite
     When I follow "create_version"
     Then I should see "New version created."
-    And I should see "Version: 2"
+    And 1 testsuites should exist with version: 2
 
   Scenario: Search Testsuites
     Given an project exists
