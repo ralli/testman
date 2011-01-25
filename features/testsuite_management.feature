@@ -6,8 +6,8 @@ Feature: Manage Testsuites
   Scenario: List Test Suites
     Given a project exists
     And I am logged in as user "test" for that project
-    And a testsuite exists with name: "My test suite", project: that project
-    And a testsuite exists with name: "My second suite", project: that project
+    And a testsuite exists with name: "My test suite", project: that project, created_by: the user, edited_by: the user
+    And a testsuite exists with name: "My second suite", project: that project, created_by: the user, edited_by: the user
     When I go to page "/testsuites"
     Then I should see "My test suite"
     And I should see "My second suite"
@@ -40,7 +40,7 @@ Feature: Manage Testsuites
   Scenario: Edit Test suite
     Given a project exists
     And I am logged in as user "test" for that project
-    And a testsuite exists with project: the project
+    And a testsuite exists with project: the project, created_by: the user, edited_by: the user
     And I am on the page "/testsuites"
     When I follow "edit_testsuite"
     And I enter the following values
@@ -54,7 +54,7 @@ Feature: Manage Testsuites
   Scenario: Delete Test Suite    
     Given a project exists
     And I am logged in as user "test" for that project
-    And a testsuite exists with project: the project
+    And a testsuite exists with project: the project, created_by: the user, edited_by: the user
     When I go to the page "/testsuites"
     And I follow "delete_testsuite"
     Then I should see "Successfully deleted Testsuite."
@@ -63,7 +63,7 @@ Feature: Manage Testsuites
   Scenario: Delete Testcase from Testsuite
     Given an project exists
     And I am logged in as user "test" for that project
-    And a testsuite exists with project: the project
+    And a testsuite exists with project: the project, created_by: the user, edited_by: the user
     And a testcase exists with project: the project
     And a testsuite entry exists with testsuite: the testsuite, testcase: the testcase
     And I am on the show page for the testsuite
@@ -74,16 +74,16 @@ Feature: Manage Testsuites
   Scenario: Create version of Testsuite
     Given an project exists
     And I am logged in as user "test" for that project
-    And a testsuite exists with project: the project
+    And a testsuite exists with project: the project, created_by: the user, edited_by: the user
     And I am on the show page for the testsuite
     When I follow "create_version"
     Then I should see "New version created."
-    And 1 testsuites exist with version: "2"
+    And I should see "Version: 2"
 
   Scenario: Search Testsuites
     Given an project exists
     And I am logged in as user "test" for that project
-    And a testsuite exists with project: the project, name: "My Bingo Bongo"
+    And a testsuite exists with project: the project, name: "My Bingo Bongo", created_by: the user, edited_by: the user
     And I am on the testsuites page
     When I enter the following values
       | q | bongo |

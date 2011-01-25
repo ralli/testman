@@ -31,13 +31,8 @@ end
 
 Given /^I am logged in as user "([^"]*)" for #{capture_model}$/ do |login, name|
   user = User.find_by_login(login)
-  if user.nil?
-    user = User.create(:login => login, :password => 'test123', :password_confirmation => 'test123', :email => 'noreply@test.com', :current_project => model(name))
-  else
-    project = model(name)
-    puts "#{project.inspect}"
-    user.update_attribute(:current_project, model(name))
-  end
+  user.destroy unless user.nil?
+  Given "a user exists with login: \"#{login}\", password: \"test123\", password_confirmation: \"test123\", current_project: #{name}"
   visit login_path
   fill_in "Login", :with => login
   fill_in "Password", :with => 'test123'

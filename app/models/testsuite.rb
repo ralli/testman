@@ -5,10 +5,15 @@ class Testsuite < ActiveRecord::Base
   validates_presence_of :enabled
   validates_presence_of :name
   validates_length_of :name, :maximum => 80
+
   belongs_to :created_by, :class_name => 'User'
   belongs_to :edited_by, :class_name => 'User'
   belongs_to :project
 
+  validates_presence_of :project
+  validates_presence_of :created_by
+  validates_presence_of :edited_by
+  
   has_many :testsuite_entries, :dependent => :destroy, :order => :position, :class_name => 'TestsuiteEntry'
   has_many :testcases, :through => :testsuite_entries
   has_many :testsuiteruns, :dependent => :destroy

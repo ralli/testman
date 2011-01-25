@@ -1,34 +1,55 @@
 require 'spec_helper'
 
 describe Testsuite do
-  def create_suite(attributes = {})
-    project = Project.new
-    project.stubs(Project.plan.merge({:id => 10}))
 
-    user = User.new
-    user.stubs(User.plan(:current_project => project).merge({:id => 10}))
+  describe "when validating" do
+    def create_suite(attributes = {})
+      project = Project.new
+      project.stubs(Project.plan.merge({:id => 10}))
 
-    Testcase.make_unsaved(:project => project, :created_by => user, :edited_by => user)
+      user = User.new
+      user.stubs(User.plan(:current_project => project).merge({:id => 10}))
+
+      bla = {:project => project, :created_by => user, :edited_by => user}
+      Testsuite.make_unsaved(bla.merge(attributes))
+    end
+
+    it "should be valid" do
+      testsuite = create_suite
+      testsuite.should be_valid
+    end
+
+    it "should not be valid with no project" do
+      testsuite = create_suite(:project => nil)
+      testsuite.should_not be_valid
+    end
+
+    it "should not be valid with no user creating it" do
+      testsuite = create_suite(:created_by => nil)
+      testsuite.should_not be_valid
+    end
+
+    it "should not be valid with no user editing it" do
+      testsuite = create_suite(:edited_by => nil)
+      testsuite.should_not be_valid
+    end
   end
 
-  it "should be valid" do
-    testsuite = create_suite
-    testsuite.should be_valid
-  end
+  describe "when creating a new test run" do
+    def make_full_suite
+      project = Project.make
+      user = User.make(:current_project => project)
+      testcase = Testcase.make(:project => project, :created_by => user, :edited_by => user)
+      teststep = Teststep.make(:testcase => testcase)
+      testsuite = Testsuite.make(:project => project, :created_by => user, :edited_by => user)
+      testsuite.testsuite_entries.create(:testcase => testcase)
+      Testsuite.find(testsuite.id)
+    end
 
-  def make_full_suite
-    project = Project.make
-    user = User.make(:current_project => project)
-    testcase = Testcase.make(:project => project, :created_by => user, :edited_by => user)
-    teststep = Teststep.make(:testcase => testcase)
-    testsuite = Testsuite.make(:project => project, :created_by => user, :edited_by => user)
-    testsuite.testsuite_entries.create(:testcase => testcase)
-    Testsuite.find(testsuite.id)
-  end
-
-  it "should create a valid test run" do
-    suite = make_full_suite
-    suite.create_run(suite.created_by)
+    it "should create a valid test run" do
+      suite = make_full_suite
+      suite.create_run(suite.created_by)
+    end
   end
 
   describe "when searching" do

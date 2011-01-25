@@ -8,7 +8,7 @@ Feature: Run a test suite
     Given a project exists
     And I am logged in as user "test" for that project
     And a testcase exists with project: the project
-    And a testsuite exists with project: the project
+    And a testsuite exists with project: the project, created_by: the user, edited_by: the user
     And a testsuite entry exists with testsuite: the testsuite, testcase: the testcase
     And a teststep exists with testcase: the testcase
     And I am on the show page for the testsuite
@@ -22,7 +22,7 @@ Feature: Run a test suite
     Given a project exists
     And I am logged in as user "test" for that project
     And a testcase exists with project: the project
-    And a testsuite exists with project: the project
+    And a testsuite exists with project: the project, created_by: the user, edited_by: the user
     And a testsuite entry exists with testsuite: the testsuite, testcase: the testcase
     And a teststep exists with testcase: the testcase
     And I am on page "/testsuites"

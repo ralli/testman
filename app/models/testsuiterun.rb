@@ -40,9 +40,9 @@ class Testsuiterun < ActiveRecord::Base
   end
 
   def step(user, result)
+    return if status == 'ended'
     c = nextcase
-    return nil if c.nil?
-    c.step(user, result)
+    c.step(user, result) unless c.nil?
     update_attributes!(:edited_by => user, :status => 'ended', :result => result) if nextcase.nil?
   end
 
