@@ -30,13 +30,22 @@ class Testcaserun < ActiveRecord::Base
     not nextstep.nil?
   end
 
+  def step?
+    status != 'ended'
+  end
+
   def step(user, result)
+    return nil unless step?
+
     s = nextstep
-    return nil if s.nil?
+    if s.nil? then
+      update_status(user, 'ended', result)
+      return nil
+    end
+
     s.step(user, result)
     if nextstep.nil? then
-      update_attributes!(:edited_by => user, :status => 'ended', :result => result)
-      Testcaselog.create!(:created_by => user, :testcaserun => self, :status => 'ended', :result => result)
+      update_status(user, 'ended', result)
     end
     s
   end
@@ -52,7 +61,7 @@ class Testcaserun < ActiveRecord::Base
     save!
     create_log
   end
-  
+
   def testcasecount
     testsuiterun.try(:testcaseruns).try(:count) || 0
   end
@@ -60,5 +69,13 @@ class Testcaserun < ActiveRecord::Base
   private
   def create_log
     Testcaselog.create!(:created_by => created_by, :testcaserun => self, :status => status, :result => result)
+  end
+
+  def update_status(user, status, result)
+    self.edited_by = user
+    self.status = status
+    self.result = result
+    save!
+    testcaselogs.create!(:created_by => user, :status => status, :result => result)    
   end
 end

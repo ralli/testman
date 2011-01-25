@@ -16,6 +16,48 @@ describe Testcaserun do
     run
   end
 
+  context "when stepping" do
+    it "should be ended even if no teststep run exists" do
+      @testcase = Testcase.new
+      @testcase.stubs(Testcase.plan)
+      @testcaserun = Testcaserun.new
+      @user = User.make_unsaved
+      @testcaserun = Testcaserun.make_unsaved(:status => 'new', :result => 'unknown', :testcase => @testcase, :created_by => @user, :edited_by => @user)
+      @testcaserun.expects(:save!)
+      arr = Array.new
+      arr.expects(:create!)
+      @testcaserun.stubs(:testcaselogs => arr)
+      @testcaserun.step(@user, 'ok')
+      @testcaserun.status.should== 'ended'
+      @testcaserun.result.should== 'ok'
+    end
+    
+    it "just should step the first open teststep if there is another open teststep left" do
+      @testcaserun = Testcaserun.make_unsaved(:status => 'new', :result => 'unknown')
+      @teststep = stub()
+      @teststep.stubs(:step)
+      @testcaserun.stubs(:nextstep => @teststep)
+      @testcaserun.step('bla', 'ok')
+      @testcaserun.status.should== 'new'
+      @testcaserun.result.should== 'unknown'
+    end
+    
+    it "should be ended if the last teststep ended" do
+      @testcaserun = Testcaserun.make_unsaved(:status => 'new', :result => 'unknown')
+      @teststep = stub()
+      @teststep.stubs(:step)
+      @testcaserun.stubs(:nextstep => @teststep)
+      @testcaserun.stubs(:nextstep => nil)
+      @testcaserun.expects(:update_status)
+      @testcaserun.step('bla', 'ok')
+    end
+
+    it "should just return nil if already ended" do
+      @testcaserun = Testcaserun.make_unsaved(:status => 'ended')
+      @testcaserun.step('bla', 'ok').should be_nil
+    end
+  end
+
   context "when validating" do
     it "should be valid" do
       run = make_valid_testrun
