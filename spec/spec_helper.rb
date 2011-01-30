@@ -28,7 +28,7 @@ RSpec.configure do |config|
   config.use_transactional_fixtures = true
 
   config.before(:all)    { Sham.reset(:before_all)  }
-  config.before(:each)   { Sham.reset(:before_each) }
+  config.before(:each)   { Sham.reset(:before_each) }  
 end
 
 class Object

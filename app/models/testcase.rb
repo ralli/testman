@@ -128,4 +128,8 @@ class Testcase < ActiveRecord::Base
     search = search.where("lcase(testcases.name) like ? or lcase(testcases.description) like ? or lcase(teststeps.step) like ? or lcase(teststeps.expected_result) like ?", pattern, pattern, pattern, pattern)
     search
   end
+
+  def save_copy
+    copy = self.dup
+  end
 end

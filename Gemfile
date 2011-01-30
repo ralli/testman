@@ -34,5 +34,6 @@ group :development, :test do
   gem 'pickle'
 
   gem 'mocha'
+  gem 'rcov'
 end
 

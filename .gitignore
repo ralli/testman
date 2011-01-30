@@ -8,3 +8,5 @@ nbproject/**
 public/system/**
 db/sphinx/**
 rerun.txt
+doc/**
+coverage/**
