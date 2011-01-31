@@ -4,17 +4,21 @@ class ProjectStatistic
   def initialize(project)
     @project = project
   end
+  
+  def project_name
+    project.name 
+  end
 
   def testcase_count
-    project.testcases.count
+    @testcase_count ||= project.testcases.count
   end
 
   def testsuite_count
-    project.testsuites.count
+    @testsuite_count ||= project.testsuites.count
   end
 
   def teststep_count
-    project.testcases.joins(:teststeps).count
+    @teststep_count ||= project.testcases.joins(:teststeps).count
   end
 
   def testsuiterun_status_groups
@@ -38,6 +42,6 @@ class ProjectStatistic
   end
 
   def teststeprun_result_groups
-    @teststeprun_status_groups ||= project.testcaseruns.joins(:teststepruns).group('teststepruns.result').count
+    @teststeprun_result_groups ||= project.testcaseruns.joins(:teststepruns).group('teststepruns.result').count
   end
 end

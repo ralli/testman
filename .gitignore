@@ -10,3 +10,4 @@ db/sphinx/**
 rerun.txt
 doc/**
 coverage/**
+.project

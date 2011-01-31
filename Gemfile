@@ -35,5 +35,7 @@ group :development, :test do
 
   gem 'mocha'
   gem 'rcov'
+  gem 'ruby-debug-ide'
+  gem 'ruby-debug-base'
 end
 

@@ -40,7 +40,7 @@ class TestsuiterunsController < ApplicationController
   def set_all_failed
     Testsuiterun.transaction do
       fetch_testrun
-      @testrun.set_all(current_user, 'ok')
+      @testrun.set_all(current_user, 'failed')
     end
     redirect_to @testrun
   end

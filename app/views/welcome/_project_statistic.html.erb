@@ -1,0 +1,101 @@
+<div class="span-24 last">
+    Current project: <%= @project_statistic.project_name %>
+</div>
+<div class="span-24 last">
+    <div class="span-12">
+        <fieldset>
+            <legend>
+                Testcases
+            </legend>
+            <ul>
+                <li>
+                    <div  class="span-3 label">
+                        Testsuites:
+                    </div><%= as_number(@project_statistic.testsuite_count) %>
+                </li>
+                <li>
+                    <div class="span-3 label">
+                        Testcases:
+                    </div><%= as_number(@project_statistic.testcase_count) %>
+                </li>
+                <li>
+                    <div class="span-3 label">
+                        Steps:
+                    </div><%= as_number(@project_statistic.teststep_count) %>
+                </li>
+            </ul>
+        </fieldset>
+    </div>
+    <div class="span-12 last">
+        <fieldset>
+            <legend>
+                Test runs
+            </legend>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>New</th>
+                        <th>Ended</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Testsuites</td>
+                        <td><%= as_number(@project_statistic.testsuiterun_status_groups['new']) %></td>
+                        <td><%= as_number(@project_statistic.testsuiterun_status_groups['ended']) %></td>
+                    </tr>
+                    <tr>
+                        <td>Testcases</td>
+                        <td><%= as_number(@project_statistic.testcaserun_status_groups['new']) %></td>
+                        <td><%= as_number(@project_statistic.testcaserun_status_groups['ended']) %></td>
+                    </tr>
+                    <tr>
+                        <td>Teststeps</td>
+                        <td><%= as_number(@project_statistic.teststeprun_status_groups['new']) %></td>
+                        <td><%= as_number(@project_statistic.teststeprun_status_groups['ended']) %></td>
+                    </tr>
+                </tbody>
+            </table>
+        </fieldset>
+    </div>
+</div>
+<div class="span-24 last">
+    <div class="span-12 last">
+        <fieldset>
+            <legend>
+                Test Results
+            </legend>
+            <table>
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Unknown</th>
+                        <th>Ok</th>
+                        <th>Failure</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Testsuites</td>
+                        <td><%= as_number(@project_statistic.testsuiterun_result_groups['unknown']) %></td>
+                        <td><%= as_number(@project_statistic.testsuiterun_result_groups['ok']) %></td>
+                        <td><%= as_number(@project_statistic.testsuiterun_result_groups['failed']) %></td>
+                    </tr>
+                    <tr>
+                        <td>Testcases</td>
+                        <td><%= as_number(@project_statistic.testcaserun_result_groups['unknown']) %></td>
+                        <td><%= as_number(@project_statistic.testcaserun_result_groups['ok']) %></td>
+                        <td><%= as_number(@project_statistic.testcaserun_result_groups['failed']) %></td>
+                    </tr>
+                    <tr>
+                        <td>Teststeps</td>
+                        <td><%= as_number(@project_statistic.teststeprun_result_groups['unknown']) %></td>
+                        <td><%= as_number(@project_statistic.teststeprun_result_groups['ok']) %></td>
+                        <td><%= as_number(@project_statistic.teststeprun_result_groups['failed']) %></td>
+                    </tr>
+                </tbody>
+            </table>
+        </fieldset>
+    </div>
+</div>
