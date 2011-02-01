@@ -47,6 +47,7 @@ GEM
     cgi_multipart_eof_fix (2.5.0)
     childprocess (0.1.6)
       ffi (~> 0.6.3)
+    columnize (0.3.2)
     configuration (1.2.0)
     cucumber (0.10.0)
       builder (>= 2.1.2)
@@ -140,6 +141,9 @@ GEM
       activesupport (~> 3.0)
       railties (~> 3.0)
       rspec (~> 2.4.0)
+    ruby-debug (0.10.4)
+      columnize (>= 0.1)
+      ruby-debug-base (~> 0.10.4.0)
     ruby-debug-base (0.10.4)
       linecache (>= 0.3)
     ruby-debug-ide (0.4.16)
@@ -188,6 +192,7 @@ DEPENDENCIES
   rails (= 3.0.3)
   rcov
   rspec-rails
+  ruby-debug
   ruby-debug-base
   ruby-debug-ide
   simple_form

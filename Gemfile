@@ -37,5 +37,6 @@ group :development, :test do
   gem 'rcov'
   gem 'ruby-debug-ide'
   gem 'ruby-debug-base'
+  gem 'ruby-debug'
 end
 
