@@ -58,3 +58,4 @@ Feature: Manage Projects
     And I am on the show page for that project
     When I follow "delete"
     Then I should see "Successfully deleted project."
+
