@@ -2,63 +2,50 @@
   <%= javascript_include_tag "highcharts" %>
 
   <script type="text/javascript">
-    function results_chart() {
+    function _pie_chart(title, render_to, data) {
       new Highcharts.Chart({
-        chart: { renderTo: 'results_chart' },
-				plotOptions: {
-				  pie: {animation: false}
-				},
-				tooltip: {
-						formatter: function() {
-							return '<b>'+ this.point.name +'</b>: '+ this.y +' %';
-						}
-				},
-				series: [
-				   {
-				      type: 'pie',
-				      name: 'Test Results',
-				      data: <%= raw @project_statistic.result_percentages.to_json %>
-				   }
-				],
-				title: {
-				   text: null
-				},
-				credits: {
-				  enabled: false
-				}
+        chart: { renderTo: render_to },
+        plotOptions: { pie: { animation: false } },
+        tooltip: { formatter: function() {
+                      return '<b>'+ this.point.name +'</b>: '+ this.y +' %';
+                   }
+        },
+        series: [ { type: 'pie', name: title, data: data } ],
+        title: {  text: null },
+        credits: { enabled: false }
       });
     }
 
+    function results_chart() {
+      _pie_chart('Test Results', 'results_chart', <%= raw @project_statistic.result_percentages.to_json %>);
+    }
+
     function status_chart() {
+      _pie_chart('Test Status', 'status_chart', <%= raw @project_statistic.status_percentages.to_json %>);
+    }
+
+   function testlog_chart() {
       new Highcharts.Chart({
-        chart: { renderTo: 'status_chart' },
-				plotOptions: {
-				  pie: { animation: false}
-				},
-				tooltip: {
-						formatter: function() {
-							return '<b>'+ this.point.name +'</b>: '+ this.y +' %';
-						}
-				},
-				series: [
-				   {
-				      type: 'pie',
-				      name: 'Test Status',
-				      data: <%= raw @project_statistic.status_percentages.to_json %>
-				   }
-				],
-				title: {
-				   text: null
-				},
-				credits: {
-				  enabled: false
-				}
+        chart: { renderTo: 'testlog_chart' },
+        plotOptions: { line: { animation: false } },
+        tooltip: { formatter: function() {
+                      return '<b>'+ this.point.name +'</b>: '+ this.y;
+                   }
+        },
+        xAxis: {
+            type: 'datetime'
+        },
+        series: [ { type: 'line', name: 'New', data: <%= raw datetime_series_to_json(@project_statistic.testlog_new_counts) %> },
+                  { type: 'line', name: 'Ended', data: <%= raw datetime_series_to_json(@project_statistic.testlog_ended_counts) %> } ],
+        title: {  text: 'Testcase statuses of the last two weeks' },
+        credits: { enabled: false }
       });
     }
 
     $(function() {
       results_chart();
       status_chart();
+      testlog_chart();
     });
   </script>
   <style>
@@ -68,6 +55,10 @@
 
      #results_chart {
        height: 200px;
+     }
+
+     .right_align {
+       text-align: right;
      }
   </style>
 <% end %>
@@ -86,29 +77,29 @@
           <thead>
             <tr>
               <th></th>
-              <th>New</th>
-              <th>Ended</th>
-              <th>Total</th>
+              <th class="right_align">New</th>
+              <th class="right_align">Ended</th>
+              <th class="right_align">Total</th>
             </tr>
           </thead>
           <tbody>
             <tr>
               <td>Testsuites</td>
-              <td><%= as_number(@project_statistic.testsuiterun_status_groups['new']) %></td>
-              <td><%= as_number(@project_statistic.testsuiterun_status_groups['ended']) %></td>
-              <td><%= as_number(@project_statistic.testsuiterun_count) %></td>
+              <td class="right_align"><%= as_number(@project_statistic.testsuiterun_status_groups['new']) %></td>
+              <td class="right_align"><%= as_number(@project_statistic.testsuiterun_status_groups['ended']) %></td>
+              <td class="right_align"><%= as_number(@project_statistic.testsuiterun_count) %></td>
             </tr>
             <tr>
               <td>Testcases</td>
-              <td><%= as_number(@project_statistic.testcaserun_status_groups['new']) %></td>
-              <td><%= as_number(@project_statistic.testcaserun_status_groups['ended']) %></td>
-              <td><%= as_number(@project_statistic.testcaserun_count) %></td>
+              <td class="right_align"><%= as_number(@project_statistic.testcaserun_status_groups['new']) %></td>
+              <td class="right_align"><%= as_number(@project_statistic.testcaserun_status_groups['ended']) %></td>
+              <td class="right_align"><%= as_number(@project_statistic.testcaserun_count) %></td>
             </tr>
             <tr>
               <td>Teststeps</td>
-              <td><%= as_number(@project_statistic.teststeprun_status_groups['new']) %></td>
-              <td><%= as_number(@project_statistic.teststeprun_status_groups['ended']) %></td>
-              <td><%= as_number(@project_statistic.teststeprun_count) %></td>
+              <td class="right_align"><%= as_number(@project_statistic.teststeprun_status_groups['new']) %></td>
+              <td class="right_align"><%= as_number(@project_statistic.teststeprun_status_groups['ended']) %></td>
+              <td class="right_align"><%= as_number(@project_statistic.teststeprun_count) %></td>
             </tr>
           </tbody>
       </table>
@@ -122,33 +113,33 @@
       <thead>
         <tr>
           <th></th>
-          <th>Unknown</th>
-          <th>Ok</th>
-          <th>Failure</th>
-          <th>Total</th>
+          <th class="right_align">Unknown</th>
+          <th class="right_align">Ok</th>
+          <th class="right_align">Failure</th>
+          <th class="right_align">Total</th>
         </tr>
       </thead>
         <tbody>
           <tr>
             <td>Testsuites</td>
-            <td><%= as_number(@project_statistic.testsuiterun_result_groups['unknown']) %></td>
-            <td><%= as_number(@project_statistic.testsuiterun_result_groups['ok']) %></td>
-            <td><%= as_number(@project_statistic.testsuiterun_result_groups['failed']) %></td>
-            <td><%= as_number(@project_statistic.testsuiterun_count) %></td>
+            <td class="right_align"><%= as_number(@project_statistic.testsuiterun_result_groups['unknown']) %></td>
+            <td class="right_align"><%= as_number(@project_statistic.testsuiterun_result_groups['ok']) %></td>
+            <td class="right_align"><%= as_number(@project_statistic.testsuiterun_result_groups['failed']) %></td>
+            <td class="right_align"><%= as_number(@project_statistic.testsuiterun_count) %></td>
           </tr>
           <tr>
             <td>Testcases</td>
-            <td><%= as_number(@project_statistic.testcaserun_result_groups['unknown']) %></td>
-            <td><%= as_number(@project_statistic.testcaserun_result_groups['ok']) %></td>
-            <td><%= as_number(@project_statistic.testcaserun_result_groups['failed']) %></td>
-            <td><%= as_number(@project_statistic.testcaserun_count) %></td>
+            <td class="right_align"><%= as_number(@project_statistic.testcaserun_result_groups['unknown']) %></td>
+            <td class="right_align"><%= as_number(@project_statistic.testcaserun_result_groups['ok']) %></td>
+            <td class="right_align"><%= as_number(@project_statistic.testcaserun_result_groups['failed']) %></td>
+            <td class="right_align"><%= as_number(@project_statistic.testcaserun_count) %></td>
           </tr>
           <tr>
             <td>Teststeps</td>
-            <td><%= as_number(@project_statistic.teststeprun_result_groups['unknown']) %></td>
-            <td><%= as_number(@project_statistic.teststeprun_result_groups['ok']) %></td>
-            <td><%= as_number(@project_statistic.teststeprun_result_groups['failed']) %></td>
-            <td><%= as_number(@project_statistic.teststeprun_count) %></td>
+            <td class="right_align"><%= as_number(@project_statistic.teststeprun_result_groups['unknown']) %></td>
+            <td class="right_align"><%= as_number(@project_statistic.teststeprun_result_groups['ok']) %></td>
+            <td class="right_align"><%= as_number(@project_statistic.teststeprun_result_groups['failed']) %></td>
+            <td class="right_align"><%= as_number(@project_statistic.teststeprun_count) %></td>
           </tr>
         </tbody>
     </table>
@@ -156,4 +147,6 @@
   <div class="span-12 last" id="results_chart">
   </div>
 </div>
+
+<div class="span-24 last" id="testlog_chart"></div>
 

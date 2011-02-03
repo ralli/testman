@@ -60,6 +60,14 @@ describe ProjectStatistic do
     it "should return valid teststeps grouped by result" do
       @statistics.teststeprun_result_groups.should == {"unknown" => 2, "ok" => 2}
     end
+
+    it "should provide valid testcaselog counts for ended testruns" do
+      @statistics.testlog_ended_counts[0][1].should == 2
+    end
+
+    it "should provide valid testcaselog counts for ended testruns" do
+      @statistics.testlog_new_counts[0][1].should == 4
+    end
   end
 
   it "should query the testsuite groups for statuses once if called multiple times" do
@@ -117,4 +125,6 @@ describe ProjectStatistic do
     statistics.teststeprun_result_groups
     statistics.teststeprun_result_groups
   end
+
 end
+

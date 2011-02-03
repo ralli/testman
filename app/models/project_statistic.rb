@@ -72,5 +72,34 @@ class ProjectStatistic
       [k, ((v.to_f / total.to_f) * 100).round(2)]
     end
   end
+
+  def testlog_ended_counts
+    return @testlog_ended_counts if @testlog_ended_counts
+    fetch_testlog_counts
+    return @testlog_ended_counts
+  end
+
+  def testlog_new_counts
+    return @testlog_new_counts if @testlog_new_counts
+    fetch_testlog_counts
+    return @testlog_new_counts
+  end
+private
+  def fetch_testlog_counts
+    @testlog_ended_counts = get_testlog_counts('ended')
+    @testlog_new_counts = get_testlog_counts('new')
+  end
+
+  def get_testlog_counts(status)
+    date = Date.today - 14.days
+    counts = Testcaselog.where('created_at >= ?', date).where('status = ?', status).group('date(created_at)').count.to_a
+    a = counts.sort {|a,b| a[0] <=> b[0]}
+    c = 0
+    a.each do |x|
+      x[1] += c
+      c = x[1]
+    end
+    a
+  end
 end
 
