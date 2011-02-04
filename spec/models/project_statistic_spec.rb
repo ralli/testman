@@ -62,11 +62,11 @@ describe ProjectStatistic do
     end
 
     it "should provide valid testcaselog counts for ended testruns" do
-      @statistics.testlog_ended_counts[0][1].should == 2
+      @statistics.testlog_ended_counts.last[1].should == 2
     end
 
     it "should provide valid testcaselog counts for ended testruns" do
-      @statistics.testlog_new_counts[0][1].should == 4
+      @statistics.testlog_new_counts.last[1].should == 4
     end
   end
 

@@ -90,16 +90,25 @@ private
     @testlog_new_counts = get_testlog_counts('new')
   end
 
+  def make_testlog_counts(counthash, min_count)
+    end_date = Date.today
+    start_date = end_date - 14.days
+    current_count = min_count
+    result = {}
+    (start_date..end_date).each do |d|
+      x = counthash[d]
+      current_count += x if x
+      result[d] = current_count
+    end
+    result.to_a.sort { |a,b| a[0] <=> b[0] }
+  end
+
+
   def get_testlog_counts(status)
     date = Date.today - 14.days
-    counts = Testcaselog.where('created_at >= ?', date).where('status = ?', status).group('date(created_at)').count.to_a
-    a = counts.sort {|a,b| a[0] <=> b[0]}
-    c = 0
-    a.each do |x|
-      x[1] += c
-      c = x[1]
-    end
-    a
+    counts = Testcaselog.where('created_at >= ?', date).where('status = ?', status).group('date(created_at)').count
+    min_count = Testcaselog.where('created_at <= ?', date).where('status = ?', status).count
+    make_testlog_counts(counts, min_count)
   end
 end
 

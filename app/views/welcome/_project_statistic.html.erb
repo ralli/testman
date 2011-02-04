@@ -29,11 +29,16 @@
         chart: { renderTo: 'testlog_chart' },
         plotOptions: { line: { animation: false } },
         tooltip: { formatter: function() {
-                      return '<b>'+ this.point.name +'</b>: '+ this.y;
+                      return '<b>'+ Highcharts.dateFormat('%Y-%m-%d', this.x) +'</b>: '+ this.y;
                    }
         },
         xAxis: {
             type: 'datetime'
+        },
+        yAxis: {
+           title: {
+             text: "count"
+           }
         },
         series: [ { type: 'line', name: 'New', data: <%= raw datetime_series_to_json(@project_statistic.testlog_new_counts) %> },
                   { type: 'line', name: 'Ended', data: <%= raw datetime_series_to_json(@project_statistic.testlog_ended_counts) %> } ],
