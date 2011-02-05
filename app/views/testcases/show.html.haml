@@ -1,0 +1,193 @@
+- title "Testcase"
+- content_for :head do
+  = javascript_include_tag 'jquery.tablednd'
+  = stylesheet_link_tag 'jquery.tag'
+  :css
+    .link_list {
+      list-style: none;
+    }
+
+    .top_margin {
+      margin-top: 1em;
+      margin-bottom: 0px;
+    }
+
+    .link_list li {
+      float: left;
+      margin: 0px;
+      padding: 0px 5px 0px 0px;
+    }
+
+    .handle {
+      cursor: move;
+      font-size: 0.8em;
+      color: #888888;
+      vertical-align: top;
+    }
+
+    ol#attachments {
+      list-style: none;
+      margin: 0px;
+      padding: 0px;
+    }
+
+    .dragClass {
+      background-color: #cccccc;
+    }
+
+    tbody tr:nth-child(even) td {
+      background-color: transparent;
+    }
+
+    li.tag_entry {
+      list-style: none;
+      float: left;
+      background-color: #cccccc;
+      border-color: #aaaaaa;
+      border-width: 1px;
+      border-style: solid;
+      padding: 2px 4px;
+      margin-right: 4px;
+      -moz-border-radius: 4px;
+      -o-border-radius: 4px;
+      border-radius: 4px;
+      -webkit-border-radius: 4px;
+    }
+
+  :javascript
+    $(function() {
+      $('a.button_add').button({icons: { primary:'ui-icon-plus'}});
+      $('#attachments').sortable({
+        axis: 'y',
+        dropOnEmpty: false,
+        handle: '.handle',
+        cursor: 'move',
+        items: 'li',
+        opacity: 0.4,
+        scroll: true,
+        update: function(){
+          $.ajax({
+            type: 'post',
+            data: $('#attachments').sortable("serialize"),
+            dataType: 'script',
+            complete: function(request){
+              $('#attachments').effect('highlight');
+            },
+            url: '#{sort_attachments_testcase_url(@testcase)}' })
+        }
+      });
+
+      $('#teststeps').tableDnD( {
+        onDragClass: 'dragClass',
+        dragHandle: 'handle',
+        onDrop: function(table, row) {
+          $.ajax({
+            type: 'post',
+            data: $.tableDnD.serialize(),
+            dataType: 'script',
+            complete: function(request){
+              $('#teststeps').effect('highlight');
+            },
+            url: '#{sort_teststeps_testcase_url(@testcase)}'
+          });
+        }
+      })
+    })
+
+%fieldset.span-24.last
+  %legend Testcase
+  .span-22.last{:style => "padding: 1em;"}
+    .row.span-22.last
+      .label.span-4 Key:
+      .span-7= @testcase.key
+      .label.span-4 Version:
+      .span-7.last= @testcase.version
+    .row.span-22.last
+      .label.span-4 Project:
+      .span-18.last= @testcase.project.try(:to_label)
+    .row.span-22.last
+      .label.span-4 Name:
+      .span-18.last= @testcase.name
+    .row
+      .label.span-4 Description:
+      .span-18.last= render_textile(@testcase.description)
+    .row.span-22.last
+      .label.span-4 Test Area:
+      .span-7= @testcase.value_for(:test_area)
+      .label.span-4 Test Variety:
+      .span-7.last= @testcase.value_for(:test_variety)
+    .row.span-22.last
+      .label.span-4 Test Level:
+      .span-7= @testcase.value_for(:test_level)
+      .label.span-4 Execution Type:
+      .span-7.last= @testcase.value_for(:execution_type)
+    .row.span-22.last
+      .label.span-4 Test Status:
+      .span-7= @testcase.value_for(:test_status)
+      .label.span-4 Test Priority:
+      .span-7.last= @testcase.value_for(:test_priority)
+    .row.span-22.last
+      .label.span-4 Test Method:
+      .span-7.last= @testcase.value_for(:test_method)
+    .row.span-22.last
+      .label.span-4 Created:
+      .span-7= @testcase.created_at
+      .label.span-4 Edited:
+      .span-7.last= @testcase.created_at
+    .row.span-22.last
+      .label.span-4 Created by:
+      .span-7= @testcase.created_by.try(:to_label)
+      .label.span-4 Edited by:
+      .span-7.last= @testcase.edited_by.try(:to_label)
+    .row.span-22.last
+      .label.span-4 Tag list:
+      .span-18.last
+        %ul{:style => "margin: 0px; padding: 0px;"}
+          - @testcase.tag_list.each do |tag|
+            %li.tag_entry
+              = tag
+    .row.span-22.last
+      %ul.prepend-4.span-18.link_list.top_margin.last
+        - if permitted_to? :update, @testcase
+          %li= link_to("Edit", edit_testcase_path(@testcase), :id => 'edit', :class => 'button')
+        - if permitted_to? :delete, @testcase
+          %li= link_to("Destroy", @testcase, :confirm => 'Are you sure?', :method => :delete, :id => 'delete', :class => 'button')
+        - if permitted_to? :create, @testcase
+          %li= link_to("Create Version", create_version_testcase_path(@testcase), :id => 'create_version', :method => 'put', :class => 'button')
+        %li= link_to("Go back", url_for(:back), :id => 'view_all', :class => 'button')
+%fieldset.span-24.last
+  %legend Attachments
+  .span-22.last.fieldset
+    %ul.link_list.span-22.last{:style => "margin: 0px 0px 1em 0px; padding: 0px"}
+      %li= link_to 'Add Attachment', new_testcase_attachment_url(@testcase), :class => 'button_add', :id => 'add_attachment' if permitted_to? 'update', @testcase
+    %ol#attachments
+      - @testcase.testcase_attachments.each do |attachment|
+        %li.span-22.last{:id => "attachment_#{attachment.to_param}"}
+          .handle.span-2 [drag]
+          .span-8
+            = link_to attachment.attachment_file_name, attachment.attachment.url
+          .span-4
+            = attachment.attachment_file_size.bytes
+            Bytes
+          .span-4.last
+            = link_to 'Delete', testcase_attachment_url(@testcase, attachment), :confirm => 'Are you shure?', :method => 'delete'
+%h2 Test Steps
+%ul.link_list.span-24.last{:style => "margin: 0px 0px 1em 0px; padding: 0px;"}
+  %li= link_to 'New Test Step', new_testcase_teststep_path(@testcase), :id => 'new_teststep', :class => 'button_add' if permitted_to? 'update', @testcase
+%table#teststeps
+  %thead
+    %tr
+      %th #
+      %th Step
+      %th Expected Result
+      %th Actions
+  %tbody
+    - @testcase.teststeps.each do |teststep|
+      %tr{:id => "#{teststep.to_param} "}
+        %td.handle [drag]
+        %td= render_textile(teststep.step)
+        %td= render_textile(teststep.expected_result)
+        %td
+          = link_to "Edit", edit_testcase_teststep_path(@testcase, teststep), {:id => 'edit_teststep'}
+          = link_to "Delete", testcase_teststep_path(@testcase, teststep), :method => 'delete', :confirm => 'Are you sure?', :id => 'delete_teststep'
+

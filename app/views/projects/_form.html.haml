@@ -1,0 +1,8 @@
+= simple_form_for @project do |f|
+  = f.error_notification
+  %fieldset
+    %legend Project
+    .fieldset
+      = f.input :name
+      = f.button :submit
+      = cancel_link @project, :class => 'button', :id => 'cancel'

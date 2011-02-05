@@ -1,0 +1,21 @@
+= content_tag('h2', label_for_testcase(testcaserun)) if full
+%fieldset.span-24.last
+  %legend= label_for_testcase(testcaserun)
+  .fieldset.span-22.last
+    .row.span-22.last
+      .label.span-4 Key
+      .span-7
+        = testcaserun.testcase.key
+      .label.span-4 Name
+      .span-7.last
+        = testcaserun.testcase.name
+    .row.span-22.last
+      .label.span-4 Description
+      .span-18.last= render_textile(testcaserun.testcase.description)
+
+- if full
+  = render :partial => 'teststeprun', :collection => testcaserun.teststepruns
+- else
+  - if nextstep(testcaserun)
+    = render :partial => 'teststeprun', :object => nextstep(testcaserun)
+

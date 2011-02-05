@@ -1,0 +1,11 @@
+- title "Project"
+%fieldset.span-24.last
+  %legend Project
+  .fieldset.span-22
+    .label.span-3 Name:
+    .span-19.last= @project.name
+    .prepend-3.span-19.last{'style' => 'margin-top: 1em'}
+      = link_to "Edit", edit_project_path(@project), :class => 'button', :id => 'edit' if permitted_to? :update, @project
+      = link_to "Destroy", @project, :confirm => 'Are you sure?', :method => :delete, :class => 'button', :id => 'delete' if permitted_to? :delete, @project
+      = link_to "Back to list", projects_path, :class => 'button', :id => 'cancel' if permitted_to? :read, :projects
+

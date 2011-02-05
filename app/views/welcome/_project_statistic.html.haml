@@ -1,0 +1,144 @@
+- content_for :head do
+  = javascript_include_tag "highcharts"
+  :javascript
+    function _pie_chart(title, render_to, data) {
+      new Highcharts.Chart({
+        chart: { renderTo: render_to },
+        plotOptions: {
+          pie: { animation: false }
+        },
+        tooltip: {
+          formatter: function() {
+                        return '<b>'+ this.point.name +'</b>: '+ this.y +' %';
+                     }
+        },
+        series: [ { type: 'pie', name: title, data: data } ],
+        title: {  text: null },
+        credits: { enabled: false }
+      });
+    }
+
+    function results_chart() {
+      _pie_chart('Test Results', 'results_chart', #{raw @project_statistic.result_percentages.to_json});
+    }
+
+    function status_chart() {
+      _pie_chart('Test Status', 'status_chart', #{raw @project_statistic.status_percentages.to_json});
+    }
+
+    function testlog_chart() {
+      new Highcharts.Chart({
+        chart: { renderTo: 'testlog_chart' },
+        plotOptions: { line: { animation: false } },
+        tooltip: { formatter: function() {
+                      return '<b>'+ Highcharts.dateFormat('%Y-%m-%d', this.x) +'</b>: '+ this.y;
+                   }
+        },
+        xAxis: {
+            type: 'datetime'
+        },
+        yAxis: {
+           title: {
+             text: "count"
+           }
+        },
+        series: [ { type: 'line', name: 'New', data: #{raw datetime_series_to_json(@project_statistic.testlog_new_counts)} },
+                  { type: 'line', name: 'Ended', data: #{raw datetime_series_to_json(@project_statistic.testlog_ended_counts)} } ],
+        title: {  text: 'Testcase statuses of the last two weeks' },
+        credits: { enabled: false }
+      });
+    }
+
+    $(function() {
+      results_chart();
+      status_chart();
+      testlog_chart();
+    });
+
+  :css
+    #status_chart {
+          height: 200px;
+    }
+
+    #results_chart {
+       height: 200px;
+    }
+
+    .right_align {
+      text-align: right;
+    }
+
+.span-24.last
+  %ul
+    %li
+      .span-3.label Current project:
+      = @project_statistic.project_name
+    %li
+      .span-3.label Testsuites:
+      = as_number(@project_statistic.testsuite_count)
+    %li
+      .span-3.label Testcases:
+      = as_number(@project_statistic.testcase_count)
+    %li
+      .span-3.label Steps:
+      = as_number(@project_statistic.teststep_count)
+.span-24.last
+  .span-12
+    %h2 Test Status
+    %table
+      %thead
+        %tr
+          %th
+          %th.right_align New
+          %th.right_align Ended
+          %th.right_align Total
+      %tbody
+        %tr
+          %td Testsuites
+          %td.right_align= as_number(@project_statistic.testsuiterun_status_groups['new'])
+          %td.right_align= as_number(@project_statistic.testsuiterun_status_groups['ended'])
+          %td.right_align= as_number(@project_statistic.testsuiterun_count)
+        %tr
+          %td Testcases
+          %td.right_align= as_number(@project_statistic.testcaserun_status_groups['new'])
+          %td.right_align= as_number(@project_statistic.testcaserun_status_groups['ended'])
+          %td.right_align= as_number(@project_statistic.testcaserun_count)
+        %tr
+          %td Teststeps
+          %td.right_align= as_number(@project_statistic.teststeprun_status_groups['new'])
+          %td.right_align= as_number(@project_statistic.teststeprun_status_groups['ended'])
+          %td.right_align= as_number(@project_statistic.teststeprun_count)
+  #status_chart.span-12.last
+.span-24.last
+  .span-12
+    %h2 Test Results
+    %table
+      %thead
+        %tr
+          %th
+          %th.right_align Unknown
+          %th.right_align Ok
+          %th.right_align Failure
+          %th.right_align Total
+      %tbody
+        %tr
+          %td Testsuites
+          %td.right_align= as_number(@project_statistic.testsuiterun_result_groups['unknown'])
+          %td.right_align= as_number(@project_statistic.testsuiterun_result_groups['ok'])
+          %td.right_align= as_number(@project_statistic.testsuiterun_result_groups['failed'])
+          %td.right_align= as_number(@project_statistic.testsuiterun_count)
+        %tr
+          %td Testcases
+          %td.right_align= as_number(@project_statistic.testcaserun_result_groups['unknown'])
+          %td.right_align= as_number(@project_statistic.testcaserun_result_groups['ok'])
+          %td.right_align= as_number(@project_statistic.testcaserun_result_groups['failed'])
+          %td.right_align= as_number(@project_statistic.testcaserun_count)
+        %tr
+          %td Teststeps
+          %td.right_align= as_number(@project_statistic.teststeprun_result_groups['unknown'])
+          %td.right_align= as_number(@project_statistic.teststeprun_result_groups['ok'])
+          %td.right_align= as_number(@project_statistic.teststeprun_result_groups['failed'])
+          %td.right_align= as_number(@project_statistic.teststeprun_count)
+  #results_chart.span-12.last
+#testlog_chart.span-24.last
+

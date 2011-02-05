@@ -1,0 +1,75 @@
+- title "Testcases"
+- content_for :head do
+  :css
+    div.row {
+      margin-bottom: 1em;
+    }
+    ul.taglist {
+      list-style: none;
+      margin: 0px 0px;
+      padding: 0px;
+    }
+    ul.taglist li {
+      margin: 0px 0px 0.3em 0px;
+      padding: 0.5em 1em;
+      -moz-border-radius: 6px;
+      color: #0066cc;
+      font-weight: bold;
+      background: #C3D9FF;
+    }
+    ul.taglist li a {
+      color: #0066cc;
+      text-decoration: underline;
+    }
+    ul.taglist li a:hover {
+      color: #0099ff;
+      text-decoration: none;
+    }
+
+.row.span-24.last
+  = form_tag(search_testcases_path, :method => 'get') do
+    %fieldset.span-24.last
+      %legend Search
+      .fieldset
+        .row.span-15
+          = label_tag(:search, 'Search: ')
+          = text_field_tag(:search, params[:search])
+          = submit_tag 'Search'
+          = "#{@testcases.total_entries} Testcases found"
+        .right
+          = link_to "New Testcase", new_testcase_path, :class => 'button_add', :id => 'new_testcase' if permitted_to? :create, :testcases
+
+.span-20
+  %table
+    %thead
+      %tr
+        %th Key
+        %th Version
+        %th Name
+        %th Execution Type
+        %th Test Status
+        %th Test Priority
+        %th Action
+    %tbody
+      - for testcase in @testcases
+        %tr
+          %td= testcase.key
+          %td= testcase.version
+          %td= testcase.name
+          %td= testcase.value_for(:execution_type)
+          %td= testcase.value_for(:test_status)
+          %td= testcase.value_for(:test_priority)
+          %td
+            = link_to "Show", testcase if permitted_to? :read, testcase
+            = link_to "Edit", edit_testcase_path(testcase) if permitted_to? :update, testcase
+            = link_to "Destroy", testcase, :confirm => 'Are you sure?', :method => :delete if permitted_to? :delete, testcase
+
+  = will_paginate @testcases
+
+.span-4.last
+  %ul.taglist
+    - @tag_counts.each do |t|
+      %li
+        = link_to t.name, testcases_path(:tag => t.name)
+        %span.right= t.count
+

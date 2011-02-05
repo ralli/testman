@@ -1,0 +1,19 @@
+- title "Test Runs"
+
+%table
+  %thead
+    %tr
+      %th Key
+      %th Name
+      %th Result
+      %th Action
+  %tbody
+    - @testruns.each do |run|
+      %tr
+        %td= run.testsuite.key
+        %td= run.testsuite.name
+        %td= run.result
+        %td= link_to 'Show', run, :id => 'show_testsuiterun'
+
+= will_paginate @testruns
+

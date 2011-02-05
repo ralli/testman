@@ -1,0 +1,53 @@
+- content_for :head do
+  = javascript_include_tag 'markitup/jquery.markitup.js'
+  = javascript_include_tag 'markitup/sets/textile/set.js'
+  = stylesheet_link_tag 'markitup/skins/simple/style.css'
+  = stylesheet_link_tag 'markitup/sets/textile/style.css'
+
+  :css
+    form.testcase textarea, input[type="text"] {
+      padding: 4px;
+      width: 570px;
+    }
+
+    form.testcase select {
+      width: 140px;
+      margin-right:10px;
+      padding: 4px;
+    }
+
+    div.textile {
+      margin-left: 120px;
+    }
+
+  = stylesheet_link_tag 'jquery.tag'
+  = javascript_include_tag 'jquery.tag'
+
+  :javascript
+    $(function() {
+      $('#testcase_tag_list').tag({seperator: ','});
+
+      $('textarea').markItUp(mySettings);
+    });
+
+= simple_form_for @testcase, :class => 'testcases' do |f|
+  = f.error_notification
+  %fieldset.span-24.last
+    %legend Testcase
+    .fieldset.span-22
+      = f.input :name
+      = f.input :description
+      = f.input :tag_list, :as => :string, :input_html => {"data-seperator" => "," }
+      .span-11
+        = f.input :test_area, :as => :select, :collection => Testcase.test_areas, :include_blank => false
+        = f.input :test_variety, :as => :select, :collection => Testcase.test_varieties, :include_blank => false
+        = f.input :test_level, :as => :select, :collection => Testcase.test_levels, :include_blank => false
+      .span-11.right.last
+        = f.input :execution_type, :as => :select, :collection => Testcase.execution_types, :include_blank => false
+        = f.input :test_status, :as => :select, :collection => Testcase.test_statuses, :include_blank => false
+        = f.input :test_method, :as => :select, :collection => Testcase.test_methods, :include_blank => false
+        = f.input :test_priority, :as => :select, :collection => Testcase.test_priorities, :include_blank => false
+      .span-22.last
+        = f.button :submit
+        = cancel_link @testcase, :id => 'cancel', :class => 'button'
+

@@ -1,0 +1,10 @@
+- title "Login"
+- content_for :head do
+  :css
+    form.simple_form input[type="text"], input[type="password"] {
+      padding: 4px;
+      width: 570px;
+    }
+
+= render :partial => 'user_sessions/form'
+

@@ -1,0 +1,12 @@
+- title "Activate Project"
+%table
+  %thead
+    %tr
+      %th Project
+      %th Action
+  %tbody
+    - @projects.each do |project|
+      %tr
+        %td= project.name
+        %td= link_to 'Activate', activate_project_url(project)
+

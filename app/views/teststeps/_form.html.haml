@@ -1,0 +1,30 @@
+- content_for :head do
+  = javascript_include_tag 'markitup/jquery.markitup.js'
+  = javascript_include_tag 'markitup/sets/textile/set.js'
+  = stylesheet_link_tag 'markitup/skins/simple/style.css'
+  = stylesheet_link_tag 'markitup/sets/textile/style.css'
+
+  :css
+    form.testcase textarea {
+      padding: 4px;
+      width: 570px;
+    }
+
+    div.textile {
+      margin-left: 120px;
+    }
+
+  :javascript
+    $(function() {
+      $('textarea').markItUp(mySettings);
+    });
+
+%fieldset.span-24.last
+  %legend Test step
+  .fieldset
+    = simple_form_for [@testcase, @teststep] do |f|
+      = f.input :step
+      = f.input :expected_result
+      = f.button :submit
+      = link_to "Cancel", @testcase, :class => 'button', :id => 'cancel'
+

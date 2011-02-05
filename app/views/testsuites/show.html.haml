@@ -1,0 +1,84 @@
+- content_for :head do
+  = javascript_include_tag 'jquery.tablednd.js'
+  :css
+    .dragHandle {
+      cursor: move;
+      color: #888888;
+      font-size: 0.8em;
+    }
+    .dragClass {
+      background-color: #eeeeee;
+    }
+    tbody tr:nth-child(even) td {
+      background-color: transparent;
+    }
+
+  :javascript
+    $(function() {
+      $('#tctable').tableDnD( {
+        onDragClass: 'dragClass',
+        dragHandle: 'dragHandle',
+        onDrop: function(table, row) {
+          $.ajax({
+            type: 'post',
+            data: $.tableDnD.serialize(),
+            dataType: 'script',
+            complete: function(request){
+              $('#tctable').effect('highlight');
+            },
+            url: "#{sort_testcases_testsuite_url(@testsuite)}'
+          });
+        }
+      })
+    })
+
+- title Testsuite
+
+%fieldset.span-24.last
+  %legend Testsuite
+  .fieldset.span-22.last
+    .label.span-3 Key:
+    .span-4= @testsuite.key || "New"
+    .label.span-3 Name:
+    .span-4= @testsuite.name
+    .label.span-3 Version:
+    .span-4.last= @testsuite.version
+
+    .span-22.last
+      .label.span-3 Description:
+      .span-19.last= render_textile(@testsuite.description)
+
+    .span-22.last
+      %ol.link_list.prepend-3.span-19.last{:style => "margin: 0px;"}
+        - if permitted_to? :update, @testsuite
+          %li= link_to("Edit", edit_testsuite_path(@testsuite), :class => 'button')
+        - if permitted_to? :create, Testsuiterun.new
+          %li= link_to('Run', run_testsuite_path(@testsuite), :id => 'run_testsuite', :class => 'button')
+        - if permitted_to? :update, @testsuite
+          %li= link_to("Create version", create_version_testsuite_path(@testsuite), :id => 'create_version', :class => 'button',:method => 'put')
+        %li= link_to("Show All", testsuites_path, :class => 'button')
+
+
+%h2 Testcases
+%ol.link_list.span-24.last{:style => "margin: 0px; padding: 0px 0px 1em 0px;"}
+  %li= link_to('Add Testcases', show_add_testsuite_url(@testsuite), :id => 'show_add', :class => 'button_add')
+
+%table#tctable
+  %thead
+    %tr
+      %th #
+      %th Key
+      %th Version
+      %th Name
+      %th Action
+  %tbody
+    - @testsuite_entries.each do |entry|
+      = content_tag :tr, :id => entry.id do
+        %td.dragHandle [drag]
+        %td= entry.testcase.key
+        %td= entry.testcase.version
+        %td= entry.testcase.name
+        %td
+          = link_to "Show", entry.testcase
+          = link_to "Delete", testsuite_testsuite_entry_url(@testsuite, entry), :method => 'delete', :confirm => 'Are you sure?', :id => 'remove_testcase'
+

@@ -1,0 +1,28 @@
+- content_for :head do
+  :css
+    form.simple_form_user textarea, input[type="text"], input[type="email"], input[type="password"] {
+      padding: 4px;
+      width: 570px;
+    }
+
+- title "Register"
+= simple_form_for @user do |f|
+  = f.error_notification
+  %fieldset.span-24.last
+    %legend User
+    .fieldset.span-22.last
+      = f.input :login
+      = f.input :first_name
+      = f.input :last_name
+      = f.input :email
+
+  %fieldset.span-24.last
+    %legend Change password
+    .fieldset.span-22.last
+      = f.input :password
+      = f.input :password_confirmation
+
+  .span-22.last{ :style => "margin-left: 1em; margin-top: 1em;" }
+    = f.button :submit, 'Save'
+    = link_to 'Cancel', root_url, :class => 'button'
+

@@ -1,0 +1,96 @@
+- title "Add Testcases"
+
+- content_for :head do
+  :css
+    .handle {
+      color: #aaaaaa;
+      font-size: 0.8em;
+      cursor: move;
+    }
+
+    div.testcases {
+      background-color: #C3D9FF;
+      -moz-border-radius: 6px;
+      border-radius: 6px;
+      -webkit-border-radius: 6px;
+      padding: 1em;
+    }
+
+    div.testcases ol {
+      list-style: none;
+      margin: 0px;
+      padding: 0px;
+    }
+
+    div.search, div.testcases ol li {
+      background-color: #E5ECF9;
+      -moz-border-radius: 6px;
+      border-radius: 6px;
+      -webkit-border-radius: 6px;
+      padding: 0.5em 1em;
+      margin-bottom: 0.3em;
+    }
+
+    .delete {
+      padding: 0.5em 0.5em;
+      cursor: pointer;
+    }
+
+  :javascript
+    $(function() {
+      $('#testcases').sortable({
+        connectWith: '#testentries',
+        helper: 'clone',
+        handle: '.handle',
+        revert: true
+      });
+
+      $('#testentries').sortable({
+        handle: '.handle',
+        axis: 'y',
+        update: function() {
+          $('#message').hide();
+          $.post("#{assign_testcase_testsuite_url(@testsuite)}", $('#testentries').sortable('serialize'));
+        }
+      });
+
+      $('.delete').click(function() {
+        $("#message").hide();
+        $.post("#{remove_testcase_testsuite_url(@testsuite)}", "entryid=" + $(this).attr('id') );
+        $(this).parent('li').remove();
+        return false;
+      });
+
+      $('#search_form').submit(function() {
+        $.post("#{search_testcases_testsuite_url(@testsuite)}", "search=" + $('#searchfield').val());
+        return false;
+      });
+    })
+
+#message.notice{:style=>"display: none"}
+  Hossa
+
+%fieldset.span-24.last{:style => "margin-bottom: 1em;"}
+  %legend Testsuite
+  .fieldset.span-22.last
+    .label.span-2= @testsuite.key
+    .span-20.last= @testsuite.name
+    .span-22.last{:style => "margin-top: 1em;"}= link_to 'Back to testsuite', @testsuite, :class => 'button', :id => 'back'
+
+.span-11
+  %h2 Available testcases
+  .testcases
+    .search
+      = form_tag(search_testcases_testsuite_url(@testsuite), :id => 'search_form') do
+        = label_tag(:search, 'Search')
+        = text_field_tag(:search, "", :id => 'searchfield')
+        = submit_tag 'Search', :id => 'search_button'
+    %ol.testcases
+      = render 'testcases'
+
+.span-11.right.last
+  %h2 Assigned testcases
+  .testcases
+    %ol.testcases#testentries{:style => "min-height: 3em;"}
+      = render 'testsuite_entries'
+
