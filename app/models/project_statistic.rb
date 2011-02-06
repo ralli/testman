@@ -106,8 +106,10 @@ private
 
   def get_testlog_counts(status)
     date = Date.today - 14.days
-    counts = Testcaselog.where('created_at >= ?', date).where('status = ?', status).group('date(created_at)').count
-    min_count = Testcaselog.where('created_at <= ?', date).where('status = ?', status).count
+    counts = Testcaselog.for_project(@project.id)
+    counts = counts.where('testcaselogs.created_at >= ?', date)
+    counts = counts.where('testcaselogs.status = ?', status).group('date(testcaselogs.created_at)').count
+    min_count = Testcaselog.for_project(@project.id).where('testcaselogs.created_at <= ?', date).where('testcaselogs.status = ?', status).count
     make_testlog_counts(counts, min_count)
   end
 end
