@@ -32,24 +32,24 @@
       %legend Search
       .fieldset
         .row.span-15
-          = label_tag(:search, 'Search: ')
+          = label_tag(:search, t('testcases.index.searchlabel'))
           = text_field_tag(:search, params[:search])
-          = submit_tag 'Search'
-          = "#{@testcases.total_entries} Testcases found"
+          = submit_tag t('testcases.index.searchbutton')
+          = t('testcases.index.testcases_found', :count => @testcases.total_entries)
         .right
-          = link_to "New Testcase", new_testcase_path, :class => 'button_add', :id => 'new_testcase' if permitted_to? :create, :testcases
+          = link_to t('testcases.index.new_testcase'), new_testcase_path, :class => 'button_add', :id => 'new_testcase' if permitted_to? :create, :testcases
 
 .span-20
   %table
     %thead
       %tr
-        %th Key
-        %th Version
-        %th Name
-        %th Execution Type
-        %th Test Status
-        %th Test Priority
-        %th Action
+        %th= t('testcases.index.key')
+        %th= t('testcases.index.version')
+        %th= t('testcases.index.name')
+        %th= t('testcases.index.execution_type')
+        %th= t('testcases.index.test_status')
+        %th= t('testcases.index.test_priority')
+        %th= t('testcases.index.actions')
     %tbody
       - for testcase in @testcases
         %tr
@@ -60,9 +60,9 @@
           %td= testcase.value_for(:test_status)
           %td= testcase.value_for(:test_priority)
           %td
-            = link_to "Show", testcase if permitted_to? :read, testcase
-            = link_to "Edit", edit_testcase_path(testcase) if permitted_to? :update, testcase
-            = link_to "Destroy", testcase, :confirm => 'Are you sure?', :method => :delete if permitted_to? :delete, testcase
+            = link_to t('helpers.show'), testcase if permitted_to? :read, testcase
+            = link_to t('helpers.edit'), edit_testcase_path(testcase) if permitted_to? :update, testcase
+            = link_to t('helpers.destroy'), testcase, :confirm => t('helpers.confirm'), :method => :delete if permitted_to? :delete, testcase
 
   = will_paginate @testcases
 

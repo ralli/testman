@@ -1,6 +1,6 @@
 module TestsuiterunsHelper
   def nextcase(testrun)
-    @nextcase = testrun.nextcase unless defined?(@nextcase)    
+    @nextcase = testrun.nextcase unless defined?(@nextcase)
     @nextcase
   end
 
@@ -14,15 +14,11 @@ module TestsuiterunsHelper
   end
 
   def label_for_testcase(testcaserun)
-    s = "Testcase ##{testcaserun.position}"
-    if testcaserun.testsuiterun then
-      s << " of #{testcaserun.testcasecount}"
-    end
-    s
+    t('helpers.testsuiteruns.label_for_testcase', :position => testcaserun.position, :count => testcaserun.testcasecount)
   end
 
   def label_for_teststep(teststeprun)
-    "Teststep ##{teststeprun.teststep.position} of #{teststeprun.teststepcount}"
+    t('helpers.testsuiteruns.label_for_teststep', :position => teststeprun.teststep.position, :count => teststeprun.teststepcount)
   end
 
   def completed_percentage
@@ -33,3 +29,4 @@ module TestsuiterunsHelper
     end
   end
 end
+

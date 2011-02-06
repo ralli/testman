@@ -1,12 +1,12 @@
 %fieldset.span-24.last
-  %legend Login
+  %legend= t('user_sessions.form.login')
   .fieldset.span-22.last
     = simple_form_for @user_session, :url => url_for(:controller => 'user_sessions', :action => 'create') do |f|
       = f.error_notification
       = f.input :login
       = f.input :password
       .buttons
-        = f.button :submit, 'Login'
-        = link_to 'Cancel', root_url, :class => 'button'
-        = link_to 'Register', new_user_path, :class => 'button'
+        = f.button :submit, t('user_sessions.form.loginbutton')
+        = link_to t('helpers.cancel'), root_url, :class => 'button'
+        = link_to t('user_sessions.form.registerbutton'), new_user_path, :class => 'button'
 

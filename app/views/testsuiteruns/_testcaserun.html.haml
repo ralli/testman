@@ -1,16 +1,17 @@
 = content_tag('h2', label_for_testcase(testcaserun)) if full
+
 %fieldset.span-24.last
   %legend= label_for_testcase(testcaserun)
   .fieldset.span-22.last
     .row.span-22.last
-      .label.span-4 Key
+      .label.span-4= t('simple_form.labels.testcase.key')
       .span-7
         = testcaserun.testcase.key
-      .label.span-4 Name
+      .label.span-4= t('simple_form.labels.testcase.name')
       .span-7.last
         = testcaserun.testcase.name
     .row.span-22.last
-      .label.span-4 Description
+      .label.span-4= t('simple_form.labels.testcase.description')
       .span-18.last= render_textile(testcaserun.testcase.description)
 
 - if full

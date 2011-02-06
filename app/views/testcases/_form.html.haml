@@ -33,7 +33,7 @@
 = simple_form_for @testcase, :class => 'testcases' do |f|
   = f.error_notification
   %fieldset.span-24.last
-    %legend Testcase
+    %legend= t('testcases.form.testcase')
     .fieldset.span-22
       = f.input :name
       = f.input :description

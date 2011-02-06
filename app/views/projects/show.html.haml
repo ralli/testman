@@ -1,11 +1,12 @@
-- title "Project"
+- title t('projects.show.title')
+
 %fieldset.span-24.last
-  %legend Project
+  %legend= t('projects.show.project')
   .fieldset.span-22
-    .label.span-3 Name:
+    .label.span-3= t('projects.show.name')
     .span-19.last= @project.name
     .prepend-3.span-19.last{'style' => 'margin-top: 1em'}
-      = link_to "Edit", edit_project_path(@project), :class => 'button', :id => 'edit' if permitted_to? :update, @project
-      = link_to "Destroy", @project, :confirm => 'Are you sure?', :method => :delete, :class => 'button', :id => 'delete' if permitted_to? :delete, @project
-      = link_to "Back to list", projects_path, :class => 'button', :id => 'cancel' if permitted_to? :read, :projects
+      = link_to t('projects.show.edit'), edit_project_path(@project), :class => 'button', :id => 'edit' if permitted_to? :update, @project
+      = link_to t('projects.show.destroy'), @project, :confirm => t('projects.show.confirm'), :method => :delete, :class => 'button', :id => 'delete' if permitted_to? :delete, @project
+      = link_to t('projects.show.back_to_list'), projects_path, :class => 'button', :id => 'cancel' if permitted_to? :read, :projects
 

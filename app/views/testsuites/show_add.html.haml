@@ -71,25 +71,25 @@
   Hossa
 
 %fieldset.span-24.last{:style => "margin-bottom: 1em;"}
-  %legend Testsuite
+  %legend= t('testsuites.show_add.testsuite')
   .fieldset.span-22.last
     .label.span-2= @testsuite.key
     .span-20.last= @testsuite.name
-    .span-22.last{:style => "margin-top: 1em;"}= link_to 'Back to testsuite', @testsuite, :class => 'button', :id => 'back'
+    .span-22.last{:style => "margin-top: 1em;"}= link_to t('testsuites.show_add.back_to_testsuite'), @testsuite, :class => 'button', :id => 'back'
 
 .span-11
-  %h2 Available testcases
+  %h2= t('testsuites.show_add.available_testcases')
   .testcases
     .search
       = form_tag(search_testcases_testsuite_url(@testsuite), :id => 'search_form') do
-        = label_tag(:search, 'Search')
+        = label_tag(:search, t('testsuites.show_add.searchlabel'))
         = text_field_tag(:search, "", :id => 'searchfield')
         = submit_tag 'Search', :id => 'search_button'
     %ol.testcases
       = render 'testcases'
 
 .span-11.right.last
-  %h2 Assigned testcases
+  %h2= t('testsuites.show_add.assigned_testcases')
   .testcases
     %ol.testcases#testentries{:style => "min-height: 3em;"}
       = render 'testsuite_entries'

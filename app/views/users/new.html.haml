@@ -5,7 +5,7 @@
       width: 570px;
     }
 
-- title "Register"
+- title t('users.new.title')
 = simple_form_for @user do |f|
   = f.error_notification
   %fieldset.span-24.last
@@ -23,6 +23,6 @@
       = f.input :password_confirmation
 
   .span-22.last{ :style => "margin-left: 1em; margin-top: 1em;" }
-    = f.button :submit, 'Save'
-    = link_to 'Cancel', root_url, :class => 'button'
+    = f.button :submit
+    = link_to t('helpers.cancel'), root_url, :class => 'button'
 

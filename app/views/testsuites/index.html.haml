@@ -12,20 +12,20 @@
       %legend Search
       .fieldset
         .row.span-15
-          = label_tag(:q, 'Search: ')
+          = label_tag(:q, t('testsuites.index.searchlabel'))
           = text_field_tag(:q, params[:q])
-          = submit_tag 'Search', :id => 'search'
-          = "#{@testsuites.total_entries} Testsuites found"
+          = submit_tag t('testsuites.index.searchbutton'), :id => 'search'
+          = t('testsuites.index.testsuites_found', :count => @testsuites.total_entries)
         .row.right
-          = link_to "New Testsuite", new_testsuite_path, :id => 'new_testsuite', :class => 'button_add'
+          = link_to t('testsuites.index.new_testsuite'), new_testsuite_path, :id => 'new_testsuite', :class => 'button_add'
 
 %table
   %thead
     %tr
-      %th Key
-      %th Version
-      %th Name
-      %th Action
+      %th= t('simple_form.labels.testsuite.key')
+      %th= t('simple_form.labels.testsuite.version')
+      %th= t('simple_form.labels.testsuite.name')
+      %th= t('testsuites.index.actions')
   %tbody
     - @testsuites.each do |testsuite|
       %tr
@@ -33,10 +33,10 @@
         %td= testsuite.version
         %td= testsuite.name
         %td
-          = link_to "Show", testsuite, :id => 'show_testsuite'
-          = link_to "Edit", edit_testsuite_path(testsuite), :id => 'edit_testsuite'
-          = link_to 'Run', run_testsuite_path(testsuite), :id => 'run_testsuite'
-          = link_to "Delete", testsuite, :method => 'delete', :confirm => 'Are you sure?', :id => 'delete_testsuite'
+          = link_to t('helpers.show'), testsuite, :id => 'show_testsuite'
+          = link_to t('helpers.edit'), edit_testsuite_path(testsuite), :id => 'edit_testsuite'
+          = link_to t('helpers.run'), run_testsuite_path(testsuite), :id => 'run_testsuite'
+          = link_to t('helpers.destroy'), testsuite, :method => 'delete', :confirm => t('helpers.confirm'), :id => 'delete_testsuite'
 
 = will_paginate @testsuites
 

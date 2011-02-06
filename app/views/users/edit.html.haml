@@ -5,11 +5,12 @@
       width: 570px;
     }
 
-- title "Edit Profile"
+- title t('users.edit.title')
+
 = simple_form_for @user do |f|
   = f.error_notification
   %fieldset.span-24.last
-    %legend User
+    %legend= t('users.edit.user')
     .fieldset.span-22.last
       = f.input :login
       = f.input :first_name
@@ -17,11 +18,11 @@
       = f.input :email
 
   %fieldset.span-24.last
-    %legend Change password
+    %legend= t('users.edit.change_password')
     .fieldset.span-22.last
       = f.input :password
       = f.input :password_confirmation
   .span-24.last{:style => "margin-left: 1em; margin-top: 1em;"}
-    = f.button :submit, 'Save'
-    = link_to 'Cancel', root_url, :class => 'button'
+    = f.button :submit
+    = link_to t('helpers.cancel'), root_url, :class => 'button'
 

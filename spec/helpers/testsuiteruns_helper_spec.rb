@@ -55,6 +55,7 @@ describe TestsuiterunsHelper do
     testcaserun = Testcaserun.new
     testsuiterun = nil
     testcaserun.stubs(:position => 1, :testcasecount => 10, :testsuiterun => testsuiterun)
-    label_for_testcase(testcaserun).should== 'Testcase #1'
+    label_for_testcase(testcaserun).should== 'Testcase #1 of 10'
   end
 end
+

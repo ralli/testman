@@ -1,19 +1,19 @@
-- title "Test Runs"
+- title t('testsuiteruns.index.title')
 
 %table
   %thead
     %tr
-      %th Key
-      %th Name
-      %th Result
-      %th Action
+      %th= t('simple_form.labels.testsuite.key')
+      %th= t('simple_form.labels.testsuite.name')
+      %th= t('testsuiteruns.index.result')
+      %th= t('testsuiteruns.index.actions')
   %tbody
     - @testruns.each do |run|
       %tr
         %td= run.testsuite.key
         %td= run.testsuite.name
-        %td= run.result
-        %td= link_to 'Show', run, :id => 'show_testsuiterun'
+        %td= result_label(run.result)
+        %td= link_to t('helpers.show'), run, :id => 'show_testsuiterun'
 
 = will_paginate @testruns
 

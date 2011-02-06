@@ -1,10 +1,10 @@
-- title "New Testcase Attachment"
+- title t('testcase_attachments.new.title')
 
 = simple_form_for @testcase_attachment, :html => { :multipart => true } do |f|
   %fieldset.span-24.last
-  %legend Attachment
-  %fieldset.span-22.last
-    = f.input :attachment
-    = f.button :submit, 'Save'
-    = link_to "Cancel", @testcase, :class => 'button', :id => 'cancel'
+    %legend= t('testcase_attachments.new.attachment')
+    .fieldset.span-22.last
+      = f.input :attachment
+      = f.button :submit
+      = link_to t('helpers.submit.cancel'), @testcase, :class => 'button', :id => 'cancel'
 

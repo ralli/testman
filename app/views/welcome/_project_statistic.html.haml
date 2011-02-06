@@ -19,11 +19,11 @@
     }
 
     function results_chart() {
-      _pie_chart('Test Results', 'results_chart', #{raw @project_statistic.result_percentages.to_json});
+      _pie_chart('#{t('welcome.project_statistic.test_results')}', 'results_chart', #{raw @project_statistic.result_percentages.to_json});
     }
 
     function status_chart() {
-      _pie_chart('Test Status', 'status_chart', #{raw @project_statistic.status_percentages.to_json});
+      _pie_chart('#{t('welcome.project_statistic.test_status')}', 'status_chart', #{raw @project_statistic.status_percentages.to_json});
     }
 
     function testlog_chart() {
@@ -31,7 +31,7 @@
         chart: { renderTo: 'testlog_chart' },
         plotOptions: { line: { animation: false } },
         tooltip: { formatter: function() {
-                      return '<b>'+ Highcharts.dateFormat('%Y-%m-%d', this.x) +'</b>: '+ this.y;
+                      return '<b>'+ Highcharts.dateFormat('#{t('welcome.project_statistic.testlog_chart_dateformat')}', this.x) +'</b>: '+ this.y;
                    }
         },
         xAxis: {
@@ -39,12 +39,12 @@
         },
         yAxis: {
            title: {
-             text: "count"
+             text: "#{t('welcome.project_statistic.testlog_chart_count')}"
            }
         },
-        series: [ { type: 'line', name: 'New', data: #{raw datetime_series_to_json(@project_statistic.testlog_new_counts)} },
-                  { type: 'line', name: 'Ended', data: #{raw datetime_series_to_json(@project_statistic.testlog_ended_counts)} } ],
-        title: {  text: 'Testcase statuses of the last two weeks' },
+        series: [ { type: 'line', name: "#{t('welcome.project_statistic.new')}", data: #{raw datetime_series_to_json(@project_statistic.testlog_new_counts)} },
+                  { type: 'line', name: "#{t('welcome.project_statistic.ended')}", data: #{raw datetime_series_to_json(@project_statistic.testlog_ended_counts)} } ],
+        title: {  text: "#{t('welcome.project_statistic.testlog_chart_title')}" },
         credits: { enabled: false }
       });
     }
@@ -71,70 +71,71 @@
 .span-24.last
   %ul
     %li
-      .span-3.label Current project:
+      .span-3.label= t('welcome.project_statistic.current_project')
       = @project_statistic.project_name
     %li
-      .span-3.label Testsuites:
+      .span-3.label= t('welcome.project_statistic.testsuites')
       = as_number(@project_statistic.testsuite_count)
     %li
-      .span-3.label Testcases:
+      .span-3.label= t('welcome.project_statistic.testcases')
       = as_number(@project_statistic.testcase_count)
     %li
-      .span-3.label Steps:
+      .span-3.label= t('welcome.project_statistic.teststeps')
       = as_number(@project_statistic.teststep_count)
+
 .span-24.last
   .span-12
-    %h2 Test Status
+    %h2= t('welcome.project_statistic.test_status')
     %table
       %thead
         %tr
           %th
-          %th.right_align New
-          %th.right_align Ended
-          %th.right_align Total
+          %th.right_align= status_label('new')
+          %th.right_align= status_label('ended')
+          %th.right_align= t('welcome.project_statistic.total')
       %tbody
         %tr
-          %td Testsuites
+          %td= t('welcome.project_statistic.testsuites')
           %td.right_align= as_number(@project_statistic.testsuiterun_status_groups['new'])
           %td.right_align= as_number(@project_statistic.testsuiterun_status_groups['ended'])
           %td.right_align= as_number(@project_statistic.testsuiterun_count)
         %tr
-          %td Testcases
+          %td= t('welcome.project_statistic.testcases')
           %td.right_align= as_number(@project_statistic.testcaserun_status_groups['new'])
           %td.right_align= as_number(@project_statistic.testcaserun_status_groups['ended'])
           %td.right_align= as_number(@project_statistic.testcaserun_count)
         %tr
-          %td Teststeps
+          %td= t('welcome.project_statistic.teststeps')
           %td.right_align= as_number(@project_statistic.teststeprun_status_groups['new'])
           %td.right_align= as_number(@project_statistic.teststeprun_status_groups['ended'])
           %td.right_align= as_number(@project_statistic.teststeprun_count)
   #status_chart.span-12.last
 .span-24.last
   .span-12
-    %h2 Test Results
+    %h2= t('welcome.project_statistic.test_results')
     %table
       %thead
         %tr
           %th
-          %th.right_align Unknown
-          %th.right_align Ok
-          %th.right_align Failure
-          %th.right_align Total
+          %th.right_align= result_label('unknown')
+          %th.right_align= result_label('ok')
+          %th.right_align= result_label('failed')
+          %th.right_align= t('welcome.project_statistic.total')
       %tbody
         %tr
-          %td Testsuites
+          %td= t('welcome.project_statistic.testsuites')
           %td.right_align= as_number(@project_statistic.testsuiterun_result_groups['unknown'])
           %td.right_align= as_number(@project_statistic.testsuiterun_result_groups['ok'])
           %td.right_align= as_number(@project_statistic.testsuiterun_result_groups['failed'])
           %td.right_align= as_number(@project_statistic.testsuiterun_count)
         %tr
-          %td Testcases
+          %td= t('welcome.project_statistic.testcases')
           %td.right_align= as_number(@project_statistic.testcaserun_result_groups['unknown'])
           %td.right_align= as_number(@project_statistic.testcaserun_result_groups['ok'])
           %td.right_align= as_number(@project_statistic.testcaserun_result_groups['failed'])
           %td.right_align= as_number(@project_statistic.testcaserun_count)
         %tr
-          %td Teststeps
+          %td= t('welcome.project_statistic.teststeps')
           %td.right_align= as_number(@project_statistic.teststeprun_result_groups['unknown'])
           %td.right_align= as_number(@project_statistic.teststeprun_result_groups['ok'])
           %td.right_align= as_number(@project_statistic.teststeprun_result_groups['failed'])

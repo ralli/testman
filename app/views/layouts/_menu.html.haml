@@ -1,7 +1,7 @@
 %ul
-  %li= link_to_unless_current 'Home', root_url
-  %li= link_to_unless_current 'Projects', projects_url if permitted_to? :read, Project.new
-  %li= link_to_unless_current  'Test cases', testcases_url if can_show_testcases?
-  %li= link_to_unless_current  'Test suites', testsuites_url if can_show_testsuites?
-  %li= link_to_unless_current  'Test runs', testsuiteruns_url if can_show_testruns?
+  %li= link_to_unless_current t('layouts.menu.home'), root_url
+  %li= link_to_unless_current t('layouts.menu.projects'), projects_url if permitted_to? :read, Project.new
+  %li= link_to_unless_current  t('layouts.menu.testcases'), testcases_url if can_show_testcases?
+  %li= link_to_unless_current  t('layouts.menu.testsuites'), testsuites_url if can_show_testsuites?
+  %li= link_to_unless_current  t('layouts.menu.testruns'), testsuiteruns_url if can_show_testruns?
 

@@ -18,7 +18,7 @@ Feature: Manage Projects
     When I follow "New Project"
     And I enter the following values
       | Name | Testproject |
-    And I press "Create Project"
+    And I press "project_submit"
     Then I should see "Successfully created project."
     And the number of projects is 1
 
@@ -36,8 +36,8 @@ Feature: Manage Projects
     Given there do not exist any projects
     And I am logged in as user "test"
     And I am on the projects list
-    When I follow "New Project"
-    And I press "Create Project"
+    When I follow "new_project"
+    And I press "project_submit"
     Then I should not see "Successfully created project."
     And I should see "can't be blank"
 

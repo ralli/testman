@@ -32,53 +32,53 @@
       })
     })
 
-- title Testsuite
+- title t('testsuites.show.title')
 
 %fieldset.span-24.last
-  %legend Testsuite
+  %legend= t('testsuites.show.testsuite')
   .fieldset.span-22.last
-    .label.span-3 Key:
-    .span-4= @testsuite.key || "New"
-    .label.span-3 Name:
+    .label.span-3= t('simple_form.labels.testsuite.key')
+    .span-4= @testsuite.key
+    .label.span-3= t('simple_form.labels.testsuite.name')
     .span-4= @testsuite.name
-    .label.span-3 Version:
+    .label.span-3= t('simple_form.labels.testsuite.version')
     .span-4.last= @testsuite.version
 
     .span-22.last
-      .label.span-3 Description:
+      .label.span-3= t('simple_form.labels.testsuite.description')
       .span-19.last= render_textile(@testsuite.description)
 
     .span-22.last
       %ol.link_list.prepend-3.span-19.last{:style => "margin: 0px;"}
         - if permitted_to? :update, @testsuite
-          %li= link_to("Edit", edit_testsuite_path(@testsuite), :class => 'button')
+          %li= link_to(t('helpers.edit'), edit_testsuite_path(@testsuite), :class => 'button')
         - if permitted_to? :create, Testsuiterun.new
-          %li= link_to('Run', run_testsuite_path(@testsuite), :id => 'run_testsuite', :class => 'button')
+          %li= link_to(t('helpers.run'), run_testsuite_path(@testsuite), :id => 'run_testsuite', :class => 'button')
         - if permitted_to? :update, @testsuite
-          %li= link_to("Create version", create_version_testsuite_path(@testsuite), :id => 'create_version', :class => 'button',:method => 'put')
-        %li= link_to("Show All", testsuites_path, :class => 'button')
+          %li= link_to(t('helpers.create_version'), create_version_testsuite_path(@testsuite), :id => 'create_version', :class => 'button',:method => 'put')
+        %li= link_to(t('helpers.show_all'), testsuites_path, :class => 'button')
 
 
-%h2 Testcases
+%h2= t('testsuites.show.testcases')
 %ol.link_list.span-24.last{:style => "margin: 0px; padding: 0px 0px 1em 0px;"}
-  %li= link_to('Add Testcases', show_add_testsuite_url(@testsuite), :id => 'show_add', :class => 'button_add')
+  %li= link_to(t('testsuites.show.add_testcases'), show_add_testsuite_url(@testsuite), :id => 'show_add', :class => 'button_add')
 
 %table#tctable
   %thead
     %tr
       %th #
-      %th Key
-      %th Version
-      %th Name
-      %th Action
+      %th= t('simple_form.labels.testcase.key')
+      %th= t('simple_form.labels.testcase.version')
+      %th= t('simple_form.labels.testcase.name')
+      %th= t('testsuites.show.actions')
   %tbody
     - @testsuite_entries.each do |entry|
       = content_tag :tr, :id => entry.id do
-        %td.dragHandle [drag]
+        %td.dragHandle= t('helpers.drag')
         %td= entry.testcase.key
         %td= entry.testcase.version
         %td= entry.testcase.name
         %td
-          = link_to "Show", entry.testcase
-          = link_to "Delete", testsuite_testsuite_entry_url(@testsuite, entry), :method => 'delete', :confirm => 'Are you sure?', :id => 'remove_testcase'
+          = link_to t('helpers.show'), entry.testcase
+          = link_to t('helpers.destroy'), testsuite_testsuite_entry_url(@testsuite, entry), :method => 'delete', :confirm => t('helpers.confirm'), :id => 'remove_testcase'
 

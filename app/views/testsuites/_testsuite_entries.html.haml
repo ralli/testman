@@ -1,6 +1,6 @@
 - @testsuite_entries.each do |entry|
   = content_tag :li, :id => "entryid_e#{entry.to_param}" do
-    .handle.span-1 [drag]
+    .handle.span-1= t('helpers.drag')
     = "#{entry.testcase.key}.#{entry.testcase.version}"
     = entry.testcase.name
     = image_tag 'to-delete.png', :id => entry.id, :class => 'delete right', :alt => 'delete', :title => 'remove testcase'

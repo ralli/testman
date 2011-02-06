@@ -1,4 +1,4 @@
-- title "Testcase"
+- title t('testcases.show.title')
 - content_for :head do
   = javascript_include_tag 'jquery.tablednd'
   = stylesheet_link_tag 'jquery.tag'
@@ -95,52 +95,52 @@
     })
 
 %fieldset.span-24.last
-  %legend Testcase
+  %legend= t('testcases.show.testcase')
   .span-22.last{:style => "padding: 1em;"}
     .row.span-22.last
-      .label.span-4 Key:
+      .label.span-4= t('simple_form.labels.testcase.key')
       .span-7= @testcase.key
-      .label.span-4 Version:
+      .label.span-4= t('simple_form.labels.testcase.version')
       .span-7.last= @testcase.version
     .row.span-22.last
-      .label.span-4 Project:
+      .label.span-4= t('simple_form.labels.testcase.project')
       .span-18.last= @testcase.project.try(:to_label)
     .row.span-22.last
-      .label.span-4 Name:
+      .label.span-4= t('simple_form.labels.testcase.name')
       .span-18.last= @testcase.name
     .row
-      .label.span-4 Description:
+      .label.span-4= t('simple_form.labels.testcase.description')
       .span-18.last= render_textile(@testcase.description)
     .row.span-22.last
-      .label.span-4 Test Area:
+      .label.span-4= t('simple_form.labels.testcase.test_area')
       .span-7= @testcase.value_for(:test_area)
-      .label.span-4 Test Variety:
+      .label.span-4= t('simple_form.labels.testcase.test_variety')
       .span-7.last= @testcase.value_for(:test_variety)
     .row.span-22.last
-      .label.span-4 Test Level:
+      .label.span-4= t('simple_form.labels.testcase.test_level')
       .span-7= @testcase.value_for(:test_level)
-      .label.span-4 Execution Type:
+      .label.span-4= t('simple_form.labels.testcase.execution_type')
       .span-7.last= @testcase.value_for(:execution_type)
     .row.span-22.last
-      .label.span-4 Test Status:
+      .label.span-4= t('simple_form.labels.testcase.test_status')
       .span-7= @testcase.value_for(:test_status)
-      .label.span-4 Test Priority:
+      .label.span-4= t('simple_form.labels.testcase.test_priority')
       .span-7.last= @testcase.value_for(:test_priority)
     .row.span-22.last
-      .label.span-4 Test Method:
+      .label.span-4= t('simple_form.labels.testcase.test_method')
       .span-7.last= @testcase.value_for(:test_method)
     .row.span-22.last
-      .label.span-4 Created:
+      .label.span-4= t('simple_form.labels.testcase.created_at')
       .span-7= @testcase.created_at
-      .label.span-4 Edited:
-      .span-7.last= @testcase.created_at
+      .label.span-4= t('simple_form.labels.testcase.updated_at')
+      .span-7.last= @testcase.updated_at
     .row.span-22.last
-      .label.span-4 Created by:
+      .label.span-4= t('simple_form.labels.testcase.created_by')
       .span-7= @testcase.created_by.try(:to_label)
-      .label.span-4 Edited by:
+      .label.span-4= t('simple_form.labels.testcase.updated_by')
       .span-7.last= @testcase.edited_by.try(:to_label)
     .row.span-22.last
-      .label.span-4 Tag list:
+      .label.span-4= t('simple_form.labels.testcase.tag_list')
       .span-18.last
         %ul{:style => "margin: 0px; padding: 0px;"}
           - @testcase.tag_list.each do |tag|
@@ -149,45 +149,29 @@
     .row.span-22.last
       %ul.prepend-4.span-18.link_list.top_margin.last
         - if permitted_to? :update, @testcase
-          %li= link_to("Edit", edit_testcase_path(@testcase), :id => 'edit', :class => 'button')
+          %li= link_to(t('helpers.edit'), edit_testcase_path(@testcase), :id => 'edit', :class => 'button')
         - if permitted_to? :delete, @testcase
-          %li= link_to("Destroy", @testcase, :confirm => 'Are you sure?', :method => :delete, :id => 'delete', :class => 'button')
+          %li= link_to(t('helpers.destroy'), @testcase, :confirm => t('helpers.confirm'), :method => :delete, :id => 'delete', :class => 'button')
         - if permitted_to? :create, @testcase
-          %li= link_to("Create Version", create_version_testcase_path(@testcase), :id => 'create_version', :method => 'put', :class => 'button')
-        %li= link_to("Go back", url_for(:back), :id => 'view_all', :class => 'button')
+          %li= link_to(t('testcases.show.create_version'), create_version_testcase_path(@testcase), :id => 'create_version', :method => 'put', :class => 'button')
+        %li= link_to(t('testcases.show.go_back'), url_for(:back), :id => 'view_all', :class => 'button')
+
 %fieldset.span-24.last
-  %legend Attachments
+  %legend= t('testcases.show.attachments')
   .span-22.last.fieldset
     %ul.link_list.span-22.last{:style => "margin: 0px 0px 1em 0px; padding: 0px"}
-      %li= link_to 'Add Attachment', new_testcase_attachment_url(@testcase), :class => 'button_add', :id => 'add_attachment' if permitted_to? 'update', @testcase
+      %li= link_to t('testcases.show.add_attachment'), new_testcase_attachment_url(@testcase), :class => 'button_add', :id => 'add_attachment' if permitted_to? 'update', @testcase
     %ol#attachments
       - @testcase.testcase_attachments.each do |attachment|
         %li.span-22.last{:id => "attachment_#{attachment.to_param}"}
-          .handle.span-2 [drag]
+          .handle.span-2= t('helpers.drag')
           .span-8
             = link_to attachment.attachment_file_name, attachment.attachment.url
           .span-4
             = attachment.attachment_file_size.bytes
             Bytes
           .span-4.last
-            = link_to 'Delete', testcase_attachment_url(@testcase, attachment), :confirm => 'Are you shure?', :method => 'delete'
-%h2 Test Steps
-%ul.link_list.span-24.last{:style => "margin: 0px 0px 1em 0px; padding: 0px;"}
-  %li= link_to 'New Test Step', new_testcase_teststep_path(@testcase), :id => 'new_teststep', :class => 'button_add' if permitted_to? 'update', @testcase
-%table#teststeps
-  %thead
-    %tr
-      %th #
-      %th Step
-      %th Expected Result
-      %th Actions
-  %tbody
-    - @testcase.teststeps.each do |teststep|
-      %tr{:id => "#{teststep.to_param} "}
-        %td.handle [drag]
-        %td= render_textile(teststep.step)
-        %td= render_textile(teststep.expected_result)
-        %td
-          = link_to "Edit", edit_testcase_teststep_path(@testcase, teststep), {:id => 'edit_teststep'}
-          = link_to "Delete", testcase_teststep_path(@testcase, teststep), :method => 'delete', :confirm => 'Are you sure?', :id => 'delete_teststep'
+            = link_to t('helpers.destroy'), testcase_attachment_url(@testcase, attachment), :confirm => t('helpers.confirm'), :method => 'delete'
+
+= render :partial => "test_steps"
 

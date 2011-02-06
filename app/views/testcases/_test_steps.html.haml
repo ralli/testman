@@ -1,0 +1,20 @@
+%h2= t('testcases.test_steps.title')
+%ul.link_list.span-24.last{:style => "margin: 0px 0px 1em 0px; padding: 0px;"}
+  %li= link_to t('testcases.test_steps.new_teststep'), new_testcase_teststep_path(@testcase), :id => 'new_teststep', :class => 'button_add' if permitted_to? 'update', @testcase
+%table#teststeps
+  %thead
+    %tr
+      %th #
+      %th= t('simple_form.labels.teststep.step')
+      %th= t('simple_form.labels.teststep.expected_result')
+      %th= t('testcases.test_steps.actions')
+  %tbody
+    - @testcase.teststeps.each do |teststep|
+      %tr{:id => "#{teststep.to_param} "}
+        %td.handle= t('helpers.drag')
+        %td= render_textile(teststep.step)
+        %td= render_textile(teststep.expected_result)
+        %td
+          = link_to t('helpers.edit'), edit_testcase_teststep_path(@testcase, teststep), {:id => 'edit_teststep'}
+          = link_to t('helpers.destroy'), testcase_teststep_path(@testcase, teststep), :method => 'delete', :confirm => t('helpers.confirm'), :id => 'delete_teststep'
+

@@ -1,5 +1,4 @@
 - content_for :head do
-
   :css
     ul.step_buttons {
       list-style: none;
@@ -53,37 +52,37 @@
       $('#set_all_ok').button({icons: { primary:'ui-icon-circle-check'}});
     })
 
-- title 'Test Run'
+- title t('testsuiteruns.show.title')
 
 #progressbar.progressbar.span-21
-.right= "#{number_to_percentage(completed_percentage, :precision => 1)} completed"
+.right= t('testsuiteruns.show.completed', :completed => number_to_percentage(completed_percentage, :precision => 1))
 
 %fieldset.span-24.last
   %legend Testrun
   .fieldset.span-22.last{'style' => 'padding: 1em;' }
     .row.span-22.last
-      .label.span-4 Key
+      .label.span-4= t('simple_form.labels.testsuite.key')
       .span-7= @testrun.testsuite.key
-      .label.span-4 Name
+      .label.span-4= t('simple_form.labels.testsuite.name')
       .span-7.last= @testrun.testsuite.name
 
     .row.span-22.last
-      .label.span-4 Status
-      .span-7= @testrun.status
-      .label.span-4 Result
-      .span-7.last= @testrun.result
+      .label.span-4= t('simple_form.labels.testsuiterun.status')
+      .span-7= status_label(@testrun.status)
+      .label.span-4= t('simple_form.labels.testsuiterun.result')
+      .span-7.last= result_label(@testrun.result)
 
     .row.span-22.last
-      .label.span-4 Description
+      .label.span-4= t('simple_form.labels.testsuite.description')
       .span-18.last= render_textile(@testrun.testsuite.description)
 
     .row.span-22.last
       .prepend-4.span-18.last
-        = link_to("Show all testcases", show_all_testsuiterun_path(@testrun), :method => 'put', :id => 'show_all') if @testrun.show_current?
-        = link_to("Show only current", show_current_testsuiterun_path(@testrun), :method => 'put', :id => 'show_current') if @testrun.show_all?
+        = link_to(t('testsuiteruns.show.show_all_testcases'), show_all_testsuiterun_path(@testrun), :method => 'put', :id => 'show_all') if @testrun.show_current?
+        = link_to(t('testsuiteruns.show.show_only_current'), show_current_testsuiterun_path(@testrun), :method => 'put', :id => 'show_current') if @testrun.show_all?
         - if show_steplink?(@testrun) && @testrun.show_all?
-          = link_to("Set all to OK", set_all_ok_testsuiterun_path(@testrun), :method => 'put', :id => 'set_all_ok')
-          = link_to("Set all to FAILED", set_all_failed_testsuiterun_path(@testrun), :method => 'put', :id => 'set_all_failed')
+          = link_to(t('testsuiteruns.show.set_all_to_ok'), set_all_ok_testsuiterun_path(@testrun), :method => 'put', :id => 'set_all_ok')
+          = link_to(t('testsuiteruns.show.set_all_to_failed'), set_all_failed_testsuiterun_path(@testrun), :method => 'put', :id => 'set_all_failed')
 
 - if @testrun.show_current?
   - if nextcase(@testrun)
@@ -94,6 +93,6 @@
 - if show_steplink?(@testrun)
   .span-24.last
     %ul.step_buttons.right
-      %li.step_ok= link_to 'Step (Ok)', step_ok_testsuiterun_path(@testrun), :id => 'step_ok', :method => 'put'
-      %li.step_failure= link_to 'Step (Failure)', step_failure_testsuiterun_path(@testrun), :id => 'step_failure', :method => 'put'
+      %li.step_ok= link_to t('testsuiteruns.show.step_ok'), step_ok_testsuiterun_path(@testrun), :id => 'step_ok', :method => 'put'
+      %li.step_failure= link_to t('testsuiteruns.show.step_failure'), step_failure_testsuiterun_path(@testrun), :id => 'step_failure', :method => 'put'
 

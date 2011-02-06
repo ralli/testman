@@ -2,8 +2,9 @@
   %legend= label_for_teststep(teststeprun)
   .fieldset.span-22.last
     .row.span-22.last
-      .label.span-11 Step
-      .label.span-11.last Expected outcome
+      .label.span-11= t('simple_form.labels.teststep.step')
+      .label.span-11.last= t('simple_form.labels.teststep.expected_result')
     .row.span-22.last
       .span-11= render_textile(teststeprun.teststep.step)
       .span-11.last= render_textile(teststeprun.teststep.expected_result)
+

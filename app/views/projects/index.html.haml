@@ -1,18 +1,18 @@
-- title "Projects"
+- title t('projects.index.title')
 %ul.link_list{ 'style' => "margin: 0px; padding: 0px;" }
-  %li= link_to "New Project", new_project_path,:class => 'button_add',:style => 'margin-bottom: 1em' if permitted_to? :create, :projects
+  %li= link_to t('projects.index.new_project'), new_project_path, :id => 'new_project', :class => 'button_add',:style => 'margin-bottom: 1em' if permitted_to? :create, :projects
 
 %table
   %thead
     %tr
-      %th Name
-      %th Actions
+      %th= t('projects.index.name')
+      %th= t('projects.index.actions')
   %tbody
     - for project in @projects
       %tr
         %td= project.name
         %td
-          = link_to "Show", project if permitted_to? :read, project
-          = link_to "Edit", edit_project_path(project) if permitted_to? :update, project
-          = link_to "Destroy", project, :confirm => 'Are you sure?', :method => :delete if permitted_to? :delete, project
+          = link_to t('projects.index.show'), project if permitted_to? :read, project
+          = link_to t('projects.index.edit'), edit_project_path(project) if permitted_to? :update, project
+          = link_to t('projects.index.destroy'), project, :confirm => t('projects.index.confirm'), :method => :delete if permitted_to? :delete, project
 
