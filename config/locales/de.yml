@@ -1,0 +1,227 @@
+de:
+  simple_form:
+    labels:
+      project:
+        name: 'Name'
+      testcase_attachment:
+        attachment: 'Attachment'
+      testcase:
+        key: 'Nr.'
+        version: 'Version'
+        project: 'Projekt'
+        name: 'Name'
+        description: 'Beschreibung'
+        tag_list: 'Tagliste'
+        test_area: 'Testbereich'
+        execution_type: 'Ausführungsart'
+        test_variety: 'Test variety'
+        test_status: 'Teststatus'
+        test_level: 'Teststufe'
+        test_method: 'Testmethode'
+        test_priority: 'Testpriorität'
+        created_at: 'Angelegt am'
+        updated_at: 'Geändert am'
+        created_by: 'Angelegt von'
+        updated_by: 'Geändert von'
+      teststep:
+        step: 'Schritt'
+        expected_result: 'Erwartetes Ergebnis'
+      testsuite:
+        key: 'Nr.'
+        version: 'Version'
+        name: 'Name'
+        description: 'Beschreibung'
+      testsuiterun:
+        status: 'Status'
+        result: 'Ergebnis'
+      user:
+        login: 'Login'
+        first_name: 'Vorname'
+        last_name: 'Nachname'
+        email: 'Email'
+        password: 'Passwort'
+        password_confirmation: 'Passwortwiederholung'
+
+  helpers:
+    submit:
+      create: "Anlegen"
+      update: "Speichern"
+      cancel: 'Abbrechen'
+    result:
+      ok: 'Ok'
+      failed: 'Fehlgeschlagen'
+      unknown: 'Unbekannt'
+    status:
+      new: 'Neu'
+      ended: 'Beendet'
+    show: 'Anzeigen'
+    edit: 'Bearbeiten'
+    destroy: 'Löschen'
+    cancel: 'Abbrechen'
+    confirm: 'Sind Sie sicher?'
+    run: 'Ausführen'
+    create_version: 'Version anlegen'
+    show_all: 'Alle anzeigen'
+    drag: '[Verschieben]'
+    testsuiteruns:
+      label_for_testcase: 'Testfall #%{position} von %{count}'
+      label_for_teststep: 'Testschritt #%{position} von %{count}'
+
+  layouts:
+    login:
+      current_project: "Aktuelles Projekt: %{current_project}"
+      choose: 'Auswählen...'
+      choose_current_project: 'Aktuelles Projekt auswählen'
+      welcome: 'Willkommen: %{current_user}'
+      logout: 'Abmelden'
+      edit_user_profile: 'Profil anpassen'
+      login: 'Anmelden'
+      register: 'Registrieren'
+    menu:
+      home: 'Start'
+      projects: 'Projekte'
+      testcases: 'Testfälle'
+      testsuites: 'Testsuiten'
+      testruns: 'Testausführungen'
+  projects:
+    activatable_projects:
+      activate_project: 'Projekt aktivieren'
+      project: 'Projekt'
+      action: 'Aktion'
+      activate: 'Aktivieren'
+    edit:
+      title: 'Projekt bearbeiten'
+    form:
+      project: 'Projekt'
+    index:
+      title: 'Projekte'
+      new_project: 'Neues Projekt'
+      name: 'Name'
+      actions: 'Aktionen'
+      show: 'Anzeigen'
+      edit: 'Bearbeiten'
+      destroy: 'Löschen'
+      confirm: 'Sind Sie sicher?'
+    new:
+      title: 'Projekt anlegen'
+    show:
+      title: 'Projekt'
+      project: 'Projekt'
+      name: 'Name:'
+      edit: 'Bearbeiten'
+      destroy: 'Löschen'
+      confirm: 'Sind Sie sicher?'
+      back_to_list: 'Zurück zur Liste'
+  testcase_attachments:
+    new:
+      title: 'Neuer Anhang'
+      attachment: 'Anhang'
+  testcases:
+    edit:
+      title: 'Testfall bearbeiten'
+    form:
+      testcase: 'Testfall'
+    index:
+      searchlabel: 'Suchen: '
+      searchbutton: 'Suchen'
+      testcases_found:
+        one: 'Ein Testfall gefunden'
+        other: '%{count} Testfälle gefunden'
+      new_testcase: 'Neuer Testfall'
+      key: 'Nr.'
+      version: 'Version'
+      name: 'Name'
+      execution_type: 'Ausführungsart'
+      test_status: 'Teststatus'
+      test_priority: 'Testpriorität'
+      actions: 'Aktionen'
+    new:
+      title: 'Testfall anlegen'
+    show:
+      title: 'Testfall'
+      testcase: 'Testfall'
+      create_version: 'Version anlegen'
+      go_back: 'Zurück'
+      attachments: 'Anhänge'
+      add_attachment: 'Anhang hinzufügen'
+    test_steps:
+      title: 'Testschritte'
+      new_teststep: 'Neuer Testschritt'
+      actions: 'Aktionen'
+  teststeps:
+    edit:
+      title: 'Testschritt bearbeiten'
+    new:
+      title: 'Neuer Testschritt'
+  testsuiteruns:
+    index:
+      title: 'Testausführungen'
+      result: 'Ergebnis'
+      actions: 'Aktionen'
+    show:
+      title: 'Testausführung'
+      completed: '%{completed} ausgeführt'
+      testrun: 'Testausführung'
+      show_all_testcases: 'Zeige alle Testfälle'
+      show_only_current: 'Zeige aktuellen Testfall'
+      set_all_to_ok: 'Alles auf OK setzen'
+      set_all_to_failed: 'Alles auf Fehlgeschlagen setzen'
+      step_ok: 'Weiter (Ok)'
+      step_failure: 'Weiter (Fehlschlag)'
+  testsuites:
+    edit:
+      title: 'Testsuite bearbeiten'
+    form:
+      testsuite: 'Testsuite'
+    index:
+      searchlabel: 'Suchen: '
+      searchbutton: 'Suchen'
+      testsuites_found:
+        one: 'Eine Testsuite gefunden'
+        other: '%{count} Testsuiten gefunden'
+      new_testsuite: 'Neue Testsuite'
+      actions: 'Aktionen'
+    new:
+      title: 'Neue Testsuite'
+    show:
+      title: 'Testsuite'
+      testsuite: 'Testsuite'
+      testcases: 'Testfälle'
+      add_testcases: 'Testfälle hinzufügen'
+      actions: 'Aktionen'
+    show_add:
+      testsuite: 'Testsuite'
+      back_to_testsuite: 'Zurück'
+      available_testcases: 'Mögliche Testfälle'
+      searchlabel: 'Suchen'
+      searchbutton: 'Suchen'
+      assigned_testcases: 'Zugeordnete Testfälle'
+  users:
+    edit:
+      title: 'Benutzerprofil bearbeiten'
+      user: 'Benutzer'
+      change_password: 'Passwort ändern'
+    new:
+      title: 'Registrieren'
+  user_sessions:
+    form:
+      login: 'Login'
+      loginbutton: 'Anmelden'
+      registerbutton: 'Registrieren'
+  welcome:
+    index:
+      title: 'Willkommen'
+    project_statistic:
+      new: 'Neu'
+      ended: 'Beendet'
+      testlog_chart_title: 'Testfallstatus der letzten zwei Wochen'
+      testlog_chart_count: 'Anzahl'
+      testlog_chart_dateformat: '%d.%m.%Y'
+      test_results: 'Testfälle'
+      current_project: 'Aktuelles Projekt'
+      testsuites: 'Testsuiten'
+      testcases: 'Testfälle'
+      teststeps: 'Testschritte'
+      test_status: 'Teststatus'
+      total: 'Gesamt'
+

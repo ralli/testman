@@ -33,5 +33,13 @@ module ApplicationHelper
   def status_label(status)
     t("helpers.status.#{status}")
   end
+
+  def result_chart_series(series)
+    (series.collect { |x| [result_label(x[0]), x[1] ] }).to_json
+  end
+
+  def status_chart_series(series)
+    (series.collect { |x| [status_label(x[0]), x[1] ] }).to_json
+  end
 end
 

@@ -19,11 +19,11 @@
     }
 
     function results_chart() {
-      _pie_chart('#{t('welcome.project_statistic.test_results')}', 'results_chart', #{raw @project_statistic.result_percentages.to_json});
+      _pie_chart('#{t('welcome.project_statistic.test_results')}', 'results_chart', #{raw result_chart_series(@project_statistic.result_percentages)});
     }
 
     function status_chart() {
-      _pie_chart('#{t('welcome.project_statistic.test_status')}', 'status_chart', #{raw @project_statistic.status_percentages.to_json});
+      _pie_chart('#{t('welcome.project_statistic.test_status')}', 'status_chart', #{raw status_chart_series(@project_statistic.status_percentages)});
     }
 
     function testlog_chart() {
