@@ -4,6 +4,19 @@ class ApplicationController < ActionController::Base
   helper_method :current_user_session, :current_user, :current_project
 
   before_filter { |c| Authorization.current_user = c.current_user }
+  before_filter :set_locale
+
+  def set_locale
+    if current_user.nil?
+      I18n.locale = params[:locale]
+    else
+      I18n.locale = current_user.try(:locale)
+    end
+  end
+
+  def default_url_options(options = {})
+    {:locale => I18n.locale } if current_user.nil?
+  end
 
   def permission_denied
     flash[:error] = "Sorry, you are not allowed to access that page."

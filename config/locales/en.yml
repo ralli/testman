@@ -44,6 +44,9 @@ en:
         email: 'Email'
         password: 'Password'
         password_confirmation: 'Password confirmation'
+      user_session:
+        login: 'Login'
+        password: 'Password'
 
   helpers:
     submit:

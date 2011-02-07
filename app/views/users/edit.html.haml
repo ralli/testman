@@ -1,28 +1,9 @@
 - content_for :head do
   :css
-    form.simple_form_user textarea, input[type="text"], input[type="email"], input[type="password"] {
+    form.simple_form_user textarea, input[type="text"], input[type="email"], input[type="password"], select {
       padding: 4px;
       width: 570px;
     }
-
 - title t('users.edit.title')
-
-= simple_form_for @user do |f|
-  = f.error_notification
-  %fieldset.span-24.last
-    %legend= t('users.edit.user')
-    .fieldset.span-22.last
-      = f.input :login
-      = f.input :first_name
-      = f.input :last_name
-      = f.input :email
-
-  %fieldset.span-24.last
-    %legend= t('users.edit.change_password')
-    .fieldset.span-22.last
-      = f.input :password
-      = f.input :password_confirmation
-  .span-24.last{:style => "margin-left: 1em; margin-top: 1em;"}
-    = f.button :submit
-    = link_to t('helpers.cancel'), root_url, :class => 'button'
+= render "form"
 

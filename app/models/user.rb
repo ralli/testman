@@ -6,13 +6,13 @@ class User < ActiveRecord::Base
   validates_length_of :email, :maximum => 80
 
   belongs_to :current_project, :class_name => 'Project'
-  
-  attr_accessible :login, :first_name, :last_name, :email, :password, :password_confirmation, :current_project
+
+  attr_accessible :login, :first_name, :last_name, :email, :password, :password_confirmation, :current_project, :locale
 
   def to_label
     display_name
   end
-  
+
   def display_name
     unless first_name.blank? or last_name.blank?
       "#{first_name} #{last_name}"
@@ -25,3 +25,4 @@ class User < ActiveRecord::Base
     [:admin]
   end
 end
+

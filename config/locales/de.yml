@@ -40,7 +40,10 @@ de:
         last_name: 'Nachname'
         email: 'Email'
         password: 'Passwort'
-        password_confirmation: 'Passwortwiederholung'
+        password_confirmation: 'Wiederholung'
+      user_session:
+        login: 'Login'
+        password: 'Passwort'
 
   helpers:
     submit:

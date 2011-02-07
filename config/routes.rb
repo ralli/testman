@@ -1,5 +1,4 @@
 Testman::Application.routes.draw do
-
   resources :testsuiteruns do
     member do
       put 'show_all'
@@ -22,7 +21,7 @@ Testman::Application.routes.draw do
       post  'reorder_testcases'
       post  'remove_testcase'
       match 'search_testcases'
-      put   'create_version'      
+      put   'create_version'
     end
     collection do
       get   'search'
@@ -39,7 +38,7 @@ Testman::Application.routes.draw do
     collection do
       get 'search'
     end
-    
+
     resources :teststeps
     resources :testcase_attachments, :as => 'attachments'
   end
@@ -53,6 +52,7 @@ Testman::Application.routes.draw do
   resources :user_sessions
   get 'login' => 'user_sessions#new'
   get 'logout' => 'user_sessions#destroy'
-  
+
   root :to => "welcome#index"
 end
+

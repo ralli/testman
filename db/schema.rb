@@ -10,7 +10,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110123212701) do
+ActiveRecord::Schema.define(:version => 20110207203226) do
 
   create_table "projects", :force => true do |t|
     t.string   "name",       :limit => 80, :null => false
@@ -198,6 +198,7 @@ ActiveRecord::Schema.define(:version => 20110123212701) do
     t.integer  "current_project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "locale",              :limit => 10
   end
 
   add_index "users", ["current_project_id"], :name => "index_users_on_current_project_id"

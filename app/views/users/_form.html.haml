@@ -1,0 +1,21 @@
+= simple_form_for @user do |f|
+  = f.error_notification
+  %fieldset.span-24.last
+    %legend User
+    .fieldset.span-22.last
+      = f.input :login
+      = f.input :first_name
+      = f.input :last_name
+      = f.input :email
+      = f.input :locale, :as => :select, :collection => [[ 'English', 'en'], [ 'Deutsch', 'de']]
+
+  %fieldset.span-24.last
+    %legend= t('users.edit.change_password')
+    .fieldset.span-22.last
+      = f.input :password
+      = f.input :password_confirmation
+
+  .span-22.last{ :style => "margin-left: 1em; margin-top: 1em;" }
+    = f.button :submit
+    = link_to t('helpers.cancel'), root_url, :class => 'button'
+

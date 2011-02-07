@@ -12,6 +12,7 @@ User.blueprint do
   password_confirmation { password }
   first_name { login.camelize }
   last_name { Faker::Name.last_name }
+  locale { 'en' }
 end
 
 User.blueprint(:full) do
@@ -29,7 +30,7 @@ Testcase.blueprint do
   test_status { Testcase.keys_for(:test_statuses).rand }
   test_priority { Testcase.keys_for(:test_priorities).rand }
   test_method { Testcase.keys_for(:test_methods).rand }
-  
+
 end
 
 Testcase.blueprint(:full) do
@@ -88,5 +89,6 @@ TestcaseAttachment.blueprint do
 end
 
 Testcaselog.blueprint do
-  
+
 end
+
