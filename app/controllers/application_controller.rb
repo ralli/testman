@@ -15,7 +15,11 @@ class ApplicationController < ActionController::Base
   end
 
   def default_url_options(options = {})
-    {:locale => I18n.locale } if current_user.nil?
+    if current_user.nil?
+      {:locale => I18n.locale }
+    else
+      options
+    end
   end
 
   def permission_denied
