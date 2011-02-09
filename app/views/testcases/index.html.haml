@@ -64,7 +64,7 @@
             = link_to t('helpers.edit'), edit_testcase_path(testcase) if permitted_to? :update, testcase
             = link_to t('helpers.destroy'), testcase, :confirm => t('helpers.confirm'), :method => :delete if permitted_to? :delete, testcase
 
-  = will_paginate @testcases
+  = my_will_paginate @testcases
 
 .span-4.last
   %ul.taglist

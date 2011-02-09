@@ -1,5 +1,12 @@
 module ApplicationHelper
   include TagsHelper
+  include WillPaginate::ViewHelpers
+
+  def my_will_paginate(collection, options = {})
+    will_paginate(collection, options.merge(:previous_label => I18n.t('will_paginate.previous'), :next_label => I18n.t('will_paginate.next')))
+  end
+
+
 
   def can_show_testcases?
     (permitted_to? :read, :testcases) and (not current_project.nil?)

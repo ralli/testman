@@ -1,4 +1,7 @@
 de:
+  will_paginate:
+    next: 'Vor &raquo;'
+    previous: '&laquo; Zurück'
   simple_form:
     labels:
       project:

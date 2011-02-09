@@ -38,5 +38,5 @@
           = link_to t('helpers.run'), run_testsuite_path(testsuite), :id => 'run_testsuite'
           = link_to t('helpers.destroy'), testsuite, :method => 'delete', :confirm => t('helpers.confirm'), :id => 'delete_testsuite'
 
-= will_paginate @testsuites
+= my_will_paginate @testsuites
 
