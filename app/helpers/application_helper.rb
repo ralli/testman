@@ -29,7 +29,7 @@ module ApplicationHelper
     options = args[1] || {}
     html_options = args[2]
     url = model.new_record? ? polymorphic_path(model.class) : polymorphic_path(model)
-    label = options[:label] || "Cancel"
+    label = options[:label] || I18n::t('helpers.cancel')
     link_to(label, url, options, html_options)
   end
 

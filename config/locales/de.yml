@@ -72,6 +72,9 @@ de:
     testsuiteruns:
       label_for_testcase: 'Testfall #%{position} von %{count}'
       label_for_teststep: 'Testschritt #%{position} von %{count}'
+    error_messages:
+      invalid_fields: "Fehlerhafte Eingaben"
+      correct_the_errors: "Korrigieren Sie bitte die folgenden Fehler um fortzufahren"
 
   layouts:
     login:

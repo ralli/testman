@@ -2,8 +2,8 @@ module ErrorMessagesHelper
   # Render error messages for the given objects. The :message and :header_message options are allowed.
   def error_messages_for(*objects)
     options = objects.extract_options!
-    options[:header_message] ||= "Invalid Fields"
-    options[:message] ||= "Correct the following errors and try again."
+    options[:header_message] ||= I18n::t('error_messages.helpers.invalid_fields')
+    options[:message] ||= I18n::t('error_messages.helpers.correct_the_errors')
     messages = objects.compact.map { |o| o.errors.full_messages }.flatten
     unless messages.empty?
       content_tag(:div, :class => "error_messages") do
@@ -21,3 +21,4 @@ module ErrorMessagesHelper
 end
 
 ActionView::Helpers::FormBuilder.send(:include, ErrorMessagesHelper::FormBuilderAdditions)
+

@@ -72,6 +72,9 @@ en:
     testsuiteruns:
       label_for_testcase: 'Testcase #%{position} of %{count}'
       label_for_teststep: 'Teststep #%{position} of %{count}'
+    error_messages:
+      invalid_fields: "Invalid Fields"
+      correct_the_errors: "Correct the following errors and try again."
 
   layouts:
     login:
