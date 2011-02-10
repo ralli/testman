@@ -8,6 +8,5 @@ class WelcomeController < ApplicationController
       @project_statistic = ProjectStatistic.new(current_project) if current_project
     end
   end
-
 end
 

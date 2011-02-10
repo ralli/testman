@@ -4,7 +4,7 @@ class TestsuitesController < ApplicationController
   filter_access_to :search_testcases, :require => :read
   filter_access_to :create_version, :require => :update
   filter_access_to :search, :require => :read
-  
+
   def index
     @testsuites = current_project.testsuites.paginate(:per_page => 10, :page => params[:page])
   end
@@ -20,9 +20,9 @@ class TestsuitesController < ApplicationController
     @testsuite.edited_by = current_user
     @testsuite.version = 1
     @testsuite.enabled = true
-    
+
     if @testsuite.save
-      redirect_to @testsuite, :notice => 'Testsuite successfully created.'
+      redirect_to @testsuite, :notice => I18n.t('controller.testsuites.successfully_created')
     else
       render 'new'
     end
@@ -50,7 +50,7 @@ class TestsuitesController < ApplicationController
   def update
     @testsuite = Testsuite.find(params[:id])
     if @testsuite.update_attributes(params[:testsuite])
-      redirect_to @testsuite, :notice => 'Successfully saved Testsuite.'
+      redirect_to @testsuite, :notice => I18n.t('controller.testsuites.successfully_updated')
     else
       render 'edit'
     end
@@ -59,19 +59,19 @@ class TestsuitesController < ApplicationController
   def destroy
     @testsuite = Testsuite.find(params[:id])
     @testsuite.destroy
-    redirect_to testsuites_path, :notice => 'Successfully deleted Testsuite.'
+    redirect_to testsuites_path, :notice => I18n.t('controller.testsuites.successfully_deleted')
   end
 
   def run
     @testsuite = Testsuite.find(params[:id])
     testsuiterun = @testsuite.create_run(current_user)
-    redirect_to testsuiterun, :notice => 'Test suite run started' 
+    redirect_to testsuiterun, :notice => I18n.t('controller.testsuites.testsuite_run_started')
   end
 
   def sort_testcases
     @testsuite = Testsuite.find(params[:id])
     ids = params['tctable']
-    ids.delete_at(0) unless ids.empty?    
+    ids.delete_at(0) unless ids.empty?
     ids.each_with_index do |id, idx|
       TestsuiteEntry.update_all(['position=?', idx+1], ['id=?', id.to_i])
     end
@@ -100,14 +100,14 @@ class TestsuitesController < ApplicationController
       TestsuiteEntry.update_all(['position=?', idx+1], ['id=?', id])
     end
     @testsuite_entries = @testsuite.testsuite_entries(true).includes(:testcase)
-    @notice = entry.nil? ? "Successfully reordered testcases" : "Assigned Testcase."
+    @notice = entry.nil? ? I18n.t('controller.testsuites.successfully_reordered')  : I18n.t('controller.testsuites.successfully_assigned')
   end
 
   def remove_testcase
     entryid = params[:entryid]
     entry = TestsuiteEntry.find(entryid.to_i)
     entry.destroy()
-    @notice = "Successfully removed testcase."
+    @notice = I18n.t('controller.testsuites.successfully_removed_testcase')
   end
 
   def search_testcases
@@ -124,7 +124,7 @@ class TestsuitesController < ApplicationController
     Testsuite.transaction do
       @testsuite = @testsuite.create_version(current_user)
     end
-    redirect_to @testsuite, :notice => 'New version created.'
+    redirect_to @testsuite, :notice => I18n.t('controller.testsuites.new_version_created')
   end
 
   def search
@@ -137,9 +137,9 @@ class TestsuitesController < ApplicationController
     @testsuites = @testsuites.paginate(:per_page => 10, :page => params[:page])
     render 'index'
   end
-  
+
   private
-  
+
   def find_testcase_id(entry_ids)
     testcase_id = entry_ids.detect(nil) { |id| /^t\d+$/.match(id) }
     return nil if testcase_id.blank?
@@ -148,3 +148,4 @@ class TestsuitesController < ApplicationController
   end
 
 end
+

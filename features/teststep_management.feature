@@ -13,7 +13,7 @@ Feature: Manage Test Steps
       | Step            | My step description |
       | Expected result | My expected result  |
     And I press "teststep_submit"
-    Then I should see "Successfully created test step."
+    Then I should see "The teststep has been successfully created."
     And I should see "My step description"
     And I should see "My expected result"
 
@@ -28,7 +28,7 @@ Feature: Manage Test Steps
       | Step            | My step description |
       | Expected result | My expected result  |
     And I press "teststep_submit"
-    Then I should see "Successfully updated test step."
+    Then I should see "The teststep has been successfully saved."
     And I should see "My step description"
     And I should see "My expected result"
 
@@ -39,4 +39,5 @@ Feature: Manage Test Steps
     And a teststep exists with testcase: that testcase
     And I go to the show page for that testcase
     And I follow "delete_teststep"
-    Then I should see "Successfully deleted test step."
+    Then I should see "The teststep has been successfully deleted."
+

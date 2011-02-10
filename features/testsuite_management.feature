@@ -21,11 +21,11 @@ Feature: Manage Testsuites
       | Name        | My test suite  |
       | Description | My description |
     And I press "testsuite_submit"
-    Then I should see "Testsuite successfully created."
+    Then I should see "The testsuite has been successfully created."
     And I should see "My test suite"
     And I should see "My description"
 
-  Scenario: Cancel Test Suite creation    
+  Scenario: Cancel Test Suite creation
     Given a project exists
     And I am logged in as user "test" for that project
     And I am on the page "/testsuites"
@@ -47,17 +47,17 @@ Feature: Manage Testsuites
       | Name        | My test suite  |
       | Description | My description |
     And I press "testsuite_submit"
-    Then I should see "Successfully saved Testsuite."
+    Then I should see "The testsuite has been successfully saved."
     Then I should see "My test suite"
     And I should see "My description"
 
-  Scenario: Delete Test Suite    
+  Scenario: Delete Test Suite
     Given a project exists
     And I am logged in as user "test" for that project
     And a testsuite exists with project: the project, created_by: the user, edited_by: the user
     When I go to the page "/testsuites"
     And I follow "delete_testsuite"
-    Then I should see "Successfully deleted Testsuite."
+    Then I should see "The testsuite has been successfully deleted."
     And 0 testsuites should exist
 
   Scenario: Delete Testcase from Testsuite
@@ -68,7 +68,7 @@ Feature: Manage Testsuites
     And a testsuite entry exists with testsuite: the testsuite, testcase: the testcase
     And I am on the show page for the testsuite
     When I follow "remove_testcase"
-    Then I should see "Successfully removed the Testcase from the Testsuite"
+    Then I should see "The testcase has been successfully removed from the testsuite."
     And 0 testsuite entries should exist
 
   Scenario: Create version of Testsuite
@@ -77,7 +77,7 @@ Feature: Manage Testsuites
     And a testsuite exists with project: the project, created_by: the user, edited_by: the user
     And I am on the show page for the testsuite
     When I follow "create_version"
-    Then I should see "New version created."
+    Then I should see "Successfully created a new version."
     And 1 testsuites should exist with version: 2
 
   Scenario: Search Testsuites
@@ -89,3 +89,4 @@ Feature: Manage Testsuites
       | q | bongo |
     And I press "search"
     Then I should see "My Bingo Bongo"
+

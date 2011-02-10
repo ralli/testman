@@ -1,6 +1,6 @@
 class TeststepsController < ApplicationController
   filter_resource_access :nested_in => :testcases
-  
+
   def new
     @testcase = Testcase.find(params[:testcase_id])
     @teststep = Teststep.new(:testcase => @testcase)
@@ -11,7 +11,7 @@ class TeststepsController < ApplicationController
     @teststep = Teststep.new(params[:teststep])
     @teststep.testcase = @testcase
     if @teststep.save
-      redirect_to @testcase, :notice => 'Successfully created test step.'
+      redirect_to @testcase, :notice => I18n::t('controller.teststeps.successfully_created')
     else
       render 'new'
     end
@@ -26,7 +26,7 @@ class TeststepsController < ApplicationController
     @testcase = Testcase.find(params[:testcase_id])
     @teststep = Teststep.find(params[:id])
     if @teststep.update_attributes(params[:teststep])
-      redirect_to @testcase, :notice => 'Successfully updated test step.'
+      redirect_to @testcase, :notice => I18n::t('controller.teststeps.successfully_updated')
     else
       render 'edit'
     end
@@ -36,6 +36,7 @@ class TeststepsController < ApplicationController
     @testcase = Testcase.find(params[:testcase_id])
     @teststep = Teststep.find(params[:id])
     @teststep.destroy
-    redirect_to @testcase, :notice => 'Successfully deleted test step.'
+    redirect_to @testcase, :notice => I18n::t('controller.teststeps.successfully_deleted')
   end
 end
+

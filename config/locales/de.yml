@@ -230,4 +230,44 @@ de:
       teststeps: 'Testschritte'
       test_status: 'Teststatus'
       total: 'Gesamt'
+  controller:
+    application:
+      permission_denied: "Sie haben keine Berechtigung zum Ansehen dieser Seite."
+      must_be_logged_in: "Zum Ansehen dieser Seite müssen Sie angemeldet sein."
+      must_be_logged_out: "Zum Ansehen dieser Seite dürfen Sie nicht angemeldet sein."
+    projects:
+      successfully_created: 'Das Projekt wurde erfolgreich angelegt.'
+      successfully_updated: 'Das Projekt wurde erfolgreich gespeichert.'
+      successfully_deleted: 'Das Projekt wurde erfolgreich gelöscht.'
+      project_activated: "Das Projekt %{project_name} wurde aktiviert."
+    testcase_attachments:
+      successfully_created: 'Der Anhang wurde erfolgreich angelegt.'
+      successfully_deleted: 'Der Anhang wurde gelöscht.'
+    testcases:
+      successfully_created: 'Der Testfall wurde angelegt.'
+      successfully_updated: 'Der Testfall wurde gespeichert.'
+      successfully_deleted: 'Der Testfall wurde geslöscht.'
+      active_project_needed: 'Wählen Sie bitte zunächst ein aktives Projekt aus.'
+      new_version_created: 'Es wurde eine neue Version angelegt.'
+    teststeps:
+      successfully_created: 'Der Testschritt wurde angelegt.'
+      successfully_updated: 'Der Testschritt wurde geändert.'
+      successfully_deleted: 'Der Testschritt wurde gelöscht.'
+    testsuite_entries:
+      successfully_deleted: 'Der Testfall wurde aus der Testsuite entfernt.'
+    testsuites:
+      successfully_created: 'Die Testsuite wurde angelegt.'
+      successfully_updated: 'Die Testsuite wurde gespeichert.'
+      successfully_deleted: 'Die Testsuite wurde gelöscht.'
+      testsuite_run_started: 'Die Ausführung der Testsuite wurde begonnen.'
+      successfully_reordered: "Die neue Anordnung der Testfälle wurde gespeichert."
+      successfully_assigned: "Der Testfall wurde zugeordnet."
+      successfully_removed_testcase: 'Der Testfall wurde entfernt.'
+      new_version_created: 'Es wurde eine neue Version angelegt.'
+    users:
+      successfully_created: 'Der Benutzer wurde angelegt.'
+      successfully_updated: 'Der Benutzer wurde gespeichert.'
+    user_sessions:
+      logged_in: 'Anmeldung erfolgreich.'
+      logged_out: 'Abmeldung erfolgreich.'
 

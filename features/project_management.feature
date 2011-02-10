@@ -19,7 +19,7 @@ Feature: Manage Projects
     And I enter the following values
       | Name | Testproject |
     And I press "project_submit"
-    Then I should see "Successfully created project."
+    Then I should see "The project has been successfully created."
     And the number of projects is 1
 
   Scenario: Cancel Project creation
@@ -38,7 +38,7 @@ Feature: Manage Projects
     And I am on the projects list
     When I follow "new_project"
     And I press "project_submit"
-    Then I should not see "Successfully created project."
+    Then I should not see "The project has been successfully saved."
     And I should see "can't be blank"
 
   Scenario: Edit Project
@@ -49,7 +49,7 @@ Feature: Manage Projects
     And I enter the following values
       | Name | New project name |
     And I press "project_submit"
-    Then I should see "Successfully updated project."
+    Then I should see "The project has been successfully saved."
     And I should see "New project name"
 
   Scenario: Delete Project
@@ -57,5 +57,5 @@ Feature: Manage Projects
     And I am logged in as user "test" for that project
     And I am on the show page for that project
     When I follow "delete"
-    Then I should see "Successfully deleted project."
+    Then I should see "The project has been successfully deleted."
 

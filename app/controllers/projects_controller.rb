@@ -20,7 +20,7 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(params[:project])
     if @project.save
-      redirect_to @project, :notice =>"Successfully created project."
+      redirect_to @project, :notice => I18n::t('controller.projects.successfully_created')
     else
       render :action => 'new'
     end
@@ -33,7 +33,7 @@ class ProjectsController < ApplicationController
   def update
     @project = Project.find(params[:id])
     if @project.update_attributes(params[:project])
-      redirect_to @project, :notice => "Successfully updated project."
+      redirect_to @project, :notice => I18n::t('controller.projects.successfully_updated')
     else
       render :action => 'edit'
     end
@@ -42,13 +42,13 @@ class ProjectsController < ApplicationController
   def destroy
     @project = Project.find(params[:id])
     @project.destroy
-    redirect_to projects_url, :notice => "Successfully deleted project."
+    redirect_to projects_url, :notice => I18n::t('controller.projects.successfully_deleted')
   end
 
   def activate
     project = Project.find(params[:id])
     current_user.reload.update_attribute(:current_project, project)
-    redirect_to root_url, :notice => "Current project changed to #{project.name}"
+    redirect_to root_url, :notice => I18n::t('controller.projects.project_activated', :project_name => project.name)
   end
 end
 
