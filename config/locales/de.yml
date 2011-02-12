@@ -68,7 +68,7 @@ de:
     run: 'Ausführen'
     create_version: 'Version anlegen'
     show_all: 'Alle anzeigen'
-    drag: '[Verschieben]'
+    drag: '[Ziehen]'
     testsuiteruns:
       label_for_testcase: 'Testfall #%{position} von %{count}'
       label_for_teststep: 'Testschritt #%{position} von %{count}'

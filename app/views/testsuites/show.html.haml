@@ -26,7 +26,7 @@
             complete: function(request){
               $('#tctable').effect('highlight');
             },
-            url: "#{sort_testcases_testsuite_url(@testsuite)}'
+            url: "'#{sort_testcases_testsuite_url(@testsuite)}'"
           });
         }
       })
@@ -74,7 +74,7 @@
   %tbody
     - @testsuite_entries.each do |entry|
       = content_tag :tr, :id => entry.id do
-        %td.dragHandle= t('helpers.drag')
+        %td.dragHandle#dragHandle= t('helpers.drag')
         %td= entry.testcase.key
         %td= entry.testcase.version
         %td= entry.testcase.name

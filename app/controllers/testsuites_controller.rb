@@ -100,7 +100,11 @@ class TestsuitesController < ApplicationController
       TestsuiteEntry.update_all(['position=?', idx+1], ['id=?', id])
     end
     @testsuite_entries = @testsuite.testsuite_entries(true).includes(:testcase)
-    @notice = entry.nil? ? I18n.t('controller.testsuites.successfully_reordered')  : I18n.t('controller.testsuites.successfully_assigned')
+    if entry.nil?
+      @notice = I18n.t('controller.testsuites.successfully_reordered')
+    else
+      @notice = I18n.t('controller.testsuites.successfully_assigned')
+    end
   end
 
   def remove_testcase

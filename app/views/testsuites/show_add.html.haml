@@ -85,7 +85,7 @@
         = label_tag(:search, t('testsuites.show_add.searchlabel'))
         = text_field_tag(:search, "", :id => 'searchfield')
         = submit_tag 'Search', :id => 'search_button'
-    %ol.testcases
+    %ol.testcases#testcases
       = render 'testcases'
 
 .span-11.right.last
