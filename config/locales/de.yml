@@ -131,6 +131,7 @@ de:
     form:
       testcase: 'Testfall'
     index:
+      title: 'Testfälle'
       searchlabel: 'Suchen: '
       searchbutton: 'Suchen'
       testcases_found:
@@ -263,7 +264,7 @@ de:
       successfully_updated: 'Die Testsuite wurde gespeichert.'
       successfully_deleted: 'Die Testsuite wurde gelöscht.'
       testsuite_run_started: 'Die Ausführung der Testsuite wurde begonnen.'
-      successfully_reordered: "Die neue Anordnung der Testfälle wurde gespeichert."
+      successfully_reordered: "Die Testfälle wurden umsortiert."
       successfully_assigned: "Der Testfall wurde zugeordnet."
       successfully_removed_testcase: 'Der Testfall wurde entfernt.'
       new_version_created: 'Es wurde eine neue Version angelegt.'

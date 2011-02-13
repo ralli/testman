@@ -90,3 +90,11 @@ Feature: Manage Testsuites
     And I press "search"
     Then I should see "My Bingo Bongo"
 
+  Scenario: Show add Page of Testsuites
+    Given an project exists
+    And I am logged in as user "test" for that project
+    And a testsuite exists with project: the project, name: "My Bingo Bongo", created_by: the user, edited_by: the user
+    And I am on the show page for the testsuite
+    When I follow "show_add"
+    Then I should see "Add Testcases"
+

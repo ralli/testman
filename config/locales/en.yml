@@ -131,6 +131,7 @@ en:
     form:
       testcase: 'Testcase'
     index:
+      title: 'Testcases'
       searchlabel: 'Search: '
       searchbutton: 'Search'
       testcases_found:

@@ -7,7 +7,7 @@
       = f.input :first_name
       = f.input :last_name
       = f.input :email
-      = f.input :locale, :as => :select, :collection => [[ 'English', 'en'], [ 'Deutsch', 'de']]
+      = f.input :locale, :as => :select, :collection => options_for_languages,
 
   %fieldset.span-24.last
     %legend= t('users.edit.change_password')
