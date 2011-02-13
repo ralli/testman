@@ -7,9 +7,10 @@ class TestsuiterunsController < ApplicationController
   filter_access_to :show_current, :require => :update
   filter_access_to :set_all_ok, :require => :update
   filter_access_to :set_all_failed, :require => :update
-  
+
   def index
-    @testruns = current_project.testsuiteruns.includes(:testsuite).order("testsuites.key").paginate(:page => params[:page])
+    @testsuiterun_search = TestsuiterunSearch.new(params[:testsuiterun_search] || {})
+    @testruns = @testsuiterun_search.to_query(current_project).includes(:testsuite).order("testsuites.key").paginate(:page => params[:page])
   end
 
   def show
@@ -61,7 +62,7 @@ class TestsuiterunsController < ApplicationController
     end
     redirect_to @testrun
   end
-  
+
   private
   def check_current_project
     if current_project.nil?
@@ -79,3 +80,4 @@ class TestsuiterunsController < ApplicationController
     @completed_teststep_count = @testrun.completed_teststep_count
   end
 end
+

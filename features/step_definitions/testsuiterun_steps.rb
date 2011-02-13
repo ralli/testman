@@ -8,7 +8,7 @@ Given /^a testsuiterun with (\d+) testcases and (\d+) teststeps per testcase exi
       Teststep.make(:testcase => testcase)
     end
     testcases << testcase
-  end  
+  end
   testsuite = Testsuite.make(:project => project, :created_by => user, :edited_by => user)
   testcases.each do |testcase|
     testsuite.add_testcase(testcase)
@@ -17,6 +17,7 @@ Given /^a testsuiterun with (\d+) testcases and (\d+) teststeps per testcase exi
   testsuite.create_run(user)
 end
 
-When /^I follow the show all link$/ do
-  
+When /^I select "Unknown"$/ do
+  choose 'Unknown'
 end
+

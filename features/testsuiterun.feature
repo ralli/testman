@@ -87,3 +87,13 @@ Feature: Run a test suite
     When I am on the show page for the testsuiterun
     And I follow "show_current"
     Then I should see "Show all testcases"
+
+  Scenario: Filter testsuiteruns by status
+    Given a project exists
+    And I am logged in as user "test" for that project
+    And a testsuiterun with 1 testcases and 1 teststeps per testcase exists
+    And I am on page "/testsuiteruns"
+    When I select "Unknown"
+    And I press "testsuiterun_search_submit"
+    Then I should see "Search (one match)"
+

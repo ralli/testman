@@ -37,6 +37,9 @@ de:
       testsuiterun:
         status: 'Status'
         result: 'Ergebnis'
+      testsuiterun_search:
+        status: 'Status'
+        result: 'Ergebnis'
       user:
         login: 'Login'
         first_name: 'Vorname'
@@ -54,10 +57,12 @@ de:
       update: "Speichern"
       cancel: 'Abbrechen'
     result:
+      all: 'Alle'
       ok: 'Ok'
       failed: 'Fehlgeschlagen'
       unknown: 'Unbekannt'
     status:
+      all: 'Alle'
       new: 'Neu'
       ended: 'Beendet'
     show: 'Anzeigen'
@@ -68,6 +73,7 @@ de:
     run: 'Ausführen'
     create_version: 'Version anlegen'
     show_all: 'Alle anzeigen'
+    search: 'Suchen'
     drag: '[Ziehen]'
     testsuiteruns:
       label_for_testcase: 'Testfall #%{position} von %{count}'
@@ -168,6 +174,9 @@ de:
       title: 'Testausführungen'
       result: 'Ergebnis'
       actions: 'Aktionen'
+      search:
+        one: 'Suche (Ein Treffer)'
+        other: 'Suche (%{count} Treffer)'
     show:
       title: 'Testausführung'
       completed: '%{completed} ausgeführt'

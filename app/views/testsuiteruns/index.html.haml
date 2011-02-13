@@ -1,5 +1,15 @@
 - title t('testsuiteruns.index.title')
 
+%fieldset{:style => 'margin-bottom: 1em;'}
+  %legend= t('testsuiteruns.index.search', :count => @testruns.total_entries)
+  .fieldset
+    = simple_form_for @testsuiterun_search, :url => url_for(:controller => 'testsuiteruns', :action => 'index'), :html => {:method => 'get'} do |f|
+      .span-22.last
+        = f.input :status, :as => :radio, :collection => options_for_status
+      .span-22.last
+        = f.input :result, :as => :radio, :collection => options_for_result
+      .span-22.last{:style => 'margin-bottom: 1em'}
+        = f.button :submit, t('helpers.search')
 %table
   %thead
     %tr

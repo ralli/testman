@@ -37,6 +37,9 @@ en:
       testsuiterun:
         status: 'Status'
         result: 'Result'
+      testsuiterun_search:
+        status: 'Status'
+        result: 'Result'
       user:
         login: 'Login'
         first_name: 'First name'
@@ -54,10 +57,12 @@ en:
       update: "Save"
       cancel: 'Cancel'
     result:
+      all: 'All'
       ok: 'Ok'
       failed: 'Failed'
       unknown: 'Unknown'
     status:
+      all: 'All'
       new: 'New'
       ended: 'Ended'
     show: 'Show'
@@ -68,6 +73,7 @@ en:
     run: 'Run'
     create_version: 'Create version'
     show_all: 'Show all'
+    search: 'Search'
     drag: '[drag]'
     testsuiteruns:
       label_for_testcase: 'Testcase #%{position} of %{count}'
@@ -168,6 +174,9 @@ en:
       title: 'Testruns'
       result: 'Result'
       actions: 'Actions'
+      search:
+        one: 'Search (one match)'
+        other: 'Search (%{count} matches)'
     show:
       title: 'Testrun'
       completed: '%{completed} completed'
