@@ -173,6 +173,7 @@ de:
     index:
       title: 'Testausführungen'
       result: 'Ergebnis'
+      updated_at: 'Geändert am'
       actions: 'Aktionen'
       search:
         one: 'Suche (Ein Treffer)'

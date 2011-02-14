@@ -13,12 +13,17 @@ class Testsuite < ActiveRecord::Base
   validates_presence_of :project
   validates_presence_of :created_by
   validates_presence_of :edited_by
-  
+
   has_many :testsuite_entries, :dependent => :destroy, :order => :position, :class_name => 'TestsuiteEntry'
   has_many :testcases, :through => :testsuite_entries
   has_many :testsuiteruns, :dependent => :destroy
-  
+
   after_create :init_key
+
+
+  def key_and_version
+    "#{key}.#{version}"
+  end
 
   def self.new_with_defaults(attributes = {})
     self.new({:version => 1}.merge(attributes))
@@ -32,7 +37,7 @@ class Testsuite < ActiveRecord::Base
 
   def add_testcase(testcase, user = nil)
     entry = TestsuiteEntry.new
-    self.transaction do      
+    self.transaction do
       entry.testsuite = self
       entry.testcase = testcase
       entry.save
@@ -52,7 +57,7 @@ class Testsuite < ActiveRecord::Base
     testsuiterun
   end
 
-  def create_version(user)    
+  def create_version(user)
     copy = Testsuite.create!(self.attributes.merge({:project => project, :created_by => created_by, :edited_by => user, :version => version + 1}))
     TestsuiteEntry.includes(:testcase).where(:testsuite_id => self.id).order('position').each do |entry|
       new_entry = copy.testsuite_entries.build(:testcase => entry.testcase)
@@ -71,3 +76,4 @@ class Testsuite < ActiveRecord::Base
     return testsuites
   end
 end
+

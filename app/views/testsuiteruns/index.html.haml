@@ -16,13 +16,15 @@
       %th= t('simple_form.labels.testsuite.key')
       %th= t('simple_form.labels.testsuite.name')
       %th= t('testsuiteruns.index.result')
+      %th= t('testsuiteruns.index.updated_at')
       %th= t('testsuiteruns.index.actions')
   %tbody
     - @testruns.each do |run|
       %tr
-        %td= run.testsuite.key
+        %td= run.testsuite.key_and_version
         %td= run.testsuite.name
         %td= result_label(run.result)
+        %td= l(run.latest_status_update, :format => :short)
         %td= link_to t('helpers.show'), run, :id => 'show_testsuiterun'
 
 = my_will_paginate @testruns

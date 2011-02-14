@@ -1,6 +1,6 @@
 class Testcaserun < ActiveRecord::Base
   belongs_to :testsuiterun
-  
+
   belongs_to :testcase
   validates_presence_of :testcase
 
@@ -13,12 +13,12 @@ class Testcaserun < ActiveRecord::Base
   validates_inclusion_of :result, :in => ['unknown', 'ok', 'failed', 'error', 'skipped']
 
   has_many :teststepruns, :dependent => :destroy, :order => 'position'
-  
+
   belongs_to :created_by, :class_name => 'User'
   validates_presence_of :created_by
   belongs_to :edited_by, :class_name => 'User'
   validates_presence_of :edited_by
-  has_many :testcaselogs, :dependent => :destroy
+  has_many :testcaselogs, :dependent => :destroy, :order => 'created_at'
 
   after_create :create_log
 
@@ -66,6 +66,12 @@ class Testcaserun < ActiveRecord::Base
     testsuiterun.try(:testcaseruns).try(:count) || 0
   end
 
+  def latest_status_update
+    result = testcaselogs.last.try(:created_at)
+    result = updated_at if result.nil?
+    result
+  end
+
   private
   def create_log
     Testcaselog.create!(:created_by => created_by, :testcaserun => self, :status => status, :result => result)
@@ -76,6 +82,9 @@ class Testcaserun < ActiveRecord::Base
     self.status = status
     self.result = result
     save!
-    testcaselogs.create!(:created_by => user, :status => status, :result => result)    
+    testcaselogs.create!(:created_by => user, :status => status, :result => result)
   end
+
+
 end
+

@@ -10,7 +10,7 @@ class TestsuiterunsController < ApplicationController
 
   def index
     @testsuiterun_search = TestsuiterunSearch.new(params[:testsuiterun_search] || {})
-    @testruns = @testsuiterun_search.to_query(current_project).includes(:testsuite).order("testsuites.key").paginate(:page => params[:page])
+    @testruns = @testsuiterun_search.to_query(current_project).includes(:testsuite).includes(:testcaseruns => :testcaselogs).order("testsuites.key").paginate(:page => params[:page])
   end
 
   def show
