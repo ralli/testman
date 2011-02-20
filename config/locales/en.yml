@@ -81,6 +81,35 @@ en:
     error_messages:
       invalid_fields: "Invalid Fields"
       correct_the_errors: "Correct the following errors and try again."
+    test_areas:
+      functional: 'Functional'
+      non_functional: 'Non-functional'
+      structural: 'Structural'
+      regression: 'Regression'
+      retest: 'Re-Test'
+    test_varieties:
+      positive: 'Positive'
+      negative: 'Negative'
+    test_priorities:
+      low: 'Low'
+      medium: 'Medium'
+      high: 'High'
+    test_methods:
+      black_box: 'Black Box'
+      white_box: 'White Box'
+    test_statuses:
+      design: 'Design'
+      confirmed: 'Confirmed'
+      locked: 'Locked'
+      disabled: 'Disabled'
+    test_levels:
+      component_test: 'Component test'
+      system_test: 'System test'
+      integration_test: 'Integration test'
+      acceptance_test: 'Acceptance test'
+    execution_types:
+      manual: 'Manual'
+      automatic: 'Automatic'
 
   layouts:
     login:

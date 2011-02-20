@@ -81,6 +81,35 @@ de:
     error_messages:
       invalid_fields: "Fehlerhafte Eingaben"
       correct_the_errors: "Korrigieren Sie bitte die folgenden Fehler um fortzufahren"
+    test_areas:
+      functional: 'Funktional'
+      non_functional: 'Nichtfunktional'
+      structural: 'Strukturell'
+      regression: 'Regression'
+      retest: 'Retest'
+    test_varieties:
+      positive: 'Positiv'
+      negative: 'Negativ'
+    test_priorities:
+      low: 'Niedrig'
+      medium: 'Mittel'
+      high: 'Hoch'
+    test_methods:
+      black_box: 'Black Box'
+      white_box: 'White Box'
+    test_statuses:
+      design: 'Design'
+      confirmed: 'Bestätigt'
+      locked: 'Gesperrt'
+      disabled: 'Deaktiviert'
+    test_levels:
+      component_test: 'Komponententest'
+      system_test: 'Systemtest'
+      integration_test: 'Integrationstest'
+      acceptance_test: 'Akzeptanztest'
+    execution_types:
+      manual: 'Manuell'
+      automatic: 'Automatisch'
 
   layouts:
     login:

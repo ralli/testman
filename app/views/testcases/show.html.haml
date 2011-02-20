@@ -113,22 +113,22 @@
       .span-18.last= render_textile(@testcase.description)
     .row.span-22.last
       .label.span-4= t('simple_form.labels.testcase.test_area')
-      .span-7= @testcase.value_for(:test_area)
+      .span-7= value_for(@testcase, :test_area)
       .label.span-4= t('simple_form.labels.testcase.test_variety')
-      .span-7.last= @testcase.value_for(:test_variety)
+      .span-7.last= value_for(@testcase, :test_variety)
     .row.span-22.last
       .label.span-4= t('simple_form.labels.testcase.test_level')
-      .span-7= @testcase.value_for(:test_level)
+      .span-7= value_for(@testcase, :test_level)
       .label.span-4= t('simple_form.labels.testcase.execution_type')
-      .span-7.last= @testcase.value_for(:execution_type)
+      .span-7.last= value_for(@testcase, :execution_type)
     .row.span-22.last
       .label.span-4= t('simple_form.labels.testcase.test_status')
-      .span-7= @testcase.value_for(:test_status)
+      .span-7= value_for(@testcase, :test_status)
       .label.span-4= t('simple_form.labels.testcase.test_priority')
-      .span-7.last= @testcase.value_for(:test_priority)
+      .span-7.last= value_for(@testcase, :test_priority)
     .row.span-22.last
       .label.span-4= t('simple_form.labels.testcase.test_method')
-      .span-7.last= @testcase.value_for(:test_method)
+      .span-7.last= value_for(@testcase, :test_method)
     .row.span-22.last
       .label.span-4= t('simple_form.labels.testcase.created_at')
       .span-7= @testcase.created_at

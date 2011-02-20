@@ -1,6 +1,8 @@
 require 'machinist/active_record'
 require 'faker'
 
+include TestcasesHelper
+
 Project.blueprint do
   name { Faker::Lorem.words(3).join(" ") }
 end
@@ -23,13 +25,13 @@ Testcase.blueprint do
   version { 1 }
   name { Faker::Lorem.words(4).join(' ') }
   description { Faker::Lorem.sentences(4).join(' ') }
-  test_area { Testcase.keys_for(:test_areas).rand }
-  test_variety { Testcase.keys_for(:test_varieties).rand }
-  test_level { Testcase.keys_for(:test_levels).rand }
-  execution_type { Testcase.keys_for(:execution_types).rand }
-  test_status { Testcase.keys_for(:test_statuses).rand }
-  test_priority { Testcase.keys_for(:test_priorities).rand }
-  test_method { Testcase.keys_for(:test_methods).rand }
+  test_area { TestcasesHelper.keys_for(:test_areas).rand }
+  test_variety { TestcasesHelper.keys_for(:test_varieties).rand }
+  test_level { TestcasesHelper.keys_for(:test_levels).rand }
+  execution_type { TestcasesHelper.keys_for(:execution_types).rand }
+  test_status { TestcasesHelper.keys_for(:test_statuses).rand }
+  test_priority { TestcasesHelper.keys_for(:test_priorities).rand }
+  test_method { TestcasesHelper.keys_for(:test_methods).rand }
 
 end
 

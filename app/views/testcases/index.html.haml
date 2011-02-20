@@ -56,9 +56,9 @@
           %td= testcase.key
           %td= testcase.version
           %td= testcase.name
-          %td= testcase.value_for(:execution_type)
-          %td= testcase.value_for(:test_status)
-          %td= testcase.value_for(:test_priority)
+          %td= value_for(testcase, :execution_type)
+          %td= value_for(testcase, :test_status)
+          %td= value_for(testcase, :test_priority)
           %td
             = link_to t('helpers.show'), testcase if permitted_to? :read, testcase
             = link_to t('helpers.edit'), edit_testcase_path(testcase) if permitted_to? :update, testcase

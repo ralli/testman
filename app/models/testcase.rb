@@ -4,7 +4,7 @@ class Testcase < ActiveRecord::Base
   belongs_to :project
   belongs_to :created_by, :class_name => 'User'
   belongs_to :edited_by, :class_name => 'User'
-  
+
   validates_presence_of :key, :on => :update
   validates_length_of :key, :maximum => 10
   validates_presence_of  :version
@@ -23,10 +23,10 @@ class Testcase < ActiveRecord::Base
   has_many :testsuites, :through => :testsuite_entries
   has_many :testcaseruns, :dependent => :destroy
   has_many :testcase_attachments, :dependent => :destroy, :class_name => 'TestcaseAttachment', :order => 'position'
-  
+
   before_validation :init_fields
   after_create :init_key
-  
+
   attr_accessible :key, :version, :project, :name, :created_by, :edited_by, :description, :test_area, :test_variety, :test_level, :execution_type, :test_status, :test_priority, :test_method, :tag_list
 
   def self.new_with_defaults
@@ -36,65 +36,14 @@ class Testcase < ActiveRecord::Base
   def init_key
     update_attribute(:key, sprintf('TC%05d', id)) if key == 'NEW' or key.blank?
   end
-  
-  def init_fields    
+
+  def init_fields
     self.version = 1 if version.nil? and new_record?
   end
 
-  def value_for(attribute)
-    key = self.send(attribute.to_sym)
-    method = attribute.to_s.pluralize.to_sym
-    list = self.class.send(method)
-    p = list.detect { |e| e[1] == key }
-    p.nil? ? '<Undefined>' :  p[0]
-  end
- 
   def self.keys_for(method)
     list = self.send(method.to_sym)
-    list.collect {|item| item[1] }    
-  end
-  
-  def self.test_areas
-    [['Functional', 'FUNCTIONAL'],
-      ['Non-Functional', 'NON-FUNCTIONAL'],
-      ['Structural', 'STRUCTURAL'],
-      ['Regression', 'REGRESSION'],
-      ['Re-Test', 'RETEST']]
-  end
-
-  def self.test_varieties
-    [['Positive', 'POSITIVE'],
-      ['Negative', 'NEGATIVE']]
-  end
-
-  def self.test_priorities
-    [['Low', 'LOW'],
-      ['Medium', 'MEDIUM'],
-      ['High', 'HIGH']]
-  end
-
-  def self.test_methods
-    [['Black box', 'BLACKBOX'],
-      ['White box', 'WHITEBOX'],]
-  end
-
-  def self.test_statuses
-    [['Design', 'DESIGN'],
-      ['Confirmed', 'CONFIRMED'],
-      ['Locked', 'LOCKED'],
-      ['Disabled', 'DISABLED'],]
-  end
-
-  def self.test_levels
-    [['Component Test', 'COMPONENT_TEST'],
-      ['System Test', 'SYSTEM_TEST'],
-      ['Integration Test', 'INTEGRATION_TEST'],
-      ['Acceptance Test', 'ACCEPTANCE_TEST'],]
-  end
-
-  def self.execution_types
-    [['Manual', 'MANUAL'],
-      ['Automatic', 'AUTOMATIC']]    
+    list.collect {|item| item[1] }
   end
 
   def create_run(user, testsuiterun, position)
@@ -120,7 +69,7 @@ class Testcase < ActiveRecord::Base
     end
     copy
   end
-  
+
   def self.search(pattern)
     pattern = "%#{pattern.downcase.strip}%"
     search = Testcase.select('distinct testcases.id, testcases.key, testcases.version, testcases.name, testcases.execution_type, testcases.test_status, testcases.test_priority')
@@ -133,3 +82,4 @@ class Testcase < ActiveRecord::Base
     copy = self.dup
   end
 end
+

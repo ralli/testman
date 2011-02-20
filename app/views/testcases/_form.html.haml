@@ -39,14 +39,14 @@
       = f.input :description
       = f.input :tag_list, :as => :string, :input_html => {"data-seperator" => "," }
       .span-11
-        = f.input :test_area, :as => :select, :collection => Testcase.test_areas, :include_blank => false
-        = f.input :test_variety, :as => :select, :collection => Testcase.test_varieties, :include_blank => false
-        = f.input :test_level, :as => :select, :collection => Testcase.test_levels, :include_blank => false
+        = f.input :test_area, :as => :select, :collection => test_areas, :include_blank => false
+        = f.input :test_variety, :as => :select, :collection => test_varieties, :include_blank => false
+        = f.input :test_level, :as => :select, :collection => test_levels, :include_blank => false
       .span-11.right.last
-        = f.input :execution_type, :as => :select, :collection => Testcase.execution_types, :include_blank => false
-        = f.input :test_status, :as => :select, :collection => Testcase.test_statuses, :include_blank => false
-        = f.input :test_method, :as => :select, :collection => Testcase.test_methods, :include_blank => false
-        = f.input :test_priority, :as => :select, :collection => Testcase.test_priorities, :include_blank => false
+        = f.input :execution_type, :as => :select, :collection => execution_types, :include_blank => false
+        = f.input :test_status, :as => :select, :collection => test_statuses, :include_blank => false
+        = f.input :test_method, :as => :select, :collection => test_methods, :include_blank => false
+        = f.input :test_priority, :as => :select, :collection => test_priorities, :include_blank => false
       .span-22.last
         = f.button :submit
         = cancel_link @testcase, :id => 'cancel', :class => 'button'
