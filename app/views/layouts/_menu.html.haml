@@ -4,4 +4,5 @@
   %li= link_to_unless_current  t('layouts.menu.testcases'), testcases_url if can_show_testcases?
   %li= link_to_unless_current  t('layouts.menu.testsuites'), testsuites_url if can_show_testsuites?
   %li= link_to_unless_current  t('layouts.menu.testruns'), testsuiteruns_url if can_show_testruns?
+  %li= link_to_unless_current  t('layouts.menu.users'), users_url if permitted_to? :manage, User.new
 

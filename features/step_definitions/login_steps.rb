@@ -38,3 +38,7 @@ Given /^I am logged in as user "([^"]*)" for #{capture_model}$/ do |login, name|
   click_button "user_session_submit"
 end
 
+Given /^I am logged in as administrator "([^"]*)"$/ do |login|
+  Given "I am logged in as user \"#{login}\""
+end
+

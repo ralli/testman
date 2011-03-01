@@ -65,6 +65,7 @@ en:
       all: 'All'
       new: 'New'
       ended: 'Ended'
+    save: 'Save'
     show: 'Show'
     edit: 'Edit'
     destroy: 'Destroy'
@@ -127,6 +128,7 @@ en:
       testcases: 'Test cases'
       testsuites: 'Test suites'
       testruns: 'Test runs'
+      users: 'Users'
   projects:
     activatable_projects:
       activate_project: 'Activate Project'
@@ -252,6 +254,13 @@ en:
       change_password: 'Change password'
     new:
       title: 'Register'
+    index:
+      title: 'Users'
+      login: 'Login'
+      first_name: 'First Name'
+      last_name: 'Last Name'
+      actions: 'Actions'
+      new_user: 'Create user'
   user_sessions:
     form:
       login: 'Login'
@@ -310,6 +319,8 @@ en:
     users:
       successfully_created: 'Successfully registered.'
       successfully_updated: 'Your profile has been updated.'
+      successfully_deleted: 'User successfully deleted.'
+      cannot_delete_current: 'Cannot delete current user.'
     user_sessions:
       logged_in: 'Login successful.'
       logged_out: 'Logout successful.'

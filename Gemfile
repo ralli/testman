@@ -1,6 +1,6 @@
 source 'http://rubygems.org'
 
-gem 'rails', '3.0.4'
+gem 'rails', '3.0.5'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -37,5 +37,7 @@ group :development, :test do
 
   gem 'mocha'
   gem 'rcov'
+
+  gem 'ruby_parser'
 end
 

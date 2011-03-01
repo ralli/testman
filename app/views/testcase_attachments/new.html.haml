@@ -5,6 +5,6 @@
     %legend= t('testcase_attachments.new.attachment')
     .fieldset.span-22.last
       = f.input :attachment
-      = f.button :submit
-      = link_to t('helpers.submit.cancel'), @testcase, :class => 'button', :id => 'cancel'
+      = f.button :submit, t('helpers.save')
+      = link_to t('helpers.cancel'), @testcase, :class => 'button', :id => 'cancel'
 

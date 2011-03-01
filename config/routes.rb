@@ -49,6 +49,7 @@ Testman::Application.routes.draw do
   end
 
   resources :users
+
   resources :user_sessions
   get 'login' => 'user_sessions#new'
   get 'logout' => 'user_sessions#destroy'

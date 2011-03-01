@@ -154,7 +154,7 @@
           %li= link_to(t('helpers.destroy'), @testcase, :confirm => t('helpers.confirm'), :method => :delete, :id => 'delete', :class => 'button')
         - if permitted_to? :create, @testcase
           %li= link_to(t('testcases.show.create_version'), create_version_testcase_path(@testcase), :id => 'create_version', :method => 'put', :class => 'button')
-        %li= link_to(t('testcases.show.go_back'), url_for(:back), :id => 'view_all', :class => 'button')
+        %li= link_to(t('testcases.show.go_back'), testcases_path, :id => 'view_all', :class => 'button')
 
 %fieldset.span-24.last
   %legend= t('testcases.show.attachments')

@@ -1,0 +1,24 @@
+- title t('users.index.title')
+%ul.link_list{ 'style' => "margin: 0px; padding: 0px;" }
+  %li= link_to t('users.index.new_user'), new_user_path, :id => 'new_user', :class => 'button_add',:style => 'margin-bottom: 1em' if permitted_to? :create, :users
+
+%table
+  %thead
+    %tr
+      %th= t('users.index.login')
+      %th= t('users.index.first_name')
+      %th= t('users.index.last_name')
+      %th= t('users.index.actions')
+  %tbody
+    - @users.each do |user|
+      %tr
+        %td= user.login
+        %td= user.first_name
+        %td= user.last_name
+        %td
+          = link_to t('helpers.edit'), edit_user_path(user)
+          = link_to t('helpers.destroy'), user, :method => 'delete', :confirm => 'Are you sure?'
+
+
+= my_will_paginate @users
+
