@@ -66,6 +66,7 @@ de:
       new: 'Neu'
       ended: 'Beendet'
     save: 'Speichern'
+    save_and_new: 'Speichern und Neu'
     show: 'Anzeigen'
     edit: 'Bearbeiten'
     destroy: 'Löschen'
