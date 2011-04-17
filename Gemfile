@@ -30,7 +30,6 @@ group :development, :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'cucumber-rails'
-  gem 'cucumber'
   gem 'spork'
   gem 'launchy'
   gem 'pickle'
