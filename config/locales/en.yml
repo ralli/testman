@@ -295,6 +295,7 @@ en:
     testcase_attachments:
       successfully_created: 'The attachment has been successfully created.'
       successfully_deleted: 'The attachment has been successfully deleted.'
+      attachment_required: 'Please select a file to attach.'
     testcases:
       successfully_created: 'The testcase has been successfully created.'
       successfully_updated: 'The testcase has been successfully saved.'

@@ -12,7 +12,9 @@ class TestcaseAttachmentsController < ApplicationController
     if @testcase_attachment.save
       redirect_to @testcase, :notice => I18n::t('controller.testcase_attachments.successfully_created')
     else
+      flash[:error] = I18n::t('controller.testcase_attachments.attachment_required')
       render :action => 'new'
+      flash.clear
     end
   end
 

@@ -3,7 +3,6 @@ class CreateTestcaseAttachments < ActiveRecord::Migration
     create_table :testcase_attachments do |t|
       t.integer :testcase_id
       t.integer :position
-      t.text :description
 
       t.string :attachment_file_name
       t.string :attachment_content_type
@@ -18,3 +17,4 @@ class CreateTestcaseAttachments < ActiveRecord::Migration
     drop_table :testcase_attachments
   end
 end
+

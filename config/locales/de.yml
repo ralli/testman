@@ -295,6 +295,7 @@ de:
     testcase_attachments:
       successfully_created: 'Der Anhang wurde erfolgreich angelegt.'
       successfully_deleted: 'Der Anhang wurde gelöscht.'
+      attachment_required: 'Wählen Sie bitte eine Datei aus.'
     testcases:
       successfully_created: 'Der Testfall wurde angelegt.'
       successfully_updated: 'Der Testfall wurde gespeichert.'
