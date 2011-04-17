@@ -11,8 +11,14 @@ class TeststepsController < ApplicationController
     @teststep = Teststep.new(params[:teststep])
     @teststep.testcase = @testcase
     if @teststep.save
-      redirect_to @testcase, :notice => I18n::t('controller.teststeps.successfully_created')
+      debugger
+      unless params[:submit_and_new].blank? then
+         redirect_to new_testcase_teststep_path(@testcase), :notice => I18n::t('controller.teststeps.successfully_created')
+      else
+         redirect_to @testcase, :notice => I18n::t('controller.teststeps.successfully_created')
+      end
     else
+
       render 'new'
     end
   end

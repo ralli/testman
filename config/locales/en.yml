@@ -66,6 +66,7 @@ en:
       new: 'New'
       ended: 'Ended'
     save: 'Save'
+    save_and_new: 'Save and New'
     show: 'Show'
     edit: 'Edit'
     destroy: 'Destroy'
