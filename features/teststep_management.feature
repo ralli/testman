@@ -28,7 +28,7 @@ Feature: Manage Test Steps
       | Expected result | My expected result  |
     And I press "teststep_submit_new"
     Then I should see "The teststep has been successfully created."
-    And I should see "Save and new"
+    And I should see "New teststep"
 
   Scenario: Edit Test Step
     Given a project exists
