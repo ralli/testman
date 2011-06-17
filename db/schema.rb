@@ -37,7 +37,6 @@ ActiveRecord::Schema.define(:version => 20110207203226) do
   create_table "testcase_attachments", :force => true do |t|
     t.integer  "testcase_id"
     t.integer  "position"
-    t.text     "description"
     t.string   "attachment_file_name"
     t.string   "attachment_content_type"
     t.integer  "attachment_file_size"

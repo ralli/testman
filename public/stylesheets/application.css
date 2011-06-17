@@ -85,7 +85,7 @@ div.mainmenu {
 }
 div.mainmenu ul {
     display: inline;
-    list-style: none;    
+    list-style: none;
 }
 
 div.mainmenu ul li {
@@ -166,3 +166,4 @@ div.login {
     float: left;
     margin-right: 0.5em;
 }
+

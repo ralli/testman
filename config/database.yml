@@ -9,6 +9,7 @@ development:
   password: testman
   socket: /var/run/mysqld/mysqld.sock
 
+
 test:
   adapter: mysql2
   encoding: utf8
@@ -31,3 +32,4 @@ production:
 
 cucumber:
   <<: *test
+

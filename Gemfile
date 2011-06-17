@@ -5,7 +5,7 @@ gem 'rails', '3.0.7'
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
 
-gem 'mysql2'
+gem 'mysql2', '< 0.3.0'
 # gem 'sqlite3-ruby', :require => 'sqlite3'
 
 gem 'haml-rails'
@@ -17,10 +17,11 @@ gem 'declarative_authorization'
 gem 'RedCloth'
 gem 'jquery-rails'
 gem 'paperclip'
-gem 'ruby-debug'
+#gem 'ruby-debug19'
 
 group :development, :test do
-  gem 'mongrel'
+ # gem 'mongrel'
+  gem 'thin'
   gem 'nifty-generators'
 
   gem 'machinist'
