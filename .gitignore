@@ -11,3 +11,5 @@ rerun.txt
 doc/**
 coverage/**
 .project
+.sass-cache/
+

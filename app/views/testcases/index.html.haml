@@ -1,31 +1,4 @@
 - title t('testcases.index.title')
-- content_for :head do
-  :css
-    div.row {
-      margin-bottom: 1em;
-    }
-    ul.taglist {
-      list-style: none;
-      margin: 0px 0px;
-      padding: 0px;
-    }
-    ul.taglist li {
-      margin: 0px 0px 0.3em 0px;
-      padding: 0.5em 1em;
-      -moz-border-radius: 6px;
-      color: #0066cc;
-      font-weight: bold;
-      background: #C3D9FF;
-    }
-    ul.taglist li a {
-      color: #0066cc;
-      text-decoration: underline;
-    }
-    ul.taglist li a:hover {
-      color: #0099ff;
-      text-decoration: none;
-    }
-
 .row.span-24.last
   = form_tag(search_testcases_path, :method => 'get') do
     %fieldset.span-24.last
@@ -67,7 +40,7 @@
   = my_will_paginate @testcases
 
 .span-4.last
-  %ul.taglist
+  %ul.tagmenu
     - @tag_counts.each do |t|
       %li
         = link_to t.name, testcases_path(:tag => t.name)

@@ -1,0 +1,26 @@
+div.row {
+  margin-bottom: 1em;
+}
+
+ul.tagmenu {
+  list-style: none;
+  margin: 0px 0px;
+  padding: 0px;
+  li {
+    margin: 0px 0px 0.3em 0px;
+    padding: 0.5em 1em;
+    -moz-border-radius: 6px;
+    color: #0066cc;
+    font-weight: bold;
+    background: #C3D9FF;
+    a {
+     color: #0066cc;
+     text-decoration: underline;
+    }
+    a:hover {
+      color: #0099ff;
+      text-decoration: none;
+    }
+  }
+}
+
