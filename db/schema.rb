@@ -1,3 +1,4 @@
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -180,24 +181,15 @@ ActiveRecord::Schema.define(:version => 20110207203226) do
   add_index "testsuites", ["project_id"], :name => "index_testsuites_on_project_id"
 
   create_table "users", :force => true do |t|
-    t.string   "login",               :limit => 20,                :null => false
-    t.string   "first_name",          :limit => 80
-    t.string   "last_name",           :limit => 80
-    t.string   "email",               :limit => 80,                :null => false
-    t.string   "crypted_password",                                 :null => false
-    t.string   "password_salt",                                    :null => false
-    t.string   "persistence_token",                                :null => false
-    t.string   "single_access_token",                              :null => false
-    t.integer  "login_count",                       :default => 0, :null => false
-    t.integer  "failed_login_count",                :default => 0, :null => false
-    t.datetime "current_login_at"
-    t.datetime "last_login_at"
-    t.string   "current_login_ip"
-    t.string   "last_login_ip"
+    t.string   "login",              :limit => 20, :null => false
+    t.string   "first_name",         :limit => 80
+    t.string   "last_name",          :limit => 80
+    t.string   "email",              :limit => 80, :null => false
+    t.string   "password_digest"
     t.integer  "current_project_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "locale",              :limit => 10
+    t.string   "locale",             :limit => 10
   end
 
   add_index "users", ["current_project_id"], :name => "index_users_on_current_project_id"

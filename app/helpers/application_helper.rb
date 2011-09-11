@@ -6,8 +6,6 @@ module ApplicationHelper
     will_paginate(collection, options.merge(:previous_label => I18n.t('will_paginate.previous'), :next_label => I18n.t('will_paginate.next')))
   end
 
-
-
   def can_show_testcases?
     (permitted_to? :read, :testcases) and (not current_project.nil?)
   end

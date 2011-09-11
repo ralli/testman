@@ -11,7 +11,7 @@ namespace :testman do
     (1..10).each do |k|
       testsuite = Testsuite.make(:project => project, :created_by => user, :edited_by => user, :name => "Testsuite ##{k}")
       (1..10).each do |i|
-        testcase = Testcase.make(:project => project, :created_by => user, :edited_by => user, :name => "Testcase ##{i} for testsuite ##{k}", :tag_list => [possible_tags.rand])
+        testcase = Testcase.make(:project => project, :created_by => user, :edited_by => user, :name => "Testcase ##{i} for testsuite ##{k}", :tag_list => [possible_tags.sample])
         (1..3).each do |j|
           Teststep.make(:testcase => testcase, :step => "Test step No. #{j} for testcase #{i}", :expected_result => "Expected result ##{j} for testcase ##{i}")
         end
@@ -25,3 +25,4 @@ namespace :testman do
     User.destroy_all
   end
 end
+

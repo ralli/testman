@@ -25,13 +25,13 @@ Testcase.blueprint do
   version { 1 }
   name { Faker::Lorem.words(4).join(' ') }
   description { Faker::Lorem.sentences(4).join(' ') }
-  test_area { TestcasesHelper.keys_for(:test_areas).rand }
-  test_variety { TestcasesHelper.keys_for(:test_varieties).rand }
-  test_level { TestcasesHelper.keys_for(:test_levels).rand }
-  execution_type { TestcasesHelper.keys_for(:execution_types).rand }
-  test_status { TestcasesHelper.keys_for(:test_statuses).rand }
-  test_priority { TestcasesHelper.keys_for(:test_priorities).rand }
-  test_method { TestcasesHelper.keys_for(:test_methods).rand }
+  test_area { TestcasesHelper.keys_for(:test_areas).sample }
+  test_variety { TestcasesHelper.keys_for(:test_varieties).sample }
+  test_level { TestcasesHelper.keys_for(:test_levels).sample }
+  execution_type { TestcasesHelper.keys_for(:execution_types).sample }
+  test_status { TestcasesHelper.keys_for(:test_statuses).sample }
+  test_priority { TestcasesHelper.keys_for(:test_priorities).sample }
+  test_method { TestcasesHelper.keys_for(:test_methods).sample }
 
 end
 
@@ -66,8 +66,8 @@ TestsuiteEntry.blueprint do
 end
 
 Testsuiterun.blueprint do
-  status { ['new', 'running', 'ended'].rand }
-  result { status != 'ended' ? 'unknown' : ['unknown', 'ok', 'failed', 'error', 'skipped'].rand }
+  status { ['new', 'running', 'ended'].sample }
+  result { status != 'ended' ? 'unknown' : ['unknown', 'ok', 'failed', 'error', 'skipped'].sample }
 end
 
 Testsuiterun.blueprint(:full) do
@@ -77,13 +77,13 @@ Testsuiterun.blueprint(:full) do
 end
 
 Testcaserun.blueprint do
-  status { ['new', 'running', 'ended'].rand }
-  result { status != 'ended' ? 'unknown' : ['unknown', 'ok', 'failed', 'error', 'skipped'].rand }
+  status { ['new', 'running', 'ended'].sample }
+  result { status != 'ended' ? 'unknown' : ['unknown', 'ok', 'failed', 'error', 'skipped'].sample }
 end
 
 Teststeprun.blueprint do
-  status { ['new', 'running', 'ended'].rand }
-  result { status != 'ended' ? 'unknown' : ['unknown', 'ok', 'failed', 'error', 'skipped'].rand }
+  status { ['new', 'running', 'ended'].sample }
+  result { status != 'ended' ? 'unknown' : ['unknown', 'ok', 'failed', 'error', 'skipped'].sample }
 end
 
 TestcaseAttachment.blueprint do

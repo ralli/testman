@@ -4,6 +4,6 @@
     %legend= t('projects.form.project')
     .fieldset
       = f.input :name
-      = f.button :submit, t('helpers.save')
+      = f.button :submit, t('helpers.save'), :id => 'project_submit'
       = link_to t('helpers.cancel'), projects_path,  :class => 'button', :id => 'cancel'
 

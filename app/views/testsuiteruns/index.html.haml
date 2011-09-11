@@ -9,7 +9,7 @@
       .span-22.last
         = f.input :result, :as => :radio, :collection => options_for_result
       .span-22.last{:style => 'margin-bottom: 1em'}
-        = f.button :submit, t('helpers.search')
+        = f.button :submit, t('helpers.search'), :id => 'testsuiterun_search_submit'
 %table
   %thead
     %tr

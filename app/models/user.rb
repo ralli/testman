@@ -1,9 +1,11 @@
 class User < ActiveRecord::Base
-  acts_as_authentic
   validates_presence_of :login
+  validates_uniqueness_of :login
   validates_presence_of :email
   validates_length_of :login, :maximum => 20
   validates_length_of :email, :maximum => 80
+
+  has_secure_password
 
   belongs_to :current_project, :class_name => 'Project'
 

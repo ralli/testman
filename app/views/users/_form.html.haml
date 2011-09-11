@@ -16,7 +16,7 @@
       = f.input :password_confirmation
 
   .span-22.last{ :style => "margin-left: 1em; margin-top: 1em;" }
-    = f.button :submit, t('helpers.save')
+    = f.button :submit, t('helpers.save'), :id => 'user_submit'
     - if permitted_to? :manage, @user
       = link_to t('helpers.cancel'), users_url, :class => 'button'
     - else

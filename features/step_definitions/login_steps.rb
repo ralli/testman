@@ -1,5 +1,3 @@
-require 'authlogic/test_case'
-
 Given /^there is no user logged in$/ do
 
 end
@@ -12,12 +10,6 @@ Given /^(?:|I )enter the following values$/ do |table|
   end
 end
 
-
-Given /^I am logged in with login "([^"]*)" and password "([^"]*)"$/ do |login, password|
-  user_session = UserSession.new(:login => login, :password => password)
-  user_session.save!
-end
-
 Given /^I am logged in as user "([^"]*)"$/ do |login|
   user = User.find_by_login(login)
   user.destroy unless user.nil?
@@ -25,7 +17,7 @@ Given /^I am logged in as user "([^"]*)"$/ do |login|
   visit login_path
   fill_in "user_session_login", :with => login
   fill_in "user_session_password", :with => 'test123'
-  click_button "user_session_submit"
+  click_button "commit"
 end
 
 Given /^I am logged in as user "([^"]*)" for #{capture_model}$/ do |login, name|
@@ -35,7 +27,7 @@ Given /^I am logged in as user "([^"]*)" for #{capture_model}$/ do |login, name|
   visit login_path
   fill_in "user_session_login", :with => login
   fill_in "user_session_password", :with => 'test123'
-  click_button "user_session_submit"
+  click_button "commit"
 end
 
 Given /^I am logged in as administrator "([^"]*)"$/ do |login|

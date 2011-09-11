@@ -25,7 +25,7 @@
     = simple_form_for [@testcase, @teststep] do |f|
       = f.input :step
       = f.input :expected_result
-      = f.button :submit, t('helpers.save')
+      = f.button :submit, t('helpers.save'), :id => 'teststep_submit'
       = f.button :submit, t('helpers.save_and_new'), {:id => 'teststep_submit_new', :name => 'submit_and_new', :style => 'margin-left: 0px;'} if @teststep.new_record?
       = link_to t('helpers.cancel'), @testcase, :class => 'button', :id => 'cancel'
 

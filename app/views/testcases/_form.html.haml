@@ -48,6 +48,6 @@
         = f.input :test_method, :as => :select, :collection => test_methods, :include_blank => false
         = f.input :test_priority, :as => :select, :collection => test_priorities, :include_blank => false
       .span-22.last
-        = f.button :submit, t('helpers.save')
+        = f.button :submit, t('helpers.save'), :id => 'testcase_submit'
         = cancel_link @testcase, :id => 'cancel', :class => 'button'
 
