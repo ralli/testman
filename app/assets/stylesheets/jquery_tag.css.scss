@@ -1,5 +1,5 @@
 .taglist {
-    background: url("../images/textbox-bg.png") repeat-x scroll center top white;
+    background: url(textbox-bg.png) repeat-x scroll center top white;
     border-color: #727272 #B4B4B4 #DADADA;
     border-left: 1px solid #B4B4B4;
     border-right: 1px solid #B4B4B4;
@@ -45,7 +45,7 @@
 }
 
 .taglist li.tag a.delete {
-    background: url("../images/to-delete.png") no-repeat 5px 5px;
+    background: url("to-delete.png") no-repeat 5px 5px;
     width: 8px;
     height: 7px;
     text-decoration: none;
