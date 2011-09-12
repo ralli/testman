@@ -8,7 +8,6 @@ class UserSessionsController < ApplicationController
   end
 
   def create
-    debugger
     @user_session = UserSession.new(params[:user_session])
     if @user_session.valid?
       user = User.find_by_login(@user_session.login)
