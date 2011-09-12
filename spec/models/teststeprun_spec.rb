@@ -1,74 +1,53 @@
 require 'spec_helper'
 
 describe Teststeprun do
-  def make_valid_testrun(attributes = {})
-    teststep = Teststep.new
-    teststep.stubs(Teststep.plan)
-    testcaserun = Testcaserun.new
-    testcaserun.stubs(Testcaserun.plan)
-    user = User.new
-    user.stubs(User.plan)
-    Teststeprun.make_unsaved(Teststeprun.plan.merge(:teststep => teststep, :testcaserun => testcaserun, :created_by => user, :edited_by => user).merge(attributes))
+  let(:teststep) { mock_model(Teststep) }
+  let(:testcaserun) { mock_model(Testcaserun) }
+  let(:user) { mock_model(User) }
+  subject { Teststeprun.make_unsaved(Teststeprun.plan.merge(:teststep => teststep, :testcaserun => testcaserun, :created_by => user, :edited_by => user)) }
+
+  context "when validating" do
+    it "should be valid" do
+      subject.should be_valid
+    end
+
+    it { should validate_presence_of(:status) }
+    it { should validate_presence_of(:result) }
+    it { should validate_presence_of(:teststep) }
+    it { should validate_presence_of(:testcaserun) }
+    it { should validate_presence_of(:created_by) }
+    it { should validate_presence_of(:edited_by) }
+
+    it "should have a valid status" do
+      subject.status = 'hase'
+      subject.should_not be_valid
+    end
+
+    it "should have a valid result" do
+      subject.result = 'hase'
+      subject.should_not be_valid
+    end
   end
 
-  it "should be valid" do
-    run = make_valid_testrun
-    run.should be_valid
-  end
+  context "when stepping" do
+    it "should not step if status is ended" do
+      subject.status = 'ended'
+      subject.result = 'ok'
+      subject.step?.should be_false
+    end
 
-  it "should have a status" do
-    run = make_valid_testrun(:status => nil)
-    run.should_not be_valid
-  end
+    it "should step if status is running" do
+      subject.status = 'running'
+      subject.result = 'unknown'
+      subject.step?.should be_true
+    end
 
-  it "should have a result" do
-    run = make_valid_testrun(:result => nil)
-    run.should_not be_valid
-  end
-
-  it "should have a valid status" do
-    run = make_valid_testrun(:status => 'hase')
-    run.should_not be_valid
-  end
-
-  it "should have a valid result" do
-    run = make_valid_testrun(:result => 'hase')
-    run.should_not be_valid
-  end
-
-  it "should belong to a test step" do
-    run = make_valid_testrun(:teststep => nil)
-    run.should_not be_valid
-  end
-
-  it "should belong to a testcase run" do
-    run = make_valid_testrun(:testcaserun => nil)
-    run.should_not be_valid
-  end
-
-  it "should not step if status is ended" do
-    run = make_valid_testrun(:status => 'ended', :result => 'ok')
-    run.step?.should be_false    
-  end
-
-  it "should step if status is running" do
-    run = make_valid_testrun(:status => 'running', :result => 'unknown')
-    run.step?.should be_true
-  end
-
-  it "should step ok" do
-    run = make_valid_testrun(:status => 'running', :result => 'unknown')
-    run.expects(:update_attributes!).with(:edited_by => run.created_by, :status  => 'ended', :result => 'ok')
-    run.step(run.created_by, 'ok')
-  end
-
-  it "should be created by a user" do
-    run = make_valid_testrun(:created_by => nil)
-    run.should_not be_valid    
-  end
-
-  it "should be edited by a user" do
-    run = make_valid_testrun(:edited_by => nil)
-    run.should_not be_valid
+    it "should step ok" do
+      subject.status = 'running'
+      subject.result = 'unknown'
+      subject.expects(:update_attributes!).with(:edited_by => user, :status  => 'ended', :result => 'ok')
+      subject.step(user, 'ok')
+    end
   end
 end
+

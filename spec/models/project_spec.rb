@@ -1,10 +1,15 @@
-require File.dirname(__FILE__) + '/../spec_helper'
+require 'spec_helper'
 
 describe Project do
-  it "should be valid" do
-    Project.make_unsaved.should be_valid
-  end
+  context "when validating" do
+    subject { Project.make_unsaved }
 
-  check_length Project, :name, 80
-  check_required Project, :name
+    it "should be valid" do
+      subject.should be_valid
+    end
+
+    it { should validate_maximum_length_of(:name).to_be(80) }
+    it { should validate_presence_of :name }
+  end
 end
+
