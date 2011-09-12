@@ -28,7 +28,7 @@ describe Testcase do
     check_invalid_value(:test_priority)
     check_invalid_value(:test_method)
   end
-  
+
   describe "when searching" do
     it "should find a text within its name" do
       testcase = make_unsaved_testcase(:name => 'King of the Bongo la la')
@@ -67,7 +67,7 @@ describe Testcase do
       attachment = @testcase.testcase_attachments.create(:attachment => File.join(Rails.root, 'spec', 'fixtures', 'testfile.txt'))
       @copy = @testcase.create_version
     end
-    
+
     after :all do
       @testcase.destroy
       @copy.destroy
@@ -75,10 +75,10 @@ describe Testcase do
 
     it "should have the same attributes as its original" do
       @testcase.attributes.each do |key, value|
-        @copy.attributes[key].should== value unless key == 'version' or key == 'created_at' or key == 'updated_at' or key == 'id'
+        @copy.attributes[key].to_s.should== value.to_s unless key == 'version' or key == 'created_at' or key == 'updated_at' or key == 'id'
       end
     end
-    
+
     it "should have a different id than its original" do
       @testcase.id.should_not== @copy.id
     end
@@ -96,9 +96,10 @@ describe Testcase do
         step_copy.id.should_not== step.id
       end
     end
-    
+
     it "should copy its attachments as well" do
       @copy.testcase_attachments.size.should== 1
     end
   end
 end
+

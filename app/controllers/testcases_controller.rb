@@ -6,7 +6,7 @@ class TestcasesController < ApplicationController
 
   def index
     unless params[:tag].blank?
-      @testcases = Testcase.find_tagged_with(params[:tag], :order => 'testcases.key, testcases.version')
+      @testcases = Testcase.tagged_with(params[:tag], :order => 'testcases.key, testcases.version')
     else
       @testcases = current_project.testcases.order("testcases.key, testcases.version")
     end

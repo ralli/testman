@@ -1,5 +1,4 @@
 module ApplicationHelper
-  include TagsHelper
   include WillPaginate::ViewHelpers
 
   def my_will_paginate(collection, options = {})

@@ -51,3 +51,11 @@ Feature: Managing Testcases
     And I press "Search"
     Then I should see "Wonderful testcase"
 
+  Scenario: List Testcases by Tag
+    Given a project exists with name: "Test project"
+    And I am logged in as user "test" for that project
+    And a testcase exists with name: "Wonderful testcase", project: the project, tag_list: "smalltalk"
+    And I am on the testcases page
+    When I follow "smalltalk"
+    Then I should see "Wonderful testcase"
+
