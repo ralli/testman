@@ -27,8 +27,11 @@ gem 'declarative_authorization'
 gem 'RedCloth'
 gem 'jquery-rails'
 gem 'paperclip'
-gem 'ruby-debug19'
-#gem 'ruby-debug'
+if RUBY_VERSION > "1.9"
+    gem 'ruby-debug19'
+else
+    gem 'ruby-debug'
+end
 
 group :development, :test do
   gem 'therubyracer'
@@ -50,8 +53,7 @@ group :development, :test do
 
 
   gem 'mocha'
-  gem 'rcov'
-
+  gem 'simplecov', '>= 0.5.2', :require => false, :group => :test
   gem 'ruby_parser'
 end
 
