@@ -14,7 +14,6 @@ class TestcaseAttachmentsController < ApplicationController
     else
       flash[:error] = I18n::t('controller.testcase_attachments.attachment_required')
       render :action => 'new'
-      flash.clear
     end
   end
 

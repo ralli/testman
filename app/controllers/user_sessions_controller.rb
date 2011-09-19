@@ -25,7 +25,7 @@ class UserSessionsController < ApplicationController
   end
 
   def destroy
-    session[:user_id] = nil
+    session[:user_id  ] = nil
     redirect_to root_url, :notice => I18n::t('controller.user_sessions.logged_out')
   end
 end

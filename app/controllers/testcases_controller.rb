@@ -68,7 +68,7 @@ class TestcasesController < ApplicationController
 
   def check_current_project
     if current_project.nil?
-      flash[:error] = I18n::t("controller.testcases.active_project_needed")
+      flash[:alert] = I18n::t("controller.testcases.active_project_needed")
       redirect_to root_url
     end
   end

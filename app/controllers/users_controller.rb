@@ -7,10 +7,6 @@ class UsersController < ApplicationController
     @users = User.order('login').paginate(:page => params[:page])
   end
 
-  def show
-    @user = user.find(params[:id])
-  end
-
   def new
     @user = User.new
   end
@@ -39,7 +35,7 @@ class UsersController < ApplicationController
 
   def destroy
     if (params[:id] == current_user.to_param)
-      redirect_to return_url, :notice => I18n::t('controller.users.cannot_delete_current')
+      redirect_to return_url, :alert => I18n::t('controller.users.cannot_delete_current')
       return
     end
     @user = User.find(params[:id])
