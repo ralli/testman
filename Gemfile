@@ -43,14 +43,10 @@ group :development, :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'cucumber-rails'
-#  gem 'spork'
+  gem 'spork', '~> 0.9.0.rc'
   gem 'launchy'
   gem 'pickle'
-
- # gem 'mongrel'
-#  gem 'thin'
   gem 'nifty-generators'
-
 
   gem 'mocha'
   gem 'simplecov', '>= 0.5.2', :require => false, :group => :test
