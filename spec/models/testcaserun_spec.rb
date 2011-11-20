@@ -9,6 +9,13 @@ describe Testcaserun do
 
   subject { Testcaserun.make_unsaved(:testsuiterun => testsuiterun, :testcase => testcase, :created_by => user, :edited_by => user, :status => 'new', :result => 'unknown') }
 
+  it { should belong_to :testsuiterun }
+  it { should belong_to :testcase }
+  it { should belong_to :created_by }
+  it { should belong_to :edited_by }
+  it { should have_many(:teststepruns).dependent(:destroy) }
+  it { should have_many(:testcaselogs).dependent(:destroy) }
+
   context "when validating" do
     it { should be_valid }
     it { should validate_presence_of(:testsuiterun) }
@@ -83,4 +90,3 @@ describe Testcaserun do
     end
   end
 end
-
