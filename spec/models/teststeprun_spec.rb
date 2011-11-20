@@ -45,7 +45,7 @@ describe Teststeprun do
     it "should step ok" do
       subject.status = 'running'
       subject.result = 'unknown'
-      subject.expects(:update_attributes!).with(:edited_by => user, :status  => 'ended', :result => 'ok')
+      subject.should_receive(:update_attributes!).with(:edited_by => user, :status  => 'ended', :result => 'ok')
       subject.step(user, 'ok')
     end
   end

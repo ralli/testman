@@ -9,15 +9,10 @@ describe Project do
   it { should have_many(:testsuiteruns) }
   it { should have_many(:testcaseruns) }
   it { should have_many(:teststeps) }
-
-  describe "when validating" do
-    it "should be valid" do
-      subject.should be_valid
-    end
-
-    it { should ensure_length_of(:name).is_at_most(80) }
-    it { should validate_presence_of :name }
-
+  it "should be valid with valid attributes given" do
+    subject.should be_valid
   end
+  it { should ensure_length_of(:name).is_at_most(80) }
+  it { should validate_presence_of :name }
 end
 

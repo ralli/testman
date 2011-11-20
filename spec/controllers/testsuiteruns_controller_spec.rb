@@ -6,8 +6,8 @@ describe TestsuiterunsController do
   let(:user) { mock_model(User, :current_project => project, :locale => 'en', :roles => [:admin]) }
 
   before do
-    session[:user_id] = 1
-    User.stub(:find) { user }
+    session[:user_id] = user.to_param
+    User.stub(:find).with(user.to_param) { user }
     Testsuiterun.stub(:find).with(testsuiterun.to_param) { testsuiterun }
   end
 
