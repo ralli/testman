@@ -43,23 +43,3 @@ Spork.each_run do
     SimpleCov.start 'rails'
   end
 end
-
-
-class Object
-  def self.check_required(cls, attribute)
-    it "should validate the presence of the attribute #{attribute}" do
-      instance = cls.make_unsaved(attribute => nil)
-      instance.should_not be_valid
-    end
-  end
-
-  def self.check_length(cls, attribute, length)
-    it "should validate the length of the attribute #{attribute} to be at most #{length}" do
-      instance = cls.make_unsaved(attribute => ("x" * (length+1)))
-      instance.should_not be_valid
-      instance = cls.make_unsaved(attribute => "x" * length)
-      instance.should be_valid
-    end
-  end
-end
-
