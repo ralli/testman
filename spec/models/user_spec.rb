@@ -6,9 +6,9 @@ describe User do
   context "when validating" do
     it { should be_valid }
     it { should validate_presence_of :login }
-    it { should validate_maximum_length_of(:login).to_be(20) }
+    it { should ensure_length_of(:login).is_at_most(20) }
     it { should validate_presence_of :email }
-    it { should validate_maximum_length_of(:email).to_be(80) }
+    it { should ensure_length_of(:email).is_at_most(80) }
   end
 
   context "when getting the display name" do

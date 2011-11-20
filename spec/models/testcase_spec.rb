@@ -1,9 +1,9 @@
 require File.dirname(__FILE__) + '/../spec_helper'
 
 describe Testcase do
+  let(:project) { mock_model(Project) }
+  let(:user) { mock_model(User) }
   def make_unsaved_testcase(attributes = {})
-    project = Project.make
-    user = User.make
     Testcase.make_unsaved(attributes.merge({:key => 'NEW', :project => project, :created_by => user, :edited_by => user }))
   end
 

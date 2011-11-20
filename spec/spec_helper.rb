@@ -37,9 +37,10 @@ end
 
 Spork.each_run do
   # This code will be run each time you run your specs.
-# This file is copied to spec/ when you run 'rails generate rspec:install'
+  # This file is copied to spec/ when you run 'rails generate rspec:install'
   if RUBY_VERSION > "1.9"
     require 'simplecov'
     SimpleCov.start 'rails'
   end
 end
+

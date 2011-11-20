@@ -39,6 +39,7 @@ group :development, :test do
   gem 'machinist'
   gem 'faker'
   gem 'rspec-rails'
+  gem 'shoulda-matchers'
 
   gem 'capybara'
   gem 'database_cleaner'
