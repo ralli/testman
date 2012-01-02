@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110912180120) do
+ActiveRecord::Schema.define(:version => 20120101182259) do
 
   create_table "projects", :force => true do |t|
     t.string   "name",       :limit => 80, :null => false
@@ -182,6 +182,17 @@ ActiveRecord::Schema.define(:version => 20110912180120) do
   add_index "testsuites", ["edited_by_id"], :name => "index_testsuites_on_edited_by_id"
   add_index "testsuites", ["key"], :name => "index_testsuites_on_key"
   add_index "testsuites", ["project_id"], :name => "index_testsuites_on_project_id"
+
+  create_table "tracker_settings", :force => true do |t|
+    t.string  "type",       :limit => 60
+    t.integer "project_id"
+    t.string  "site"
+    t.string  "user",       :limit => 40
+    t.string  "password",   :limit => 40
+  end
+
+  add_index "tracker_settings", ["project_id"], :name => "index_tracker_settings_on_project_id"
+  add_index "tracker_settings", ["type"], :name => "index_tracker_settings_on_type"
 
   create_table "users", :force => true do |t|
     t.string   "login",              :limit => 20, :null => false

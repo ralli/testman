@@ -94,3 +94,14 @@ Testcaselog.blueprint do
 
 end
 
+TrackerSetting.blueprint do
+  site { 'http://localhost:3000' }
+  user { 'admin' }
+  password { 'admin' }
+end
+
+RedmineSetting.blueprint do
+  site { 'http://localhost:3000' }
+  user { 'admin' }
+  password { 'admin' }
+end

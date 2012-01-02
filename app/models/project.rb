@@ -8,7 +8,9 @@ class Project < ActiveRecord::Base
   has_many :testsuiteruns, :through => :testsuites
   has_many :testcaseruns, :through => :testcases
   has_many :teststeps, :through => :testcases
-  
+
+  has_one :tracker_setting, :dependent => :destroy
+
   def to_label
     name
   end
