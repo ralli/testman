@@ -1,6 +1,10 @@
 /*
 *= require_self
-*= require_tree .
+*= require_tree ./markitup
+*= require_tree ./smoothness
+*= require ./blueprint/screen
+*= require ./jquery_tag
+*= require ./testcases
 */
 
 .pagination {
