@@ -15,7 +15,7 @@
     .mainmenu
       .container
         = render '/layouts/menu'
-    .container{:style => "min-height: 200px;"}
+    .container.body-container
       - flash.each do |name, msg|
         = content_tag :div, :id => "flash_#{name}", :class => "span-24 last #{name}", :style => 'padding: 0px;' do
           = content_tag :div, msg, :style => 'padding: 1em;'

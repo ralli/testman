@@ -6,34 +6,14 @@
       padding: 1em 0px 0px 0px;
     }
 
+    ul.step_buttons li {
+      float: left;
+      list-style: none;
+      width: auto;
+    }
+
     ul.step_buttons li.step_ok {
-      float: left;
-      list-style: none;
-      width: auto;
-      min-height: 32px;
-      background-image: url("/icons/medium/ok.png");
-      background-position: left;
-      background-repeat: no-repeat;
-      line-height: 32px;
-      padding-right: 32px;
-    }
-
-    ul.step_buttons li.step_failure {
-      float: left;
-      list-style: none;
-      width: auto;
-      min-height: 32px;
-      line-height: 32px;
-      background-image: url("/icons/medium/failure.png");
-      background-position: left;
-      background-repeat: no-repeat;
-    }
-
-    ul.step_buttons li a {
-      padding-left: 35px;
-      min-height: 32px;
-      line-height: 32px;
-      height: 32px;
+      padding-right: 1em;
     }
 
     div.progressbar {
@@ -48,8 +28,8 @@
     $(function() {
       $('#progressbar').progressbar({ value: #{completed_percentage}  });
       $('#show_all,#show_current').button({icons: { primary:'ui-icon-search'}});
-      $('#set_all_failed').button({icons: { primary:'ui-icon-circle-close'}});
-      $('#set_all_ok').button({icons: { primary:'ui-icon-circle-check'}});
+      $('#set_all_failed,#step_failure').button({icons: { primary:'ui-icon-circle-close'}});
+      $('#set_all_ok,#step_ok').button({icons: { primary:'ui-icon-circle-check'}});
     })
 
 - title t('testsuiteruns.show.title')

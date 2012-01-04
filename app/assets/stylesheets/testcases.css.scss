@@ -24,3 +24,20 @@ ul.tagmenu {
   }
 }
 
+form.testcase {
+  textarea,  input[type="text"] {
+    padding: 4px;
+    width: 570px;
+  }
+}
+
+form.testcase select {
+  width: 140px;
+  margin-right:10px;
+  padding: 4px;
+}
+
+form.testcase div.textile {
+  margin-left: 120px;
+}
+
