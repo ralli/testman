@@ -4,12 +4,12 @@ describe Testsuiterun do
   describe "when validating" do
     def make_valid_testrun(attributes = {})
       project = Project.new
-      project.stubs(Project.plan)
+      project.stub(Project.make.attributes)
       user = User.new
-      user.stubs(User.plan(:current_project => project))
+      user.stub(User.make(:current_project => project).attributes)
       testsuite = Testsuite.new
-      testsuite.stubs(:edited_by => user, :created_by => user, :project => project)
-      run = Testsuiterun.make_unsaved({:testsuite => testsuite, :created_by => user, :edited_by => user}.merge(attributes))
+      testsuite.stub(:edited_by => user, :created_by => user, :project => project)
+      run = Testsuiterun.make({:testsuite => testsuite, :created_by => user, :edited_by => user}.merge(attributes))
     end
   
     it "should be valid" do
@@ -55,15 +55,15 @@ describe Testsuiterun do
 
   describe "when stepping" do
     it "should update the run even if no testcase run is presend" do
-      run = Testsuiterun.make_unsaved(:status => 'new', :result => 'unknown')
-      run.stubs(:nextcase => nil)
+      run = Testsuiterun.make(:status => 'new', :result => 'unknown')
+      run.stub(:nextcase => nil)
       arg = { :edited_by => 'user', :status => 'ended', :result => 'ok' }
       run.expects(:update_attributes!).with(arg)
       run.step('user', 'ok')
     end
 
     it "should not update the run if already ended" do
-      run = Testsuiterun.make_unsaved(:status => 'ended', :result => 'ok')
+      run = Testsuiterun.make(:status => 'ended', :result => 'ok')
       run.nextcase.should be_nil
       run.next?.should be_false
       run.step?.should be_false

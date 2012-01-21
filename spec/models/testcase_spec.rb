@@ -4,7 +4,7 @@ describe Testcase do
   let(:project) { mock_model(Project) }
   let(:user) { mock_model(User) }
   def make_unsaved_testcase(attributes = {})
-    Testcase.make_unsaved(attributes.merge({:key => 'NEW', :project => project, :created_by => user, :edited_by => user }))
+    Testcase.make(attributes.merge({:key => 'NEW', :project => project, :created_by => user, :edited_by => user }))
   end
 
   describe "validations" do
@@ -46,7 +46,7 @@ describe Testcase do
     it "should find a text within the teststeps step-definition" do
       testcase = make_unsaved_testcase()
       testcase.save!
-      teststep = testcase.teststeps.make(:step => 'King of the Bongo la la')
+      teststep = testcase.teststeps.make!(:step => 'King of the Bongo la la')
       result = Testcase.search('bongo')
       result.size.should== 1
     end
@@ -54,7 +54,7 @@ describe Testcase do
     it "should find a text within the teststeps expected outcome" do
       testcase = make_unsaved_testcase()
       testcase.save!
-      teststep = testcase.teststeps.make(:expected_result => 'King of the Bongo la la')
+      teststep = testcase.teststeps.make!(:expected_result => 'King of the Bongo la la')
       result = testcase.class.search('bongo')
       result.size.should== 1
     end
@@ -62,8 +62,8 @@ describe Testcase do
 
   describe "when creating a new version" do
     before :all do
-      @testcase = Testcase.make(:full)
-      @testcase.teststeps.make()
+      @testcase = Testcase.make!(:full)
+      @testcase.teststeps.make!()
       attachment = @testcase.testcase_attachments.create(:attachment => File.join(Rails.root, 'spec', 'fixtures', 'testfile.txt'))
       @copy = @testcase.create_version
     end

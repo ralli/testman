@@ -15,8 +15,8 @@ ActiveRecord::Schema.define(:version => 20110912180120) do
 
   create_table "projects", :force => true do |t|
     t.string   "name",       :limit => 80, :null => false
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
   end
 
   add_index "projects", ["name"], :name => "index_projects_on_name"
@@ -54,8 +54,8 @@ ActiveRecord::Schema.define(:version => 20110912180120) do
     t.integer  "created_by_id"
     t.string   "status",         :limit => 20
     t.string   "result",         :limit => 20
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                   :null => false
+    t.datetime "updated_at",                   :null => false
   end
 
   add_index "testcaselogs", ["created_by_id"], :name => "index_testcaselogs_on_created_by_id"
@@ -69,8 +69,8 @@ ActiveRecord::Schema.define(:version => 20110912180120) do
     t.string   "result",          :limit => 20
     t.integer  "created_by_id"
     t.integer  "edited_by_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
   end
 
   add_index "testcaseruns", ["created_by_id"], :name => "index_testcaseruns_on_created_by_id"
@@ -94,8 +94,8 @@ ActiveRecord::Schema.define(:version => 20110912180120) do
     t.string   "test_status",     :limit => 20
     t.string   "test_priority",   :limit => 20
     t.string   "test_method",     :limit => 20
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                      :null => false
+    t.datetime "updated_at",                                      :null => false
     t.string   "cached_tag_list"
   end
 
@@ -120,8 +120,8 @@ ActiveRecord::Schema.define(:version => 20110912180120) do
     t.string   "result",         :limit => 20
     t.integer  "created_by_id"
     t.integer  "edited_by_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                  :null => false
+    t.datetime "updated_at",                                  :null => false
   end
 
   add_index "teststepruns", ["created_by_id"], :name => "index_teststepruns_on_created_by_id"
@@ -134,8 +134,8 @@ ActiveRecord::Schema.define(:version => 20110912180120) do
     t.integer  "position"
     t.text     "step"
     t.text     "expected_result"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   add_index "teststeps", ["testcase_id", "position"], :name => "index_teststeps_on_testcase_id_and_position"
@@ -157,8 +157,8 @@ ActiveRecord::Schema.define(:version => 20110912180120) do
     t.integer  "created_by_id"
     t.integer  "edited_by_id"
     t.string   "show_mode",     :limit => 10, :default => "current"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                         :null => false
+    t.datetime "updated_at",                                         :null => false
   end
 
   add_index "testsuiteruns", ["created_by_id"], :name => "index_testsuiteruns_on_created_by_id"
@@ -174,8 +174,8 @@ ActiveRecord::Schema.define(:version => 20110912180120) do
     t.integer  "created_by_id"
     t.integer  "edited_by_id"
     t.integer  "project_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                                    :null => false
+    t.datetime "updated_at",                                    :null => false
   end
 
   add_index "testsuites", ["created_by_id"], :name => "index_testsuites_on_created_by_id"
@@ -190,8 +190,8 @@ ActiveRecord::Schema.define(:version => 20110912180120) do
     t.string   "email",              :limit => 80, :null => false
     t.string   "password_digest"
     t.integer  "current_project_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.datetime "created_at",                       :null => false
+    t.datetime "updated_at",                       :null => false
     t.string   "locale",             :limit => 10
   end
 

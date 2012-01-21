@@ -7,7 +7,7 @@ describe Testcaserun do
   let(:teststeprun) { mock_model(Teststeprun) }
   let(:testcaselog) { mock_model(Testcaselog) }
 
-  subject { Testcaserun.make_unsaved(:testsuiterun => testsuiterun, :testcase => testcase, :created_by => user, :edited_by => user, :status => 'new', :result => 'unknown') }
+  subject { Testcaserun.make(:testsuiterun => testsuiterun, :testcase => testcase, :created_by => user, :edited_by => user, :status => 'new', :result => 'unknown') }
 
   it { should belong_to :testsuiterun }
   it { should belong_to :testcase }

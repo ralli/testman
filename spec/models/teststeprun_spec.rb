@@ -4,7 +4,7 @@ describe Teststeprun do
   let(:teststep) { mock_model(Teststep) }
   let(:testcaserun) { mock_model(Testcaserun) }
   let(:user) { mock_model(User) }
-  subject { Teststeprun.make_unsaved(Teststeprun.plan.merge(:teststep => teststep, :testcaserun => testcaserun, :created_by => user, :edited_by => user)) }
+  subject { Teststeprun.make(:teststep => teststep, :testcaserun => testcaserun, :created_by => user, :edited_by => user) }
 
   context "when validating" do
     it "should be valid" do

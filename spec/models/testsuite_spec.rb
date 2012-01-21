@@ -5,13 +5,13 @@ describe Testsuite do
   describe "when validating" do
     def create_suite(attributes = {})
       project = Project.new
-      project.stubs(Project.plan.merge({:id => 10}))
+      project.stub(Project.make.attributes.merge({:id => 10}))
 
       user = User.new
-      user.stubs(User.plan(:current_project => project).merge({:id => 10}))
+      user.stub(User.make(:current_project => project).attributes.merge({:id => 10}))
 
       bla = {:project => project, :created_by => user, :edited_by => user}
-      Testsuite.make_unsaved(bla.merge(attributes))
+      Testsuite.make(bla.merge(attributes))
     end
 
     it "should be valid" do
@@ -37,11 +37,11 @@ describe Testsuite do
 
   describe "when creating a new test run" do
     def make_full_suite
-      project = Project.make
-      user = User.make(:current_project => project)
-      testcase = Testcase.make(:project => project, :created_by => user, :edited_by => user)
-      teststep = Teststep.make(:testcase => testcase)
-      testsuite = Testsuite.make(:project => project, :created_by => user, :edited_by => user)
+      project = Project.make!
+      user = User.make!(:current_project => project)
+      testcase = Testcase.make!(:project => project, :created_by => user, :edited_by => user)
+      teststep = Teststep.make!(:testcase => testcase)
+      testsuite = Testsuite.make!(:project => project, :created_by => user, :edited_by => user)
       testsuite.testsuite_entries.create(:testcase => testcase)
       Testsuite.find(testsuite.id)
     end
@@ -54,18 +54,18 @@ describe Testsuite do
 
   describe "when searching" do
     it "should find matches within the name" do
-      project = Project.make
-      user = User.make
-      testsuite = Testsuite.make(:project => project, :created_by => user, :edited_by => user, :name => 'My Bingo Bongo')
+      project = Project.make!
+      user = User.make!
+      testsuite = Testsuite.make!(:project => project, :created_by => user, :edited_by => user, :name => 'My Bingo Bongo')
       testsuites = Testsuite.search('bingo')
       testsuites.size.should== 1
       testsuites.first.name.should== 'My Bingo Bongo'
     end
 
     it "should find matches within the description" do
-      project = Project.make
-      user = User.make
-      testsuite = Testsuite.make(:project => project, :created_by => user, :edited_by => user, :description => 'My Bingo Bongo')
+      project = Project.make!
+      user = User.make!
+      testsuite = Testsuite.make!(:project => project, :created_by => user, :edited_by => user, :description => 'My Bingo Bongo')
       testsuites = Testsuite.search('bingo')
       testsuites.size.should== 1
       testsuites.first.description.should== 'My Bingo Bongo'      
@@ -74,11 +74,11 @@ describe Testsuite do
 
   describe "when creating a new version" do
     before :all do
-      @project = Project.make
-      @user = User.make(:current_project => @project)
-      @testcase = Testcase.make(:project => @project, :created_by => @user, :edited_by => @user)
-      @teststep = @testcase.teststeps.make
-      @original = Testsuite.make(:project => @project, :created_by => @user, :edited_by => @user)
+      @project = Project.make!
+      @user = User.make!(:current_project => @project)
+      @testcase = Testcase.make!(:project => @project, :created_by => @user, :edited_by => @user)
+      @teststep = @testcase.teststeps.make!
+      @original = Testsuite.make!(:project => @project, :created_by => @user, :edited_by => @user)
       @original.testsuite_entries.create(:testcase => @testcase)
       @original = Testsuite.find(@original.id)
       @copy = @original.create_version(@user)

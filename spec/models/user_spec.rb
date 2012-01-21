@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe User do
-  subject { User.make_unsaved }
+  subject { User.make }
 
   context "when validating" do
     it { should be_valid }
