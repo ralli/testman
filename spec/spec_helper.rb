@@ -29,9 +29,6 @@ Spork.prefork do
     # examples within a transaction, remove the following line or assign false
     # instead of true.
     config.use_transactional_fixtures = true
-
-    config.before(:all)    { Sham.reset(:before_all)  }
-    config.before(:each)   { Sham.reset(:before_each) }
   end
 end
 

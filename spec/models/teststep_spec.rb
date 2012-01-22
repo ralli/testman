@@ -4,7 +4,7 @@ describe Teststep do
   let(:testcase) { mock_model(Testcase) }
   let(:user) { mock_model(User) }
   let(:testcaserun) { mock_model(Testcaserun) }
-  subject { Teststep.make_unsaved(:testcase => testcase) }
+  subject { Teststep.make(:testcase => testcase) }
 
   context "when validating" do
     it { should be_valid }

@@ -326,4 +326,4 @@ de:
     user_sessions:
       logged_in: 'Anmeldung erfolgreich.'
       logged_out: 'Abmeldung erfolgreich.'
-
+      invalid_user_or_password: 'Falscher Benutzername oder falsches Passwort'

@@ -7,6 +7,7 @@ describe ProjectsController do
   before do
     session[:user_id] = 1
     User.stub(:find) { user }
+    user.stub(:reload) { user }
   end
 
   describe "GET new" do
@@ -42,8 +43,7 @@ describe ProjectsController do
     end
 
     it "should assign the project to the current user" do
-      user.should_receive(:reload).and_return(user)
-      user.should_receive(:update_attribute).with(:current_project, project)
+      user.stub_chain(:reload, :update_attribute)
       get 'activate', :id => project.to_param
     end
 

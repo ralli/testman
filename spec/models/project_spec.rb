@@ -1,7 +1,7 @@
 require 'spec_helper'
 
 describe Project do
-  subject { Project.make_unsaved }
+  subject { Project.make }
 
   it { should have_many(:testcases) }
   it { should have_many(:testsuites) }

@@ -314,8 +314,8 @@ en:
       successfully_updated: 'The testsuite has been successfully saved.'
       successfully_deleted: 'The testsuite has been successfully deleted.'
       testsuite_run_started: 'Testsuite run started'
-      successfully_reordered: "Successfully reordered testcases"
-      successfully_assigned: "Successfully assigned testcase"
+      successfully_reordered: 'Successfully reordered testcases'
+      successfully_assigned: 'Successfully assigned testcase'
       successfully_removed_testcase: 'The testcase has been successfully removed.'
       new_version_created: 'Successfully created a new version.'
     users:
@@ -326,4 +326,5 @@ en:
     user_sessions:
       logged_in: 'Login successful.'
       logged_out: 'Logout successful.'
+      invalid_user_or_password: 'Invalid username or password'
 

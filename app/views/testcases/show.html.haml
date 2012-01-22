@@ -1,21 +1,9 @@
 - title t('testcases.show.title')
 - content_for :head do
-  = javascript_include_tag 'jquery.tablednd'
-  = stylesheet_link_tag 'jquery.tag'
   :css
-    .link_list {
-      list-style: none;
-    }
-
     .top_margin {
       margin-top: 1em;
       margin-bottom: 0px;
-    }
-
-    .link_list li {
-      float: left;
-      margin: 0px;
-      padding: 0px 5px 0px 0px;
     }
 
     .handle {
@@ -56,7 +44,6 @@
 
   :javascript
     $(function() {
-      $('a.button_add').button({icons: { primary:'ui-icon-plus'}});
       $('#attachments').sortable({
         axis: 'y',
         dropOnEmpty: false,

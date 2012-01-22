@@ -4,7 +4,7 @@ describe TestsuiteEntry do
   context "when validating" do
     let(:testcase) { mock_model(Testcase) }
     let(:testsuite) { mock_model(Testsuite) }
-    subject { TestsuiteEntry.make_unsaved(:testsuite => testsuite, :testcase => testcase) }
+    subject { TestsuiteEntry.make(:testsuite => testsuite, :testcase => testcase) }
 
     it { should be_valid }
     it { should validate_presence_of :testsuite }

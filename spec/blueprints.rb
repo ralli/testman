@@ -10,9 +10,9 @@ end
 User.blueprint do
   login { Faker::Base::letterify("??????????") }
   email { Faker::Internet::email(login) }
-  password { login }
-  password_confirmation { password }
-  first_name { login.camelize }
+  password { object.login }
+  password_confirmation { object.password }
+  first_name { object.login.camelize }
   last_name { Faker::Name.last_name }
   locale { 'en' }
 end
@@ -36,9 +36,9 @@ Testcase.blueprint do
 end
 
 Testcase.blueprint(:full) do
-  project { Project.make }
-  created_by { User.make(:current_project => project) }
-  edited_by { created_by }
+  project { Project.make! }
+  created_by { User.make!(:current_project => project) }
+  edited_by { object.created_by }
 end
 
 Teststep.blueprint do
@@ -47,7 +47,7 @@ Teststep.blueprint do
 end
 
 Teststep.blueprint(:full) do
-  testcase { Testcase.make(:full) }
+  testcase { Testcase.make!(:full) }
 end
 
 Testsuite.blueprint do
@@ -57,9 +57,9 @@ Testsuite.blueprint do
 end
 
 Testsuite.blueprint(:full) do
-  project { Project.make }
-  created_by { User.make(:current_project => project) }
-  edited_by { created_by }
+  project { Project.make! }
+  created_by { User.make!(:current_project => object.project) }
+  edited_by { object.created_by }
 end
 
 TestsuiteEntry.blueprint do
@@ -71,19 +71,19 @@ Testsuiterun.blueprint do
 end
 
 Testsuiterun.blueprint(:full) do
-  created_by { User.make(:full)}
-  edited_by { created_by }
-  testsuite { Testsuite.make(:full) }
+  created_by { User.make!(:full)}
+  edited_by { object.created_by }
+  testsuite { Testsuite.make!(:full) }
 end
 
 Testcaserun.blueprint do
   status { ['new', 'running', 'ended'].sample }
-  result { status != 'ended' ? 'unknown' : ['unknown', 'ok', 'failed', 'error', 'skipped'].sample }
+  result { object.status != 'ended' ? 'unknown' : ['unknown', 'ok', 'failed', 'error', 'skipped'].sample }
 end
 
 Teststeprun.blueprint do
   status { ['new', 'running', 'ended'].sample }
-  result { status != 'ended' ? 'unknown' : ['unknown', 'ok', 'failed', 'error', 'skipped'].sample }
+  result { object.status != 'ended' ? 'unknown' : ['unknown', 'ok', 'failed', 'error', 'skipped'].sample }
 end
 
 TestcaseAttachment.blueprint do
@@ -91,7 +91,6 @@ TestcaseAttachment.blueprint do
 end
 
 Testcaselog.blueprint do
-
 end
 
 TrackerSetting.blueprint do

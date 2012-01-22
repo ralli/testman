@@ -3,15 +3,15 @@ require File.dirname(__FILE__) + '/../spec_helper'
 describe ProjectStatistic do
   context "when querying the database" do
     before :all do
-      @project   = Project.make
-      @user      = User.make(:current_project => @project)
-      @testcase1 = Testcase.make(:project => @project, :created_by => @user, :edited_by => @user)
-      @testcase2 = Testcase.make(:project => @project, :created_by => @user, :edited_by => @user)
-      @testcase1.teststeps.make
-      @testcase2.teststeps.make
+      @project   = Project.make!
+      @user      = User.make!(:current_project => @project)
+      @testcase1 = Testcase.make!(:project => @project, :created_by => @user, :edited_by => @user)
+      @testcase2 = Testcase.make!(:project => @project, :created_by => @user, :edited_by => @user)
+      @testcase1.teststeps.make!
+      @testcase2.teststeps.make!
 
-      @testsuite1 = Testsuite.make(:project => @project, :created_by => @user, :edited_by => @user)
-      @testsuite2 = Testsuite.make(:project => @project, :created_by => @user, :edited_by => @user)
+      @testsuite1 = Testsuite.make!(:project => @project, :created_by => @user, :edited_by => @user)
+      @testsuite2 = Testsuite.make!(:project => @project, :created_by => @user, :edited_by => @user)
       @testsuite1.testsuite_entries.create(:testcase => @testcase1)
       @testsuite1.testsuite_entries.create(:testcase => @testcase2)
       @testsuite2.testsuite_entries.create(:testcase => @testcase1)
@@ -108,9 +108,9 @@ describe ProjectStatistic do
 
   it "should query the teststeprun groups for statuses once if called multiple times" do
     teststepruns = stub()
-    teststepruns.stubs(:joins).returns(stub(:group => []))
+    teststepruns.stub(:joins) {stub(:group => [])}
     project = mock()
-    project.expects(:testcaseruns).returns(teststepruns)
+    project.stub(:testcaseruns) {teststepruns}
     statistics = ProjectStatistic.new(project)
     statistics.teststeprun_status_groups
     statistics.teststeprun_status_groups
@@ -118,9 +118,9 @@ describe ProjectStatistic do
 
   it "should query the teststeprun groups for results once if called multiple times" do
     teststepruns = stub()
-    teststepruns.stubs(:joins).returns(stub(:group => []))
+    teststepruns.stub(:joins) {stub(:group => [])}
     project = mock()
-    project.expects(:testcaseruns).returns(teststepruns)
+    project.stub(:testcaseruns) {teststepruns}
     statistics = ProjectStatistic.new(project)
     statistics.teststeprun_result_groups
     statistics.teststeprun_result_groups

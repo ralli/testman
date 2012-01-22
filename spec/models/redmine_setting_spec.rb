@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe RedmineSetting do
   let(:project) { mock_model(Project) }
-  subject { RedmineSetting.make_unsaved(:project => project) }
+  subject { RedmineSetting.make(:project => project) }
 
   it { should be_valid }
 
