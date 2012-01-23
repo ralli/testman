@@ -10,3 +10,4 @@
       = link_to t('projects.show.destroy'), @project, :confirm => t('projects.show.confirm'), :method => :delete, :class => 'button', :id => 'delete' if permitted_to? :delete, @project
       = link_to t('projects.show.back_to_list'), projects_path, :class => 'button', :id => 'cancel' if permitted_to? :read, :projects
 
+= link_to "Tracker settings", new_project_redmine_setting_path(@project), :class => 'button'

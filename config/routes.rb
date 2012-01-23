@@ -46,6 +46,7 @@ Testman::Application.routes.draw do
   resources :projects do
     get 'activatable_projects', :on => :collection
     get 'activate', :on => :member
+    resources :redmine_settings
   end
 
   resources :users

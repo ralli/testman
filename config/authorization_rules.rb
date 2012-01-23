@@ -7,7 +7,7 @@ authorization do
 
   role :manager do
     includes :user
-    has_permission_on [:projects, :testcases, :teststeps, :testsuites, :testsuiteruns, :testcase_attachments], :to => :manage
+    has_permission_on [:projects, :testcases, :teststeps, :testsuites, :testsuiteruns, :testcase_attachments, :redmine_settings], :to => :manage
   end
 
   role :admin do

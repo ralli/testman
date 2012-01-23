@@ -1,0 +1,2 @@
+module RedmineSettingsHelper
+end

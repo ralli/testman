@@ -50,6 +50,11 @@ de:
       user_session:
         login: 'Login'
         password: 'Passwort'
+      redmine_setting:
+        site: 'URL'
+        user: 'Benutzer'
+        password: 'Passwort'
+        project_id: 'Projekt'
 
   helpers:
     submit:
@@ -283,6 +288,12 @@ de:
       teststeps: 'Testschritte'
       test_status: 'Teststatus'
       total: 'Gesamt'
+  redmine_settings:
+    new:
+      title: 'Redmine Einstellungen'
+      settings: 'Einstellungen'
+    choose_project:
+      title: 'Projekt auswählen'
   controller:
     application:
       permission_denied: "Sie haben keine Berechtigung zum Ansehen dieser Seite."
@@ -327,3 +338,7 @@ de:
       logged_in: 'Anmeldung erfolgreich.'
       logged_out: 'Abmeldung erfolgreich.'
       invalid_user_or_password: 'Falscher Benutzername oder falsches Passwort'
+    redmine_settings:
+      successfully_created: 'Die Einstellungen wurden erfolgreich angelegt.'
+      successfully_updated: 'Die Einstellungen wurden erfolgreich gespeichert.'
+      successfully_deleted: 'Die Einstellungen wurden erfolgreich gelöscht.'

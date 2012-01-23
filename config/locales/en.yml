@@ -50,6 +50,11 @@ en:
       user_session:
         login: 'Login'
         password: 'Password'
+      redmine_setting:
+        site: 'URL'
+        user: 'User'
+        password: 'Password'
+        project_id: 'Project'
 
   helpers:
     submit:
@@ -267,6 +272,12 @@ en:
       login: 'Login'
       loginbutton: 'Login'
       registerbutton: 'Register'
+  redmine_settings:
+    new:
+      title: 'Redmine Settings'
+      settings: 'Settings'
+    choose_project:
+      title: 'Choose Project'
   welcome:
     index:
       title: 'Welcome'
@@ -327,4 +338,7 @@ en:
       logged_in: 'Login successful.'
       logged_out: 'Logout successful.'
       invalid_user_or_password: 'Invalid username or password'
-
+    redmine_settings:
+      successfully_created: 'Successfully saved settings.'
+      successfully_updated: 'Successfully updated settings.'
+      successfully_deleted: 'Successfully deleted settings.'

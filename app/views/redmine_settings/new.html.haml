@@ -1,0 +1,12 @@
+- title t('redmine_settings.new.title')
+
+= simple_form_for [@project, @redmine_setting] do |f|
+  = f.error_notification
+  %fieldset
+    %legend= t('redmine_settings.new.settings')
+    .fieldset
+      = f.input :site
+      = f.input :user
+      = f.input :password
+      = f.button :submit, t('helpers.save')
+      = link_to t('helpers.cancel'), @project, :class => 'button'
