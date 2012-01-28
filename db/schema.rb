@@ -184,12 +184,14 @@ ActiveRecord::Schema.define(:version => 20120122174600) do
   add_index "testsuites", ["project_id"], :name => "index_testsuites_on_project_id"
 
   create_table "tracker_settings", :force => true do |t|
-    t.string  "type",               :limit => 60
+    t.string  "type",                 :limit => 60
     t.integer "project_id"
     t.string  "site"
-    t.string  "user",               :limit => 40
-    t.string  "password",           :limit => 40
+    t.string  "user",                 :limit => 40
+    t.string  "password",             :limit => 40
     t.integer "tracker_project_id"
+    t.string  "tracker_project_name"
+    t.string  "tracker_project_key",  :limit => 60
   end
 
   add_index "tracker_settings", ["project_id"], :name => "index_tracker_settings_on_project_id"

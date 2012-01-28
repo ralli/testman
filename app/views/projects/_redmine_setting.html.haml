@@ -1,0 +1,22 @@
+%fieldset.span-24.last.prepend-top
+  %legend Redmine Settings
+  .fieldset.span-22
+    .label.span-3 Site
+    .span-19.last= redmine_setting.site
+
+    .label.span-3 User
+    .span-19.last= redmine_setting.user
+
+    .label.span-3 Password
+    .span-19.last ****
+
+    .label.span-3 Project-Id
+    .span-19.last= redmine_setting.tracker_project_id
+
+    .label.span-3 Project Name
+    .span-19.last= redmine_setting.tracker_project_name
+
+    .label.span-3 Project Key
+    .span-19.last= redmine_setting.tracker_project_key
+    .span-22.last.prepend-top
+      = link_to t('helpers.edit'), edit_project_redmine_setting_path(@project, @project.tracker_setting), :class => 'button'

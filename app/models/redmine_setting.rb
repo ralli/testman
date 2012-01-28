@@ -1,6 +1,7 @@
+require 'redmine/project'
+
 class RedmineSetting < TrackerSetting
-  validates_presence_of :site
-  validates_length_of :site, :maximum => 255
-  validates_length_of :user, :maximum => 60
-  validates_length_of :password, :maximum => 60
+  def all_redmine_projects
+    Redmine::Project.find_all(self.site, self.user, self.password)
+  end
 end

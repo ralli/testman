@@ -97,10 +97,12 @@ TrackerSetting.blueprint do
   site { 'http://localhost:3000' }
   user { 'admin' }
   password { 'admin' }
+  tracker_project_id { 1 }
 end
 
 RedmineSetting.blueprint do
   site { 'http://localhost:3000' }
   user { 'admin' }
   password { 'admin' }
+  tracker_project_id { 1 }
 end

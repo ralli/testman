@@ -82,6 +82,7 @@ en:
     show_all: 'Show all'
     search: 'Search'
     drag: '[drag]'
+    continue: 'Continue'
     testsuiteruns:
       label_for_testcase: 'Testcase #%{position} of %{count}'
       label_for_teststep: 'Teststep #%{position} of %{count}'
@@ -117,7 +118,6 @@ en:
     execution_types:
       manual: 'Manual'
       automatic: 'Automatic'
-
   layouts:
     login:
       current_project: "Current project: %{current_project}"
@@ -278,6 +278,9 @@ en:
       settings: 'Settings'
     choose_project:
       title: 'Choose Project'
+    edit:
+      title: 'Redmine Settings'
+      settings: 'Settings'
   welcome:
     index:
       title: 'Welcome'

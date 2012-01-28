@@ -82,6 +82,7 @@ de:
     show_all: 'Alle anzeigen'
     search: 'Suchen'
     drag: '[Ziehen]'
+    continue: 'Weiter'
     testsuiteruns:
       label_for_testcase: 'Testfall #%{position} von %{count}'
       label_for_teststep: 'Testschritt #%{position} von %{count}'
@@ -294,6 +295,9 @@ de:
       settings: 'Einstellungen'
     choose_project:
       title: 'Projekt auswählen'
+    edit:
+      title: 'Redmine Einstellungen'
+      settings: 'Einstellungen'
   controller:
     application:
       permission_denied: "Sie haben keine Berechtigung zum Ansehen dieser Seite."

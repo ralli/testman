@@ -1,13 +1,3 @@
 - title t('redmine_settings.choose_project.title')
 
-= simple_form_for [@project, @redmine_setting] do |f|
-  = f.error_notification
-  %fieldset
-    %legend= t('redmine_settings.new.settings')
-    .fieldset
-      = f.input :site, :as => :hidden
-      = f.input :user, :as => :hidden
-      = f.input :password, :as => :hidden
-      = f.input :tracker_project_id, :as => :select, :collection => @redmine_projects, :include_blank => false
-      = f.button :submit, t('helpers.save')
-      = link_to t('helpers.cancel'), @project, :class => 'button'
+= render 'page2'
