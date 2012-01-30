@@ -298,6 +298,10 @@ de:
     edit:
       title: 'Redmine Einstellungen'
       settings: 'Einstellungen'
+  bug_reports:
+    new:
+      title: 'Bug Report erstellen'
+      bug_report: 'Bug Report'
   controller:
     application:
       permission_denied: "Sie haben keine Berechtigung zum Ansehen dieser Seite."
@@ -346,3 +350,9 @@ de:
       successfully_created: 'Die Einstellungen wurden erfolgreich angelegt.'
       successfully_updated: 'Die Einstellungen wurden erfolgreich gespeichert.'
       successfully_deleted: 'Die Einstellungen wurden erfolgreich gelöscht.'
+    bug_reports:
+      default_title: 'Testsuite %{testsuiteid} fehlgeschlagen'
+      default_message: |
+        Beim Ausführen der Testsuite %{testsuiteid} wurde ein Problem festgestellt.
+
+        Details finden Sie hier: "Testsuite %{testsuiteid}":%{url}

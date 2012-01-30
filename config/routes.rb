@@ -8,6 +8,7 @@ Testman::Application.routes.draw do
       put 'step_failure'
       put 'step_ok'
     end
+    resources :bug_reports
   end
 
   resources :testsuites do

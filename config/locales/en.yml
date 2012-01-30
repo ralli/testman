@@ -281,6 +281,10 @@ en:
     edit:
       title: 'Redmine Settings'
       settings: 'Settings'
+  bug_reports:
+    new:
+      title: 'Create Bug Report'
+      bug_report: 'Bug Report'
   welcome:
     index:
       title: 'Welcome'
@@ -345,3 +349,9 @@ en:
       successfully_created: 'Successfully saved settings.'
       successfully_updated: 'Successfully updated settings.'
       successfully_deleted: 'Successfully deleted settings.'
+    bug_reports:
+      default_title: 'Execution of Test Suite %{testsuiteid} failed.'
+      default_message: |
+        The execution of test suite %{testsuiteid} failed.
+
+        Please refer to this link to view the details: "Test suite %{testsuiteid}":%{url}

@@ -18,6 +18,8 @@ class Testsuiterun < ActiveRecord::Base
   belongs_to :edited_by, :class_name => 'User'
   validates_presence_of :edited_by
 
+  has_one :project, :through => :testsuite
+
   def nextcase
     return nil unless step?
     testcaseruns.where(['status <> ?', 'ended']).includes(:testcase).first

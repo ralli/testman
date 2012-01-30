@@ -62,7 +62,8 @@
         = link_to(t('testsuiteruns.show.show_only_current'), show_current_testsuiterun_path(@testrun), :method => 'put', :id => 'show_current') if @testrun.show_all?
         - if show_steplink?(@testrun) && @testrun.show_all?
           = link_to(t('testsuiteruns.show.set_all_to_ok'), set_all_ok_testsuiterun_path(@testrun), :method => 'put', :id => 'set_all_ok')
-          = link_to(t('testsuiteruns.show.set_all_to_failed'), set_all_failed_testsuiterun_path(@testrun), :method => 'put', :id => 'set_all_failed')
+          = link_to(t('testsuiteruns.show.set_all_to_failed'), new_testsuiterun_bug_report_path(@testrun), :id => 'set_all_failed')
+
 
 - if @testrun.show_current?
   - if nextcase(@testrun)

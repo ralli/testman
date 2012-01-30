@@ -1,0 +1,14 @@
+- content_for :head do
+  = javascript_include_tag('bug_reports')
+  = stylesheet_link_tag('bug_reports')
+- title t('bug_reports.new.title')
+
+= simple_form_for [@testsuiterun, @bug_report] do |f|
+  %fieldset
+    %legend= t('bug_reports.new.bug_report')
+    .fieldset
+      = f.input :title
+      = f.input :message, :as => 'text'
+      = f.button :submit, t('helpers.save')
+      = link_to t('helpers.cancel'), @testsuiterun, :class => 'button'
+
