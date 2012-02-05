@@ -11,7 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120122174600) do
+ActiveRecord::Schema.define(:version => 20120205152405) do
+
+  create_table "bug_reports", :force => true do |t|
+    t.integer  "testsuiterun_id"
+    t.string   "title",           :limit => 100
+    t.string   "bug_number",      :limit => 20
+    t.text     "message"
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
+  end
+
+  add_index "bug_reports", ["bug_number"], :name => "index_bug_reports_on_bug_number"
+  add_index "bug_reports", ["testsuiterun_id"], :name => "index_bug_reports_on_testsuiterun_id"
 
   create_table "projects", :force => true do |t|
     t.string   "name",       :limit => 80, :null => false

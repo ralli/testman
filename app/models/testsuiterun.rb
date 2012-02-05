@@ -19,6 +19,7 @@ class Testsuiterun < ActiveRecord::Base
   validates_presence_of :edited_by
 
   has_one :project, :through => :testsuite
+  has_many :bug_reports, :dependent => :destroy
 
   def nextcase
     return nil unless step?
@@ -71,5 +72,8 @@ class Testsuiterun < ActiveRecord::Base
     result
   end
 
+  def bug_url_for(bug_number)
+    self.testsuite.bug_url_for(bug_number)
+  end
 end
 

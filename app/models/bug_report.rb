@@ -1,20 +1,7 @@
-class BugReport
-  include ActiveModel::Validations
-  include ActiveModel::Conversion
-  extend ActiveModel::Naming
-
-  attr_accessor :title, :message
-  validates_length_of :title, :maximum => 80
+class BugReport < ActiveRecord::Base
+  validates_length_of :title, :maximum => 100
   validates_presence_of :title
   validates_presence_of :message
-
-   def initialize(attributes = {})
-    attributes.each do |name, value|
-      send("#{name}=", value)
-    end
-   end
-
-   def persisted?
-     false
-   end
+  belongs_to :testsuiterun
+  has_one :testsuite, :through => :testsuiterun
 end

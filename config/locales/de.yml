@@ -356,3 +356,4 @@ de:
         Beim Ausführen der Testsuite %{testsuiteid} wurde ein Problem festgestellt.
 
         Details finden Sie hier: "Testsuite %{testsuiteid}":%{url}
+      successfully_created: 'Der Fehlerbericht wurde erfolgreich angelegt.'

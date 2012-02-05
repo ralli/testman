@@ -11,7 +11,7 @@ describe BugReport do
 
   describe "when validating" do
     it { should validate_presence_of :title }
-    it { should ensure_length_of(:title).is_at_most(80) }
+    it { should ensure_length_of(:title).is_at_most(100) }
     it { should validate_presence_of :message }
   end
 end

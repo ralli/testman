@@ -355,3 +355,4 @@ en:
         The execution of test suite %{testsuiteid} failed.
 
         Please refer to this link to view the details: "Test suite %{testsuiteid}":%{url}
+      successfully_created: 'Bug Report successfully created.'

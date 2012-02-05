@@ -17,6 +17,7 @@ class Testsuite < ActiveRecord::Base
   has_many :testsuite_entries, :dependent => :destroy, :order => :position, :class_name => 'TestsuiteEntry'
   has_many :testcases, :through => :testsuite_entries
   has_many :testsuiteruns, :dependent => :destroy
+  has_many :bug_reports, :through => :testsuiteruns
 
   after_create :init_key
 
@@ -74,6 +75,10 @@ class Testsuite < ActiveRecord::Base
     testsuites = Testsuite.scoped
     testsuites = Testsuite.where("lcase(testsuites.name) like ? or lcase(testsuites.description) like ?", pattern, pattern)
     return testsuites
+  end
+
+  def bug_url_for(bug_number)
+    self.project.bug_url_for(bug_number)
   end
 end
 

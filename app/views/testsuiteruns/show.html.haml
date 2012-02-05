@@ -57,6 +57,14 @@
       .span-18.last= render_textile(@testrun.testsuite.description)
 
     .row.span-22.last
+      .label.span-4 Bug-Reports
+      .span.18.last
+        %ul
+          - @testsuiterun.bug_reports.each do |report|
+            %li= content_tag(:a, "#{report.bug_number} - #{report.title}", :href => @testsuiterun.bug_url_for(report.bug_number), :target => '_blank')
+
+
+    .row.span-22.last
       .prepend-4.span-18.last
         = link_to(t('testsuiteruns.show.show_all_testcases'), show_all_testsuiterun_path(@testrun), :method => 'put', :id => 'show_all') if @testrun.show_current?
         = link_to(t('testsuiteruns.show.show_only_current'), show_current_testsuiterun_path(@testrun), :method => 'put', :id => 'show_current') if @testrun.show_all?

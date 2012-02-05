@@ -14,4 +14,12 @@ class Project < ActiveRecord::Base
   def to_label
     name
   end
+
+  def bug_url_for(bug_number)
+    if self.tracker_setting.nil?
+      nil
+    else
+      tracker_setting.bug_url_for(bug_number)
+    end
+  end
 end
