@@ -39,5 +39,13 @@ module TestsuiterunsHelper
      [I18n.t('helpers.result.failed'), 'failed'],
      [I18n.t('helpers.result.unknown'), 'unknown']]
   end
+
+  def bug_report_link(testsuiterun, report)
+    if report.bug_number.nil?
+      content_tag(:a, "#{report.to_param} - #{report.title}", :href => url_for([testsuiterun, report]))
+    else
+      content_tag(:a, "#{report.bug_number} - #{report.title}", :href => testsuiterun.bug_url_for(report.bug_number), :target => '_blank')
+    end
+  end
 end
 

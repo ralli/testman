@@ -56,12 +56,13 @@
       .label.span-4= t('simple_form.labels.testsuite.description')
       .span-18.last= render_textile(@testrun.testsuite.description)
 
-    .row.span-22.last
-      .label.span-4 Bug-Reports
-      .span.18.last
-        %ul
-          - @testsuiterun.bug_reports.each do |report|
-            %li= content_tag(:a, "#{report.bug_number} - #{report.title}", :href => @testsuiterun.bug_url_for(report.bug_number), :target => '_blank')
+    - unless @testsuiterun.bug_reports.empty?
+      .row.span-22.last
+        .label.span-4 Bug-Reports
+        .span-18.last
+          %ul
+            - @testsuiterun.bug_reports.each do |report|
+              %li= bug_report_link(@testsuiterun, report)
 
 
     .row.span-22.last
@@ -83,5 +84,5 @@
   .span-24.last
     %ul.step_buttons.right
       %li.step_ok= link_to t('testsuiteruns.show.step_ok'), step_ok_testsuiterun_path(@testrun), :id => 'step_ok', :method => 'put'
-      %li.step_failure= link_to t('testsuiteruns.show.step_failure'), step_failure_testsuiterun_path(@testrun), :id => 'step_failure', :method => 'put'
+      %li.step_failure= link_to t('testsuiteruns.show.step_failure'), new_testsuiterun_bug_report_path(@testrun, :testcaserun_id => nextcase(@testrun), :teststeprun_id => nextstep(nextcase(@testrun))), :id => 'step_failure'
 

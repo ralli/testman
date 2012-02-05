@@ -55,6 +55,9 @@ en:
         user: 'User'
         password: 'Password'
         project_id: 'Project'
+      bug_report:
+        title: 'Title'
+        message: 'Message'
 
   helpers:
     submit:
@@ -285,6 +288,9 @@ en:
     new:
       title: 'Create Bug Report'
       bug_report: 'Bug Report'
+    show:
+      title: 'Bug Report'
+      bug_report: 'Bug Report'
   welcome:
     index:
       title: 'Welcome'
@@ -354,5 +360,11 @@ en:
       default_message: |
         The execution of test suite %{testsuiteid} failed.
 
-        Please refer to this link to view the details: "Test suite %{testsuiteid}":%{url}
+        Please refer to this link to view the details: "Test Suite %{testsuiteid}":%{url}
       successfully_created: 'Bug Report successfully created.'
+      default_title_with_details: 'Execution of step %{teststep_no} of Test Case %{testcase_no} of Test Suite %{testsuiteid} failed'
+      default_message_with_details: |
+        The execution of step #%{teststep_no} of test case #%{testcase_no} of test suite %{testsuiteid} failed.
+
+          * Please refer to this link to view the details: "Test Suite %{testsuiteid}":%{url}
+          * "Testcase":%{testcase_url}

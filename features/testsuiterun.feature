@@ -51,6 +51,7 @@ Feature: Run a test suite
     And I am on page "/testsuiteruns"
     When I follow "show_testsuiterun"
     And I follow "step_failure"
+    And I press "save"
     Then 1 teststepruns should exist with result: "failed", status: "ended"
     And 1 testcaseruns should exist with result: "failed", status: "ended"
     And 1 testsuiteruns should exist with result: "failed", status: "ended"

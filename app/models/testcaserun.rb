@@ -20,6 +20,8 @@ class Testcaserun < ActiveRecord::Base
   has_many :teststepruns, :dependent => :destroy, :order => 'position'
   has_many :testcaselogs, :dependent => :destroy, :order => 'created_at'
 
+  has_many :bug_reports, :dependent => :destroy
+
   after_create :create_log
 
   def nextstep

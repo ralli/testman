@@ -23,6 +23,7 @@ class Testcase < ActiveRecord::Base
   has_many :testsuites, :through => :testsuite_entries
   has_many :testcaseruns, :dependent => :destroy
   has_many :testcase_attachments, :dependent => :destroy, :class_name => 'TestcaseAttachment', :order => 'position'
+  has_many :bug_reports, :through => :testcaseruns
 
   before_validation :init_fields
   after_create :init_key

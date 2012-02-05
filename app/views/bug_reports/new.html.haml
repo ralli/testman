@@ -9,6 +9,8 @@
     .fieldset
       = f.input :title
       = f.input :message, :as => 'text'
-      = f.button :submit, t('helpers.save')
+      = f.input :testcaserun_id, :as => 'hidden'
+      = f.input :teststeprun_id, :as => 'hidden'
+      = f.button :submit, t('helpers.save'), :id => 'save'
       = link_to t('helpers.cancel'), @testsuiterun, :class => 'button'
 

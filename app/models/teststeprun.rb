@@ -17,7 +17,9 @@ class Teststeprun < ActiveRecord::Base
 
   validates_presence_of :created_by
   validates_presence_of :edited_by
-  
+
+  has_many :bug_reports, :dependent => :destroy
+
   def step(user, result)
     update_attributes!(:edited_by => user, :status => 'ended', :result => result)
   end

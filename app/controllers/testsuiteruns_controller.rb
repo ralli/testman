@@ -54,7 +54,6 @@ class TestsuiterunsController < ApplicationController
     redirect_to @testrun
   end
 
-
   def step_failure
     Testsuiterun.transaction do
       fetch_testrun

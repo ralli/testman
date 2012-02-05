@@ -55,6 +55,9 @@ de:
         user: 'Benutzer'
         password: 'Passwort'
         project_id: 'Projekt'
+      bug_report:
+        title: 'Titel'
+        message: 'Beschreibung'
 
   helpers:
     submit:
@@ -302,6 +305,9 @@ de:
     new:
       title: 'Bug Report erstellen'
       bug_report: 'Bug Report'
+    show:
+      title: 'Bug Report'
+      bug_report: 'Bug Report'
   controller:
     application:
       permission_denied: "Sie haben keine Berechtigung zum Ansehen dieser Seite."
@@ -357,3 +363,10 @@ de:
 
         Details finden Sie hier: "Testsuite %{testsuiteid}":%{url}
       successfully_created: 'Der Fehlerbericht wurde erfolgreich angelegt.'
+      default_title_with_details: 'Schritt %{teststep_no} von Testfall %{testcase_no} der Testsuite %{testsuiteid} fehlgeschlagen'
+      default_message_with_details: |
+        Beim Ausführen von Schritt Nr. %{teststep_no} des Testfalls %{testcase_no} der Testsuite %{testsuiteid} wurde ein Problem festgestellt.
+
+          * Details finden Sie hier: "Testsuite %{testsuiteid}":%{url}
+          * "Link zum Testfall":%{testcase_url}
+

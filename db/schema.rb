@@ -15,6 +15,8 @@ ActiveRecord::Schema.define(:version => 20120205152405) do
 
   create_table "bug_reports", :force => true do |t|
     t.integer  "testsuiterun_id"
+    t.integer  "testcaserun_id"
+    t.integer  "teststeprun_id"
     t.string   "title",           :limit => 100
     t.string   "bug_number",      :limit => 20
     t.text     "message"
@@ -23,6 +25,8 @@ ActiveRecord::Schema.define(:version => 20120205152405) do
   end
 
   add_index "bug_reports", ["bug_number"], :name => "index_bug_reports_on_bug_number"
+  add_index "bug_reports", ["testcaserun_id"], :name => "index_bug_reports_on_testcaserun_id"
+  add_index "bug_reports", ["teststeprun_id"], :name => "index_bug_reports_on_teststeprun_id"
   add_index "bug_reports", ["testsuiterun_id"], :name => "index_bug_reports_on_testsuiterun_id"
 
   create_table "projects", :force => true do |t|

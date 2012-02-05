@@ -1,0 +1,11 @@
+- title t('bug_reports.show.title')
+
+%fieldset
+  %legend= t('bug_reports.show.bug_report')
+  .fieldset
+    .span-3.label Titel
+    .span-19.last= @bug_report.title
+    .span-3.label Beschreibung
+    .span-19.last= render_textile(@bug_report.message)
+    .prepend-3.span-19.last.append-bottom
+      = link_to 'Zurück', @testsuiterun, :class => 'button'
