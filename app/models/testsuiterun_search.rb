@@ -14,7 +14,7 @@ class TestsuiterunSearch
   end
 
   def persisted?
-    @persisted
+    @persisted || false
   end
 
   def to_query(project)
