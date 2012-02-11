@@ -106,3 +106,9 @@ RedmineSetting.blueprint do
   password { 'admin' }
   tracker_project_id { 1 }
 end
+
+BugReport.blueprint do
+  bug_number { rand(10000).to_s }
+  title { Faker::Lorem.words(4).join(' ') }
+  message { Faker::Lorem.paragraph(3) }
+end
