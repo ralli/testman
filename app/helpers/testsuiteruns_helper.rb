@@ -5,7 +5,8 @@ module TestsuiterunsHelper
   end
 
   def nextstep(testcase)
-    @nextstep = testcase.nextstep unless defined?(@nextstep)
+    return nil if testcase.nil?
+    @nextstep ||= testcase.nextstep
     @nextstep
   end
 
