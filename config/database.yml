@@ -31,6 +31,4 @@ production:
   password: testman
   socket: /var/run/mysqld/mysqld.sock
 
-cucumber:
-  <<: *test
 
