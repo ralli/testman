@@ -20,6 +20,12 @@ test:
   password: testman
   socket: /var/run/mysqld/mysqld.sock
 
+travis:
+  adapter: mysql2
+  encoding: utf8
+  database: testman_test
+  username: root
+
 production:
   adapter: mysql2
   encoding: utf8

@@ -4,6 +4,8 @@ rvm:
 # uncomment this line if your project needs to run something other than `rake`:
 # script: bundle exec rspec spec
 
+env: RAILS_ENV=travis
+
 # .travis.yml
 before_script:
-  - "mysql -e 'create database testman_test; grant all on testman_test.* to 'testman'@'localhost' identified by 'testman''"
+  - "mysql -e 'create database testman_test;"
