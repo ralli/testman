@@ -9,16 +9,11 @@ development:
   password: testman
   socket: /var/run/mysqld/mysqld.sock
 
-
 test:
   adapter: mysql2
   encoding: utf8
-  reconnect: false
   database: testman_test
-  pool: 5
-  username: testman
-  password: testman
-  socket: /var/run/mysqld/mysqld.sock
+  username: root
 
 production:
   adapter: mysql2
