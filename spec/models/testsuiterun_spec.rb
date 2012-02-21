@@ -54,11 +54,11 @@ describe Testsuiterun do
   end
 
   describe "when stepping" do
-    it "should update the run even if no testcase run is presend" do
+    it "should update the run even if no testcase run is present" do
       run = Testsuiterun.make(:status => 'new', :result => 'unknown')
       run.stub(:nextcase => nil)
       arg = { :edited_by => 'user', :status => 'ended', :result => 'ok' }
-      run.expects(:update_attributes!).with(arg)
+      run.should_receive(:update_attributes!).with(arg)
       run.step('user', 'ok')
     end
 

@@ -21,6 +21,11 @@ describe ProjectStatistic do
       @testsuiterun1.set_all(@user, 'ok')
     end
 
+    after :all do
+      @project.destroy
+      @user.destroy
+    end
+
     before :each do
       @statistics = ProjectStatistic.new(@project)
     end
@@ -72,8 +77,8 @@ describe ProjectStatistic do
 
   it "should query the testsuite groups for statuses once if called multiple times" do
     testsuiteruns = stub(:group => [])
-    project       = mock()
-    project.expects(:testsuiteruns).returns(testsuiteruns)
+    project       = mock_model(Project)
+    project.should_receive(:testsuiteruns) { testsuiteruns }
     statistics = ProjectStatistic.new(project)
     statistics.testsuiterun_status_groups
     statistics.testsuiterun_status_groups
@@ -81,8 +86,8 @@ describe ProjectStatistic do
 
   it "should query the testsuite groups for results once if called multiple times" do
     testsuiteruns = stub(:group => [])
-    project       = mock()
-    project.expects(:testsuiteruns).returns(testsuiteruns)
+    project       = mock_model(Project)
+    project.should_receive(:testsuiteruns) { testsuiteruns }
     statistics = ProjectStatistic.new(project)
     statistics.testsuiterun_result_groups
     statistics.testsuiterun_result_groups
@@ -90,8 +95,8 @@ describe ProjectStatistic do
 
   it "should query the testcaserun groups for statuses once if called multiple times" do
     testcaseruns = stub(:group => [])
-    project      = mock()
-    project.expects(:testcaseruns).returns(testcaseruns)
+    project      = mock_model(Project)
+    project.should_receive(:testcaseruns) { testcaseruns }
     statistics = ProjectStatistic.new(project)
     statistics.testcaserun_status_groups
     statistics.testcaserun_status_groups
@@ -99,8 +104,8 @@ describe ProjectStatistic do
 
   it "should query the testcaserun groups for results once if called multiple times" do
     testcaseruns = stub(:group => [])
-    project      = mock()
-    project.expects(:testcaseruns).returns(testcaseruns)
+    project      = mock_model(Project)
+    project.should_receive(:testcaseruns) { testcaseruns }
     statistics = ProjectStatistic.new(project)
     statistics.testcaserun_result_groups
     statistics.testcaserun_result_groups
@@ -108,8 +113,8 @@ describe ProjectStatistic do
 
   it "should query the teststeprun groups for statuses once if called multiple times" do
     teststepruns = stub()
-    teststepruns.stub(:joins) {stub(:group => [])}
-    project = mock()
+    teststepruns.stub_chain(:joins, :group) {[]}
+    project = mock_model(Project)
     project.stub(:testcaseruns) {teststepruns}
     statistics = ProjectStatistic.new(project)
     statistics.teststeprun_status_groups
@@ -118,8 +123,8 @@ describe ProjectStatistic do
 
   it "should query the teststeprun groups for results once if called multiple times" do
     teststepruns = stub()
-    teststepruns.stub(:joins) {stub(:group => [])}
-    project = mock()
+    teststepruns.stub_chain(:joins, :group) { [] }
+    project = mock_model(Project)
     project.stub(:testcaseruns) {teststepruns}
     statistics = ProjectStatistic.new(project)
     statistics.teststeprun_result_groups

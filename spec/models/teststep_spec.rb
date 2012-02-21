@@ -14,7 +14,7 @@ describe Teststep do
 
   context "when creating a run" do
     it "should not crash" do
-      Teststeprun.expects(:create!).with(:created_by => user, :edited_by => user, :testcaserun => testcaserun, :teststep => subject, :status => 'new', :result => 'unknown')
+      Teststeprun.should_receive(:create!).with(:created_by => user, :edited_by => user, :testcaserun => testcaserun, :teststep => subject, :status => 'new', :result => 'unknown')
       subject.create_run(user, testcaserun)
     end
   end
