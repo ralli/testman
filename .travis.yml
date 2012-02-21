@@ -7,3 +7,6 @@ rvm:
 # .travis.yml
 before_script:
   - "mysql -e 'create database testman_test;'"
+  - "RAILS_ENV=test && rake db:schema:load"
+
+
