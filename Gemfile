@@ -44,7 +44,7 @@ group :development, :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'cucumber-rails'
-  gem 'spork', '~> 0.9.0.rc'
+  gem 'spork', '~> 1.0.0.rc'
   gem 'launchy'
   gem 'pickle'
   gem 'nifty-generators'
