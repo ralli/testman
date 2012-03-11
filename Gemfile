@@ -21,7 +21,7 @@ end
 gem 'haml-rails'
 gem 'simple_form'
 gem 'acts_as_list'
-gem 'acts-as-taggable-on', '~>2.1.0'
+gem 'acts-as-taggable-on', '~>2.2.0'
 gem 'will_paginate', '~> 3.0.0'
 gem 'declarative_authorization'
 gem 'RedCloth'
