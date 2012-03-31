@@ -26,7 +26,7 @@ gem 'will_paginate', '~> 3.0.0'
 gem 'declarative_authorization'
 gem 'RedCloth'
 gem 'jquery-rails'
-gem 'paperclip'
+gem 'paperclip', '~>2.7.0'
 if RUBY_VERSION > "1.9"
     gem 'ruby-debug19'
 else
