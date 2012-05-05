@@ -13,7 +13,8 @@ test:
   adapter: mysql2
   encoding: utf8
   database: testman_test
-  username: root
+  username: testman
+  password: testman
 
 travis:
   adapter: mysql2
