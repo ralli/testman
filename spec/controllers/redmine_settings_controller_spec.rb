@@ -83,11 +83,11 @@ describe RedmineSettingsController do
         end
 
         it "should render the choose project page" do
-          put :update, :project_id => project.to_param, :redmine_setting => {:user => 'user', :password => 'password' }, :update_trigger => 'true'
+          put :update, :project_id => project.to_param, :id => redmine_setting.to_param, :redmine_setting => {:user => 'user', :password => 'password' }, :update_trigger => 'true'
           response.should render_template('choose_project')
         end
         it "should have the list of redmine projects assigned" do
-          put :update, :project_id => project.to_param, :redmine_setting => {:user => 'user', :password => 'password' }, :update_trigger => 'true'
+          put :update, :project_id => project.to_param, :id => redmine_setting.to_param, :redmine_setting => {:user => 'user', :password => 'password' }, :update_trigger => 'true'
           assigns(:redmine_projects).should_not be_nil
         end
       end
@@ -97,11 +97,11 @@ describe RedmineSettingsController do
           redmine_setting.stub(:update_attributes) { true }
         end
         it "should redirect to the project page" do
-          put :update, :project_id => project.to_param, :redmine_setting => {:user => 'user', :password => 'password' }, :update_trigger => 'true'
+          put :update, :project_id => project.to_param, :id => redmine_setting.to_param, :redmine_setting => {:user => 'user', :password => 'password' }, :update_trigger => 'true'
           response.should redirect_to(project)
         end
         it "should show a success message" do
-          put :update, :project_id => project.to_param, :redmine_setting => {:user => 'user', :password => 'password' }, :update_trigger => 'true'
+          put :update, :project_id => project.to_param, :id => redmine_setting.to_param, :redmine_setting => {:user => 'user', :password => 'password' }, :update_trigger => 'true'
           flash[:notice].should_not be_nil
         end
       end
@@ -109,12 +109,12 @@ describe RedmineSettingsController do
 
     context "when update trigger is not given" do
       it "should render the choose project page" do
-        put :update, :project_id => project.to_param, :redmine_setting => {:user => 'user', :password => 'password' }
+        put :update, :project_id => project.to_param, :id => redmine_setting.to_param, :redmine_setting => {:user => 'user', :password => 'password' }
         response.should render_template('choose_project')
       end
 
       it "should have the list of redmine projects assigned" do
-        put :update, :project_id => project.to_param, :redmine_setting => {:user => 'user', :password => 'password' }
+        put :update, :project_id => project.to_param, :id => redmine_setting.to_param, :redmine_setting => {:user => 'user', :password => 'password' }
         assigns(:redmine_projects).should_not be_nil
       end
     end
