@@ -33,9 +33,9 @@ else
     gem 'ruby-debug'
 end
 
-group :development, :test do
-  gem 'therubyracer'
+gem 'therubyracer', :groups => [:development, :test]
 
+group :test do
   gem 'machinist'
   gem 'faker'
   gem 'rspec-rails'
