@@ -5,10 +5,10 @@ Feature: To be able to work with the system
   Scenario: User registration
     Given there exists no User
     And I am on the home page
-    When I follow "Register"
+    When I follow "register_button"
     And I enter the following values
       | Login                 | test             |
-      | Password              | test123          |
+      | user_password         | test123          |
       | Password confirmation | test123          |
       | Email                 | noreply@test.com |
       | First name            | Horst            |
