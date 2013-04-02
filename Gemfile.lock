@@ -233,7 +233,6 @@ DEPENDENCIES
   json
   launchy
   machinist
-  mocha
   mysql2
   nifty-generators
   paperclip (~> 2.7.0)

@@ -43,13 +43,12 @@ group :test do
 
   gem 'capybara'
   gem 'database_cleaner'
-  gem 'cucumber-rails'
+  gem 'cucumber-rails', :require => false
   gem 'spork', '~> 1.0.0.rc'
   gem 'launchy'
   gem 'pickle'
   gem 'nifty-generators'
 
-  gem 'mocha'
   gem 'simplecov', '>= 0.5.2', :require => false, :group => :test
   gem 'ruby_parser'
 end
