@@ -27,11 +27,6 @@ gem 'declarative_authorization'
 gem 'RedCloth'
 gem 'jquery-rails'
 gem 'paperclip', '~>2.7.0'
-if RUBY_VERSION > "1.9"
-    gem 'ruby-debug19'
-else
-    gem 'ruby-debug'
-end
 
 gem 'therubyracer', :groups => [:development, :test]
 
